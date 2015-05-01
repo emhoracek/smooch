@@ -12,13 +12,13 @@ int debug = 0;
 int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
             *fppnm;
-    char    header[32],
-            file_mark,
-            bpp;
-    int     height, width;
-            //offx, offy; might need these later
-    int     i, j;
-    size_t  n_read;
+    unsigned char header[32],
+             file_mark,
+             bpp;
+    int      height, width,
+             offx, offy;// might need these later
+    int      i, j;
+    size_t   n_read;
 
     fpcel = fopen(celfile, "r");
 
@@ -31,6 +31,9 @@ int convert_cel(const char *celfile, const char *pnmfile) {
 
     if (strncmp ((const char *) header, "KiSS", 4)) {
         // if the header does NOT start with KiSS
+        if (debug) {
+            fprintf(stderr, "Old style KiSS cell.");
+        }
         bpp = 4;
         width = header[0] + (256 * header[1]);
         height = header[2] + (256 * header[3]);
@@ -54,8 +57,19 @@ int convert_cel(const char *celfile, const char *pnmfile) {
         bpp = header[1];
         width = header[4] + (256 * header[5]);
         height = header[6] + (256 * header[7]);
-        //offx = header[8] + (256 * header[9]);
-        //offy = header[10] + (256 * header[11]);
+        offx = header[8] + (256 * header[9]);
+        offy = header[10] + (256 * header[11]);
+    }
+
+    if (debug) {
+        fprintf(stderr, "Width: %d, height: %d \n", width, height);
+        fprintf(stderr, "Offx: %d, offy: %d \n", offx, offy);
+        fprintf(stderr, "Bits-per-pixel: %d \n", bpp);
+    }
+
+    if (width < 0 || height < 0) {
+        fprintf(stderr, "Invalid width or height.");
+        return -1;
     }
 
     // open fppnm stream
@@ -123,6 +137,8 @@ int read_palette(const char *palfile) {
     }
 
     if (strncmp ((const char *) header, "KiSS", 4)) {
+        fprintf(stderr, "Old style palette\n");
+        
         colors = 16;
 
         // seeks back to the start of the file
@@ -146,6 +162,8 @@ int read_palette(const char *palfile) {
         }
     }
     else {
+        fprintf(stderr, "New style palette\n");
+
         n_read = fread(header+4, 28, 1, fppal);
         if (n_read < 1) {
             fprintf(stderr, "Can't read palette header after \"KiSS\".\n");
