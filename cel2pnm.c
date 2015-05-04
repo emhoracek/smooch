@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// so why does it have to be an unsigned char again?
-// need to research that
 unsigned char palette[256 * 3];
 char transparent[3]; // the red, green, blue of the transparent color, 
                      // as hex, with slashes between, prefaced by "rgb:"
@@ -79,33 +77,62 @@ int convert_cel(const char *celfile, const char *pnmfile) {
     fprintf(fppnm, "%d %d\n", width, height);
     fprintf(fppnm, "255 \n");
 
-    // using nested for loop here mostly because its an easy
-    // way to end each row with a newline :)
-    // would also work as (i < height * width)
     for (i = 0; i < height  && !feof(fpcel); ++i) {
     // for each row in the picture
-        for (j = 0; j < width; j++) {
-        // and each pixel in each row
-            // read a byte into the buffer,
-            char buffer;
-            fread(&buffer, 1, 1, fpcel);
-            // convert the byte to an int
-            int color;
-            color = buffer;
-            // print the color if in debug mode 
-            if (debug) {
-                if (color == 0) {
-                    fprintf(stderr, "T. ");
+
+        switch (bpp) {
+            case 4: 
+                for (j = 0; j < (width+1)/2; j++) {
+                // for every two pixels in each row
+                    
+                    // read one byte into the buffer
+                    unsigned char buffer;
+                    fread(&buffer, 1, 1, fpcel);
+                    
+                    // split the byte into two numbers
+                    int num1 = (buffer & 0xf0) >> 4;
+                    int num2 = buffer & 0x0f;
+
+                    // print the numbers if in debug mode 
+                    if (debug) {
+                        fprintf(stderr, "%d ", num1);
+                        fprintf(stderr, "%d ", num2);
+                    }
+
+                    // lookup the R, G, and B values and print
+                    // both pixels to the output file
+                    fprintf(fppnm, "%u %u %u %u %u %u", 
+                            (unsigned) palette[num1*3], 
+                            (unsigned) palette[num1*3+1],
+                            (unsigned) palette[num1*3+2],
+                            (unsigned) palette[num2*3], 
+                            (unsigned) palette[num2*3+1],
+                            (unsigned) palette[num2*3+2]);
                 }
-                 else {
-                    fprintf(stderr, "P: %d .", color);
-                 }
-            }
-            // lookup the R, G, and B values 
-            fprintf(fppnm, "%u %u %u ", (unsigned) palette[color*3], 
-                                        (unsigned) palette[color*3+1],
-                                        (unsigned) palette[color*3+2]);
-        }
+
+                break;
+            case 8:
+                for (j = 0; j < width; j++) {
+                // for each pixel in each row
+                    
+                    // read one byte into the buffer,
+                    unsigned char buffer;
+                    fread(&buffer, 1, 1, fpcel);
+                    
+                    // convert the byte to an int
+                    int num;
+                    num = buffer;
+                    
+                    // print the number if in debug mode 
+                    if (debug) {
+                        fprintf(stderr, "%d ", num);
+                    }
+
+                    // lookup the R, G, and B values 
+                    fprintf(fppnm, "%u %u %u ", (unsigned) palette[num*3], 
+                                                (unsigned) palette[num*3+1],
+                                                (unsigned) palette[num*3+2]);
+                }
         // end the row with a newline
         fprintf(fppnm, "\n");
         if (debug) {
