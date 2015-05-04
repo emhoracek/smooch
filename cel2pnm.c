@@ -133,6 +133,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                                                 (unsigned) palette[num*3+1],
                                                 (unsigned) palette[num*3+2]);
                 }
+        }
         // end the row with a newline
         fprintf(fppnm, "\n");
         if (debug) {
@@ -249,21 +250,41 @@ int read_palette(const char *palfile) {
 
 int main (int argc, char *argv[]) {
 
+
+    char *input_file;
+    char *palette_file;
+    char *output_file;
+
     if (argc < 4) {
         fprintf(stderr, "Usage: cel2png <cel file> <palette file> <out file> (debug)\n");
         return -1;
     }
 
     if (argc > 4) {
-        debug = 1;
+        
+        if (strncmp(argv[1], "-d", 2) == 0) {
+            debug = 1;
+            input_file = argv[2];
+            palette_file = argv[3];
+            output_file = argv[4];
+        }
+        else {
+            fprintf(stderr, "Usage: cel2png <cel file> <palette file> <out file> (debug)\n");
+            return -1;
+        }
+    }
+    else {
+        input_file = argv[1];
+        palette_file = argv[2];
+        output_file = argv[3];
     }
 
-    fprintf(stderr,"Read palette %s \n", argv[2]);
-    read_palette (argv[2]);
+    fprintf(stderr,"Read palette %s \n", palette_file);
+    read_palette (palette_file);
     fprintf(stdout, "%s", transparent);
 
-    fprintf(stderr,"Read cel %s \n", argv[1]);
-    convert_cel (argv[1], argv[3]);
+    fprintf(stderr,"Read cel %s \n", input_file);
+    convert_cel (input_file, output_file);
     
     fprintf(stderr,"Done \n");
     
