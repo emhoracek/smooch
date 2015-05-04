@@ -2,7 +2,7 @@
 #include <string.h>
 
 unsigned char palette[256 * 3];
-char transparent[3]; // the red, green, blue of the transparent color, 
+char transparent[12]; // the red, green, blue of the transparent color, 
                      // as hex, with slashes between, prefaced by "rgb:"
                      // (for pnmto png)
 int debug = 0;
@@ -30,13 +30,13 @@ int convert_cel(const char *celfile, const char *pnmfile) {
     if (strncmp ((const char *) header, "KiSS", 4)) {
         // if the header does NOT start with KiSS
         if (debug) {
-            fprintf(stderr, "Old style KiSS cell.");
+            fprintf(stderr, "Old style KiSS cell.\n");
         }
         bpp = 4;
         width = header[0] + (256 * header[1]);
         height = header[2] + (256 * header[3]);
-        //offx = 0;
-        //offy = 0;
+        offx = 0;
+        offy = 0;
     }
     else {
         fread(header, 28, 1, fpcel);
@@ -99,15 +99,26 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                         fprintf(stderr, "%d ", num2);
                     }
 
-                    // lookup the R, G, and B values and print
-                    // both pixels to the output file
-                    fprintf(fppnm, "%u %u %u %u %u %u", 
+                    if ((width / 2 == 0) || j < (width/2)) {
+                    // if this is not the end of the line
+                        // lookup the R, G, and B values and print
+                        // both pixels to the output file
+                        fprintf(fppnm, "%u %u %u %u %u %u ", 
                             (unsigned) palette[num1*3], 
                             (unsigned) palette[num1*3+1],
                             (unsigned) palette[num1*3+2],
                             (unsigned) palette[num2*3], 
                             (unsigned) palette[num2*3+1],
                             (unsigned) palette[num2*3+2]);
+                    }
+                    else {
+                    // if this is the end of the line
+                        // print just the first pixel
+                        fprintf(fppnm, "%u %u %u ", 
+                            (unsigned) palette[num1*3], 
+                            (unsigned) palette[num1*3+1],
+                            (unsigned) palette[num1*3+2]);
+                    }
                 }
 
                 break;
@@ -165,8 +176,10 @@ int read_palette(const char *palfile) {
     }
 
     if (strncmp ((const char *) header, "KiSS", 4)) {
-        fprintf(stderr, "Old style palette\n");
-        
+        if (debug) {           
+            fprintf(stderr, "Old style palette\n");
+        }
+
         colors = 16;
 
         // seeks back to the start of the file
@@ -222,7 +235,10 @@ int read_palette(const char *palfile) {
                         return -1;
                     }
 
-                    //huh
+                    // three colors are stored in two bytes
+                    //     buffer[0]    |    buffer[1]
+                    //  0 1 2 3 4 5 6 7 | 0 1 2 3 4 5 6 7
+                    //  color 1 color 3 |   ---   color 2 
                     palette[i*3] = buffer[0] & 0xf0;
                     palette[i*3+1]=(buffer[1] & 0x0f) * 16;
                     palette[i*3+2]=(buffer[0] & 0x0f) * 16;

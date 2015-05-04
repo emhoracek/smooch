@@ -46,8 +46,8 @@ pnmtopng -transparent `./cel2pnm examples/luna.cel examples/smoon.kcf examples/l
 I would very much appreciate input on how to make this program better.
 
 Right now, it only works on certain cell formats. It definitely doesn't work 
-with Cherry KiSS or the older pre-"General KiSS Spec" cels. Others, it 
-sometimes works and sometimes doesn't. I'm still trying to work out the kinks.
+with Cherry KiSS. Others, it sometimes works and sometimes doesn't. I'm still 
+trying to work out the kinks.
 
 If you would like to help with this or other tools for KiSS, please let me know!
 Email me at libby@daydrea.me, submit an issue, or send a pull request. THANKS!! :D
