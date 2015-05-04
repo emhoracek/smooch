@@ -22,11 +22,13 @@ You can use cel2pnm this way:
 ```(sh)
 cel2pnm <image file> <palette file> <output file> 
 ```
+or with debugging:
+```(sh)
+cel2pnm -d <image file> <palette file> <output file> 
+```
 
-Right now you can turn on debugging by tacking on the word "debug" (or, um,
-any other word, really, oops, I need to learn out how to parse command line 
-arguments). That will print the width, height, bits-per-pixel, and alllll the 
-pixels in the cell.
+Debug mode will print the width, height, bits-per-pixel, and the palette slot
+for each pixel in the cell.
 
 KiSS cells always have a transparent color, color 0 in the palette. cel2pnm
 will print the color in the format "rbg:x/x/x" where each is a hex value.

@@ -94,7 +94,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     int num2 = buffer & 0x0f;
 
                     // print the numbers if in debug mode 
-                    if (debug) {
+                    if (debug > 1) {
                         fprintf(stderr, "%d ", num1);
                         fprintf(stderr, "%d ", num2);
                     }
@@ -124,7 +124,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     num = buffer;
                     
                     // print the number if in debug mode 
-                    if (debug) {
+                    if (debug > 1) {
                         fprintf(stderr, "%d ", num);
                     }
 
@@ -136,7 +136,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
         }
         // end the row with a newline
         fprintf(fppnm, "\n");
-        if (debug) {
+        if (debug > 1) {
             fprintf(stderr, "\n");
         }
     }
@@ -250,30 +250,35 @@ int read_palette(const char *palfile) {
 
 int main (int argc, char *argv[]) {
 
-
     char *input_file;
     char *palette_file;
     char *output_file;
 
     if (argc < 4) {
-        fprintf(stderr, "Usage: cel2png <cel file> <palette file> <out file> (debug)\n");
+        fprintf(stderr, "Usage: cel2png (-d) <cel file> <palette file> <out file> \n");
         return -1;
     }
 
     if (argc > 4) {
         
         if (strncmp(argv[1], "-d", 2) == 0) {
-            debug = 1;
+            if (strncmp(argv[1], "-d2", 3) == 0) {
+                debug = 2;
+            }
+            else {
+                debug = 1;
+            }
             input_file = argv[2];
             palette_file = argv[3];
             output_file = argv[4];
         }
         else {
-            fprintf(stderr, "Usage: cel2png <cel file> <palette file> <out file> (debug)\n");
+            fprintf(stderr, "Usage: cel2png (-d) <cel file> <palette file> <out file>\n");
             return -1;
         }
     }
     else {
+        debug = 0;
         input_file = argv[1];
         palette_file = argv[2];
         output_file = argv[3];
