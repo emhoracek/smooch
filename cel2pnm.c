@@ -77,6 +77,8 @@ int convert_cel(const char *celfile, const char *pnmfile) {
     fprintf(fppnm, "%d %d\n", width, height);
     fprintf(fppnm, "255 \n");
 
+    unsigned char line [width * 4];
+
     for (i = 0; i < height  && !feof(fpcel); ++i) {
     // for each row in the picture
 
@@ -87,7 +89,12 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     
                     // read one byte into the buffer
                     unsigned char buffer;
-                    fread(&buffer, 1, 1, fpcel);
+                    n_read = fread(&buffer, 1, 1, fpcel);
+                    if (n_read < 1) {
+                        fprintf(stderr, 
+                                "Error reading pixels at row %d, column %d\n", i, j);
+                        return -1;
+                    }
                     
                     // split the byte into two numbers
                     int num1 = (buffer & 0xf0) >> 4;
@@ -100,7 +107,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     }
 
                     if ((width / 2 == 0) || j < (width/2)) {
-                    // if this is not the end of the line
+                    // if the width is even, or it's not the end of a line
                         // lookup the R, G, and B values and print
                         // both pixels to the output file
                         fprintf(fppnm, "%u %u %u %u %u %u ", 
@@ -112,7 +119,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                             (unsigned) palette[num2*3+2]);
                     }
                     else {
-                    // if this is the end of the line
+                    // if this is the end of an uneven line
                         // print just the first pixel
                         fprintf(fppnm, "%u %u %u ", 
                             (unsigned) palette[num1*3], 
@@ -128,8 +135,12 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     
                     // read one byte into the buffer,
                     unsigned char buffer;
-                    fread(&buffer, 1, 1, fpcel);
-                    
+                    n_read = fread(&buffer, 1, 1, fpcel);
+                    if (n_read < 1) {
+                        fprintf(stderr, 
+                                "Error reading pixels at row %d, column %d\n", i, j);
+                        return -1;
+                    }
                     // convert the byte to an int
                     int num;
                     num = buffer;
@@ -144,6 +155,29 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                                                 (unsigned) palette[num*3+1],
                                                 (unsigned) palette[num*3+2]);
                 }
+            case 32:
+                // read a line of pixels
+                n_read = fread(line, width*4, 1, fpcel);
+                if (n_read < 1) {
+                    fprintf(stderr, 
+                            "Error reading pixels at row %d, column %d\n", i, j);
+                    return -1;
+                }
+
+                for (j = 0; j < width; j++) {
+
+                    // Cells are stored in Blue, Green, Red order, but most 
+                    // applications require RGB.
+                    int blue, green, red;
+                    blue = line[j];
+                    green = line[j+1];
+                    red = line[j+2];
+
+                    fprintf(fppnm, "%u %u %u ", (unsigned) red,
+                                                (unsigned) green,
+                                                (unsigned) blue);
+                }
+
         }
         // end the row with a newline
         fprintf(fppnm, "\n");
