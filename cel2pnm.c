@@ -9,7 +9,8 @@ int debug = 0;
 
 int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
-            *fppnm;
+            *fppnm,
+            *fppgm;
     unsigned char header[32],
              file_mark,
              bpp;
@@ -75,7 +76,16 @@ int convert_cel(const char *celfile, const char *pnmfile) {
     // write header
     fprintf(fppnm, "P3\n");
     fprintf(fppnm, "%d %d\n", width, height);
-    fprintf(fppnm, "255 \n");
+    fprintf(fppnm, "255\n");
+
+    // if it's a Cherry KiSS file, create a grayscale PGM file for alpha transparency
+    if (bpp == 32) {
+        
+        fppgm = fopen("out.pgm", "w+");
+        fprintf(fppgm, "P5\n");
+        fprintf(fppgm, "%d %d\n", width, height);
+        fprintf(fppgm, "255\n");
+    }
 
     unsigned char line [width * 4];
 
@@ -150,7 +160,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                         fprintf(stderr, "%d ", num);
                     }
 
-                    // lookup the R, G, and B values 
+                    // lookup the R, G, and B values and print to file
                     fprintf(fppnm, "%u %u %u ", (unsigned) palette[num*3], 
                                                 (unsigned) palette[num*3+1],
                                                 (unsigned) palette[num*3+2]);
@@ -169,13 +179,24 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     // Cells are stored in Blue, Green, Red order, but most 
                     // applications require RGB.
                     int blue, green, red;
-                    blue = line[j];
-                    green = line[j+1];
-                    red = line[j+2];
+                    blue = line[j*4];
+                    green = line[j*4+1];
+                    red = line[j*4+2];
+                    
+                    // 8-bit alpha channel
+                    unsigned char alpha;
+                    alpha = line[j*4+3];
 
+                    if (debug > 1) {
+                        fprintf(stderr, "%u%u%u-%X ", red, green, blue, alpha);
+                    }
+
+                    // Print pixels to file
                     fprintf(fppnm, "%u %u %u ", (unsigned) red,
                                                 (unsigned) green,
                                                 (unsigned) blue);
+                    // Write the one byte from alpha to fppgm
+                    fwrite(&alpha, 1, 1, fppgm);
                 }
 
         }
@@ -232,8 +253,8 @@ int read_palette(const char *palfile) {
             }
 
             palette[i*3] = buffer[0] & 0xf0;
-            palette[i*3+1]=(buffer[1] & 0x0f) * 16;
-            palette[i*3+2]=(buffer[0] & 0x0f) * 16;
+            palette[i*3+1]=(buffer[1] & 0x0f) << 4;
+            palette[i*3+2]=(buffer[0] & 0x0f) << 4;
         }
     }
     else {
