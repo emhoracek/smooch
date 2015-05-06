@@ -164,7 +164,9 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     fprintf(fppnm, "%u %u %u ", (unsigned) palette[num*3], 
                                                 (unsigned) palette[num*3+1],
                                                 (unsigned) palette[num*3+2]);
+
                 }
+                break;
             case 32:
                 // read a line of pixels
                 n_read = fread(line, width*4, 1, fpcel);
@@ -198,13 +200,14 @@ int convert_cel(const char *celfile, const char *pnmfile) {
                     // Write the one byte from alpha to fppgm
                     fwrite(&alpha, 1, 1, fppgm);
                 }
+                break;
 
         }
         // end the row with a newline
-        fprintf(fppnm, "\n");
         if (debug > 1) {
-            fprintf(stderr, "\n");
+            fprintf(stderr, " \n");
         }
+        fprintf(fppnm, "\n");
     }
     
     fclose(fpcel);
