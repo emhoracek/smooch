@@ -1,20 +1,66 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Kiss where
 
--- this will be structs and stuff
+import Data.Aeson
 
-type SetCoords = [ (Int, Int) ] 
+data KissData = KissData {
+                    kMemory :: Int,
+                    kBorder :: Int,
+                    kPalettes :: [String],
+                    kWindowSize :: (Int, Int),
+                    kObjects :: [KissObject] }
+              | BadKiss String
+    deriving (Eq, Show)
+instance ToJSON KissData where
+    toJSON (KissData _ _ _ win objs) =
+        object["window_size" .= win,
+               "objs" .= objs]
+    toJSON (BadKiss s) = toJSON s
 
-getx :: Int -> SetCoords -> Int
-getx set sets = fst (sets !! set)
+data KissObject = KissObject {
+                    objNum :: Int,
+                    objCells :: [KissCell],
+                    objPos :: [SetPos] }
+                | BadObject String
+    deriving (Eq, Show)
+instance ToJSON KissObject where
+    toJSON (KissObject num cells pos) =
+        object["id" .= num,
+               "cells" .= toJSON cells,
+               "positions" .= toJSON pos]
 
-gety :: Int -> SetCoords -> Int
-getx set sets = snd (sets !! set)
+data KissCell = KissCell {
+                    celFix :: Int,
+                    celName :: String,
+                    celPalOffset :: Int,
+                    celSets :: [Int],
+                    celAlpha :: Int }
+               | BadCell String
+    deriving (Eq, Show)
+instance ToJSON KissCell where
+    toJSON (KissCell fix name pal sets alpha) =
+        object["fix" .= fix, 
+               "name" .= name, 
+               "palette" .= pal,
+               "sets" .= toJSON sets,
+               "alpha" .= alpha]       
 
+data KissSet = KissSet {
+            setPalette :: Int,
+            setPosition :: [SetPos] }
+    deriving (Eq, Show)
+instance ToJSON KissSet where
+    toJSON (KissSet pal positions) =
+        object["palette" .= pal,
+               "positions" .= toJSON positions]
 
-data KissCell = KissCell { filename :: Filename,
-                           buffers  :: ImageBuffer,
-                           width    :: Int,
-                           height   :: Int,
-                           coords   :: SetCoords,
-                           offx     :: Int,
-                           offy     ::  
+data SetPos = Position {
+                setx :: Int, 
+                sety :: Int }
+            | NoPosition
+    deriving (Eq, Show)
+instance ToJSON SetPos where
+    toJSON (Position x y) = object["x" .= x, "y" .= y]
+    toJSON NoPosition     = "none"
+

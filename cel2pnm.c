@@ -4,8 +4,10 @@
 unsigned char palette[256 * 3];
 char transparent[12]; // the red, green, blue of the transparent color, 
                      // as hex, with slashes between, prefaced by "rgb:"
-                     // (for pnmto png)
+                     // (for pnmtopng)
 int debug = 0;
+int offsetx;
+int offsety;
 
 int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
@@ -327,44 +329,48 @@ int main (int argc, char *argv[]) {
     char *input_file;
     char *palette_file;
     char *output_file;
-
-    if (argc < 4) {
-        fprintf(stderr, "Usage: cel2png (-d) <cel file> <palette file> <out file> \n");
+    int offset;
+    
+    if (strncmp(argv[1], "-t", 2) == 0) {
+      palette_file = argv[2];
+      fprintf(stderr,"Read palette %s \n", palette_file);
+      read_palette (palette_file);
+      fprintf(stdout, "%s", transparent);
+      return 0;
+    }
+    else if (argc < 4) {
+        fprintf(stderr, "Usage: cel2png (-d) (-t) <cel file> <palette file> <out file> \n");
         return -1;
     }
-
-    if (argc > 4) {
-        
-        if (strncmp(argv[1], "-d", 2) == 0) {
-            if (strncmp(argv[1], "-d2", 3) == 0) {
-                debug = 2;
-            }
-            else {
-                debug = 1;
-            }
-            input_file = argv[2];
-            palette_file = argv[3];
-            output_file = argv[4];
+    else {
+      debug = 0;
+      palette_file = argv[argc - 3];
+      input_file = argv[argc - 2];
+      output_file = argv[argc - 1];
+      
+      if (strncmp(argv[1], "-d", 2) == 0) {
+        if (strncmp(argv[1], "-d2", 3) == 0) {
+            debug = 2;
         }
         else {
-            fprintf(stderr, "Usage: cel2png (-d) <cel file> <palette file> <out file>\n");
-            return -1;
+            debug = 1;
         }
-    }
-    else {
-        debug = 0;
-        input_file = argv[1];
-        palette_file = argv[2];
-        output_file = argv[3];
+      }
+
+      if (strncmp(argv[1], "-o", 2) == 0) {
+        offset = 1;
+      }
+      else {
+        offset = 0;
+      }
     }
 
     fprintf(stderr,"Read palette %s \n", palette_file);
     read_palette (palette_file);
-    fprintf(stdout, "%s", transparent);
 
     fprintf(stderr,"Read cel %s \n", input_file);
     convert_cel (input_file, output_file);
-    
+  
     fprintf(stderr,"Done \n");
     
     return 0;
