@@ -8,11 +8,13 @@ talented artists spent countless hours making these fun digital toys. Some are
 wonderful examples of pixel artistry. It would be a shame for them to be lost 
 just because technology has moved on.
 
+I've added information about KiSS to the [GitHub wiki](https://github.com/emhoracek/smooch/wiki), please check it out if you want to learn more.
+
 I built a tool for converting KiSS cells (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats). Next, I 
 want to make a KiSS doll viewer for the browser.
 
-## New: Haskell!
+## JavaScript KiSS
 
 I've started work on parsing the [KiSS CNF format](http://otakuworld.com/kiss/download/kissfrmt.txt).
 My current idea is to get all the important information from the CNF into JSON
@@ -57,7 +59,7 @@ Sorry, this is ugly. Install pnmtools, then:
 
 ```(sh)
 cel2pnm examples/smoon.kcf examples/luna.cel examples/luna.pnm
-pnmtopng -transparent `./cel2pnm examples/smoon.kcf` examples/luna.pnm > luna.png
+pnmtopng -transparent `./cel2pnm -t examples/smoon.kcf` examples/luna.pnm > luna.png
 ```
 
 ## Feedback
