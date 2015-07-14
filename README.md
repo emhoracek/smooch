@@ -16,9 +16,7 @@ want to make a KiSS doll viewer for the browser.
 
 ## JavaScript KiSS
 
-I've started work on parsing the [KiSS CNF format](http://otakuworld.com/kiss/download/kissfrmt.txt).
-My current idea is to get all the important information from the CNF into JSON
-format. So the plan is:
+My current goals with this project are:
 
 1. Convert CNF to JSON using Haskell
 2. Interpret the CNF with JavaScript 
@@ -26,7 +24,7 @@ format. So the plan is:
 4. Allow users to play with dolls in the browser.
 5. Enable users to create/edit dolls in the browser. 
 
-This is a very ambitious plan and right now I'm still going back and forth between steps one and two trying to get the KiSS specification implemented. I would love help if anyone is interested.
+This is a very ambitious plan and right now I'm still going back and forth between steps one and two, trying to implement the KiSS specification correctly. I would love help if anyone is interested.
 
 ## cel2pnm
 
