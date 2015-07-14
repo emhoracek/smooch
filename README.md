@@ -21,10 +21,12 @@ My current idea is to get all the important information from the CNF into JSON
 format. So the plan is:
 
 1. Convert CNF to JSON using Haskell
-2. ???
-3. View dolls in the browser.
+2. Interpret the CNF with JavaScript 
+3. Allow dolls to be uploaded to a server to be converted.
+4. Allow users to play with dolls in the browser.
+5. Enable users to create/edit dolls in the browser. 
 
-...I could use some help.
+This is a very ambitious plan and right now I'm still going back and forth between steps one and two trying to get the KiSS specification implemented. I would love help if anyone is interested.
 
 ## cel2pnm
 
@@ -42,7 +44,7 @@ cel2pnm <palette file> <cel image> <output file>
 ```
 or with debugging:
 ```(sh)
-cel2pnm -d <image file> <palette file> <output file> 
+cel2pnm -d <palette file> <cel image> <output file> 
 ```
 
 Debug mode will print the width, height, bits-per-pixel, and the palette slot
