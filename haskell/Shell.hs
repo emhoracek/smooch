@@ -12,8 +12,9 @@ import qualified Control.Foldl as F
 import System.Environment (getArgs)
 
 import Data.Aeson.Encode(encode)
-import Data.ByteString.Lazy.Char8 as BS (writeFile)
-
+import Data.Text.Lazy as L (toStrict)
+import Data.Text.Lazy.Encoding as E
+import Data.Text.IO as DT (writeFile) 
 {--
 mvIt :: T.Shell (IO ())
 mvIt = do
@@ -53,10 +54,10 @@ main = do
   let kissData = getKissData cnf
   let kissCells = getKissCells cnf
   let kissPalette = head $ kPalettes kissData
-  let json = encode kissData
+  let json = "var kissJson = " T.<> (decodeUtf8 (encode kissData))
   head <- readFile "header.html"
   footer <- readFile "footer.html"
   let html = head ++ "\n" ++ htmlCellImages kissCells ++ "\n" ++ footer 
-  BS.writeFile "kiss.js" json
+  DT.writeFile "kiss.js" (toStrict json)
   Prelude.writeFile "kiss.html" html
 

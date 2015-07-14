@@ -45,96 +45,111 @@ sampleKiss =
   "#3   shirtb.cel *0 : 0 1 2 3 \n" ++
   "$0 * * *"
 
-data CNFLine = CNFMemory Int
-             | CNFBorder Int
-             | CNFPalette String
-             | CNFWindowSize (Int, Int)
-             | CNFObject (Int, KissCell)
-             | CNFSet KissSet
-             | CNFComment
-    deriving (Eq, Show)
-
 getKissData :: String -> KissData
 getKissData file = 
     let p = parse parseCNFLines "error" file in
     either errorKiss linesToScript p
 
-errorKiss :: ParseError -> KissData
-errorKiss s = BadKiss (show s)
-
-errorKiss' :: ParseError -> [KissObject]
-errorKiss' s = [BadObject (show s)]
-
-errorKiss'' :: ParseError -> [KissCell]
-errorKiss'' s = [BadCell (show s)]
-
--- Cell-based KiSS data
 getKissCells :: String -> [KissCell]
 getKissCells file = 
     let p = parse parseCNFLines "error" file in
-    either errorKiss'' linesToCells p
+    either errorCells linesToCells p
 
--- Object-based KiSS data
+errorKiss :: ParseError -> KissData
+errorKiss s = BadKiss (show s)
 
-linesToObjects :: [(Int, KissCell)] -> [KissSet] -> [KissObject]
-linesToObjects xs ys = 
-    map (\((x,y),z) -> KissObject x y z) objs
-    where cells = nub $ map (\x -> combineCells (fst x) xs) xs
-          positions = transpose (justPos ys)
-          objs = if length cells <= length positions 
-                  then zip cells positions
-                  else zip cells (pad positions (length cells))
-           
-pad :: [[SetPos]] -> Int -> [[SetPos]]
-pad xs 0 = xs
-pad xs n = [NoPosition] : pad xs (n-1) 
+errorObjs :: ParseError -> [KissObject]
+errorObjs s = [BadObject (show s)]
 
-combineCells :: Int -> [(Int, KissCell)] -> (Int, [KissCell])
-combineCells n xs = (n, map snd (filter (\x -> fst x == n) xs))
+errorCells :: ParseError -> [KissCell]
+errorCells s = [BadCell (show s)]
 
-justPos :: [KissSet] -> [[SetPos]]
-justPos ys = map (\(KissSet pal pos) -> pos) ys
+-- Converting CNF lines to useable KiSS data
 
 linesToScript :: [CNFLine] -> KissData
 linesToScript xs = 
     KissData memory border palettes windowSize objects 
-    where memory   = fromMaybe 0 (listToMaybe [ a | CNFMemory a <- xs ])
+    where -- memory and border are optional 
+          memory   = fromMaybe 0 (listToMaybe [ a | CNFMemory a <- xs ])
           border   = fromMaybe 0 (listToMaybe [ a | CNFBorder a <- xs ])
+          -- at least one palette must be specified
           palettes = [ a | CNFPalette a <- xs ]
+          -- window is (600, 480) by default
           windowSize = fromMaybe (600, 480) (listToMaybe [ a | CNFWindowSize a <- xs ])
-          objects = linesToObjects [ a | CNFObject a <- xs ] sets
-          sets = [ a | CNFSet a <- xs ]
-         
-linesToScript' :: [CNFLine] -> [KissObject]
-linesToScript' xs = linesToObjects [ a | CNFObject a <- xs ] [ a | CNFSet a <- xs ]
+          -- turn object #, cell, set positions to objects 
+          positions = [ a | CNFSetPos a <- xs ]
+          objects = linesToObjects [ a | CNFCell a <- xs ] positions
 
+linesToObjects :: [(Int, KissCell)] -> [KissSetPos] -> [KissObject]
+linesToObjects xs ys = 
+    map (\((x,y),z) -> KissObject x y z) (zipIt cells positions)
+    where cells = nub $ map (\x -> combineCells (fst x) xs) xs
+          positions = zip (sort $ listObjectIds xs) (cellPositions ys)
+          -- nub removes duplicates from a list
+
+listObjectIds :: [(Int,KissCell)] -> [Int]
+listObjectIds xs = [ a | (a,b) <- xs ]
+
+zipIt :: [(Int, [KissCell])] -> [(Int,[SetPos])] -> [((Int, [KissCell]), [SetPos])]
+zipIt cells positions = [ (cell, snd pos) | cell <- cells, pos <- positions, fst cell == fst pos]
+
+cellPositions :: [KissSetPos] -> [[SetPos]]
+cellPositions xs = transpose $ map (\(KissSetPos pal pos) -> pos) xs
+
+{--
+zipIt cells ys 
+  | length cells == length (cellPositions ys) = zip cells (cellPositions ys)
+  | length cells > length (cellPositions ys)  = error errorMsg
+  | otherwise                                 = error errorMsg
+  where errorMsg = "Error: " ++ show (length cells) ++ " cells and " 
+                      ++ show (length $ cellPositions ys) ++ " positions."
+--}
+--
+combineCells :: Int -> [(Int, KissCell)] -> (Int, [KissCell])
+combineCells n xs = (n, map snd (filter (\x -> fst x == n) xs))
+
+
+-- A CNF's [KissSetPos] is 10 lists of SetPos each `#cells` long.
+-- This turns them into `#cells` lists of 10 SetPos.
+{--
+cellPositions :: [KissSetPos] -> [[SetPos]]
+cellPositions ys = transpose [head $ map (\(KissSetPos pal pos) -> reverse pos) ys]
+--}
 linesToCells :: [CNFLine] -> [KissCell]
-linesToCells xs = [ snd a | CNFObject a <- xs ]
+linesToCells xs = [ snd a | CNFCell a <- xs ]
  
+-- KiSS Parser Combinators
+
+-- Parses the lines describing cells and objects.
 parseCellLine :: Parser CNFLine
 parseCellLine = do
     char '#'
     num <- many digit
     cell <- parseCell
     optional parseComment
-    return $ CNFObject (read num, cell)
+    return $ CNFCell (read num, cell)
 
 parseCell :: Parser KissCell
 parseCell = do
     fix <- option 0 parseFix
     skipMany1 space
-    file <- many (choice [letter, digit, char '_', char '-'])
-    string ".cel"
+    file <- many1 (noneOf ". ")
+    string ".cel" <?> "cel file extenstion"
     skipMany1 space
-    char '*'
-    palette <- many1 digit
+    palette <- option 0 (try parseCellPalette)
     skipMany space
-    char ':'
+    optional (char ':')
     skipMany space
     sets <- option [] parseSets
     skipMany space
     transp <- option 0 (try parseTransp)
-    return $ KissCell fix file (read palette) sets transp
+    return $ KissCell fix file palette sets transp
+
+parseCellPalette :: Parser Int
+parseCellPalette = do
+    char '*'
+    num <- many1 digit
+    return $ read num
 
 parseFix :: Parser Int
 parseFix = do
@@ -142,6 +157,7 @@ parseFix = do
     num <- many digit
     return $ read num
 
+-- This parses all the list of sets the cell will be displayed in
 parseSets :: Parser [Int]
 parseSets = many1 parseSet
 
@@ -154,8 +170,7 @@ parseSet = do
 parseComment :: Parser String
 parseComment = do    
     char ';'
-    comment <- many (noneOf "\r\n")
-    return comment
+    many (noneOf "\r\n")
 
 parseTransp :: Parser Int
 parseTransp = do
@@ -190,32 +205,43 @@ parseBorder = do
     num <- many digit
     return $ CNFBorder (read num)
 
-parseKissSet :: Parser CNFLine
-parseKissSet = do
+-- The following four functions parse the cel positions for each set of cells.
+parseSetPos :: Parser CNFLine
+parseSetPos = do
     char '$'
     paletteGroup <- digit
-    positions <- many parsePosorNoPos
-    return $ CNFSet (KissSet (read [paletteGroup]) positions)
-
-parsePosorNoPos :: Parser SetPos
-parsePosorNoPos = do
-    spaces
-    position <- (parsePosition <|> parseNoPosition <?> "position")
-    spaces
-    return position
+    positions <- many parsePosition
+    return $ CNFSetPos (KissSetPos (read [paletteGroup]) positions)
 
 parsePosition :: Parser SetPos
 parsePosition = do
+    spaces
+    position <- parsePos <|> parseNoPos <?> "position"
+    spaces
+    return position
+
+parsePos :: Parser SetPos
+parsePos = do
     xpos <- many1 digit
     char ','
     ypos <- many1 digit
     return $ Position (read xpos) (read ypos)
 
-parseNoPosition :: Parser SetPos
-parseNoPosition = do
+parseNoPos :: Parser SetPos
+parseNoPos = do
     char '*'
     return NoPosition
 
+data CNFLine = CNFMemory Int
+             | CNFBorder Int
+             | CNFPalette String
+             | CNFWindowSize (Int, Int)
+             | CNFCell (Int, KissCell)
+             | CNFSetPos KissSetPos
+             | CNFComment
+    deriving (Eq, Show)
+
+-- Parse the CNF one "line" (including mult-line set descriptions) at a time
 parseCNFLines :: Parser [CNFLine]
 parseCNFLines = do
     lines <- many parseCNFLine
@@ -225,7 +251,7 @@ parseCNFLines = do
 parseCNFLine :: Parser CNFLine
 parseCNFLine = do
     line <- choice [parseCellLine, 
-                    parseKissSet,
+                    parseSetPos,
                     parseMemory, parsePalette, 
                     parseBorder, parseWindowSize, 
                     parseCNFComment]
@@ -238,12 +264,15 @@ parseCNFComment = do
     comment <- many (noneOf "\r\n")
     return CNFComment
 
-parsePos :: Parser SetPos
-parsePos = do
-    skipMany space
-    position <- parsePosition <|> parseNoPosition
-    skipMany space
-    return position
+-- SIGH
+isRight :: Either a b -> Bool
+isRight (Right _) = True
+isRight _         = False
+
+getRight :: Either a b -> b
+getRight (Right x) = x
+getRight _         = error "you suck"
+
 
 {--
 main = do
@@ -252,17 +281,33 @@ main = do
     print $ parse parseCellLine "error" sampleCell2
     print $ parse parseCellLine "error" sampleCell3
     putStrLn "Parsing set lines:"
-    print $ parse parseKissSet "error" sampleSet1
-    print $ parse parseKissSet "error" sampleSet2
-    print $ parse parseKissSet "error" sampleSet3
+    print $ parse parseSetPos "error" sampleSet1
+    print $ parse parseSetPos "error" sampleSet2
+    print $ parse parseSetPos "error" sampleSet3
     putStrLn "Parsing a real set: "
     f <- readFile "aurora/aurora.cnf"
     let p = parse parseCNFLines "error" f
-    let l = either errorKiss' linesToScript' p
     let kissdata = either errorKiss linesToScript p
     print p
-    putStrLn "objs"
-    print l 
     putStrLn "all"
-    print kissdata 
+    print kissdata
 --}
+{--
+ putStrLn "Number objects in data blob:"
+    print $ length (kObjects kissdata)
+    putStrLn "Number of sets in CNF: "
+    let q = if isRight p then [ a | CNFSetPos a <- getRight p] else []
+    print $ length q 
+    --putStrLn "Set 1: "
+    --print $ q !! 1
+    putStrLn "Number positions in Set 1:"
+    let r = map (\(KissSetPos palette positions) -> positions) q
+    print $ length ( r !! 1)
+    putStrLn "Number positions in 0, 1, 2,..."
+    print $ length (head r)
+    putStrLn "is set one the same as set 2"
+    print $ zipWith (\x y -> x == y) (r !! 1) (r !! 2) 
+    putStrLn "three and four?"
+    print $ zipWith (\x y -> x == y) (r !! 3) (r !! 4) 
+--}
+

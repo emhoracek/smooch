@@ -46,12 +46,12 @@ instance ToJSON KissCell where
                "sets" .= toJSON sets,
                "alpha" .= alpha]       
 
-data KissSet = KissSet {
+data KissSetPos = KissSetPos {
             setPalette :: Int,
             setPosition :: [SetPos] }
     deriving (Eq, Show)
-instance ToJSON KissSet where
-    toJSON (KissSet pal positions) =
+instance ToJSON KissSetPos where
+    toJSON (KissSetPos pal positions) =
         object["palette" .= pal,
                "positions" .= toJSON positions]
 

@@ -2,4 +2,12 @@ html, body {
     margin: 0px;
 }
 
-img { position: absolute}
+#borderarea { padding: 1em; }
+
+#cellarea { position: relative; 
+            margin: auto;
+            background: white }
+
+li { display: inline }
+
+img { position: absolute }
