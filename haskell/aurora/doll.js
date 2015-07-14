@@ -15,10 +15,11 @@
     borderarea.style.background = "pink";
 
     var playarea = 
-      document.getElementById("cellarea");
+      document.getElementById("playarea");
     playarea.style.width = this.size.x + "px";
     playarea.style.height = this.size.y + "px";
 
+    this.currentSet = 0;
 
     this.cells = [];
     var objs = kissData.objs;
@@ -26,7 +27,8 @@
       currCells = objs[i].cells;
       for (var j = 0; j < currCells.length; j++) {
         currCells[j].mark = objs[i].id;
-        currCells[j].position = objs[i].positions[1];
+        currCells[j].positions = objs[i].positions;
+        currCells[j].position = objs[i].positions[this.currentSet];
         if (objs[i].fix > 0) {
           currCells[j].fix = true;
         }
@@ -45,22 +47,54 @@
       }
     }
 
+    var sets = document.getElementsByTagName("a");
+    for (var i = 0; i < sets.length; i++) {
+      var that = this;
+      sets[i].addEventListener('click', function() {
+        that.currentSet = parseInt(this.innerHTML);
+        that.update();
+      });
+    }
+
+    this.update();
+  };
+
+  KissSet.prototype = {
+    update: function () {
+      for (var i = 0; i < this.cells.length; i++) {
+        this.cells[i].update(this);
+      }
+    },
   };
 
   var KiSSCell = function(cell) {
     this.name = cell.name;
-    this.id   = cell.id;
+    this.mark   = cell.mark;
     this.fix = cell.fix;
     this.position = cell.position;
+    this.positions = cell.positions;
+    this.sets = cell.sets;
     this.image = cell.image;
 
     return this;
   };
 
   KiSSCell.prototype = {
-    update: {
-      //blah
-      },
+    update: function(that) {
+      this.position = this.positions[that.currentSet];
+      var istyle = this.image.style;
+      istyle.top  = this.position.y + "px";
+      istyle.left = this.position.x + "px";
+      if (this.sets.indexOf(that.currentSet) == -1) {
+        istyle.display = "none";
+      }
+      else {
+        istyle.display = "block";
+      }
+      if (this.name == "blink") {
+        istyle.display = "none";
+      }
+    },
     draw: {
       // blah
       }

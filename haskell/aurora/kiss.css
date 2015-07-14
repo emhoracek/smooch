@@ -2,9 +2,11 @@ html, body {
     margin: 0px;
 }
 
+a { cursor: pointer }
+
 #borderarea { padding: 1em; }
 
-#cellarea { position: relative; 
+#playarea { position: relative; 
             margin: auto;
             background: white }
 
