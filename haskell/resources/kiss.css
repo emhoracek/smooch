@@ -1,0 +1,15 @@
+html, body {
+    margin: 0px;
+}
+
+a { cursor: pointer }
+
+#borderarea { padding: 1em; }
+
+#playarea { position: relative; 
+            margin: auto;
+            background: white }
+
+li { display: inline }
+
+img { position: absolute }
