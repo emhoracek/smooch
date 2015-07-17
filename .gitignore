@@ -1,2 +1,3 @@
+.gitignore
 haskell/dist
 *.swp
