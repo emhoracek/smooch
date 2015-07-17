@@ -1,0 +1,30 @@
+Test suite spec: RUNNING...
+
+CreateHTML
+  htmlCelsImages
+    generates HTML from a list of KiSS cels
+     # PENDING: laziness
+ParseCNF
+  getKissData
+    parses a CNF into KiSS data
+     # PENDING: laziness
+  getKissCells
+    parses a CNF into a list of KiSS cels
+     # PENDING: laziness
+  parseCNFLine
+    parses a single KiSS cel
+    parses a single KiSS cel (with transparency)
+    parses a single KiSS cel (different sets and fix val)
+    parses a the positions and palette for a single set in a set
+Shell
+  convertCell
+    converts cells to png
+     # PENDING: IO!! Oh no!!
+  convert cells
+    finds the transparent color
+     # PENDING: IO!! Oh no!!
+
+Finished in 0.0004 seconds
+9 examples, 0 failures, 5 pending
+Test suite spec: PASS
+Test suite logged to: dist/test/smooch-0.0.0.1-spec.log

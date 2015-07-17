@@ -2,55 +2,95 @@
 
 ;(function() {
 
-  var KissSet = function(kissData) {
-  
-    var screen;
-    this.size = { x: kissData.window_size[0],
-                  y: kissData.window_size[1] }
-     
+  var Smooch = function(kissdata) {
+    
+    // This controls dragging and dropping.
     this.mouse = Mouser(); 
 
-    var borderarea = 
-      document.getElementById("borderarea");
-    borderarea.style.background = "pink";
+    this.editMode = false;
 
-    var playarea = 
-      document.getElementById("playarea");
+    var editButton = document.getElementById("edit");
+
+    var that = this;
+    editButton.addEventListener("click", function() {
+      if (that.editMode == true) {
+        that.editMode = false;
+      }
+      else {
+        that.editMode = true;
+      }
+      that.update();
+    });
+
+    this.toolbar = document.getElementById("toolbar");
+
+    // The color of area around the play set.
+    this.borderarea = document.getElementById("borderarea");
+    borderarea.style.background = "pink";
+    
+    this.set = new KissSet(kissdata);
+
+    this.update();
+
+  };
+
+  Smooch.prototype = {
+    update: function() {
+      if (this.editMode == true) {
+        this.toolbar.style.display = "block";
+        this.borderarea.style.width = "80%";
+      }
+      else {
+        this.toolbar.style.display = "none";
+        this.borderarea.style.width = "100%";
+      }
+    }
+  };
+
+  var Toolbox = function () {
+
+    var infobox = document.getElementById("info");
+    
+    infobox.innerHTML = dobj.name;
+
+  };
+
+  var KissSet = function(kissData) {
+    
+    // Size of the play area.
+    this.size = { x: kissData.window_size[0],
+                  y: kissData.window_size[1] }
+    
+
+    var playarea = document.getElementById("playarea");
     playarea.style.width = this.size.x + "px";
     playarea.style.height = this.size.y + "px";
-
+    
+    // Start with set 0. 
     this.currentSet = 0;
 
+    /* Build a list of the cells (images) in the doll.
+       Go through each KiSS object, add information from the object to the 
+       cells within the object, then add those cells to the list. */
     this.cells = [];
     var objs = kissData.objs;
     for (var i = 0; i < objs.length; i++) {
-      currCells = objs[i].cells;
-      for (var j = 0; j < currCells.length; j++) {
-        currCells[j].mark = objs[i].id;
-        currCells[j].positions = objs[i].positions;
-        currCells[j].position = objs[i].positions[this.currentSet];
-        if (objs[i].fix > 0) {
-          currCells[j].fix = true;
-        }
-        currCells[j].image = document.getElementById(currCells[j].name);
-        currCells[j] = new KiSSCell(currCells[j]);
+      var cells = objs[i].cells;
+      for (var j = 0; j < cells.length; j++) {
+        cells[j].mark = objs[i].id;
+        cells[j].positions = objs[i].positions;
+        cells[j].image = document.getElementById(cells[j].name);
+        cells[j] = new KiSSCell(cells[j]);
       }
-      this.cells = this.cells.concat(currCells);
+      this.cells = this.cells.concat(cells);
     }
 
-    for (var i = 0; i < this.cells.length; i++) {
-      var cstyle = this.cells[i].image.style;
-      cstyle.top  = (cstyle.top + this.cells[i].position.y) + "px";
-      cstyle.left = (cstyle.left + this.cells[i].position.x) + "px";
-      if (this.cells[i].fix) {
-        this.cells[i].image.draggable = false;
-      }
-    }
-
-    var sets = document.getElementsByTagName("a");
-    for (var i = 0; i < sets.length; i++) {
+    // Add click events to set numbers 
+    this.sets = document.getElementsByTagName("a");
+    for (var i = 0; i < this.sets.length; i++) {
       var that = this;
-      sets[i].addEventListener('click', function() {
+      // when a number is clicked, set current set to that number, update
+      this.sets[i].addEventListener('click', function() {
         that.currentSet = parseInt(this.innerHTML);
         that.update();
       });
@@ -61,13 +101,27 @@
 
   KissSet.prototype = {
     update: function () {
+      
+
+      // Update cells
       for (var i = 0; i < this.cells.length; i++) {
         this.cells[i].update(this);
+      }
+
+      // Update set listing
+      for (var i = 0; i < this.sets.length; i++) {
+        if (this.currentSet == parseInt(this.sets[i].innerHTML)) {
+          this.sets[i].style.color = "black";
+        }
+        else {
+          this.sets[i].style.color = "grey";
+        }
       }
     },
   };
 
   var KiSSCell = function(cell) {
+    
     this.name = cell.name;
     this.mark   = cell.mark;
     this.fix = cell.fix;
@@ -76,31 +130,34 @@
     this.sets = cell.sets;
     this.image = cell.image;
 
+    if (this.fix) {
+      this.image.draggable = false;
+    }
     return this;
   };
 
   KiSSCell.prototype = {
     update: function(that) {
-      this.position = this.positions[that.currentSet];
-      var istyle = this.image.style;
-      istyle.top  = this.position.y + "px";
-      istyle.left = this.position.x + "px";
+      this.currentSet = that.currentSet;
+      this.position = this.positions[this.currentSet];
+      this.image.style.top  = this.position.y + "px";
+      this.image.style.left = this.position.x + "px";
       if (this.sets.indexOf(that.currentSet) == -1) {
-        istyle.display = "none";
+        this.image.style.display = "none";
       }
       else {
-        istyle.display = "block";
+        this.image.style.display = "block";
       }
       if (this.name == "blink") {
-        istyle.display = "none";
+        this.image.style.display = "none";
       }
     },
-    draw: {
-      // blah
-      }
   };
 
   var Mouser = function() {
+
+    // This is from eLouai, believe it or not!!
+    // http://www.elouai.com/javascript-drag-and-drop.php   
 
     var isdrag = false;
     var x, y;
@@ -134,11 +191,15 @@
       isdrag = false;
     };
 
+    this.getSelected = function() {
+      return this.selectedObj;
+    };
+
   };
 
   window.addEventListener('load', function() {
     var kissData = kissJson;
-    new KissSet(kissData);
+    new Smooch(kissData);
   });
 
 })();

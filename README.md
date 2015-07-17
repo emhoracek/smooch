@@ -14,17 +14,42 @@ I built a tool for converting KiSS cells (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats). Next, I 
 want to make a KiSS doll viewer for the browser.
 
-## JavaScript KiSS
+## Structure
 
-My current goals with this project are:
+To display a KiSS doll, an application has to do four things:
+1. Decompress the old, obsure Japanese compression format, LZH.
+2. Read the specialized image files (cells and palettes).
+3. Read the configuration file.
+4. Display the sets so the user can interact with them.
 
-1. Convert CNF to JSON using Haskell
-2. Interpret the CNF with JavaScript 
-3. Allow dolls to be uploaded to a server to be converted.
-4. Allow users to play with dolls in the browser.
-5. Enable users to create/edit dolls in the browser. 
+I'm manually doing the first part for now, but I'm pretty sure I'll be able to find 
 
-This is a very ambitious plan and right now I'm still going back and forth between steps one and two, trying to implement the KiSS specification correctly. I would love help if anyone is interested.
+The second is harder. I had kludge together some code from a couple different 
+open source projects (GNOME KiSS and GIMP) in order produce something I could 
+understand. That part is *cel2pnm* and it's written in *C*.
+
+The third involves parsing text into JSON, so I knew exactly what tool I wanted 
+to use. *Haskell* has two awesome libraries for this: *Parsec* and *Aeson*. 
+Under the "haskell" folder, you'll see more folders. 
+  * executable holds the main executable
+  * library contains all the other modules:
+    * ParseCNF parses the configuration file
+    * Kiss contains the KiSS data types
+    * CreateHTML is a temporary thing to build the HTML file
+    * Shell is a *Turtle* shell script to run everything
+  * test-suite will contain unit tests
+  * resources contains the HTML, CSS, and JavaScript
+
+The fourth part is where *JavaScript* comes in. If you want to hack on Smooch 
+but don't want to mess with Haskell, try the "javascript" folder. It's not 
+actually just JavaScript -- it's also the HTML, CSS, and all the images for a 
+single doll ("Aurora" by Punky). Smooch's interface is plain vanilla JavaScript 
+and I'd like to keep it that way. I'm still learning JavaScript and I don't 
+want to confuse things by trying to learn a bunch of frameworks and libraries 
+and whatnot as well.
+
+Eventually all of this will be on a web server -- probably Haskell's Snap 
+because I've been meaning to learn how to use it for ages.
 
 ## cel2pnm
 
@@ -53,7 +78,7 @@ flag and cel2pnm will print the color instead of converting any cell. The
 color will be printed in the format "rbg:x/x/x" where each is x is a 2-digit 
 hex value.
 
-## Converting to png
+### Converting to png
 
 Sorry, this is ugly. Install pnmtools, then:
 
