@@ -17,30 +17,30 @@ want to make a KiSS doll viewer for the browser.
 ## Structure
 
 To display a KiSS doll, an application has to do four things:
-1. Decompress the old, obsure Japanese compression format, LZH.
-2. Read the specialized image files (cells and palettes).
-3. Read the configuration file.
-4. Display the sets so the user can interact with them.
+  1. Decompress the old, obsure Japanese compression format, LZH.
+  2. Read the specialized image files (cells and palettes).
+  3. Read the configuration file.
+  4. Display the sets so the user can interact with them.
 
 I'm manually doing the first part for now, but I'm pretty sure I'll be able to find 
 
 The second is harder. I had kludge together some code from a couple different 
 open source projects (GNOME KiSS and GIMP) in order produce something I could 
-understand. That part is *cel2pnm* and it's written in *C*.
+understand. That part is `cel2pnm` and it's written in C.
 
 The third involves parsing text into JSON, so I knew exactly what tool I wanted 
-to use. *Haskell* has two awesome libraries for this: *Parsec* and *Aeson*. 
+to use. Haskell has two awesome libraries for this: Parsec and Aeson. 
 Under the "haskell" folder, you'll see more folders. 
   * executable holds the main executable
   * library contains all the other modules:
     * ParseCNF parses the configuration file
     * Kiss contains the KiSS data types
     * CreateHTML is a temporary thing to build the HTML file
-    * Shell is a *Turtle* shell script to run everything
+    * Shell is a Turtle shell script to run everything (probably switch to FFI or inline-c soon)
   * test-suite will contain unit tests
   * resources contains the HTML, CSS, and JavaScript
 
-The fourth part is where *JavaScript* comes in. If you want to hack on Smooch 
+The fourth part is where JavaScript comes in. If you want to hack on Smooch 
 but don't want to mess with Haskell, try the "javascript" folder. It's not 
 actually just JavaScript -- it's also the HTML, CSS, and all the images for a 
 single doll ("Aurora" by Punky). Smooch's interface is plain vanilla JavaScript 
