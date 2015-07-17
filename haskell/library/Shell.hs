@@ -5,6 +5,8 @@ module Shell where
 import Kiss
 import qualified Data.Text as Text
 import Turtle
+import System.Process hiding (shell)
+
 
 {-- Just keeping this around because I want to do a  blog post on why it doesn't work
 mvIt :: T.Shell (IO ())
@@ -26,20 +28,26 @@ getFiles :: T.Shell T.FilePath
 getFiles = T.ls "examples"
 --}
 
-convertCels :: String -> [KissCell] -> IO ()
-convertCels palString cels = do
-  let palette = Text.pack palString
-  shell ("./cel2pnm -t " <> palette <> " > bg") empty
-  bg <- readFile "bg"
-  mapM_ (\ cel -> convertCel palette (name cel) (Text.pack bg)) cels
-  where name c = Text.pack $ celName c
+transColor :: String -> IO String
+transColor paletteLoc = do
+  (_, x, _) <- readProcessWithExitCode "cel2pnm" ["-t", paletteLoc] ""
+  return x
+
+
+-- Convert a whole list of cells given a palette. Put the files in target directory.
+convertCels :: String -> [KissCell] -> String -> IO ()
+convertCels palString cels out = do
+  trans <- transColor palString
+  let name c = Text.pack $ celName c
+  let dir = Text.pack out
+  mapM_ (\ cel -> convertCel (Text.pack palString) (name cel) (Text.pack trans) dir) cels
 
 -- Convert cell to pnm, pnm to png, delete pnm
-convertCel :: Text -> Text -> Text -> IO ()
-convertCel palette cel bg = do
+convertCel :: Text -> Text -> Text -> Text -> IO ()
+convertCel palette cel bg out = do
   let celFile = cel <> ".cel"
   let pngFile = cel <> ".png"
-  shell ("./cel2pnm " <> celFile <> " " <> palette <> " pnm") empty
-  shell ("pnmtopng -transparent " <> bg <> " pnm > " <> pngFile) empty
+  shell ("cel2pnm " <> celFile <> " " <> palette <> " pnm") empty
+  shell ("pnmtopng -transparent " <> bg <> " pnm > " <> out <> "/" <> pngFile) empty
   rm "pnm"
 

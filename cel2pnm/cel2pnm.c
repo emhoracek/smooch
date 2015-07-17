@@ -368,9 +368,6 @@ int main (int argc, char *argv[]) {
     fprintf(stderr,"Read cel %s \n", input_file);
     convert_cel (input_file, output_file);
     
-    if (offset) {
-      fprintf(stdout,"Offsets
-
     fprintf(stderr,"Done \n");
     
     return 0;

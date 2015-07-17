@@ -22,4 +22,4 @@ main = do
   let html = header ++ "\n" ++ htmlCelImages kissCels ++ "\n" ++ footer 
   writeFile "kiss.js" json
   writeFile "kiss.html" html
-  convertCels kissPalette kissCels
+  convertCels kissPalette kissCels "tests/samples"
