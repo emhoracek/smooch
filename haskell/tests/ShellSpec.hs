@@ -9,10 +9,10 @@ import System.Process
 
 spec = do
   describe "convertCell" $
-    it "converts cells to png" $ 
+    it "converts a cel to png" $ 
       pendingWith "IO!! Oh no!!"
-  describe "convert cells" $
-    it "finds the transparent color" $
+  describe "convertCels" $
+    it "finds the transparent color and converts all the cels" $
       pendingWith "IO!! Oh no!!"
   describe "transColor" $ do
     it "gets the transparent color from a palette" $

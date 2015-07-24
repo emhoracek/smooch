@@ -40,11 +40,11 @@ spec = do
       parse parseCNFLine "blah" sampleSet1 `shouldBe`
         Right (CNFSetPos (KissSetPos 2 
                           [Position 192 11, NoPosition, Position 56 176, Position 55 21]))
-{--
-sampleSet1 :: String 
-sampleSet1 = "$2 192,11 * 56,176 55,21"
-sampleSet2 :: String
-sampleSet2 = "$3 * 165,207 \n * 125,261"
-sampleSet3 :: String
-sampleSet3 = "$0 192,11 * 56,17 ; blah"
---}
+    it "parses a set a with line breaks" $
+      parse parseCNFLine "blah" sampleSet2 `shouldBe`
+        Right (CNFSetPos (KissSetPos 3
+                          [NoPosition, Position 165 207, NoPosition, Position 125 261]))
+    it "parses a set with a line comment" $
+      parse parseCNFLine "blah" sampleSet3 `shouldBe`
+        Right (CNFSetPos (KissSetPos 0
+                          [Position 192 11, NoPosition, Position 56 17]))
