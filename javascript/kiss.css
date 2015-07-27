@@ -45,4 +45,4 @@ a { cursor: pointer;
 #footer { text-align: center }
 
 li { display: inline }
-img { position: absolute }
+img { position: absolute; display: none }

@@ -1,1 +1,0 @@
-Mix "test-suite/ParseCNFSpec.hs" 2015-07-15 03:34:06 UTC 587748999 8 [(6:8-6:16,ExpBox False),(6:1-6:16,TopLevelBox ["spec"])]

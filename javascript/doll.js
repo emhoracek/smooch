@@ -102,7 +102,6 @@
   KissSet.prototype = {
     update: function () {
       
-
       // Update cells
       for (var i = 0; i < this.cells.length; i++) {
         this.cells[i].update(this);
@@ -123,7 +122,6 @@
   var KiSSCell = function(cell) {
     
     this.name = cell.name;
-    this.mark   = cell.mark;
     this.fix = cell.fix;
     this.position = cell.position;
     this.positions = cell.positions;
@@ -133,7 +131,7 @@
     if (this.fix) {
       this.image.draggable = false;
     }
-    return this;
+  
   };
 
   KiSSCell.prototype = {
