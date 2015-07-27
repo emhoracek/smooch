@@ -22,11 +22,12 @@ To display a KiSS doll, an application has to do four things:
   3. Read the configuration file.
   4. Display the sets so the user can interact with them.
 
-I'm manually doing the first part for now, but I'm pretty sure I'll be able to find 
+I'm manually doing the first part for now. 
 
-The second is harder. I had kludge together some code from a couple different 
+For the second part I had kludge together some code from a couple different 
 open source projects (GNOME KiSS and GIMP) in order produce something I could 
-understand. That part is `cel2pnm` and it's written in C.
+understand. Mark Dominus helped me a lot with this when he was a resident at 
+Recurse Center. That part is `cel2pnm` and it's written in C.
 
 The third involves parsing text into JSON, so I knew exactly what tool I wanted 
 to use. Haskell has two awesome libraries for this: Parsec and Aeson. 
