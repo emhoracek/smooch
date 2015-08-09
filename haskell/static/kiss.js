@@ -9,7 +9,7 @@
 
     this.editMode = false;
 
-    var editButton = document.getElementById("edit");
+    var editButton = document.getElementById("editbutton");
 
     var that = this;
     editButton.addEventListener("click", function() {

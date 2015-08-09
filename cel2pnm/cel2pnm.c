@@ -333,7 +333,7 @@ int main (int argc, char *argv[]) {
       fprintf(stderr,"Read palette %s \n", palette_file);
       read_palette (palette_file);
       fprintf(stdout, "%s", transparent);
-      return 0;
+      return 1;
     }
     else if (argc < 4) {
         fprintf(stderr, "Usage: cel2png (-d) (-t) <cel file> <palette file> <out file> \n");
@@ -370,6 +370,6 @@ int main (int argc, char *argv[]) {
     
     fprintf(stderr,"Done \n");
     
-    return 0;
+    return 1;
 
 }

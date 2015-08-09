@@ -6,29 +6,19 @@ module ParseCNF where
 
 import Kiss
 import Text.ParserCombinators.Parsec
+import Text.ParserCombinators.Parsec.Error
 import Data.List
 import Data.Maybe
 
 
-sampleKiss :: String
-sampleKiss = 
-  "; ** Palette files ** \n" ++ 
-  "%colors.kcf \n" ++
-  "(756,398) \n" ++
-  "[ 0 \n" ++
-  "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
-  "#2   body.cel   *0 : 0 1 2 3 \n" ++
-  "#3   shirtb.cel *0 : 0 1 2 3 \n" ++
-  "$0 * * *"
-
 getKissData :: String -> KissData
 getKissData file = 
-    let p = parse parseCNFLines "error" file in
+    let p = parse parseCNFLines "KiSS CNF error: " file in
     either errorKiss linesToScript p
 
 getKissCels :: String -> [KissCell]
 getKissCels file = 
-    let p = parse parseCNFLines "error" file in
+    let p = parse parseCNFLines "KiSS cel error: " file in
     either errorCells linesToCells p
 
 errorKiss :: ParseError -> KissData

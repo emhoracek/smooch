@@ -19,13 +19,34 @@ sampleSet2 = "$3 * 165,207 \n * 125,261"
 sampleSet3 :: String
 sampleSet3 = "$0 192,11 * 56,17 ; blah"
 
+sampleKiss :: String
+sampleKiss = 
+  "; ** Palette files ** \n" ++ 
+  "%colors.kcf \n" ++
+  "(756,398) \n" ++
+  "[0 \n" ++
+  "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
+  "#2   body.cel   *0 : 0 1 2 3 \n" ++
+  "#3   shirtb.cel *0 : 0 1 2 3 \n" ++
+  "$0 * * *"
+
 spec = do
-  describe "getKissData" $
+  describe "getKissData" $ do
     it "parses a CNF into KiSS data" $
-      pendingWith "laziness"
+      getKissData sampleKiss `shouldBe`
+        KissData 0 0 ["colors.kcf"] (756, 398)
+          [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0] [NoPosition],
+            KissObject 2 [ KissCell 0 "body"  0 [0,1,2,3] 0] [NoPosition],
+            KissObject 3 [ KissCell 0 "shirtb" 0 [0,1,2,3] 0] [NoPosition] ]
+    it "returns an error message for a bad cnf" $
+      getKissData "I'm not a CNF." `shouldBe`
+        BadKiss "Oops"
   describe "getKissCells" $
     it "parses a CNF into a list of KiSS cels" $
-      pendingWith "laziness"
+      getKissCels sampleKiss `shouldBe`
+          [ KissCell 0 "shirt" 0 [0,1,2,3] 0,
+            KissCell 0 "body"  0 [0,1,2,3] 0,
+            KissCell 0 "shirtb" 0 [0,1,2,3] 0 ]
   describe "parseCNFLine" $ do
     it "parses a single KiSS cel" $ 
       parse parseCNFLine "blah" sampleCell1 `shouldBe`
