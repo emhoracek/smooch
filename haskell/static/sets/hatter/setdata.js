@@ -1,0 +1,1 @@
+var kissJson = "\"KiSS CNF error: \" (line 276, column 36):\nunexpected \"-\"\nexpecting digit"
