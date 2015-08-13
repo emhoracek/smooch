@@ -15,14 +15,20 @@ import qualified Text.Blaze.Html5 as H hiding (main, map)
 import qualified Text.Blaze.Html5.Attributes as A
 import Text.Blaze.Html.Renderer.Text (renderHtml)
 
+-- OMG I HATE TEXT IN HASKELL
 import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Char8 as BS
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text as T
+
 import System.FilePath ((</>), takeBaseName, takeExtension)
 import System.Directory
 import System.Cmd
 import System.Exit
 
+import Control.Monad.Trans.Either
 import Control.Monad.IO.Class (liftIO)
+import Data.Monoid ((<>))
 
 import KissSet
 import Index
@@ -43,35 +49,60 @@ main = scotty 3000 $ do
 
   post "/upload" $ do
     fs <- files
-    let file = case fs of 
-                [(_, b)]  -> (BS.unpack (fileName b), fileContent b)
-                otherwise -> error "Must upload exactly one file."
-    let staticDir = "static/sets/" ++ takeBaseName (fst file)
-    let relDir = "sets/" ++ takeBaseName (fst file)
-    liftIO $ B.writeFile ("static/sets" </> fst file) (snd file)
-    exit <- liftIO $ unzipFile (fst file) staticDir
-    cels <- liftIO $ convertSet (fst file) staticDir
-    blaze $ KissSet.render relDir (reverse cels)
+    -- augh nesting, no sir I don't like it
+    relDir <- liftIO $ runEitherT $ getRelDir fs 
+    cels <- liftIO $ runEitherT $ processSet fs
+    case relDir of
+      Right dir -> case cels of 
+                     Right x -> blaze $ KissSet.render dir (reverse x)
+                     Left  e -> S.text $ LT.fromStrict e
+      Left e -> S.text $ LT.fromStrict e
 
-unzipFile file dir = do 
-  let base = takeBaseName file
-  createDirectory dir
-  exit <- system $ "lha -xw=" ++ dir ++ " static/sets/" ++ file
+processSet :: [S.File] -> EitherT T.Text IO [KissCell]
+processSet files = do
+  file <- getFile files
+  let fileName = fst file
+  let fileContents = snd file
+  let staticDir = "static/sets/" <> takeBaseName fileName
+  liftIO $ B.writeFile ("static/sets" </> fileName) fileContents
+  liftIO $ createDirectoryIfMissing ("create parents" == "false") staticDir
+  unzipFile fileName staticDir
+  cnf <- getCNF staticDir
+  let kissData = getKissData cnf
+  let kissCels = getKissCels cnf
+  -- just using first palette found for now
+  let kissPalette = Prelude.head $ kPalettes kissData
+  let json = "var kissJson = " <> encode kissData
+  liftIO $ B.writeFile (staticDir <> "/setdata.js") json
+  convertCels kissPalette (map celName kissCels) staticDir
+  return kissCels
+
+getFile :: [S.File] -> EitherT T.Text IO (String, B.ByteString)
+getFile files = EitherT $ return $
+  case files of 
+    [(_, b)]  -> Right (BS.unpack (fileName b), fileContent b)
+    otherwise -> Left "Please upload exactly one file."
+
+getRelDir :: [S.File] -> EitherT T.Text IO FilePath
+getRelDir files = do
+  file <- getFile files
+  let fileName = fst file
+  return $ "sets/" ++ takeBaseName fileName
+
+unzipFile :: FilePath -> FilePath -> EitherT T.Text IO ()
+unzipFile name dir = EitherT $ do 
+  exit <- system $ "lha -xw=" <> dir <> " static/sets/" <> name
   case exit of 
-    ExitSuccess -> return "yay!"
-    otherwise   -> return "boo!"
+    ExitSuccess -> return $ Right ()
+    otherwise   -> return $ Left "Unable to decompress LZH archive."
 
 -- for now, only looks at first cnf listed
-convertSet file dir = do
-  let base = takeBaseName file
-  files <- getDirectoryContents dir
+getCNF :: FilePath -> EitherT T.Text IO String
+getCNF dir = do
+  files <- liftIO $ getDirectoryContents dir
   let cnfs = filter (\x -> takeExtension x == ".cnf") files 
-  cnf <- readFile $ dir </> Prelude.head cnfs
-  let kissData = getKissData cnf
-  print kissData
-  let kissCels = getKissCels cnf
-  let kissPalette = Prelude.head $ kPalettes kissData
-  let json = "var kissJson = " ++ BS.unpack (B.toStrict $ encode kissData)
-  writeFile (dir ++ "/setdata.js") json
-  convertCels kissPalette (map celName kissCels) dir
-  return kissCels
+  case cnfs of
+    (x:xs)    -> liftIO $ readFile $ dir </> x
+    otherwise -> EitherT $ return $ Left "No configuration file found."
+
+

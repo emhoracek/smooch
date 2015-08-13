@@ -167,10 +167,12 @@ parsePosition = do
 
 parsePos :: Parser SetPos
 parsePos = do
+    xsign <- option '0' (char '-')
     xpos <- many1 digit
     char ','
+    ysign <- option '0' (char '-')
     ypos <- many1 digit
-    return $ Position (read xpos) (read ypos)
+    return $ Position (read $ xsign : xpos) (read $ ysign : ypos)
 
 parseNoPos :: Parser SetPos
 parseNoPos = do
