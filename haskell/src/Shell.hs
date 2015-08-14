@@ -52,3 +52,6 @@ runProgram name process = EitherT $ do
   case result of 
     ExitSuccess   -> return $ Right ()
     ExitFailure n -> return $ Left $ T.pack ("Error while " <> name <> ". Exit code: " <> show n <> ". Error: " <> errMsg)
+
+unzipFile :: FilePath -> FilePath -> EitherT T.Text IO ()
+unzipFile name dir = runProgram ("decompressing archive " <> name) ("lha -xw=" <> dir <> " static/sets/" <> name)

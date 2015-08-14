@@ -9,26 +9,22 @@ import Text.ParserCombinators.Parsec
 import Text.ParserCombinators.Parsec.Error
 import Data.List
 import Data.Maybe
+import qualified Data.Text as T
+import Control.Monad.Trans.Either 
 
-
-getKissData :: String -> KissData
+getKissData :: String -> EitherT T.Text IO KissData
 getKissData file = 
-    let p = parse parseCNFLines "KiSS CNF error: " file in
-    either errorKiss linesToScript p
+    case parse parseCNFLines "KiSS CNF error: " file of
+      Right lines -> return $ linesToScript lines
+      Left error  -> EitherT $ return $ Left $ T.pack $ show error 
 
-getKissCels :: String -> [KissCell]
+getKissCels :: String -> EitherT T.Text IO [KissCell]
 getKissCels file = 
-    let p = parse parseCNFLines "KiSS cel error: " file in
-    either errorCells linesToCells p
-
-errorKiss :: ParseError -> KissData
-errorKiss s = BadKiss (show s)
-
-errorCells :: ParseError -> [KissCell]
-errorCells s = [BadCell (show s)]
+    case parse parseCNFLines "KiSS cel error: " file of
+      Right lines -> return $ linesToCells lines
+      Left error  -> EitherT $ return $ Left $ T.pack $ show error
 
 -- Converting CNF lines to useable KiSS data
-
 linesToScript :: [CNFLine] -> KissData
 linesToScript xs = 
     KissData memory border palettes windowSize objects 

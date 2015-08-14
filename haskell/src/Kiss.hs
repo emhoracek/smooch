@@ -10,19 +10,16 @@ data KissData = KissData {
                     kPalettes :: [String],
                     kWindowSize :: (Int, Int),
                     kObjects :: [KissObject] }
-              | BadKiss String
     deriving (Eq, Show)
 instance ToJSON KissData where
     toJSON (KissData _ _ _ win objs) =
         object["window_size" .= win,
                "objs" .= objs]
-    toJSON (BadKiss s) = toJSON s
 
 data KissObject = KissObject {
                     objNum :: Int,
                     objCells :: [KissCell],
                     objPos :: [SetPos] }
-                | BadObject String
     deriving (Eq, Show)
 instance ToJSON KissObject where
     toJSON (KissObject num cells pos) =
@@ -36,7 +33,6 @@ data KissCell = KissCell {
                     celPalOffset :: Int,
                     celSets :: [Int],
                     celAlpha :: Int }
-               | BadCell String
     deriving (Eq, Show)
 instance ToJSON KissCell where
     toJSON (KissCell fix name pal sets alpha) =

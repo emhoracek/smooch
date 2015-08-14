@@ -4,6 +4,7 @@ import Test.Hspec
 import Text.ParserCombinators.Parsec
 import ParseCNF
 import Kiss
+import Control.Monad.Trans.Either
 
 sampleCell1 :: String
 sampleCell1 = "#19       markr6.cel      *0 : 0 1 2 3 4 5 6 7 8 9"
@@ -33,7 +34,7 @@ sampleKiss =
 spec = do
   describe "getKissData" $ do
     it "parses a CNF into KiSS data" $
-      getKissData sampleKiss `shouldBe`
+      runEitherT (getKissData sampleKiss) `shouldReturn`
         Right (KissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0] [NoPosition],
             KissObject 2 [ KissCell 0 "body"  0 [0,1,2,3] 0] [NoPosition],
@@ -45,7 +46,7 @@ spec = do
    --}      
   describe "getKissCells" $
     it "parses a CNF into a list of KiSS cels" $
-      getKissCels sampleKiss `shouldBe`
+      runEitherT (getKissCels sampleKiss) `shouldReturn`
          Right ( [ KissCell 0 "shirt" 0 [0,1,2,3] 0,
             KissCell 0 "body"  0 [0,1,2,3] 0,
             KissCell 0 "shirtb" 0 [0,1,2,3] 0 ])
