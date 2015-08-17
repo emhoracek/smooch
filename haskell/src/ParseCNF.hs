@@ -24,6 +24,12 @@ getKissCels file =
       Right lines -> return $ linesToCells lines
       Left error  -> EitherT $ return $ Left $ T.pack $ show error
 
+getKissPalette :: KissData -> EitherT T.Text IO String
+getKissPalette file = 
+  case kPalettes file of
+    (x:xs) -> return x
+    []     -> EitherT $ return $ Left "no palette found"
+
 -- Converting CNF lines to useable KiSS data
 linesToScript :: [CNFLine] -> KissData
 linesToScript xs = 

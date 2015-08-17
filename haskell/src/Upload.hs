@@ -16,6 +16,7 @@ import System.Directory
 import System.Exit
 
 import Control.Monad.Trans.Either
+import Control.Exception
 import Control.Monad.IO.Class (liftIO)
 import Data.Monoid ((<>))
 
@@ -33,18 +34,26 @@ processSet files = do
   let fileName = fst file
   let fileContents = snd file
   let staticDir = "static/sets/" <> takeBaseName fileName
-  liftIO $ B.writeFile ("static/sets" </> fileName) fileContents
-  liftIO $ createDirectoryIfMissing ("create parents" == "false") staticDir
+  tryIO $ B.writeFile ("static/sets" </> fileName) fileContents
+  tryIO $ createDirectoryIfMissing ("create parents" == "false") staticDir
   unzipFile fileName staticDir
   cnf <- getCNF staticDir
   kissData <- getKissData cnf
+  let json = "var kissJson = " <> encode kissData
   kissCels <- getKissCels cnf
   -- just using first palette found for now
-  let kissPalette = Prelude.head $ kPalettes kissData
-  let json = "var kissJson = " <> encode kissData
-  liftIO $ B.writeFile (staticDir <> "/setdata.js") json
+  kissPalette <- getKissPalette kissData
+  tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   convertCels kissPalette (map celName kissCels) staticDir
   return kissCels
+
+tryIO :: IO () -> EitherT T.Text IO ()
+tryIO f = do
+  result <-liftIO (try f :: IO (Either IOException ()))
+  case result of
+    Right () -> return ()
+    Left ex  -> EitherT $ return $ Left (T.pack $ show ex)
+   
 
 getFile :: [S.File] -> EitherT T.Text IO (String, B.ByteString)
 getFile files = EitherT $ return $
@@ -66,5 +75,3 @@ getCNF dir = do
   case cnfs of
     (x:xs)    -> liftIO $ readFile $ dir </> x
     otherwise -> EitherT $ return $ Left "No configuration file found."
-
-

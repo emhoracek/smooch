@@ -1,5 +1,5 @@
 name:                smooch
-version:             0.1.0.2
+version:             0.1.0.3
 -- synopsis:            
 -- description:         
 license:             GPL-3
@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 executable smooch
   hs-source-dirs:      src
   main-is:             Main.hs
-  other-modules:       Kiss, ParseCNF, Shell
+  other-modules:       Kiss, ParseCNF, Shell, Upload
   -- other-extensions:    
   build-depends:       base,
                        wai, wai-extra,
@@ -35,7 +35,7 @@ test-suite tests
   ghc-options: -Wall
   default-language: Haskell2010
   main-is: Spec.hs
-  other-modules: ParseCNFSpec, ShellSpec, Kiss, ParseCNF, Main, Shell
+  other-modules: ParseCNFSpec, ShellSpec, UploadSpec, Kiss, ParseCNF, Main, Shell, Upload
   type: exitcode-stdio-1.0
   build-depends:       base,
                        wai, wai-extra,
