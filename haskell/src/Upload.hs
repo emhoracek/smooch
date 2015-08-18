@@ -21,7 +21,6 @@ import Control.Monad.IO.Class (liftIO)
 import Data.Monoid ((<>))
 
 import KissSet
-import Index
 
 import ParseCNF
 import Kiss

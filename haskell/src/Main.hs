@@ -25,7 +25,7 @@ import Control.Monad.Trans.Either
 import Control.Monad.IO.Class (liftIO)
 
 import KissSet
-import Index
+import Home
 import Upload
 
 blaze = S.html . renderHtml
