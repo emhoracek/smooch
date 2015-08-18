@@ -8,7 +8,9 @@ talented artists spent countless hours making these fun digital toys. Some are
 wonderful examples of pixel artistry. It would be a shame for them to be lost 
 just because technology has moved on.
 
-I've added information about KiSS to the [GitHub wiki](https://github.com/emhoracek/smooch/wiki), please check it out if you want to learn more.
+I've added information about KiSS to the 
+[GitHub wiki](https://github.com/emhoracek/smooch/wiki), please check it out 
+if you want to learn more.
 
 I built a tool for converting KiSS cells (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats). Next, I 
@@ -17,39 +19,26 @@ want to make a KiSS doll viewer for the browser.
 ## Structure
 
 To display a KiSS doll, an application has to do four things:
-  1. Decompress the old, obsure Japanese compression format, LZH.
+  1. Decompress the old, obsure Japanese compression format and extract the files.
   2. Read the specialized image files (cells and palettes).
   3. Read the configuration file.
   4. Display the sets so the user can interact with them.
 
-I'm manually doing the first part for now. 
-
 For the second part I had kludge together some code from a couple different 
 open source projects (GNOME KiSS and GIMP) in order produce something I could 
-understand. Mark Dominus helped me a lot with this when he was a resident at 
-Recurse Center. That part is `cel2pnm` and it's written in C.
+understand. [Mark Dominus](http://blog.plover.com) helped me a lot with this 
+when he was a resident at [Recurse Center](http://www.recurse.com). That part 
+is `cel2pnm` and it's written in C.
 
 The third involves parsing text into JSON, so I knew exactly what tool I wanted 
 to use. Haskell has two awesome libraries for this: Parsec and Aeson. 
-Under the "haskell" folder, you'll see more folders. 
-  * src
-    * Main 
-    * ParseCNF parses the configuration file
-    * Kiss contains the KiSS data types (and Aeson instances)
-    * CreateHTML is a temporary thing to build the HTML file (and it's broken)
-    * Shell is a Turtle shell script to run everything (also broken)
-  * tests contains unit tests
-  * resources contains the HTML, CSS, and JavaScript
-The Haskell is borked right now because I don't understand file systems. ;_;
+If you'd like to hack on the Haskell, check out the README in the "haskell" directory
 
 The fourth part is where JavaScript comes in. If you want to hack on Smooch 
 but don't want to mess with Haskell, try the "javascript" folder. It's not 
 actually just JavaScript -- it's also the HTML, CSS, and all the images for a 
 single doll ("Aurora" by Punky). I don't know JavaScript very well so if you 
 can help that would be amazing.
-
-Eventually all of this will be on a web server -- probably Haskell's Snap 
-because I've been meaning to learn how to use it for ages.
 
 ## cel2pnm
 
@@ -64,7 +53,7 @@ You can use cel2pnm this way:
 
 ```(sh)
 cel2pnm <palette file> <cel image> <output file> 
-```
+``
 or with debugging:
 ```(sh)
 cel2pnm -d <palette file> <cel image> <output file> 
@@ -91,8 +80,9 @@ pnmtopng -transparent `./cel2pnm -t examples/smoon.kcf` examples/luna.pnm > luna
 
 I would very much appreciate input on how to make this program better.
 
-Please let me know if the program doesn't convert a cell correctly and I will 
-attempt to fix it.
+Please let me know if cel2pnm doesn't convert a cell correctly and I will 
+attempt to fix it. (If smooch doesn't display a doll correctly, that's because it 
+doesn't display hardly anything correctly right now.)
 
 If you would like to help with this or other tools for KiSS, please let me know!
 Email me at libby@daydrea.me, submit an issue, or send a pull request. THANKS!! :D
