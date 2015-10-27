@@ -1,0 +1,18 @@
+Configuring conduit-1.2.5...
+Building conduit-1.2.5...
+Preprocessing library conduit-1.2.5...
+[1 of 8] Compiling Data.Conduit.Internal.Pipe ( Data/Conduit/Internal/Pipe.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Internal/Pipe.o )
+[2 of 8] Compiling Data.Conduit.Internal.Conduit ( Data/Conduit/Internal/Conduit.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Internal/Conduit.o )
+
+Data/Conduit/Internal/Conduit.hs:86:1: Warning:
+    Module ‘Prelude’ does not export ‘catch’
+[3 of 8] Compiling Data.Conduit.Internal.Fusion ( Data/Conduit/Internal/Fusion.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Internal/Fusion.o )
+[4 of 8] Compiling Data.Conduit.Internal.List.Stream ( Data/Conduit/Internal/List/Stream.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Internal/List/Stream.o )
+[5 of 8] Compiling Data.Conduit.Internal ( Data/Conduit/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Internal.o )
+[6 of 8] Compiling Data.Conduit     ( Data/Conduit.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit.o )
+[7 of 8] Compiling Data.Conduit.List ( Data/Conduit/List.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/List.o )
+[8 of 8] Compiling Data.Conduit.Lift ( Data/Conduit/Lift.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Conduit/Lift.o )
+In-place registering conduit-1.2.5...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/conduit-1.2.5
+Registering conduit-1.2.5...
