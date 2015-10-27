@@ -1,0 +1,158 @@
+Configuring bifunctors-5...
+Building bifunctors-5...
+Preprocessing library bifunctors-5...
+[ 1 of 11] Compiling Data.Bifoldable  ( src/Data/Bifoldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifoldable.o )
+[ 2 of 11] Compiling Data.Bitraversable ( src/Data/Bitraversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bitraversable.o )
+[ 3 of 11] Compiling Data.Biapplicative ( src/Data/Biapplicative.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Biapplicative.o )
+[ 4 of 11] Compiling Data.Bifunctor.Biff ( src/Data/Bifunctor/Biff.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Biff.o )
+
+src/Data/Bifunctor/Biff.hs:15:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Biff.hs:19:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Biff.hs:20:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Bifunctor/Biff.hs:21:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[ 5 of 11] Compiling Data.Bifunctor.Clown ( src/Data/Bifunctor/Clown.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Clown.o )
+
+src/Data/Bifunctor/Clown.hs:17:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Clown.hs:21:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Clown.hs:22:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Bifunctor/Clown.hs:23:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[ 6 of 11] Compiling Data.Bifunctor.Flip ( src/Data/Bifunctor/Flip.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Flip.o )
+
+src/Data/Bifunctor/Flip.hs:16:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Flip.hs:20:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Flip.hs:21:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Bifunctor/Flip.hs:22:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[ 7 of 11] Compiling Data.Bifunctor.Join ( src/Data/Bifunctor/Join.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Join.o )
+
+src/Data/Bifunctor/Join.hs:16:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Join.hs:20:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Join.hs:21:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[ 8 of 11] Compiling Data.Bifunctor.Joker ( src/Data/Bifunctor/Joker.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Joker.o )
+
+src/Data/Bifunctor/Joker.hs:17:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Joker.hs:21:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Joker.hs:22:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[ 9 of 11] Compiling Data.Bifunctor.Product ( src/Data/Bifunctor/Product.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Product.o )
+
+src/Data/Bifunctor/Product.hs:16:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Product.hs:20:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+[10 of 11] Compiling Data.Bifunctor.Tannen ( src/Data/Bifunctor/Tannen.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Tannen.o )
+
+src/Data/Bifunctor/Tannen.hs:15:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Tannen.hs:19:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Tannen.hs:20:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Bifunctor/Tannen.hs:21:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+[11 of 11] Compiling Data.Bifunctor.Wrapped ( src/Data/Bifunctor/Wrapped.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Wrapped.o )
+
+src/Data/Bifunctor/Wrapped.hs:15:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+src/Data/Bifunctor/Wrapped.hs:19:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Data/Bifunctor/Wrapped.hs:20:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Bifunctor/Wrapped.hs:21:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+In-place registering bifunctors-5...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/bifunctors-5-6cWzSBWZD9ID5wcfOFIydn
+Registering bifunctors-5...

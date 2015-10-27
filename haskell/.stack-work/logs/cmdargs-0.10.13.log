@@ -1,0 +1,32 @@
+Configuring cmdargs-0.10.13...
+Building cmdargs-0.10.13...
+Preprocessing library cmdargs-0.10.13...
+[ 1 of 25] Compiling System.Console.CmdArgs.Implicit.Ann ( System/Console/CmdArgs/Implicit/Ann.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Ann.o )
+[ 2 of 25] Compiling System.Console.CmdArgs.Implicit.UI ( System/Console/CmdArgs/Implicit/UI.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/UI.o )
+[ 3 of 25] Compiling System.Console.CmdArgs.Verbosity ( System/Console/CmdArgs/Verbosity.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Verbosity.o )
+[ 4 of 25] Compiling System.Console.CmdArgs.Implicit.Type ( System/Console/CmdArgs/Implicit/Type.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Type.o )
+[ 5 of 25] Compiling System.Console.CmdArgs.Explicit.SplitJoin ( System/Console/CmdArgs/Explicit/SplitJoin.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/SplitJoin.o )
+[ 6 of 25] Compiling System.Console.CmdArgs.Explicit.ExpandArgsAt ( System/Console/CmdArgs/Explicit/ExpandArgsAt.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/ExpandArgsAt.o )
+[ 7 of 25] Compiling System.Console.CmdArgs.Explicit.Type ( System/Console/CmdArgs/Explicit/Type.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/Type.o )
+[ 8 of 25] Compiling System.Console.CmdArgs.Explicit.Process ( System/Console/CmdArgs/Explicit/Process.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/Process.o )
+[ 9 of 25] Compiling System.Console.CmdArgs.Explicit.Complete ( System/Console/CmdArgs/Explicit/Complete.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/Complete.o )
+[10 of 25] Compiling System.Console.CmdArgs.Helper ( System/Console/CmdArgs/Helper.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Helper.o )
+[11 of 25] Compiling System.Console.CmdArgs.Default ( System/Console/CmdArgs/Default.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Default.o )
+[12 of 25] Compiling System.Console.CmdArgs.Text ( System/Console/CmdArgs/Text.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Text.o )
+[13 of 25] Compiling System.Console.CmdArgs.Explicit.Help ( System/Console/CmdArgs/Explicit/Help.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit/Help.o )
+[14 of 25] Compiling System.Console.CmdArgs.Explicit ( System/Console/CmdArgs/Explicit.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Explicit.o )
+[15 of 25] Compiling System.Console.CmdArgs.GetOpt ( System/Console/CmdArgs/GetOpt.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/GetOpt.o )
+[16 of 25] Compiling Data.Generics.Any ( Data/Generics/Any.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Generics/Any.o )
+[17 of 25] Compiling Data.Generics.Any.Prelude ( Data/Generics/Any/Prelude.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Generics/Any/Prelude.o )
+[18 of 25] Compiling System.Console.CmdArgs.Implicit.Reader ( System/Console/CmdArgs/Implicit/Reader.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Reader.o )
+[19 of 25] Compiling System.Console.CmdArgs.Annotate ( System/Console/CmdArgs/Annotate.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Annotate.o )
+[20 of 25] Compiling System.Console.CmdArgs.Implicit.Local ( System/Console/CmdArgs/Implicit/Local.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Local.o )
+[21 of 25] Compiling System.Console.CmdArgs.Implicit.Reform ( System/Console/CmdArgs/Implicit/Reform.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Reform.o )
+[22 of 25] Compiling System.Console.CmdArgs.Implicit.Global ( System/Console/CmdArgs/Implicit/Global.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit/Global.o )
+[23 of 25] Compiling System.Console.CmdArgs.Implicit ( System/Console/CmdArgs/Implicit.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Implicit.o )
+[24 of 25] Compiling System.Console.CmdArgs.Quote ( System/Console/CmdArgs/Quote.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs/Quote.o )
+[25 of 25] Compiling System.Console.CmdArgs ( System/Console/CmdArgs.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Console/CmdArgs.o )
+In-place registering cmdargs-0.10.13...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/cmdargs-0.10.13-3hFC8irhwwJFnXXtAnMpNG
+Registering cmdargs-0.10.13...

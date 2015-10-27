@@ -1,0 +1,195 @@
+Configuring streaming-commons-0.1.12.1...
+Building streaming-commons-0.1.12.1...
+Preprocessing library streaming-commons-0.1.12.1...
+[ 1 of 18] Compiling Data.Streaming.Zlib.Lowlevel ( Data/Streaming/Zlib/Lowlevel.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Zlib/Lowlevel.o )
+[ 2 of 18] Compiling Data.Streaming.Zlib ( Data/Streaming/Zlib.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Zlib.o )
+[ 3 of 18] Compiling Data.Text.Internal.Unsafe.Shift ( Data/Text/Internal/Unsafe/Shift.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Text/Internal/Unsafe/Shift.o )
+[ 4 of 18] Compiling Data.Text.Internal.Unsafe.Char ( Data/Text/Internal/Unsafe/Char.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Text/Internal/Unsafe/Char.o )
+[ 5 of 18] Compiling Data.Text.Internal.Encoding.Utf8 ( Data/Text/Internal/Encoding/Utf8.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Text/Internal/Encoding/Utf8.o )
+[ 6 of 18] Compiling Data.Text.Internal.Encoding.Utf32 ( Data/Text/Internal/Encoding/Utf32.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Text/Internal/Encoding/Utf32.o )
+[ 7 of 18] Compiling Data.Text.Internal.Encoding.Utf16 ( Data/Text/Internal/Encoding/Utf16.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Text/Internal/Encoding/Utf16.o )
+[ 8 of 18] Compiling Data.Streaming.Text ( Data/Streaming/Text.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Text.o )
+[ 9 of 18] Compiling Data.Streaming.Process.Internal ( Data/Streaming/Process/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Process/Internal.o )
+[10 of 18] Compiling Data.Streaming.Process ( Data/Streaming/Process.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Process.o )
+[11 of 18] Compiling Data.Streaming.Network.Internal ( Data/Streaming/Network/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Network/Internal.o )
+[12 of 18] Compiling Data.Streaming.Network ( Data/Streaming/Network.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Network.o )
+[13 of 18] Compiling Data.Streaming.Filesystem ( Data/Streaming/Filesystem.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Filesystem.o )
+[14 of 18] Compiling Data.Streaming.FileRead ( Data/Streaming/FileRead.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/FileRead.o )
+[15 of 18] Compiling Data.Streaming.ByteString.Builder.Buffer ( Data/Streaming/ByteString/Builder/Buffer.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/ByteString/Builder/Buffer.o )
+[16 of 18] Compiling Data.Streaming.ByteString.Builder ( Data/Streaming/ByteString/Builder.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/ByteString/Builder.o )
+[17 of 18] Compiling Data.Streaming.ByteString.Builder.Class ( Data/Streaming/ByteString/Builder/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/ByteString/Builder/Class.o )
+[18 of 18] Compiling Data.Streaming.Blaze ( Data/Streaming/Blaze.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Streaming/Blaze.o )
+
+cbits/zlib-helper.c:32:45:
+     warning: passing 'const char *' to parameter of type 'const Bytef *' (aka 'const unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+            return inflateSetDictionary(stream, dictionary, dictLength);
+                                                ^~~~~~~~~~
+
+include/zlib.h:737:59:
+     note: passing argument to parameter 'dictionary' here
+                                                 const Bytef *dictionary,
+                                                              ^
+
+include/zconf.h:168:23:  note: expanded from macro 'OF'
+#    define OF(args)  args
+                      ^
+
+cbits/zlib-helper.c:37:45:
+     warning: passing 'const char *' to parameter of type 'const Bytef *' (aka 'const unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+            return deflateSetDictionary(stream, dictionary, dictLength);
+                                                ^~~~~~~~~~
+
+include/zlib.h:539:59:
+     note: passing argument to parameter 'dictionary' here
+                                                 const Bytef *dictionary,
+                                                              ^
+
+include/zconf.h:168:23:  note: expanded from macro 'OF'
+#    define OF(args)  args
+                      ^
+
+cbits/zlib-helper.c:48:18:
+     warning: assigning to 'Bytef *' (aka 'unsigned char *') from 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            stream->next_in = buff;
+                            ^ ~~~~
+
+cbits/zlib-helper.c:54:19:
+     warning: assigning to 'Bytef *' (aka 'unsigned char *') from 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            stream->next_out = buff;
+                             ^ ~~~~
+
+cbits/zlib-helper.c:75:9:
+     warning: returning 'Bytef *' (aka 'unsigned char *') from a function with result type 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            return stream->next_in;
+                   ^~~~~~~~~~~~~~~
+5 warnings generated.
+
+cbits/zlib-helper.c:32:45:
+     warning: passing 'const char *' to parameter of type 'const Bytef *' (aka 'const unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+            return inflateSetDictionary(stream, dictionary, dictLength);
+                                                ^~~~~~~~~~
+
+include/zlib.h:737:59:
+     note: passing argument to parameter 'dictionary' here
+                                                 const Bytef *dictionary,
+                                                              ^
+
+include/zconf.h:168:23:  note: expanded from macro 'OF'
+#    define OF(args)  args
+                      ^
+
+cbits/zlib-helper.c:37:45:
+     warning: passing 'const char *' to parameter of type 'const Bytef *' (aka 'const unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+            return deflateSetDictionary(stream, dictionary, dictLength);
+                                                ^~~~~~~~~~
+
+include/zlib.h:539:59:
+     note: passing argument to parameter 'dictionary' here
+                                                 const Bytef *dictionary,
+                                                              ^
+
+include/zconf.h:168:23:  note: expanded from macro 'OF'
+#    define OF(args)  args
+                      ^
+
+cbits/zlib-helper.c:48:18:
+     warning: assigning to 'Bytef *' (aka 'unsigned char *') from 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            stream->next_in = buff;
+                            ^ ~~~~
+
+cbits/zlib-helper.c:54:19:
+     warning: assigning to 'Bytef *' (aka 'unsigned char *') from 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            stream->next_out = buff;
+                             ^ ~~~~
+
+cbits/zlib-helper.c:75:9:
+     warning: returning 'Bytef *' (aka 'unsigned char *') from a function with result type 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+            return stream->next_in;
+                   ^~~~~~~~~~~~~~~
+5 warnings generated.
+
+cbits/text-helper.c:71:67:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+_hs_streaming_commons_decode_latin1(uint16_t *dest, const uint8_t const *src,
+                                                                  ^
+
+cbits/text-helper.c:72:38:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                           const uint8_t const *srcend)
+                                         ^
+
+cbits/text-helper.c:133:19:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                           ^
+
+cbits/text-helper.c:133:46:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                                                      ^
+
+cbits/text-helper.c:140:19:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                           ^
+
+cbits/text-helper.c:140:46:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                                                      ^
+
+cbits/text-helper.c:205:42:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                               const uint8_t const **src,
+                                             ^
+
+cbits/text-helper.c:206:21:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                               const uint8_t const *srcend,
+                                             ^
+8 warnings generated.
+
+cbits/text-helper.c:71:67:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+_hs_streaming_commons_decode_latin1(uint16_t *dest, const uint8_t const *src,
+                                                                  ^
+
+cbits/text-helper.c:72:38:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                           const uint8_t const *srcend)
+                                         ^
+
+cbits/text-helper.c:133:19:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                           ^
+
+cbits/text-helper.c:133:46:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                                                      ^
+
+cbits/text-helper.c:140:19:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                           ^
+
+cbits/text-helper.c:140:46:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                             const uint8_t const **src, const uint8_t const *srcend,
+                                                                      ^
+
+cbits/text-helper.c:205:42:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                               const uint8_t const **src,
+                                             ^
+
+cbits/text-helper.c:206:21:
+     warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+                               const uint8_t const *srcend,
+                                             ^
+8 warnings generated.
+In-place registering streaming-commons-0.1.12.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/streaming-commons-0.1.12.1
+Registering streaming-commons-0.1.12.1...

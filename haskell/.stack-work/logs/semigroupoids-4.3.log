@@ -1,0 +1,30 @@
+Configuring semigroupoids-4.3...
+Building semigroupoids-4.3...
+Preprocessing library semigroupoids-4.3...
+[ 1 of 20] Compiling Data.Traversable.Instances ( src/Data/Traversable/Instances.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Traversable/Instances.o )
+[ 2 of 20] Compiling Data.Functor.Extend ( src/Data/Functor/Extend.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Extend.o )
+[ 3 of 20] Compiling Data.Functor.Bind ( src/Data/Functor/Bind.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Bind.o )
+
+src/Data/Functor/Bind.hs:380:3: Warning:
+    Local definition of ‘join’ clashes with a future Prelude name - this will become an error in GHC 7.10, under the Applicative-Monad Proposal.
+[ 4 of 20] Compiling Data.Functor.Bind.Trans ( src/Data/Functor/Bind/Trans.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Bind/Trans.o )
+[ 5 of 20] Compiling Data.Semigroupoid ( src/Data/Semigroupoid.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid.o )
+[ 6 of 20] Compiling Data.Semigroupoid.Dual ( src/Data/Semigroupoid/Dual.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid/Dual.o )
+[ 7 of 20] Compiling Data.Groupoid    ( src/Data/Groupoid.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Groupoid.o )
+[ 8 of 20] Compiling Data.Isomorphism ( src/Data/Isomorphism.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Isomorphism.o )
+[ 9 of 20] Compiling Data.Semigroupoid.Product ( src/Data/Semigroupoid/Product.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid/Product.o )
+[10 of 20] Compiling Data.Semigroupoid.Coproduct ( src/Data/Semigroupoid/Coproduct.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid/Coproduct.o )
+[11 of 20] Compiling Data.Semigroupoid.Ob ( src/Data/Semigroupoid/Ob.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid/Ob.o )
+[12 of 20] Compiling Data.Functor.Apply ( src/Data/Functor/Apply.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Apply.o )
+[13 of 20] Compiling Data.Semigroup.Foldable ( src/Data/Semigroup/Foldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroup/Foldable.o )
+[14 of 20] Compiling Data.Semigroup.Traversable ( src/Data/Semigroup/Traversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroup/Traversable.o )
+[15 of 20] Compiling Data.Semifunctor ( src/Data/Semifunctor.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semifunctor.o )
+[16 of 20] Compiling Data.Semifunctor.Associative ( src/Data/Semifunctor/Associative.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semifunctor/Associative.o )
+[17 of 20] Compiling Data.Semifunctor.Braided ( src/Data/Semifunctor/Braided.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semifunctor/Braided.o )
+[18 of 20] Compiling Data.Functor.Alt ( src/Data/Functor/Alt.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Alt.o )
+[19 of 20] Compiling Data.Functor.Plus ( src/Data/Functor/Plus.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Functor/Plus.o )
+[20 of 20] Compiling Data.Semigroupoid.Static ( src/Data/Semigroupoid/Static.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroupoid/Static.o )
+In-place registering semigroupoids-4.3...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/semigroupoids-4.3
+Registering semigroupoids-4.3...

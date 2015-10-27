@@ -1,0 +1,20 @@
+Configuring aeson-0.8.0.2...
+Building aeson-0.8.0.2...
+Preprocessing library aeson-0.8.0.2...
+[ 1 of 13] Compiling Data.Aeson.Types.Internal ( Data/Aeson/Types/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Types/Internal.o )
+[ 2 of 13] Compiling Data.Aeson.Types.Class ( Data/Aeson/Types/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Types/Class.o )
+[ 3 of 13] Compiling Data.Aeson.Functions ( Data/Aeson/Functions.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Functions.o )
+[ 4 of 13] Compiling Data.Aeson.Types.Instances ( Data/Aeson/Types/Instances.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Types/Instances.o )
+[ 5 of 13] Compiling Data.Aeson.Types.Generic ( Data/Aeson/Types/Generic.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Types/Generic.o )
+[ 6 of 13] Compiling Data.Aeson.Types ( Data/Aeson/Types.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Types.o )
+[ 7 of 13] Compiling Data.Aeson.Encode.ByteString ( Data/Aeson/Encode/ByteString.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Encode/ByteString.o )
+[ 8 of 13] Compiling Data.Aeson.Parser.Internal ( Data/Aeson/Parser/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Parser/Internal.o )
+[ 9 of 13] Compiling Data.Aeson.Parser ( Data/Aeson/Parser.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Parser.o )
+[10 of 13] Compiling Data.Aeson.Encode ( Data/Aeson/Encode.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Encode.o )
+[11 of 13] Compiling Data.Aeson.Generic ( Data/Aeson/Generic.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/Generic.o )
+[12 of 13] Compiling Data.Aeson       ( Data/Aeson.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson.o )
+[13 of 13] Compiling Data.Aeson.TH    ( Data/Aeson/TH.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Aeson/TH.o )
+In-place registering aeson-0.8.0.2...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/aeson-0.8.0.2
+Registering aeson-0.8.0.2...

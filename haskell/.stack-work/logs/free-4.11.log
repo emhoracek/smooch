@@ -1,0 +1,21 @@
+Configuring free-4.11...
+Building free-4.11...
+Preprocessing library free-4.11...
+[ 1 of 14] Compiling Control.Monad.Free.TH ( src/Control/Monad/Free/TH.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Free/TH.o )
+[ 2 of 14] Compiling Control.Monad.Free.Class ( src/Control/Monad/Free/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Free/Class.o )
+[ 3 of 14] Compiling Control.Monad.Trans.Iter ( src/Control/Monad/Trans/Iter.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Trans/Iter.o )
+[ 4 of 14] Compiling Control.Monad.Trans.Free ( src/Control/Monad/Trans/Free.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Trans/Free.o )
+[ 5 of 14] Compiling Control.Monad.Trans.Free.Church ( src/Control/Monad/Trans/Free/Church.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Trans/Free/Church.o )
+[ 6 of 14] Compiling Control.Monad.Free ( src/Control/Monad/Free.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Free.o )
+[ 7 of 14] Compiling Control.Monad.Free.Church ( src/Control/Monad/Free/Church.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Monad/Free/Church.o )
+[ 8 of 14] Compiling Control.Comonad.Cofree.Class ( src/Control/Comonad/Cofree/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Comonad/Cofree/Class.o )
+[ 9 of 14] Compiling Control.Comonad.Trans.Cofree ( src/Control/Comonad/Trans/Cofree.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Comonad/Trans/Cofree.o )
+[10 of 14] Compiling Control.Comonad.Trans.Coiter ( src/Control/Comonad/Trans/Coiter.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Comonad/Trans/Coiter.o )
+[11 of 14] Compiling Control.Comonad.Cofree ( src/Control/Comonad/Cofree.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Comonad/Cofree.o )
+[12 of 14] Compiling Control.Alternative.Free ( src/Control/Alternative/Free.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Alternative/Free.o )
+[13 of 14] Compiling Control.Applicative.Trans.Free ( src/Control/Applicative/Trans/Free.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Applicative/Trans/Free.o )
+[14 of 14] Compiling Control.Applicative.Free ( src/Control/Applicative/Free.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Control/Applicative/Free.o )
+In-place registering free-4.11...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/free-4.11
+Registering free-4.11...

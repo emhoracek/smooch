@@ -1,0 +1,28 @@
+Configuring semigroupoids-5.0.0.4...
+Building semigroupoids-5.0.0.4...
+Preprocessing library semigroupoids-5.0.0.4...
+[ 1 of 21] Compiling Data.Traversable.Instances ( src/Data/Traversable/Instances.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Traversable/Instances.o )
+[ 2 of 21] Compiling Data.Semigroup.Foldable.Class ( src/Data/Semigroup/Foldable/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Foldable/Class.o )
+[ 3 of 21] Compiling Data.Functor.Extend ( src/Data/Functor/Extend.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Extend.o )
+[ 4 of 21] Compiling Data.Functor.Bind.Class ( src/Data/Functor/Bind/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Bind/Class.o )
+[ 5 of 21] Compiling Data.Functor.Apply ( src/Data/Functor/Apply.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Apply.o )
+[ 6 of 21] Compiling Data.Semigroup.Bifoldable ( src/Data/Semigroup/Bifoldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Bifoldable.o )
+[ 7 of 21] Compiling Data.Functor.Bind ( src/Data/Functor/Bind.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Bind.o )
+[ 8 of 21] Compiling Data.Functor.Alt ( src/Data/Functor/Alt.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Alt.o )
+[ 9 of 21] Compiling Data.Semigroup.Foldable ( src/Data/Semigroup/Foldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Foldable.o )
+[10 of 21] Compiling Data.Semigroup.Traversable.Class ( src/Data/Semigroup/Traversable/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Traversable/Class.o )
+[11 of 21] Compiling Data.Semigroup.Bitraversable ( src/Data/Semigroup/Bitraversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Bitraversable.o )
+[12 of 21] Compiling Data.Semigroup.Traversable ( src/Data/Semigroup/Traversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroup/Traversable.o )
+[13 of 21] Compiling Data.Functor.Bind.Trans ( src/Data/Functor/Bind/Trans.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Bind/Trans.o )
+[14 of 21] Compiling Data.Functor.Plus ( src/Data/Functor/Plus.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Plus.o )
+[15 of 21] Compiling Data.Semigroupoid ( src/Data/Semigroupoid.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroupoid.o )
+[16 of 21] Compiling Data.Semigroupoid.Dual ( src/Data/Semigroupoid/Dual.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroupoid/Dual.o )
+[17 of 21] Compiling Data.Groupoid    ( src/Data/Groupoid.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Groupoid.o )
+[18 of 21] Compiling Data.Isomorphism ( src/Data/Isomorphism.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Isomorphism.o )
+[19 of 21] Compiling Data.Semigroupoid.Static ( src/Data/Semigroupoid/Static.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroupoid/Static.o )
+[20 of 21] Compiling Data.Semigroupoid.Ob ( src/Data/Semigroupoid/Ob.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Semigroupoid/Ob.o )
+[21 of 21] Compiling Data.Bifunctor.Apply ( src/Data/Bifunctor/Apply.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Bifunctor/Apply.o )
+In-place registering semigroupoids-5.0.0.4...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/semigroupoids-5.0.0.4-IPk36dXHATB4yo2y5KnSeX
+Registering semigroupoids-5.0.0.4...

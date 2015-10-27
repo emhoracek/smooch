@@ -1,0 +1,22 @@
+Configuring http-date-0.0.6.1...
+Building http-date-0.0.6.1...
+Preprocessing library http-date-0.0.6.1...
+[1 of 5] Compiling Network.HTTP.Date.Types ( Network/HTTP/Date/Types.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP/Date/Types.o )
+[2 of 5] Compiling Network.HTTP.Date.Converter ( Network/HTTP/Date/Converter.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP/Date/Converter.o )
+
+Network/HTTP/Date/Converter.hs:4:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+Network/HTTP/Date/Converter.hs:61:19: Warning:
+    In the use of ‘inlinePerformIO’
+    (imported from Data.ByteString.Internal):
+    Deprecated: "If you think you know what you are doing, use 'unsafePerformIO'. If you are sure you know what you are doing, use 'unsafeDupablePerformIO'. If you enjoy sharing an address space with a malevolent agent of chaos, try 'accursedUnutterablePerformIO'."
+[3 of 5] Compiling Network.HTTP.Date.Formatter ( Network/HTTP/Date/Formatter.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP/Date/Formatter.o )
+[4 of 5] Compiling Network.HTTP.Date.Parser ( Network/HTTP/Date/Parser.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP/Date/Parser.o )
+[5 of 5] Compiling Network.HTTP.Date ( Network/HTTP/Date.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP/Date.o )
+In-place registering http-date-0.0.6.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/http-date-0.0.6.1-LG64vB1VavXHoJheD4DkAw
+Registering http-date-0.0.6.1...

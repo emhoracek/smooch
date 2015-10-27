@@ -1,0 +1,43 @@
+Configuring MonadRandom-0.4...
+Building MonadRandom-0.4...
+Preprocessing library MonadRandom-0.4...
+[1 of 2] Compiling Control.Monad.Random.Class ( Control/Monad/Random/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Monad/Random/Class.o )
+[2 of 2] Compiling Control.Monad.Random ( Control/Monad/Random.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Monad/Random.o )
+
+Control/Monad/Random.hs:49:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+Control/Monad/Random.hs:53:1: Warning:
+    Module ‘Control.Monad.Error’ is deprecated:
+      Use Control.Monad.Except instead
+
+Control/Monad/Random.hs:69:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+Control/Monad/Random.hs:202:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random.hs:202:51: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Error, but defined in Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random.hs:247:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random.hs:247:53: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Error, but defined in Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+In-place registering MonadRandom-0.4...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/MonadRandom-0.4-0HPLrpuIT1h0NYNnfFzaza
+Registering MonadRandom-0.4...

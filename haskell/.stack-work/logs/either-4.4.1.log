@@ -1,0 +1,49 @@
+Configuring either-4.4.1...
+Building either-4.4.1...
+Preprocessing library either-4.4.1...
+[1 of 3] Compiling Data.Either.Validation ( src/Data/Either/Validation.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Either/Validation.o )
+
+src/Data/Either/Validation.hs:32:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+src/Data/Either/Validation.hs:35:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+
+src/Data/Either/Validation.hs:120:20: Warning:
+    Variable ‘p’ is implicitly quantified due to a context
+    Use explicit forall syntax instead.
+    This will become an error in GHC 7.12.
+    In the type ‘(Profunctor p, Functor f) => p a (f b) -> p s (f t)’
+    In the declaration for type synonym ‘Iso’
+
+src/Data/Either/Validation.hs:120:20: Warning:
+    Variable ‘f’ is implicitly quantified due to a context
+    Use explicit forall syntax instead.
+    This will become an error in GHC 7.12.
+    In the type ‘(Profunctor p, Functor f) => p a (f b) -> p s (f t)’
+    In the declaration for type synonym ‘Iso’
+[2 of 3] Compiling Data.Either.Combinators ( src/Data/Either/Combinators.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Either/Combinators.o )
+
+src/Data/Either/Combinators.hs:39:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+[3 of 3] Compiling Control.Monad.Trans.Either ( src/Control/Monad/Trans/Either.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Monad/Trans/Either.o )
+
+src/Control/Monad/Trans/Either.hs:55:1: Warning:
+    The import of ‘Data.Foldable’ is redundant
+      except perhaps to import instances from ‘Data.Foldable’
+    To import instances alone, use: import Data.Foldable()
+
+src/Control/Monad/Trans/Either.hs:59:1: Warning:
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+In-place registering either-4.4.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/either-4.4.1-6qpWLdUDoO89XrqyarIxLz
+Registering either-4.4.1...

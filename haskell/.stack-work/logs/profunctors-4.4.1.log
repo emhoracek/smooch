@@ -1,0 +1,44 @@
+Configuring profunctors-4.4.1...
+Building profunctors-4.4.1...
+Preprocessing library profunctors-4.4.1...
+[ 1 of 14] Compiling Data.Profunctor.Trace ( src/Data/Profunctor/Trace.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Trace.o )
+[ 2 of 14] Compiling Data.Profunctor.Unsafe ( src/Data/Profunctor/Unsafe.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Unsafe.o )
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package array-0.5.0.0 ... linking ... done.
+Loading package deepseq-1.3.0.2 ... linking ... done.
+Loading package containers-0.5.5.1 ... linking ... done.
+Loading package stm-2.4.4 ... linking ... done.
+Loading package transformers-0.3.0.0 ... linking ... done.
+Loading package StateVar-1.1.0.0 ... linking ... done.
+Loading package bytestring-0.10.4.0 ... linking ... done.
+Loading package text-1.2.0.6 ... linking ... done.
+Loading package hashable-1.2.3.3 ... linking ... done.
+Loading package nats-1 ... linking ... done.
+Loading package unordered-containers-0.2.5.1 ... linking ... done.
+Loading package semigroups-0.16.2.2 ... linking ... done.
+Loading package mtl-2.1.3.1 ... linking ... done.
+Loading package transformers-compat-0.4.0.3 ... linking ... done.
+Loading package void-0.7 ... linking ... done.
+Loading package contravariant-1.3.1.1 ... linking ... done.
+Loading package tagged-0.7.3 ... linking ... done.
+Loading package distributive-0.4.4 ... linking ... done.
+Loading package comonad-4.2.7.2 ... linking ... done.
+Loading package semigroupoids-4.3 ... linking ... done.
+[ 3 of 14] Compiling Data.Profunctor  ( src/Data/Profunctor.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor.o )
+[ 4 of 14] Compiling Data.Profunctor.Monad ( src/Data/Profunctor/Monad.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Monad.o )
+[ 5 of 14] Compiling Data.Profunctor.Adjunction ( src/Data/Profunctor/Adjunction.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Adjunction.o )
+[ 6 of 14] Compiling Data.Profunctor.Cayley ( src/Data/Profunctor/Cayley.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Cayley.o )
+[ 7 of 14] Compiling Data.Profunctor.Closed ( src/Data/Profunctor/Closed.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Closed.o )
+[ 8 of 14] Compiling Data.Profunctor.Rep ( src/Data/Profunctor/Rep.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Rep.o )
+[ 9 of 14] Compiling Data.Profunctor.Composition ( src/Data/Profunctor/Composition.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Composition.o )
+[10 of 14] Compiling Data.Profunctor.Codensity ( src/Data/Profunctor/Codensity.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Codensity.o )
+[11 of 14] Compiling Data.Profunctor.Collage ( src/Data/Profunctor/Collage.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Collage.o )
+[12 of 14] Compiling Data.Profunctor.Monoid ( src/Data/Profunctor/Monoid.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Monoid.o )
+[13 of 14] Compiling Data.Profunctor.Ran ( src/Data/Profunctor/Ran.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Ran.o )
+[14 of 14] Compiling Data.Profunctor.Tambara ( src/Data/Profunctor/Tambara.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Profunctor/Tambara.o )
+In-place registering profunctors-4.4.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/profunctors-4.4.1
+Registering profunctors-4.4.1...

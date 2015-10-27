@@ -1,0 +1,17 @@
+Configuring regex-posix-0.95.2...
+Building regex-posix-0.95.2...
+Preprocessing library regex-posix-0.95.2...
+[1 of 6] Compiling Text.Regex.Posix.Wrap ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/Wrap.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/Wrap.o )
+[2 of 6] Compiling Text.Regex.Posix.String ( Text/Regex/Posix/String.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/String.o )
+[3 of 6] Compiling Text.Regex.Posix.Sequence ( Text/Regex/Posix/Sequence.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/Sequence.o )
+[4 of 6] Compiling Text.Regex.Posix.ByteString ( Text/Regex/Posix/ByteString.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/ByteString.o )
+[5 of 6] Compiling Text.Regex.Posix.ByteString.Lazy ( Text/Regex/Posix/ByteString/Lazy.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix/ByteString/Lazy.o )
+[6 of 6] Compiling Text.Regex.Posix ( Text/Regex/Posix.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex/Posix.o )
+
+Text/Regex/Posix.hs:72:13: Warning:
+    In the use of ‘versionTags’ (imported from Data.Version):
+    Deprecated: "See GHC ticket #2496"
+In-place registering regex-posix-0.95.2...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/regex-posix-0.95.2-6Fv9CTZU9JMB52PT4YRZTl
+Registering regex-posix-0.95.2...

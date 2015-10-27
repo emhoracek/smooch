@@ -1,0 +1,31 @@
+Configuring zlib-0.5.4.2...
+Building zlib-0.5.4.2...
+Preprocessing library zlib-0.5.4.2...
+[1 of 5] Compiling Codec.Compression.Zlib.Stream ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/Zlib/Stream.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/Zlib/Stream.o )
+
+Codec/Compression/Zlib/Stream.hsc:111:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+Codec/Compression/Zlib/Stream.hsc:649:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:650:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:651:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:652:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:905:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:945:1: Warning: Tab character
+
+Codec/Compression/Zlib/Stream.hsc:946:1: Warning: Tab character
+[2 of 5] Compiling Codec.Compression.Zlib.Internal ( Codec/Compression/Zlib/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/Zlib/Internal.o )
+[3 of 5] Compiling Codec.Compression.Zlib.Raw ( Codec/Compression/Zlib/Raw.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/Zlib/Raw.o )
+[4 of 5] Compiling Codec.Compression.Zlib ( Codec/Compression/Zlib.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/Zlib.o )
+[5 of 5] Compiling Codec.Compression.GZip ( Codec/Compression/GZip.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Codec/Compression/GZip.o )
+In-place registering zlib-0.5.4.2...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/zlib-0.5.4.2-7EfFFsXSCF6JCVS3xlYBS8
+Registering zlib-0.5.4.2...

@@ -1,0 +1,22 @@
+Configuring cookie-0.4.1.6...
+Building cookie-0.4.1.6...
+Preprocessing library cookie-0.4.1.6...
+[1 of 1] Compiling Web.Cookie       ( Web/Cookie.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Web/Cookie.o )
+
+Web/Cookie.hs:38:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+Web/Cookie.hs:88:18: Warning:
+    In the use of ‘S.breakByte’ (imported from Data.ByteString):
+    Deprecated: "It is an internal function and should never have been exported. Use 'break (== x)' instead. (There are rewrite rules that handle this special case of 'break'.)"
+
+Web/Cookie.hs:214:21: Warning:
+    In the use of ‘parseTime’
+    (imported from Data.Time, but defined in time-1.5.0.1:Data.Time.Format.Parse):
+    Deprecated: "use "parseTimeM True" instead"
+In-place registering cookie-0.4.1.6...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/cookie-0.4.1.6-FJHZaRHUUOJ8okSoq5Xh3V
+Registering cookie-0.4.1.6...

@@ -1,0 +1,38 @@
+Configuring regex-compat-0.95.1...
+Building regex-compat-0.95.1...
+Preprocessing library regex-compat-0.95.1...
+[1 of 1] Compiling Text.Regex       ( Text/Regex.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Text/Regex.o )
+
+Text/Regex.hs:50:1: Warning: Tab character
+
+Text/Regex.hs:51:1: Warning: Tab character
+
+Text/Regex.hs:63:12: Warning: Tab character
+
+Text/Regex.hs:64:13: Warning: Tab character
+
+Text/Regex.hs:65:21: Warning: Tab character
+
+Text/Regex.hs:66:1: Warning: Tab character
+
+Text/Regex.hs:67:1: Warning: Tab character
+
+Text/Regex.hs:73:12: Warning: Tab character
+
+Text/Regex.hs:74:13: Warning: Tab character
+
+Text/Regex.hs:76:1: Warning: Tab character
+
+Text/Regex.hs:77:1: Warning: Tab character
+
+Text/Regex.hs:78:1: Warning: Tab character
+
+Text/Regex.hs:79:1: Warning: Tab character
+
+Text/Regex.hs:80:1: Warning: Tab character
+
+Text/Regex.hs:81:1: Warning: Tab character
+In-place registering regex-compat-0.95.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/regex-compat-0.95.1-LfevtAmd1jA93E87NZxMhh
+Registering regex-compat-0.95.1...

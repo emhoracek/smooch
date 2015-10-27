@@ -1,0 +1,23 @@
+Configuring syb-0.4.4...
+Building syb-0.4.4...
+Preprocessing library syb-0.4.4...
+[ 1 of 16] Compiling Data.Generics.Basics ( src/Data/Generics/Basics.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Basics.o )
+[ 2 of 16] Compiling Generics.SYB.Basics ( src/Generics/SYB/Basics.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Basics.o )
+[ 3 of 16] Compiling Data.Generics.Instances ( src/Data/Generics/Instances.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Instances.o )
+[ 4 of 16] Compiling Generics.SYB.Instances ( src/Generics/SYB/Instances.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Instances.o )
+[ 5 of 16] Compiling Data.Generics.Aliases ( src/Data/Generics/Aliases.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Aliases.o )
+[ 6 of 16] Compiling Data.Generics.Schemes ( src/Data/Generics/Schemes.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Schemes.o )
+[ 7 of 16] Compiling Generics.SYB.Schemes ( src/Generics/SYB/Schemes.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Schemes.o )
+[ 8 of 16] Compiling Data.Generics.Text ( src/Data/Generics/Text.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Text.o )
+[ 9 of 16] Compiling Generics.SYB.Text ( src/Generics/SYB/Text.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Text.o )
+[10 of 16] Compiling Data.Generics.Twins ( src/Data/Generics/Twins.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Twins.o )
+[11 of 16] Compiling Generics.SYB.Twins ( src/Generics/SYB/Twins.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Twins.o )
+[12 of 16] Compiling Data.Generics.Builders ( src/Data/Generics/Builders.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics/Builders.o )
+[13 of 16] Compiling Generics.SYB.Builders ( src/Generics/SYB/Builders.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Builders.o )
+[14 of 16] Compiling Generics.SYB.Aliases ( src/Generics/SYB/Aliases.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB/Aliases.o )
+[15 of 16] Compiling Data.Generics    ( src/Data/Generics.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Generics.o )
+[16 of 16] Compiling Generics.SYB     ( src/Generics/SYB.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Generics/SYB.o )
+In-place registering syb-0.4.4...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/syb-0.4.4
+Registering syb-0.4.4...

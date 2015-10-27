@@ -1,0 +1,22 @@
+Configuring bifunctors-4.2.1...
+Building bifunctors-4.2.1...
+Preprocessing library bifunctors-4.2.1...
+[ 1 of 15] Compiling Data.Bifoldable  ( src/Data/Bifoldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifoldable.o )
+[ 2 of 15] Compiling Data.Semigroup.Bifoldable ( src/Data/Semigroup/Bifoldable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroup/Bifoldable.o )
+[ 3 of 15] Compiling Data.Bifunctor   ( old-src/Data/Bifunctor.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor.o )
+[ 4 of 15] Compiling Data.Bifunctor.Apply ( src/Data/Bifunctor/Apply.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Apply.o )
+[ 5 of 15] Compiling Data.Bitraversable ( src/Data/Bitraversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bitraversable.o )
+[ 6 of 15] Compiling Data.Semigroup.Bitraversable ( src/Data/Semigroup/Bitraversable.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Semigroup/Bitraversable.o )
+[ 7 of 15] Compiling Data.Biapplicative ( src/Data/Biapplicative.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Biapplicative.o )
+[ 8 of 15] Compiling Data.Bifunctor.Biff ( src/Data/Bifunctor/Biff.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Biff.o )
+[ 9 of 15] Compiling Data.Bifunctor.Clown ( src/Data/Bifunctor/Clown.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Clown.o )
+[10 of 15] Compiling Data.Bifunctor.Flip ( src/Data/Bifunctor/Flip.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Flip.o )
+[11 of 15] Compiling Data.Bifunctor.Join ( src/Data/Bifunctor/Join.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Join.o )
+[12 of 15] Compiling Data.Bifunctor.Joker ( src/Data/Bifunctor/Joker.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Joker.o )
+[13 of 15] Compiling Data.Bifunctor.Product ( src/Data/Bifunctor/Product.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Product.o )
+[14 of 15] Compiling Data.Bifunctor.Tannen ( src/Data/Bifunctor/Tannen.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Tannen.o )
+[15 of 15] Compiling Data.Bifunctor.Wrapped ( src/Data/Bifunctor/Wrapped.hs, .stack-work/dist/x86_64-osx/Cabal-1.18.1.5/build/Data/Bifunctor/Wrapped.o )
+In-place registering bifunctors-4.2.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/lts-2.20/7.8.4/lib/x86_64-osx-ghc-7.8.4/bifunctors-4.2.1
+Registering bifunctors-4.2.1...

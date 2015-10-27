@@ -1,0 +1,20 @@
+Configuring mwc-random-0.13.3.2...
+Building mwc-random-0.13.3.2...
+Preprocessing library mwc-random-0.13.3.2...
+[1 of 3] Compiling System.Random.MWC ( System/Random/MWC.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Random/MWC.o )
+
+System/Random/MWC.hs:106:1: Warning:
+    The import of ‘Bits’ from module ‘Data.Bits’ is redundant
+
+System/Random/MWC.hs:113:1: Warning:
+    The import of ‘Word’ from module ‘Data.Word’ is redundant
+[2 of 3] Compiling System.Random.MWC.Distributions ( System/Random/MWC/Distributions.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Random/MWC/Distributions.o )
+
+System/Random/MWC/Distributions.hs:44:1: Warning:
+    The import of ‘Traversable’
+    from module ‘Data.Traversable’ is redundant
+[3 of 3] Compiling System.Random.MWC.CondensedTable ( System/Random/MWC/CondensedTable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/Random/MWC/CondensedTable.o )
+In-place registering mwc-random-0.13.3.2...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/mwc-random-0.13.3.2-EHoyvQtULlqL3HO0jyND4E
+Registering mwc-random-0.13.3.2...

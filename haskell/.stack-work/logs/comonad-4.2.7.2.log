@@ -1,0 +1,23 @@
+Configuring comonad-4.2.7.2...
+Building comonad-4.2.7.2...
+Preprocessing library comonad-4.2.7.2...
+[ 1 of 16] Compiling Data.Functor.Composition ( src/Data/Functor/Composition.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Composition.o )
+[ 2 of 16] Compiling Control.Comonad.Trans.Identity ( src/Control/Comonad/Trans/Identity.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Trans/Identity.o )
+[ 3 of 16] Compiling Control.Comonad  ( src/Control/Comonad.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad.o )
+[ 4 of 16] Compiling Control.Comonad.Trans.Class ( src/Control/Comonad/Trans/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Trans/Class.o )
+[ 5 of 16] Compiling Control.Comonad.Hoist.Class ( src/Control/Comonad/Hoist/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Hoist/Class.o )
+[ 6 of 16] Compiling Control.Comonad.Trans.Env ( src/Control/Comonad/Trans/Env.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Trans/Env.o )
+[ 7 of 16] Compiling Control.Comonad.Trans.Store ( src/Control/Comonad/Trans/Store.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Trans/Store.o )
+[ 8 of 16] Compiling Control.Comonad.Trans.Traced ( src/Control/Comonad/Trans/Traced.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Trans/Traced.o )
+[ 9 of 16] Compiling Control.Comonad.Env.Class ( src/Control/Comonad/Env/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Env/Class.o )
+[10 of 16] Compiling Control.Comonad.Env ( src/Control/Comonad/Env.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Env.o )
+[11 of 16] Compiling Control.Comonad.Identity ( src/Control/Comonad/Identity.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Identity.o )
+[12 of 16] Compiling Control.Comonad.Store.Class ( src/Control/Comonad/Store/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Store/Class.o )
+[13 of 16] Compiling Control.Comonad.Store ( src/Control/Comonad/Store.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Store.o )
+[14 of 16] Compiling Control.Comonad.Traced.Class ( src/Control/Comonad/Traced/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Traced/Class.o )
+[15 of 16] Compiling Control.Comonad.Traced ( src/Control/Comonad/Traced.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Comonad/Traced.o )
+[16 of 16] Compiling Data.Functor.Coproduct ( src/Data/Functor/Coproduct.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Functor/Coproduct.o )
+In-place registering comonad-4.2.7.2...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/comonad-4.2.7.2-EsayKmuIGPJJdbMoBEcxRq
+Registering comonad-4.2.7.2...

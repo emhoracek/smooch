@@ -1,0 +1,29 @@
+Configuring hashable-1.2.3.3...
+Building hashable-1.2.3.3...
+Preprocessing library hashable-1.2.3.3...
+[1 of 3] Compiling Data.Hashable.Class ( Data/Hashable/Class.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Hashable/Class.o )
+
+Data/Hashable/Class.hs:54:1: Warning:
+    The import of ‘Word’ from module ‘Data.Word’ is redundant
+
+Data/Hashable/Class.hs:218:11: Warning:
+    In the use of ‘bitSize’ (imported from Data.Bits):
+    Deprecated: "Use 'bitSizeMaybe' or 'finiteBitSize' instead"
+
+Data/Hashable/Class.hs:241:11: Warning:
+    In the use of ‘bitSize’ (imported from Data.Bits):
+    Deprecated: "Use 'bitSizeMaybe' or 'finiteBitSize' instead"
+
+Data/Hashable/Class.hs:420:28: Warning:
+    In the use of ‘B.inlinePerformIO’
+    (imported from Data.ByteString.Internal):
+    Deprecated: "If you think you know what you are doing, use 'unsafePerformIO'. If you are sure you know what you are doing, use 'unsafeDupablePerformIO'. If you enjoy sharing an address space with a malevolent agent of chaos, try 'accursedUnutterablePerformIO'."
+[2 of 3] Compiling Data.Hashable.Generic ( Data/Hashable/Generic.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Hashable/Generic.o )
+
+Data/Hashable/Generic.hs:20:1: Warning:
+    The import of ‘Bits’ from module ‘Data.Bits’ is redundant
+[3 of 3] Compiling Data.Hashable    ( Data/Hashable.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Hashable.o )
+In-place registering hashable-1.2.3.3...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/hashable-1.2.3.3-2GTZqecVp8NJZrNuKzGxfy
+Registering hashable-1.2.3.3...

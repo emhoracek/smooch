@@ -1,0 +1,93 @@
+Configuring resourcet-1.1.6...
+Building resourcet-1.1.6...
+Preprocessing library resourcet-1.1.6...
+[1 of 4] Compiling Data.Acquire.Internal ( Data/Acquire/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Acquire/Internal.o )
+
+Data/Acquire/Internal.hs:18:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+[2 of 4] Compiling Control.Monad.Trans.Resource.Internal ( Control/Monad/Trans/Resource/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Monad/Trans/Resource/Internal.o )
+
+Control/Monad/Trans/Resource/Internal.hs:31:1: Warning:
+    The import of ‘Applicative’
+    from module ‘Control.Applicative’ is redundant
+
+Control/Monad/Trans/Resource/Internal.hs:47:1: Warning:
+    Module ‘Control.Monad.Trans.Error’ is deprecated:
+      Use Control.Monad.Trans.Except instead
+
+Control/Monad/Trans/Resource/Internal.hs:73:1: Warning:
+    The import of ‘Data.Word’ is redundant
+      except perhaps to import instances from ‘Data.Word’
+    To import instances alone, use: import Data.Word()
+
+Control/Monad/Trans/Resource/Internal.hs:74:1: Warning:
+    Module ‘Prelude’ does not export ‘catch’
+
+Control/Monad/Trans/Resource/Internal.hs:288:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Trans/Resource/Internal.hs:288:56: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+[3 of 4] Compiling Control.Monad.Trans.Resource ( Control/Monad/Trans/Resource.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Control/Monad/Trans/Resource.o )
+
+Control/Monad/Trans/Resource.hs:57:7: Warning:
+    The export item ‘ExceptionT(..)’ suggests that
+    ‘ExceptionT’ has (in-scope) constructors or class methods,
+    but it has none
+
+Control/Monad/Trans/Resource.hs:67:1: Warning:
+    The import of ‘throw’ from module ‘Control.Exception’ is redundant
+
+Control/Monad/Trans/Resource.hs:72:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+Control/Monad/Trans/Resource.hs:76:1: Warning:
+    The import of ‘Data.Monoid’ is redundant
+      except perhaps to import instances from ‘Data.Monoid’
+    To import instances alone, use: import Data.Monoid()
+
+Control/Monad/Trans/Resource.hs:209:1: Warning:
+    Defined but not used: ‘finally’
+[4 of 4] Compiling Data.Acquire     ( Data/Acquire.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Data/Acquire.o )
+
+Data/Acquire.hs:18:1: Warning:
+    The import of ‘Control.Monad.Trans.Resource’ is redundant
+      except perhaps to import instances from ‘Control.Monad.Trans.Resource’
+    To import instances alone, use: import Control.Monad.Trans.Resource()
+
+Data/Acquire.hs:20:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+
+Data/Acquire.hs:21:1: Warning:
+    The import of ‘Control.Monad.Base’ is redundant
+      except perhaps to import instances from ‘Control.Monad.Base’
+    To import instances alone, use: import Control.Monad.Base()
+
+Data/Acquire.hs:23:1: Warning:
+    The import of ‘Control.Monad.Trans.Control’ is redundant
+      except perhaps to import instances from ‘Control.Monad.Trans.Control’
+    To import instances alone, use: import Control.Monad.Trans.Control()
+
+Data/Acquire.hs:25:1: Warning:
+    The import of ‘Data.Typeable’ is redundant
+      except perhaps to import instances from ‘Data.Typeable’
+    To import instances alone, use: import Data.Typeable()
+
+Data/Acquire.hs:26:1: Warning:
+    The import of ‘Control.Monad’ is redundant
+      except perhaps to import instances from ‘Control.Monad’
+    To import instances alone, use: import Control.Monad()
+In-place registering resourcet-1.1.6...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/resourcet-1.1.6-Ic1TzDDmqYbFNHpzRsDmfS
+Registering resourcet-1.1.6...

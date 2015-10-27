@@ -1,0 +1,64 @@
+Configuring http2-1.0.4...
+Building http2-1.0.4...
+Preprocessing library http2-1.0.4...
+[ 1 of 31] Compiling Network.HPACK.HeaderBlock.Integer ( Network/HPACK/HeaderBlock/Integer.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/Integer.o )
+[ 2 of 31] Compiling Network.HPACK.Huffman.Params ( Network/HPACK/Huffman/Params.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Params.o )
+[ 3 of 31] Compiling Network.HPACK.Huffman.ByteString ( Network/HPACK/Huffman/ByteString.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/ByteString.o )
+[ 4 of 31] Compiling Network.HPACK.Huffman.Bit ( Network/HPACK/Huffman/Bit.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Bit.o )
+[ 5 of 31] Compiling Network.HPACK.Huffman.Table ( Network/HPACK/Huffman/Table.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Table.o )
+[ 6 of 31] Compiling Network.HPACK.Huffman.Tree ( Network/HPACK/Huffman/Tree.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Tree.o )
+[ 7 of 31] Compiling Network.HPACK.Huffman.Encode ( Network/HPACK/Huffman/Encode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Encode.o )
+[ 8 of 31] Compiling Network.HPACK.Builder.Word8 ( Network/HPACK/Builder/Word8.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Builder/Word8.o )
+[ 9 of 31] Compiling Network.HPACK.Builder ( Network/HPACK/Builder.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Builder.o )
+[10 of 31] Compiling Network.HTTP2.Types ( Network/HTTP2/Types.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2/Types.o )
+[11 of 31] Compiling Network.HTTP2.RandomSkewHeap ( Network/HTTP2/RandomSkewHeap.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2/RandomSkewHeap.o )
+
+Network/HTTP2/RandomSkewHeap.hs:74:1: Warning:
+    Defined but not used: ‘main’
+
+Network/HTTP2/RandomSkewHeap.hs:74:1: Warning:
+    Top-level binding with no type signature: main :: IO ()
+
+Network/HTTP2/RandomSkewHeap.hs:76:5: Warning:
+    Defaulting the following constraint(s) to type ‘Integer’
+      (Eq a0)
+        arising from a use of ‘loop’
+        at Network/HTTP2/RandomSkewHeap.hs:76:5-8
+      (Num a0)
+        arising from a use of ‘loop’
+        at Network/HTTP2/RandomSkewHeap.hs:76:5-8
+    In a stmt of a 'do' block: loop 1000 q
+    In the expression:
+      do { let q = insert "c" 1 $ insert "b" 101 $ insert "a" 201 empty;
+           loop 1000 q }
+    In an equation for ‘main’:
+        main
+          = do { let q = ...;
+                 loop 1000 q }
+          where
+              loop 0 _ = return ()
+              loop n q = do { ... }
+[12 of 31] Compiling Network.HTTP2.Priority ( Network/HTTP2/Priority.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2/Priority.o )
+[13 of 31] Compiling Network.HTTP2.Encode ( Network/HTTP2/Encode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2/Encode.o )
+[14 of 31] Compiling Network.HTTP2.Decode ( Network/HTTP2/Decode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2/Decode.o )
+[15 of 31] Compiling Network.HTTP2    ( Network/HTTP2.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HTTP2.o )
+[16 of 31] Compiling Network.HPACK.Types ( Network/HPACK/Types.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Types.o )
+[17 of 31] Compiling Network.HPACK.Huffman.Decode ( Network/HPACK/Huffman/Decode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman/Decode.o )
+[18 of 31] Compiling Network.HPACK.Huffman ( Network/HPACK/Huffman.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Huffman.o )
+[19 of 31] Compiling Network.HPACK.HeaderBlock.HeaderField ( Network/HPACK/HeaderBlock/HeaderField.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/HeaderField.o )
+[20 of 31] Compiling Network.HPACK.HeaderBlock.String ( Network/HPACK/HeaderBlock/String.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/String.o )
+[21 of 31] Compiling Network.HPACK.HeaderBlock.Decode ( Network/HPACK/HeaderBlock/Decode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/Decode.o )
+[22 of 31] Compiling Network.HPACK.HeaderBlock.Encode ( Network/HPACK/HeaderBlock/Encode.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/Encode.o )
+[23 of 31] Compiling Network.HPACK.Table.Entry ( Network/HPACK/Table/Entry.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Table/Entry.o )
+[24 of 31] Compiling Network.HPACK.Table.DoubleHashMap ( Network/HPACK/Table/DoubleHashMap.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Table/DoubleHashMap.o )
+[25 of 31] Compiling Network.HPACK.Table.Static ( Network/HPACK/Table/Static.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Table/Static.o )
+[26 of 31] Compiling Network.HPACK.Table.Dynamic ( Network/HPACK/Table/Dynamic.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Table/Dynamic.o )
+[27 of 31] Compiling Network.HPACK.Table ( Network/HPACK/Table.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/Table.o )
+[28 of 31] Compiling Network.HPACK.HeaderBlock.From ( Network/HPACK/HeaderBlock/From.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/From.o )
+[29 of 31] Compiling Network.HPACK.HeaderBlock.To ( Network/HPACK/HeaderBlock/To.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock/To.o )
+[30 of 31] Compiling Network.HPACK.HeaderBlock ( Network/HPACK/HeaderBlock.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK/HeaderBlock.o )
+[31 of 31] Compiling Network.HPACK    ( Network/HPACK.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/HPACK.o )
+In-place registering http2-1.0.4...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/http2-1.0.4-4jMHUzOz7Bk4sVx4RoULbO
+Registering http2-1.0.4...

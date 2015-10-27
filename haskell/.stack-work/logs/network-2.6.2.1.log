@@ -1,0 +1,206 @@
+Configuring network-2.6.2.1...
+configure: WARNING: unrecognized options: --with-compiler, --with-gcc
+checking build system type... x86_64-apple-darwin14.5.0
+checking host system type... x86_64-apple-darwin14.5.0
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for an ANSI C-conforming const... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking for stdlib.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking winsock2.h usability... no
+checking winsock2.h presence... no
+checking for winsock2.h... no
+checking ws2tcpip.h usability... no
+checking ws2tcpip.h presence... no
+checking for ws2tcpip.h... no
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking netinet/tcp.h usability... yes
+checking netinet/tcp.h presence... yes
+checking for netinet/tcp.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/uio.h usability... yes
+checking sys/uio.h presence... yes
+checking for sys/uio.h... yes
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking linux/can.h usability... no
+checking linux/can.h presence... no
+checking for linux/can.h... no
+checking linux/tcp.h usability... no
+checking linux/tcp.h presence... no
+checking for linux/tcp.h... no
+checking net/if.h usability... yes
+checking net/if.h presence... yes
+checking for net/if.h... yes
+checking for readlink... yes
+checking for symlink... yes
+checking for if_nametoindex... yes
+checking for struct msghdr.msg_control... yes
+checking for struct msghdr.msg_accrights... no
+checking for struct sockaddr.sa_len... yes
+checking for in_addr_t in netinet/in.h... yes
+checking for SO_PEERCRED and struct ucred in sys/socket.h... no
+checking for getpeereid in unistd.h... checking for getpeereid... yes
+checking for _head_libws2_32_a in -lws2_32... no
+checking for getaddrinfo... yes
+checking for gai_strerror... yes
+checking whether AI_ADDRCONFIG is declared... yes
+checking whether AI_ALL is declared... yes
+checking whether AI_NUMERICSERV is declared... yes
+checking whether AI_V4MAPPED is declared... yes
+checking whether IPV6_V6ONLY is declared... yes
+checking whether IPPROTO_IP is declared... yes
+checking whether IPPROTO_TCP is declared... yes
+checking whether IPPROTO_IPV6 is declared... yes
+checking for sendfile in sys/sendfile.h... no
+checking for sendfile in sys/socket.h... yes
+checking for gethostent... yes
+checking for accept4... no
+configure: creating ./config.status
+config.status: creating network.buildinfo
+config.status: creating include/HsNetworkConfig.h
+configure: WARNING: unrecognized options: --with-compiler, --with-gcc
+Building network-2.6.2.1...
+Preprocessing library network-2.6.2.1...
+[ 1 of 11] Compiling Network.Socket.ByteString.IOVec ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/IOVec.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/IOVec.o )
+[ 2 of 11] Compiling Network.Socket.Types ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/Types.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/Types.o )
+
+Network/Socket/Types.hsc:852:1: Warning:
+    Pattern match(es) are non-exhaustive
+    In an equation for ‘sizeOfSockAddr’:
+        Patterns not matched: SockAddrCan _
+
+Network/Socket/Types.hsc:869:1: Warning:
+    Pattern match(es) are non-exhaustive
+    In an equation for ‘sizeOfSockAddrByFamily’:
+        Patterns not matched:
+            AF_UNSPEC
+            AF_IMPLINK
+            AF_PUP
+            AF_CHAOS
+            ...
+
+Network/Socket/Types.hsc:903:1: Warning:
+    Pattern match(es) are non-exhaustive
+    In an equation for ‘pokeSockAddr’:
+        Patterns not matched: _ (SockAddrCan _)
+
+Network/Socket/Types.hsc:951:3: Warning:
+    Pattern match(es) are non-exhaustive
+    In a case alternative:
+        Patterns not matched: #x with #x `notElem` [1#, 2#, 30#]
+
+Network/Socket/Types.hsc:1012:10: Warning:
+    Orphan instance: instance Storable HostAddress6
+    To avoid this
+        move the instance declaration to the module of the class or of the type, or
+        wrap the type with a newtype and declare the instance on the new type.
+[ 3 of 11] Compiling Network.Socket.Internal ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/Internal.o )
+
+Network/Socket/Internal.hsc:75:1: Warning:
+    The import of ‘Foreign.C.String’ is redundant
+      except perhaps to import instances from ‘Foreign.C.String’
+    To import instances alone, use: import Foreign.C.String()
+
+Network/Socket/Internal.hsc:77:1: Warning:
+    The import of ‘Foreign.Ptr’ is redundant
+      except perhaps to import instances from ‘Foreign.Ptr’
+    To import instances alone, use: import Foreign.Ptr()
+[ 4 of 11] Compiling Network.Socket   ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket.o )
+
+Network/Socket.hsc:193:1: Warning:
+    The qualified import of ‘Control.Exception’ is redundant
+      except perhaps to import instances from ‘Control.Exception’
+    To import instances alone, use: import Control.Exception()
+
+Network/Socket.hsc:198:1: Warning:
+    The import of ‘threadWaitRead’ from module ‘GHC.Conc’ is redundant
+
+Network/Socket.hsc:212:1: Warning:
+    The import of ‘GHC.IO.FD’ is redundant
+      except perhaps to import instances from ‘GHC.IO.FD’
+    To import instances alone, use: import GHC.IO.FD()
+
+Network/Socket.hsc:276:3: Warning:
+    Pattern match(es) are non-exhaustive
+    In an equation for ‘showsPrec’:
+        Patterns not matched: _ (SockAddrCan _)
+
+Network/Socket.hsc:989:3: Warning:
+    A do-notation statement discarded a result of type ‘CInt’
+    Suppress this warning by saying
+      ‘_ <- ($)
+              throwSocketErrorWaitWrite sock "sendFd"
+              c_sendFd (fdSocket sock) outfd’
+    or by using the flag -fno-warn-unused-do-bind
+[ 5 of 11] Compiling Network.Socket.ByteString.MsgHdr ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/MsgHdr.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/MsgHdr.o )
+[ 6 of 11] Compiling Network.Socket.ByteString.Internal ( Network/Socket/ByteString/Internal.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/Internal.o )
+[ 7 of 11] Compiling Network.Socket.ByteString ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString.o )
+
+Network/Socket/ByteString.hsc:54:1: Warning:
+    The import of ‘SockAddr, Socket’
+    from module ‘Network.Socket’ is redundant
+[ 8 of 11] Compiling Network.Socket.ByteString.Lazy.Posix ( Network/Socket/ByteString/Lazy/Posix.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/Lazy/Posix.o )
+[ 9 of 11] Compiling Network.Socket.ByteString.Lazy ( Network/Socket/ByteString/Lazy.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/Socket/ByteString/Lazy.o )
+[10 of 11] Compiling Network.BSD      ( .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/BSD.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network/BSD.o )
+
+Network/BSD.hsc:166:43: Warning:
+    In the use of data constructor ‘PortNum’
+    (imported from Network.Socket, but defined in Network.Socket.Types):
+    Deprecated: "Do not use the PortNum constructor. Use the Num instance. PortNum will be removed in the next release."
+
+Network/BSD.hsc:190:19: Warning:
+    In the use of data constructor ‘PortNum’
+    (imported from Network.Socket, but defined in Network.Socket.Types):
+    Deprecated: "Do not use the PortNum constructor. Use the Num instance. PortNum will be removed in the next release."
+[11 of 11] Compiling Network          ( Network.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/Network.o )
+
+Network.hs:292:16: Warning:
+    Pattern match(es) are non-exhaustive
+    In a case alternative: Patterns not matched: SockAddrCan _
+
+Network.hs:401:5: Warning:
+    Pattern match(es) are non-exhaustive
+    In a case alternative: Patterns not matched: SockAddrCan _
+In-place registering network-2.6.2.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/network-2.6.2.1-F6mK9sCIw3M5SbZMt2lUQE
+Registering network-2.6.2.1...

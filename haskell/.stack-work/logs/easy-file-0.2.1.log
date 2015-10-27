@@ -1,0 +1,21 @@
+Configuring easy-file-0.2.1...
+Building easy-file-0.2.1...
+Preprocessing library easy-file-0.2.1...
+[1 of 4] Compiling System.EasyFile.Missing ( System/EasyFile/Missing.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/EasyFile/Missing.o )
+
+System/EasyFile/Missing.hs:7:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+[2 of 4] Compiling System.EasyFile.Directory ( System/EasyFile/Directory.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/EasyFile/Directory.o )
+
+System/EasyFile/Directory.hs:37:1: Warning:
+    The import of ‘Control.Applicative’ is redundant
+      except perhaps to import instances from ‘Control.Applicative’
+    To import instances alone, use: import Control.Applicative()
+[3 of 4] Compiling System.EasyFile.FilePath ( System/EasyFile/FilePath.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/EasyFile/FilePath.o )
+[4 of 4] Compiling System.EasyFile  ( System/EasyFile.hs, .stack-work/dist/x86_64-osx/Cabal-1.22.4.0/build/System/EasyFile.o )
+In-place registering easy-file-0.2.1...
+Installing library in
+/Users/libby/.stack/snapshots/x86_64-osx/nightly-2015-09-17/7.10.2/lib/x86_64-osx-ghc-7.10.2/easy-file-0.2.1-FJwrEwDWX67AIqrB5x3TwS
+Registering easy-file-0.2.1...
