@@ -15,19 +15,20 @@ cabal-version:       >=1.10
 executable smooch
   hs-source-dirs:      src, src/templates
   main-is:             Main.hs
-  other-modules:       Kiss, ParseCNF, Shell, Upload, Home, KissSet
+  other-modules:       Kiss, ParseCNF, Shell, Upload, Index, KissSet
   -- other-extensions:
   build-depends:       base,
                        wai, wai-extra,
                        warp,
                        http-types,
                        resourcet,
+                       lens,
                        parsec, aeson,
                        process, system-filepath, directory,
                        filepath, transformers, mtl,
                        scotty, text, bytestring, blaze-html,
                        wai-middleware-static, either,
-                       fn, fn-extra
+                       fn, fn-extra, xmlhtml, logging
   -- hs-source-dirs:
   default-language:    Haskell2010
 
