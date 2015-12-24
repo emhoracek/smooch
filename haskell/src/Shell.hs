@@ -5,9 +5,7 @@ module Shell where
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
-import           Kiss
-import           System.Directory
-import           System.Exit
+import           System.Exit                (ExitCode (..))
 import           System.IO                  (hGetContents)
 import           System.Process
 

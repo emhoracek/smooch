@@ -6,28 +6,27 @@ module ParseCNF where
 
 import Kiss
 import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Error
-import Data.List
+import Data.List hiding (lines)
 import Data.Maybe
-import qualified Data.Text as T
+import qualified Data.Text as T 
 import Control.Monad.Trans.Either 
 
 getKissData :: String -> EitherT T.Text IO KissData
 getKissData file = 
     case parse parseCNFLines "KiSS CNF error: " file of
-      Right lines -> return $ linesToScript lines
-      Left error  -> EitherT $ return $ Left $ T.pack $ show error 
+      Right ls -> return $ linesToScript ls
+      Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
 getKissCels :: String -> EitherT T.Text IO [KissCell]
 getKissCels file = 
     case parse parseCNFLines "KiSS cel error: " file of
-      Right lines -> return $ linesToCells lines
-      Left error  -> EitherT $ return $ Left $ T.pack $ show error
+      Right ls -> return $ linesToCells ls
+      Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
 getKissPalette :: KissData -> EitherT T.Text IO String
 getKissPalette file = 
   case kPalettes file of
-    (x:xs) -> return x
+    (x:_) -> return x
     []     -> EitherT $ return $ Left "no palette found"
 
 -- Converting CNF lines to useable KiSS data
@@ -193,9 +192,9 @@ data CNFLine = CNFMemory Int
 -- Parse the CNF one "line" (including mult-line set descriptions) at a time
 parseCNFLines :: Parser [CNFLine]
 parseCNFLines = do
-    lines <- many parseCNFLine
+    ls <- many parseCNFLine
     eof
-    return lines
+    return ls
 
 parseCNFLine :: Parser CNFLine
 parseCNFLine = do

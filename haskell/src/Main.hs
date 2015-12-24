@@ -9,24 +9,23 @@ import           Control.Lens
 import           Control.Logging
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
-import qualified Data.ByteString            as BS
-import           Data.List                  (lookup)
-import           Data.Maybe                 (listToMaybe)
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
-import qualified Data.Text.Encoding         as TD
+import qualified Heist.Interpreted          as H
 import           Network.HTTP.Types.Method
-import           Network.HTTP.Types.Status
 import           Network.Wai
+import Heist ((##))
 import           Network.Wai.Handler.Warp
-import           Network.Wai.Parse
 import           System.Environment
+import           System.FilePath            ((</>))
+import qualified Text.XmlHtml               as X
 import           Web.Fn
 import           Web.Fn.Extra.Heist
 
+import           Kiss
 import           Upload
 
-data Ctxt = Ctxt { _req   :: Request,
+data Ctxt = Ctxt { _req   :: FnRequest,
                    _heist :: FnHeistState Ctxt}
 
 makeLenses ''Ctxt
@@ -43,7 +42,7 @@ initializer = do
   let hs = case hs' of
              Left ers -> errorL' ("Heist failed to load templates: \n" <> T.intercalate "\n" (map T.pack ers))
              Right hs'' -> hs''
-  return (Ctxt defaultRequest hs)
+  return (Ctxt defaultFnRequest hs)
 
 app :: IO Application
 app = do
@@ -53,30 +52,40 @@ app = do
 site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end ==> indexHandler
-             , path "upload" // method POST  ==> uploadHandler
-             , anything ==> staticServer ]
+             , path "upload" // method POST /? file "kissfile" ==> uploadHandler
+             , anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
-
-staticServer :: Ctxt -> IO (Maybe Response)
-staticServer ctxt =
-   let f = T.intercalate "/" ("static" : pathInfo (_req ctxt)) in
-   return $ Just $ responseFile status200 [] (T.unpack f) Nothing
 
 indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = render ctxt "index"
 
-uploadHandler :: Ctxt -> IO (Maybe Response)
-uploadHandler ctxt = do
-    ps <- parseRequestBody lbsBackEnd (_req ctxt)
-    let fs = snd ps
-    relDir <- liftIO $ runEitherT $ getRelDir fs
-    cels <- liftIO $ runEitherT $ processSet fs
-    -- augh nesting, no sir I don't like it
-    case relDir of
-      Right _ -> case cels of
-                   Right _ -> okText "yay"
-                   Left  e -> okText e
-      Left e -> okText e
+uploadHandler :: Ctxt -> File -> IO (Maybe Response)
+uploadHandler ctxt (File name _ contents) = do
+  relDir <- liftIO $ runEitherT $ getRelDir (T.unpack name, contents)
+  cels <- liftIO $ runEitherT $ processSet (T.unpack name, contents)
+  case relDir of
+    Right d -> case cels of
+      Right cs -> renderWithSplices ctxt "kissSet" $ do
+                   tag' "set-listing" setListingSplice 
+                   "base" ## H.textSplice (T.pack d)
+                   tag' "celImages" $ celsSplice d cs
+      Left  e -> okText e
+    Left e -> okText e
+
+setListingSplice :: Ctxt -> X.Node -> FnSplice Ctxt
+setListingSplice _ _ = 
+  H.mapSplices toSet (map (T.pack . show) ([0..9] :: [Int]))
+  where toSet n =
+          return [X.Element "li" []
+                   [X.Element "a" [("class", "set")] [ X.TextNode n ]]]
+
+celsSplice :: FilePath -> [KissCell] -> Ctxt -> X.Node -> FnSplice Ctxt
+celsSplice dir cels _ _ = H.mapSplices (celImageSplice dir ) (reverse cels)
+
+celImageSplice :: FilePath -> KissCell -> FnSplice Ctxt
+celImageSplice dir cel = return
+  [X.Element "img" [("src", T.pack (dir </> celName cel <> ".png")),
+                    ("id", T.pack (celName cel)) ] []]
 
 main :: IO ()
 main = withStdoutLogging $ do

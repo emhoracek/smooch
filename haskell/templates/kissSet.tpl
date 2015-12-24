@@ -22,4 +22,25 @@
 
     <div id="borderarea">
       <div id="playarea">
-        <img src=""
+        <celImages />
+      </div>
+    </div>
+
+    <div id="nav">
+      <button id="editbutton">Edit</button>
+    </div>
+
+    <div id="toolbar">
+      <h1>Edit</h1>
+      <div class="infobox">
+      </div>
+    </div>
+
+    <div id="footer">From OtakuWorld.com</div>
+
+    <script type="text/javascript" src="${base}/setdata.js"></script>
+
+    <script type="text/javascript" src="/kiss.js"></script>
+    
+  </body>
+</html>
