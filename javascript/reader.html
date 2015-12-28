@@ -12,20 +12,59 @@
 </span>
 </div>
 
-<div id="info" style="width:33%; float: left">
-<div id="kiss-marker"></div>
-<div id="cel-marker"></div>
-<div id="cel-width"></div>
-<div id="cel-height"></div>
-<div id="cel-colors"></div>
-<div id="cel-offx"></div>
-<div id="cel-offy"></div>
-<div id="pal-marker"></div>
-<div id="bits-per-color"></div>
-<div id="number-colors"></div>
+<div class="cel1">
+<div class="info" style="width:33%; float: left">
+<div class="kiss-marker"></div>
+<div class="cel-marker"></div>
+<div class="cel-width"></div>
+<div class="cel-height"></div>
+<div class="cel-colors"></div>
+<div class="cel-offx"></div>
+<div class="cel-offy"></div>
+<div class="pal-marker"></div>
+<div class="bits-per-color"></div>
+<div class="number-colors"></div>
 </div>
 
-<canvas style="float:right" id="cel-image" width=300 height=300></canvas>
+<canvas style="float:right" class="cel-image" width=300 height=300></canvas>
+
+</div>
+
+<div class="cel2">
+<div class="info" style="width:33%; float: left">
+<div class="kiss-marker"></div>
+<div class="cel-marker"></div>
+<div class="cel-width"></div>
+<div class="cel-height"></div>
+<div class="cel-colors"></div>
+<div class="cel-offx"></div>
+<div class="cel-offy"></div>
+<div class="pal-marker"></div>
+<div class="bits-per-color"></div>
+<div class="number-colors"></div>
+</div>
+
+<canvas style="float:right" class="cel-image" width=300 height=300></canvas>
+
+</div>
+
+<div class="cel3">
+<div class="info" style="width:33%; float: left">
+<div class="kiss-marker"></div>
+<div class="cel-marker"></div>
+<div class="cel-width"></div>
+<div class="cel-height"></div>
+<div class="cel-colors"></div>
+<div class="cel-offx"></div>
+<div class="cel-offy"></div>
+<div class="pal-marker"></div>
+<div class="bits-per-color"></div>
+<div class="number-colors"></div>
+</div>
+
+<canvas style="float:right" class="cel-image" width=300 height=300></canvas>
+
+</div>
 
 <script>
 function readPaletteBlob() {
@@ -62,10 +101,10 @@ function readPaletteBlob() {
         colors[i] = dv.getUint8(i+off);
       }
 
-      document.getElementById('kiss-marker').textContent = kmarker;
-      document.getElementById('pal-marker').textContent = cmarker;
-      document.getElementById('bits-per-color').textContent = bpc; 
-      document.getElementById('number-colors').textContent = numcolors; 
+      document.getElementsByClassName('kiss-marker')[0].textContent = kmarker;
+      document.getElementsByClassName('pal-marker')[0].textContent = cmarker;
+      document.getElementsByClassName('bits-per-color')[0].textContent = bpc; 
+      document.getElementsByClassName('number-colors')[0].textContent = numcolors; 
 
       readCelBlob(colors);
     }
@@ -87,9 +126,8 @@ function readCelBlob(palette) {
   for (var i = 0; i < files.length; i++) {
 	  var file = files[i];
 
-	  var reader = new FileReader();
-
-	  // If we use onloadend, we need to check the readyState.
+	              var reader = new FileReader();
+                      
 	  reader.onloadend = function(evt) {
 	    if (evt.target.readyState == FileReader.DONE) { // DONE == 2
 	      var dv = new DataView(evt.target.result);
@@ -125,14 +163,15 @@ function readCelBlob(palette) {
 		  pixeldata[i+3] = 255;
 		}
 	      }
-	      var screen = document.getElementById('cel-image').getContext('2d');
+                                         
+	      var screen = document.getElementsByClassName('cel-image')[i].getContext('2d');
 	 
-	      document.getElementById('kiss-marker').textContent = kmarker;
-	      document.getElementById('cel-marker').textContent = cmarker;
-	      document.getElementById('cel-width').textContent = width;
-	      document.getElementById('cel-height').textContent = height;
-	      document.getElementById('cel-offx').textContent = offx;
-	      document.getElementById('cel-offy').textContent = offy;
+	      document.getElementsByClassName('kiss-marker')[i].textContent = kmarker;
+	      document.getElementsByClassName('cel-marker')[i].textContent = cmarker;
+	      document.getElementsByClassName('cel-width')[i].textContent = width;
+	      document.getElementsByClassName('cel-height')[i].textContent = height;
+	      document.getElementsByClassName('cel-offx')[i].textContent = offx;
+	      document.getElementsByClassName('cel-offy')[i].textContent = offy;
 	      
 	      var idata = new ImageData (pixeldata, width, height); 
 	      screen.putImageData(idata, 0,0);  
