@@ -40,7 +40,7 @@
 
     <script type="text/javascript" src="${base}/setdata.js"></script>
 
-    <script type="text/javascript" src="/kiss.js"></script>
+    <script type="text/javascript" src="/doll.js"></script>
     
   </body>
 </html>
