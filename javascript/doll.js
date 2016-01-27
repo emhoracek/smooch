@@ -1,13 +1,11 @@
 /* SMOOCH */
 
-;(function() {
+var colorids = [];
 
-  var colorids = [];
-
-  var Smooch = function(kissdata) {
+var Smooch = function(kissdata) {
 
     this.editMode = false;
-
+  
     var editButton = document.getElementById("edit");
 
     var that = this;
@@ -74,14 +72,13 @@
     drawcanvas.style.height = this.size.y + "px";
     drawcanvas.width = this.size.x;
     drawcanvas.height = this.size.y;
-
     
     var ghostcanvas = document.getElementById("ghost");
     var ghostctxt = ghostcanvas.getContext("2d");
-    ghostcanvas.style.width  = (this.size.x / 2) + "px";
-    ghostcanvas.style.height = (this.size.y / 2) + "px";
-    ghostcanvas.width = this.size.x / 2;
-    ghostcanvas.height = this.size.y / 2;
+    ghostcanvas.style.width  = (this.size.x) + "px";
+    ghostcanvas.style.height = (this.size.y) + "px";
+    ghostcanvas.width = this.size.x;
+    ghostcanvas.height = this.size.y;
     ghostcanvas.style.background = "blue";
     ghostcanvas.style.display = "none";
 
@@ -100,15 +97,15 @@
     this.objs = []
     
     for (var i = 0; i < objs.length; i++) {
-      var objid = objs[i].id
+      var objid = objs[i].id;
       if (i < 255) {
         var colorid = i + 0 + 0 + 255;
-        colorids[colorid] = objid;
+        colorids[colorid] = i;
         objs[i].color = { red: i, green: 0, blue: 0, alpha: 255 };
       }
       else {
         var colorid = (i/2) + (i/2) + 0 + 255;
-        colorids[colorid] = objid;
+        colorids[colorid] = i;
         objs[i].color = { red: i/2, green: i/2, blue: 0, alpha: 255 };
       }
       var cells = objs[i].cells;
@@ -117,7 +114,7 @@
       }
       
       this.cells = this.cells.concat(cells);
-      this.objs[objid] = new KiSSObj(objs[i]);
+      this.objs[i] = new KiSSObj(objs[i]);
 
     }
 
@@ -130,21 +127,26 @@
         that.currentSet = parseInt(this.innerHTML);
         that.update();
         that.ctxt.clearRect(0, 0, that.size.x, that.size.y);
+        that.ghost.clearRect(0,0, that.size.x, that.size.y);
         that.draw(drawctxt, ghostctxt);
       });
     }
 
     this.cells.reverse();
+
+    this.currentSet = 0;
+    this.update();
     
-    this.update(); 
+    this.ctxt.clearRect(0, 0, that.size.x, that.size.y);
+    this.ghost.clearRect(0,0, that.size.x, that.size.y);
     this.draw(drawctxt, ghostctxt);
   };
 
   KissSet.prototype = {
     update: function () {
-     
+      
       // Update cells
-      for (var i = 0; i < this.cells.length; i++) {
+      for (var i = 0; i < this.objs.length; i++) {
         this.objs[i].update(this);
       }
 
@@ -160,8 +162,8 @@
     },
 
     draw: function(screen, ghost) {
-      screen.clearRect(0,0,this.size.x, this.size.y);
-      ghost.clearRect(0,0, this.size.x/2, this.size.y/2);
+      screen.clearRect(0, 0, this.size.x, this.size.y);
+      ghost.clearRect(0, 0, this.size.x, this.size.y);
       for (var i = 0; i < this.cells.length; i++) {
         this.cells[i].draw(screen, ghost);
       }
@@ -189,13 +191,14 @@
 
     this.obj = obj
     this.name = cell.name;
-    this.mark = obj.mark;
+    this.mark = obj.id;
     this.fix = cell.fix;
-    this.position = cell.position;
+    this.position = { x: 0, y: 0}
     this.positions = obj.positions;
     this.sets = cell.sets;
     this.image = undefined;
     this.ghostImage = undefined;
+    this.visible = false;
 
     this.init(set);
     
@@ -219,11 +222,11 @@
       drawctxt.drawImage(this.image,
                          0,
                          0,
-                         width / 2,
-                         height / 2 );
+                         width,
+                         height);
       var ghostImageData = drawctxt.getImageData(0, 0,
-                                                 width/2,
-                                                 height/2);
+                                                 width,
+                                                 height);
       var data = ghostImageData.data;
 
       // Fill image data with obj color
@@ -265,7 +268,7 @@
         screen.drawImage(this.image,
                          this.position.x, this.position.y);
         ghost.drawImage(this.ghostImage,
-                        this.position.x/2, this.position.y/2);
+                        this.position.x, this.position.y);
       }
     }
   };
@@ -281,8 +284,8 @@
     
     var mousemove = function(e) {
       if (isdrag) {
-        dobj.positions[curSet].x = tx + e.clientX - x;
-        dobj.positions[curSet].y = ty + e.clientY - y;
+        dobj.positions[curSet].x = tx + e.layerX - x;
+        dobj.positions[curSet].y = ty + e.layerY - y;
         that.set.update(that.set);
         that.set.draw(that.set.ctxt, that.set.ghost);
         return false;
@@ -290,14 +293,13 @@
     };
 
     var selectmouse = function(e) {
-      var fobj = e.target;
 
       var canvas = document.getElementById('ghost');
       var ctxt = canvas.getContext('2d');
 
       var x1 = e.layerX;
       var y1 = e.layerY;
-      var pixel = ctxt.getImageData(x1/2, y1/2, 1, 1);
+      var pixel = ctxt.getImageData(x1, y1, 1, 1);
       
       var data = pixel.data;
       var rgba = 'rgba(' + data[0] + ',' + data[1] +
@@ -313,11 +315,12 @@
         if (kobj && kobj.cells[0].fix < 1) {
           isdrag = true;
           dobj = kobj;
+          console.log(dobj);
           curSet = that.set.currentSet;
           tx = dobj.positions[curSet].x;
           ty = dobj.positions[curSet].y;
-          x = e.clientX;
-          y = e.clientY;
+          x = e.layerX;
+          y = e.layerY;
           document.onmousemove = mousemove;
           return false;
         }
@@ -338,7 +341,9 @@
 
   window.addEventListener('load', function() {
     var kissData = kissJson;
-    new Smooch(kissData);
+    this.smooch = new Smooch(kissData);
   });
 
-})();
+var debug_draw = function (x) {
+  this.smooch.set.objs[x].cells[0].draw(this.smooch.set.ctxt, this.smooch.set.ghost);
+}
