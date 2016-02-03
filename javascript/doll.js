@@ -5,7 +5,7 @@ var colorids = [];
 var Smooch = function(kissdata) {
 
     this.editMode = false;
-  
+
     var editButton = document.getElementById("edit");
 
     var that = this;
@@ -24,7 +24,7 @@ var Smooch = function(kissdata) {
     // The color of area around the play set.
     this.borderarea = document.getElementById("borderarea");
     borderarea.style.background = "pink";
-    
+
     this.set = new KissSet(kissdata);
 
     // This controls dragging and dropping.
@@ -50,17 +50,17 @@ var Smooch = function(kissdata) {
   var Toolbox = function () {
 
     var infobox = document.getElementById("info");
-    
+
     infobox.innerHTML = dobj.name;
 
   };
 
   var KissSet = function(kissData) {
-    
+
     // Size of the play area.
     this.size = { x: kissData.window_size[0],
                   y: kissData.window_size[1] }
-    
+
 
     var playarea = document.getElementById("playarea");
     playarea.style.width = this.size.x + "px";
@@ -72,7 +72,7 @@ var Smooch = function(kissdata) {
     drawcanvas.style.height = this.size.y + "px";
     drawcanvas.width = this.size.x;
     drawcanvas.height = this.size.y;
-    
+
     var ghostcanvas = document.getElementById("ghost");
     var ghostctxt = ghostcanvas.getContext("2d");
     ghostcanvas.style.width  = (this.size.x) + "px";
@@ -85,40 +85,41 @@ var Smooch = function(kissdata) {
     this.ctxt = drawctxt;
     this.canvas = drawcanvas;
     this.ghost = ghostctxt;
-    
-    // Start with set 0. 
+
+    // Start with set 0.
     this.currentSet = 0;
-    
+
     /* Build a list of the cells (images) in the doll.
-       Go through each KiSS object, add information from the object to the 
+       Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */
     this.cells = [];
     var objs = kissData.objs;
     this.objs = []
-    
+
     for (var i = 0; i < objs.length; i++) {
       var objid = objs[i].id;
+      if (i == 1) {
+        objs[i].color = { red: 50, green: 50, blue: 50, alpha: 255 };
+      } else {
+        objs[i].color = { red: 255, green: 0, blue: 0, alpha: 255 };
+      }
+/*
       if (i < 255) {
         var colorid = i + 0 + 0 + 255;
         colorids[colorid] = i;
         objs[i].color = { red: i, green: 0, blue: 0, alpha: 255 };
-      }
-      else {
-        var colorid = (i/2) + (i/2) + 0 + 255;
-        colorids[colorid] = i;
-        objs[i].color = { red: i/2, green: i/2, blue: 0, alpha: 255 };
-      }
+      }*/
       var cells = objs[i].cells;
         for (var j = 0; j < cells.length; j++) {
           cells[j] = new KiSSCell(objs[i], cells[j], this);
       }
-      
+
       this.cells = this.cells.concat(cells);
       this.objs[i] = new KiSSObj(objs[i]);
 
     }
 
-    // Add click events to set numbers 
+    // Add click events to set numbers
     this.sets = document.getElementsByTagName("a");
     for (var i = 0; i < this.sets.length; i++) {
       var that = this;
@@ -136,7 +137,7 @@ var Smooch = function(kissdata) {
 
     this.currentSet = 0;
     this.update();
-    
+
     this.ctxt.clearRect(0, 0, that.size.x, that.size.y);
     this.ghost.clearRect(0,0, that.size.x, that.size.y);
     this.draw(drawctxt, ghostctxt);
@@ -144,7 +145,7 @@ var Smooch = function(kissdata) {
 
   KissSet.prototype = {
     update: function () {
-      
+
       // Update cells
       for (var i = 0; i < this.objs.length; i++) {
         this.objs[i].update(this);
@@ -201,7 +202,7 @@ var Smooch = function(kissdata) {
     this.visible = false;
 
     this.init(set);
-    
+
     return this;
   };
 
@@ -212,7 +213,7 @@ var Smooch = function(kissdata) {
       var drawctxt = set.ctxt;
       var drawcanvas = set.canvas;
       var ghostctxt = set.ghost;
-      
+
       this.image = document.getElementById(this.name);
       var width = this.image.width;
       var height = this.image.height;
@@ -231,7 +232,7 @@ var Smooch = function(kissdata) {
 
       // Fill image data with obj color
       color = this.obj.color
-      
+
       for (var k = 0; k < data.length; k=k+4) {
         data[k]   = color.red;
         data[k+1] = color.green;
@@ -249,8 +250,8 @@ var Smooch = function(kissdata) {
       // Clear ctxt
       drawctxt.clearRect(0, 0, drawctxt.width, drawctxt.height);
 
-    }, 
-    
+    },
+
     update: function(that) {
       if (this.sets.indexOf(that.currentSet) == -1) {
         this.visible = false;
@@ -262,7 +263,7 @@ var Smooch = function(kissdata) {
         this.visible = false;
       }
     },
-    
+
     draw: function (screen, ghost) {
       if (this.visible == true) {
         screen.drawImage(this.image,
@@ -276,12 +277,12 @@ var Smooch = function(kissdata) {
   var Mouser = function(that) {
 
     // This is from eLouai, believe it or not!!
-    // http://www.elouai.com/javascript-drag-and-drop.php   
+    // http://www.elouai.com/javascript-drag-and-drop.php
 
     var isdrag = false;
     var x, y;
     var dojb;
-    
+
     var mousemove = function(e) {
       if (isdrag) {
         dobj.positions[curSet].x = tx + e.layerX - x;
@@ -300,7 +301,7 @@ var Smooch = function(kissdata) {
       var x1 = e.layerX;
       var y1 = e.layerY;
       var pixel = ctxt.getImageData(x1, y1, 1, 1);
-      
+
       var data = pixel.data;
       var rgba = 'rgba(' + data[0] + ',' + data[1] +
           ',' + data[2] + ',' + data[3] + ')';
