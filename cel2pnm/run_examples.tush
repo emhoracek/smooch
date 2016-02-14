@@ -6,8 +6,7 @@ temporary subdirectory it creates, for ease of cleanup.)
 
 $ gcc -g2 -Wall -o ../cel2pnm ../cel2pnm.c 
 
-OK, now the actual tests. We don't yet check the output file luna.pnm,
-just the messages from cel2pnm.
+OK, now the actual tests.
 
 $ ../cel2pnm -d ../examples/smoon.kcf ../examples/luna.cel luna.pnm
 @ Read palette ../examples/smoon.kcf 
@@ -20,6 +19,8 @@ $ ../cel2pnm -d ../examples/smoon.kcf ../examples/luna.cel luna.pnm
 @ Bits-per-pixel: 8 
 @ Done 
 
+$ cmp ../luna.pnm luna.pnm
+
 $ ../cel2pnm -o ../examples/smoon.kcf ../examples/luna.cel luna.pnm
 | 0 0
 @ Read palette ../examples/smoon.kcf 
@@ -27,13 +28,19 @@ $ ../cel2pnm -o ../examples/smoon.kcf ../examples/luna.cel luna.pnm
 @ Read cel ../examples/luna.cel 
 @ Done 
 
+$ cmp ../luna.pnm luna.pnm
+
 $ ../cel2pnm -t ../examples/smoon.kcf
 | rgb:c6/a8/fd
 @ Read palette ../examples/smoon.kcf 
 @ New style palette
+
+$ cmp ../luna.pnm luna.pnm
 
 $ ../cel2pnm ../examples/smoon.kcf ../examples/luna.cel luna.pnm
 @ Read palette ../examples/smoon.kcf 
 @ New style palette
 @ Read cel ../examples/luna.cel 
 @ Done 
+
+$ cmp ../luna.pnm luna.pnm
