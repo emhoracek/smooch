@@ -2,7 +2,7 @@
 #include <string.h>
 
 unsigned char palette[256 * 3];
-char transparent[12]; // the red, green, blue of the transparent color, 
+char transparent[14]; // the red, green, blue of the transparent color, 
                      // as hex, with slashes between, prefaced by "rgb:"
                      // (for pnmtopng)
 int debug = 0;
@@ -333,7 +333,7 @@ int main (int argc, char *argv[]) {
       fprintf(stderr,"Read palette %s \n", palette_file);
       read_palette (palette_file);
       fprintf(stdout, "%s", transparent);
-      return 1;
+      return 0;
     }
     else if (argc < 4) {
         fprintf(stderr, "Usage: cel2png (-d) (-t) <cel file> <palette file> <out file> \n");
@@ -370,6 +370,6 @@ int main (int argc, char *argv[]) {
     
     fprintf(stderr,"Done \n");
     
-    return 1;
+    return 0;
 
 }
