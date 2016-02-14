@@ -319,15 +319,19 @@ static int read_palette(const char *palfile) {
                     //     buffer[0]    |    buffer[1]
                     //  0 1 2 3 4 5 6 7 | 0 1 2 3 4 5 6 7
                     //  color 1 color 3 |   ---   color 2 
-                    palette[i*3] = buffer[0] & 0xf0;
-                    palette[i*3+1]=(buffer[1] & 0x0f) * 16;
-                    palette[i*3+2]=(buffer[0] & 0x0f) * 16;
+                    palette[i*3+0] =  buffer[0] & 0xf0;
+                    palette[i*3+1] = (buffer[1] & 0x0f) * 16;
+                    palette[i*3+2] = (buffer[0] & 0x0f) * 16;
                 }
                 break;
             case 24:
                 // goes through fppal grabs 3 bytes colors times
                 // and stores it in palette
-                fread(palette, colors, 3, fppal);
+                n_read = fread(palette, 3, colors, fppal);
+                if (n_read < colors) {
+                    fprintf(stderr, "Error while reading palette.");
+                    return -1;
+                }
                 break;
             default:
                 fprintf(stderr, "Invalid bits-per-pixel of %d", bpp);
