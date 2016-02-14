@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 static unsigned char palette[256 * 3];
@@ -25,6 +26,10 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     size_t   n_read;
 
     fpcel = fopen(celfile, "r");
+    if (!fpcel) {
+        perror(celfile);
+        return -1;
+    }
 
     n_read = fread(header, 4, 1, fpcel);
     if (n_read < 1) {
@@ -80,6 +85,10 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
 
     // open fppnm stream
     fppnm = fopen(pnmfile, "w+");
+    if (!fppnm) {
+        perror(pnmfile);
+        return -1;
+    }
     // write header
     fprintf(fppnm, "P3\n");
     fprintf(fppnm, "%d %d\n", width, height);
@@ -88,6 +97,10 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     // if it's a Cherry KiSS file, create a grayscale PGM file for alpha transparency
     if (bpp == 32) {
         fppgm = fopen("out.pgm", "w+");
+        if (!fppgm) {
+            perror("out.pgm");
+            return -1;
+        }
         fprintf(fppgm, "P5\n");
         fprintf(fppgm, "%d %d\n", width, height);
         fprintf(fppgm, "255\n");
@@ -232,10 +245,15 @@ static int read_palette(const char *palfile) {
     size_t  n_read;
 
     fppal = fopen(palfile, "r");
+    if (!fppal) {
+        perror(palfile);
+        return -1;
+    }
 
     n_read = fread(header, 4, 1, fppal);
     if (n_read < 1) {
         fprintf(stderr, "Bad palette header.\n");
+        return -1;
     }
 
     if (strncmp ((const char *) header, "KiSS", 4)) {
@@ -254,7 +272,6 @@ static int read_palette(const char *palfile) {
         // switch on colors?
         for (i = 0; i < colors; i++) {
             n_read = fread(buffer, 1, 2, fppal);
-
             if (n_read < 2) {
                 fprintf(stderr, "Error reading palette.");
                 return -1;
@@ -314,6 +331,7 @@ static int read_palette(const char *palfile) {
                 break;
             default:
                 fprintf(stderr, "Invalid bits-per-pixel of %d", bpp);
+                return -1;
         }
     }
 
