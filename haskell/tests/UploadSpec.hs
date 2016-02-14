@@ -6,6 +6,10 @@ import Test.Hspec
 import Upload
 import Control.Monad.Trans.Either
 import Network.Wai.Parse
+import Kiss
+
+sampleCell :: KissCell
+sampleCell = KissCell 0 "shirt"  0 [0,1,2,3] 0
 
 {--
 
@@ -29,7 +33,7 @@ shouldFailWith m r =
 
 --}
 
-spec = do 
+spec = do
   describe "tryIO" $ do 
     it "returns a Right () if the action completed" $
       runEitherT (tryIO $ return ()) `shouldReturn`
@@ -37,11 +41,9 @@ spec = do
     it "returns an exception as Text if not" $
       runEitherT (tryIO $ readFile "potato" >> return ()) `shouldReturn`
         Left "potato: openFile: does not exist (No such file or directory)"
-  describe "getFile" $ 
-    it "gets the files from a request" $
-      runEitherT (getFile [("filename", FileInfo "filename" "filetype" "content")]) `shouldReturn`
-        Right ("filename", "content")
-  describe "getRelDir" $ do
+
+
+  {-- describe "getRelDir" $ do
     it "gets the path of a directory for the set, relative to static directory" $
       runEitherT (getRelDir [("file.lzh", FileInfo "file.lzh" "lzh" "content")]) `shouldReturn`
         Right "sets/file" 
@@ -55,3 +57,9 @@ spec = do
   describe "processSet" $ do
     it "does a tooooooon of shit, fuck" $ 
       pendingWith "fuuuuuuuuuuuuuuuck"
+--}
+
+  describe "addOffsetsToCelData" $ 
+    it "does what it says on the label" $
+      addOffsetsToCelData [("shirt", (0, 0))] [sampleCell] `shouldBe`
+        [(sampleCell, (0,0))]

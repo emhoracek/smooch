@@ -35,13 +35,20 @@ processSet (fName, fileContents) = do
   unzipFile fName staticDir
   cnf <- getCNF staticDir
   kissData <- getKissData cnf
-  let json = "var kissJson = " <> encode kissData
-  kissCels <- getKissCels cnf
-  -- just using first palette found for now
+  celData <- getKissCels cnf
   kissPalette <- getKissPalette kissData
+  celsWithOffsets <- convertCels kissPalette (map celName celData) staticDir
+  let realCelData = addOffsetsToCelData celsWithOffsets celData
+  let json = "var kissJson = " <> encode kissData <> ";\n" <>
+             "var celJson = " <> encode realCelData <> ";\n"
+  -- just using first palette found for now
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
-  convertCels kissPalette (map celName kissCels) staticDir
-  return kissCels
+  return celData
+
+addOffsetsToCelData :: [(String, (Int, Int))] -> [KissCell] ->
+                       [(KissCell, (Int, Int))]
+addOffsetsToCelData offsets cells =
+  [ (cell, snd offset) | cell <- cells, offset <- offsets, celName cell == fst offset]
 
 tryIO :: IO () -> EitherT Text IO ()
 tryIO f = do

@@ -26,11 +26,11 @@ transColor paletteLoc = EitherT $ do
     ExitFailure n -> return $ Left $ T.pack ("Error while finding transparency color. Exit code: " <> show n <> ". Error: " <> errMsg)
 
 
--- Convert a whole list of cels given a palette. Put the files in target directory.
-convertCels :: String -> [String] -> String -> EitherT T.Text IO ()
+-- Convert a whole list of cels given a palette. Put the files in target directory. Return list of cels with offset information
+convertCels :: String -> [String] -> String -> EitherT T.Text IO [ (String, (Int, Int)) ] 
 convertCels pal cels base = do
   trans <- transColor $ base ++ "/" ++ pal
-  mapM_ (\ cel -> convertCel pal cel trans base) cels
+  mapM (\ cel -> convertCel pal cel trans base) cels
 
 -- Convert cel to pnm, pnm to png, delete pnm
 convertCel :: String -> String -> String -> String -> EitherT T.Text IO (String, (Int, Int))
@@ -38,7 +38,7 @@ convertCel palette cel bg base = do
   let celFile = base <> "/" <> cel <> ".cel"
   let pngFile = base <> "/" <> cel <> ".png"
   let paletteFile = base <> "/" <> palette
-  offsets <- convertAndGetOffsets celFile paletteFile
+  offsets <- convertAndGetOffsets paletteFile celFile
   runProgram ("converting to png " <> pngFile) ("pnmtopng " <> " -transparent " <> bg <> " pnm > " <> pngFile)
   runProgram "removing temp file" "rm pnm"
   return (cel, offsets)
@@ -47,7 +47,7 @@ convertCel palette cel bg base = do
 convertAndGetOffsets :: String -> String -> EitherT T.Text IO (Int, Int)
 convertAndGetOffsets paletteFile celFile = EitherT $ do
   (_,offsetOut, err, ph)  <- createProcess (shell ("cel2pnm -o " <> paletteFile <> " " <> celFile <> " pnm")) { std_out = CreatePipe, std_err = CreatePipe }
-  result <- waitForProcess ph
+  result <- waitForProcess ph   
   errMsg <- case err of
               Just x  -> hGetContents x
               Nothing -> return "no error message"
@@ -55,14 +55,12 @@ convertAndGetOffsets paletteFile celFile = EitherT $ do
               Just x -> hGetContents x
               Nothing -> return "no color"
   case result of
-    ExitSuccess   -> do
-      liftIO $ print offsets
-      return $ 
-        case words offsets of
-          [] -> Right (0,0)
-          (x: y: _ ) -> Right (read x, read y)
-          _ -> Left "Bad offset output"
-    ExitFailure n -> return $ Left $ T.pack ("Error while finding transparency color. Exit code: " <> show n <> ". Error: " <> errMsg)
+    ExitSuccess   -> return $ 
+                     case words offsets of
+                       [] ->  Left "no offset data returned"
+                       (x: y: _ ) -> Right (read x, read y)
+                       _ -> Left "Bad offset output "
+    ExitFailure n -> return $ Left $ T.pack ("Error while converting cel " <> celFile <> ". Exit code: " <> show n <> ". Error: " <> errMsg)
 
 runProgram :: String -> String -> EitherT T.Text IO ()
 runProgram name process = EitherT $ do
