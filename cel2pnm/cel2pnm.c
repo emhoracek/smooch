@@ -277,9 +277,9 @@ static int read_palette(const char *palfile) {
                 return -1;
             }
 
-            palette[i*3] = buffer[0] & 0xf0;
-            palette[i*3+1]=(buffer[1] & 0x0f) << 4;
-            palette[i*3+2]=(buffer[0] & 0x0f) << 4;
+            palette[i*3+0] =  buffer[0] & 0xf0;
+            palette[i*3+1] = (buffer[1] & 0x0f) << 4;
+            palette[i*3+2] = (buffer[0] & 0x0f) << 4;
         }
     }
     else {
