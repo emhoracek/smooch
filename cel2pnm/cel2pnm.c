@@ -6,6 +6,7 @@ char transparent[14]; // the red, green, blue of the transparent color,
                      // as hex, with slashes between, prefaced by "rgb:"
                      // (for pnmtopng)
 int debug = 0;
+int output_offset = 0;
 
 int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
@@ -60,6 +61,10 @@ int convert_cel(const char *celfile, const char *pnmfile) {
         offy = header[10] + (256 * header[11]);
     }
 
+    if (output_offset) {
+      fprintf(stdout, "%d %d\n", offx, offy);
+    }
+    
     if (debug) {
         fprintf(stderr, "Width: %d, height: %d \n", width, height);
         fprintf(stderr, "Offx: %d, offy: %d \n", offx, offy);
@@ -326,42 +331,45 @@ int main (int argc, char *argv[]) {
     char *input_file;
     char *palette_file;
     char *output_file;
-    int offset;
     
-    if (strncmp(argv[1], "-t", 2) == 0) {
+    if (strcmp(argv[1], "-t") == 0) {
       palette_file = argv[2];
       fprintf(stderr,"Read palette %s \n", palette_file);
       read_palette (palette_file);
       fprintf(stdout, "%s", transparent);
       return 0;
     }
-    else if (argc < 4) {
-        fprintf(stderr, "Usage: cel2png (-d) (-t) <cel file> <palette file> <out file> \n");
-        return -1;
-    }
     else {
-      debug = 0;
-      palette_file = argv[argc - 3];
-      input_file = argv[argc - 2];
-      output_file = argv[argc - 1];
+      int ap = 1; // arg pointer
       
-      if (strncmp(argv[1], "-d", 2) == 0) {
-        if (strncmp(argv[1], "-d2", 3) == 0) {
+      debug = 0;
+      output_offset = 0;
+
+      if (ap < argc && strncmp(argv[ap], "-d", 2) == 0) {
+        if (strncmp(argv[ap], "-d2", 3) == 0) {
             debug = 2;
         }
         else {
             debug = 1;
         }
+        ++ap;
       }
 
-      if (strncmp(argv[1], "-o", 2) == 0) {
-        offset = 1;
+      if (ap < argc && strcmp(argv[ap], "-o") == 0) {
+        output_offset = 1;
+        ++ap;
+      }
+
+      if (ap+3 == argc) {
+        palette_file = argv[ap];
+        input_file = argv[ap+1];
+        output_file = argv[ap+2];
       }
       else {
-        offset = 0;
+        fprintf(stderr, "Usage: cel2png (-d) (-t) (-o) <cel file> <palette file> <out file> \n");
+        return 1;
       }
     }
-
     fprintf(stderr,"Read palette %s \n", palette_file);
     read_palette (palette_file);
 
