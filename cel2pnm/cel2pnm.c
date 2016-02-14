@@ -331,6 +331,7 @@ int read_palette(const char *palfile) {
 
 
 int main (int argc, char *argv[]) {
+    int err;
 
     char *input_file;
     char *palette_file;
@@ -339,7 +340,8 @@ int main (int argc, char *argv[]) {
     if (strcmp(argv[1], "-t") == 0) {
       palette_file = argv[2];
       fprintf(stderr,"Read palette %s \n", palette_file);
-      read_palette (palette_file);
+      err = read_palette (palette_file);
+      if (err) return 1;
       fprintf(stdout, "%s", transparent);
       return 0;
     }
@@ -375,13 +377,14 @@ int main (int argc, char *argv[]) {
       }
     }
     fprintf(stderr,"Read palette %s \n", palette_file);
-    read_palette (palette_file);
+    err = read_palette (palette_file);
+    if (err) return 1;
 
     fprintf(stderr,"Read cel %s \n", input_file);
-    convert_cel (input_file, output_file);
+    err = convert_cel (input_file, output_file);
+    if (err) return 1;
     
     fprintf(stderr,"Done \n");
     
     return 0;
-
 }
