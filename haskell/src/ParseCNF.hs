@@ -8,18 +8,20 @@ import Kiss
 import Text.ParserCombinators.Parsec
 import Data.List hiding (lines)
 import Data.Maybe
+import Data.Char (toLower)
+import Data.Ord (comparing)
 import qualified Data.Text as T 
 import Control.Monad.Trans.Either 
 
 getKissData :: String -> EitherT T.Text IO KissData
 getKissData file = 
-    case parse parseCNFLines "KiSS CNF error: " file of
+    case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
       Right ls -> return $ linesToScript ls
       Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
 getKissCels :: String -> EitherT T.Text IO [KissCell]
 getKissCels file = 
-    case parse parseCNFLines "KiSS cel error: " file of
+    case parse parseCNFLines "KiSS cel error: " (map toLower file) of
       Right ls -> return $ linesToCells ls
       Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
@@ -46,15 +48,21 @@ linesToScript xs =
 
 linesToObjects :: [(Int, KissCell)] -> [KissSetPos] -> [KissObject]
 linesToObjects xs ys = 
-    nubBy (\(KissObject n _  _) (KissObject n2 _ _) -> n == n2) $ map (\((x,y),z) -> KissObject x y z) (zipIt cells positions)
-    where cells = map (\x -> combineCells (fst x) xs) xs
+    map (\((x,y),z) -> KissObject x y z) positions'
+    where cells = nubBy (\x y -> fst x == fst y)$ map (\x -> combineCells (fst x) xs) xs
           positions = zip (sort $ map fst xs) (cellPositions ys)
+          positions' = cellPos cells (cellPositions ys)
+
+cellPos :: [(Int, [KissCell])] -> [[SetPos]] ->
+           [((Int, [KissCell]), [SetPos])]
+cellPos cells positions = zip (sortBy (comparing fst) cells) positions
+
 
 zipIt :: [(Int, [KissCell])] -> [(Int,[SetPos])] -> [((Int, [KissCell]), [SetPos])]
 zipIt cells positions = [ (cell, snd pos) | cell <- cells, pos <- positions, fst cell == fst pos]
 
--- A CNF's [KissSetPos] is 10 lists of SetPos each `#cells` long.
--- This turns them into `#cells` lists of 10 SetPos.
+-- A CNF's [KissSetPos] is 10 lists of SetPos each `#objs` long.
+-- This turns them into `#objs` lists of 10 SetPos.
 cellPositions :: [KissSetPos] -> [[SetPos]]
 cellPositions xs = transpose $ map (\(KissSetPos pal pos) -> pos) xs
 
@@ -90,6 +98,10 @@ parseCell = do
     skipMany space
     transp <- option 0 (try parseTransp)
     return $ KissCell fix file palette sets transp
+
+{--
+caseInsensitiveChar c = char (toLower c) <|> char (toUpper c)
+caseInsensitiveString s = try (mapM caseInsensitiveChar s) <?> "\"" ++ s ++ "\""--}
 
 parseCellPalette :: Parser Int
 parseCellPalette = do
