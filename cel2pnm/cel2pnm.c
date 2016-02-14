@@ -87,7 +87,6 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
 
     // if it's a Cherry KiSS file, create a grayscale PGM file for alpha transparency
     if (bpp == 32) {
-        
         fppgm = fopen("out.pgm", "w+");
         fprintf(fppgm, "P5\n");
         fprintf(fppgm, "%d %d\n", width, height);
@@ -96,7 +95,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
 
     unsigned char line [width * 4];
 
-    for (i = 0; i < height  && !feof(fpcel); ++i) {
+    for (i = 0; i < height && !feof(fpcel); ++i) {
     // for each row in the picture
 
         switch (bpp) {
