@@ -38,7 +38,6 @@ sampleKiss2 =
   "(756,398) \n" ++
   "[0 \n" ++
   "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
-  "#2   body.cel   *0 : 0 1 2 3 \n" ++
   "#1   shirtb.cel *0 : 0 1 2 3 \n" ++
   "$0 * * *"
 
@@ -54,8 +53,7 @@ spec = do
       runEitherT (getKissData sampleKiss2) `shouldReturn`
         Right (KissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0,
-                           KissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [NoPosition],
-            KissObject 2 [ KissCell 0 "body"  0 [0,1,2,3] 0] [NoPosition]])
+                           KissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [NoPosition]])
     it "returns an error message for a bad cnf" $
       pendingWith "oops"
 {--
@@ -89,3 +87,17 @@ spec = do
       parse parseCNFLine "blah" sampleSet3 `shouldBe`
         Right (CNFSetPos (KissSetPos 0
                           [Position 192 11, NoPosition, Position 56 17]))
+
+    it "joins cels into objects" $
+      linesToObjects [(1, KissCell 0 "shirt" 0 [0,1,2,3] 0),
+                      (1, KissCell 0 "shirtb" 0 [0,1,2,3] 0)]
+                     [KissSetPos 0 [NoPosition, NoPosition, NoPosition]] `shouldBe`
+      [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0,
+                           KissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [NoPosition]]
+
+    it "combines cells" $
+      combineCells 1 [(1, KissCell 0 "shirt" 0 [0,1,2,3] 0),
+                      (1, KissCell 0 "shirtb" 0 [0,1,2,3] 0)] `shouldBe`
+
+       (1, [KissCell 0 "shirt" 0 [0,1,2,3] 0,
+            KissCell 0 "shirtb" 0 [0,1,2,3] 0])

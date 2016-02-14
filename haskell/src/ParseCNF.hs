@@ -46,7 +46,7 @@ linesToScript xs =
 
 linesToObjects :: [(Int, KissCell)] -> [KissSetPos] -> [KissObject]
 linesToObjects xs ys = 
-    map (\((x,y),z) -> KissObject x y z) (zipIt cells positions)
+    nubBy (\(KissObject n _  _) (KissObject n2 _ _) -> n == n2) $ map (\((x,y),z) -> KissObject x y z) (zipIt cells positions)
     where cells = map (\x -> combineCells (fst x) xs) xs
           positions = zip (sort $ map fst xs) (cellPositions ys)
 
