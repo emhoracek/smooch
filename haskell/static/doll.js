@@ -1,16 +1,16 @@
 /* SMOOCH */
 
-;(function() {
+var colorids = [];
 
-  var colorids = [];
-
-  var Smooch = function(kissdata) {
+var Smooch = function(kissdata, celData) {
 
     this.editMode = false;
-
+  
     var editButton = document.getElementById("edit");
 
-    var that = this;
+  var that = this;
+
+  /*
     editButton.addEventListener("click", function() {
       if (that.editMode == true) {
         that.editMode = false;
@@ -22,12 +22,12 @@
     });
 
     this.toolbar = document.getElementById("toolbar");
-
+*/
     // The color of area around the play set.
     this.borderarea = document.getElementById("borderarea");
     borderarea.style.background = "pink";
     
-    this.set = new KissSet(kissdata);
+  this.set = new KissSet(kissdata, celData);
 
     // This controls dragging and dropping.
     this.mouse = Mouser(this);
@@ -36,8 +36,8 @@
 
   };
 
-  Smooch.prototype = {
-    update: function() {
+Smooch.prototype = {
+    update: function() {/*
       if (this.editMode == true) {
         this.toolbar.style.display = "block";
         this.borderarea.style.width = "80%";
@@ -45,9 +45,10 @@
       else {
         this.toolbar.style.display = "none";
         this.borderarea.style.width = "100%";
-      }
+      }*/
     }
   };
+/*
 
   var Toolbox = function () {
 
@@ -55,9 +56,9 @@
     
     infobox.innerHTML = dobj.name;
 
-  };
+  };*/
 
-  var KissSet = function(kissData) {
+var KissSet = function(kissData, celData) {
     
     // Size of the play area.
     this.size = { x: kissData.window_size[0],
@@ -74,14 +75,13 @@
     drawcanvas.style.height = this.size.y + "px";
     drawcanvas.width = this.size.x;
     drawcanvas.height = this.size.y;
-
     
     var ghostcanvas = document.getElementById("ghost");
     var ghostctxt = ghostcanvas.getContext("2d");
-    ghostcanvas.style.width  = (this.size.x / 2) + "px";
-    ghostcanvas.style.height = (this.size.y / 2) + "px";
-    ghostcanvas.width = this.size.x / 2;
-    ghostcanvas.height = this.size.y / 2;
+    ghostcanvas.style.width  = (this.size.x) + "px";
+    ghostcanvas.style.height = (this.size.y) + "px";
+    ghostcanvas.width = this.size.x;
+    ghostcanvas.height = this.size.y;
     ghostcanvas.style.background = "blue";
     ghostcanvas.style.display = "none";
 
@@ -95,29 +95,33 @@
     /* Build a list of the cells (images) in the doll.
        Go through each KiSS object, add information from the object to the 
        cells within the object, then add those cells to the list. */
-    this.cells = [];
+    this.cells = celData;
     var objs = kissData.objs;
     this.objs = []
     
     for (var i = 0; i < objs.length; i++) {
-      var objid = objs[i].id
+      var objid = objs[i].id;
       if (i < 255) {
         var colorid = i + 0 + 0 + 255;
-        colorids[colorid] = objid;
+        colorids[colorid] = i;
         objs[i].color = { red: i, green: 0, blue: 0, alpha: 255 };
       }
       else {
         var colorid = (i/2) + (i/2) + 0 + 255;
-        colorids[colorid] = objid;
+        colorids[colorid] = i;
         objs[i].color = { red: i/2, green: i/2, blue: 0, alpha: 255 };
       }
-      var cells = objs[i].cells;
-        for (var j = 0; j < cells.length; j++) {
-          cells[j] = new KiSSCell(objs[i], cells[j], this);
+      var obj_cells = objs[i].cells;
+      for (var j = 0; j < obj_cells.length; j++) {
+        for (var k = 0; k < this.cells.length; k++) {
+          if (this.cells[k].name === obj_cells[j].name) {
+            obj_cells[j] = new KiSSCell(objs[i], obj_cells[j], this);
+            this.cells[k] = obj_cells[j];
+          }
+        }
       }
       
-      this.cells = this.cells.concat(cells);
-      this.objs[objid] = new KiSSObj(objs[i]);
+      this.objs[i] = new KiSSObj(objs[i]);
 
     }
 
@@ -130,21 +134,26 @@
         that.currentSet = parseInt(this.innerHTML);
         that.update();
         that.ctxt.clearRect(0, 0, that.size.x, that.size.y);
+        that.ghost.clearRect(0,0, that.size.x, that.size.y);
         that.draw(drawctxt, ghostctxt);
       });
     }
 
     this.cells.reverse();
+
+    this.currentSet = 0;
+    this.update();
     
-    this.update(); 
+    this.ctxt.clearRect(0, 0, that.size.x, that.size.y);
+    this.ghost.clearRect(0,0, that.size.x, that.size.y);
     this.draw(drawctxt, ghostctxt);
   };
 
   KissSet.prototype = {
     update: function () {
-     
+      
       // Update cells
-      for (var i = 0; i < this.cells.length; i++) {
+      for (var i = 0; i < this.objs.length; i++) {
         this.objs[i].update(this);
       }
 
@@ -160,8 +169,8 @@
     },
 
     draw: function(screen, ghost) {
-      screen.clearRect(0,0,this.size.x, this.size.y);
-      ghost.clearRect(0,0, this.size.x/2, this.size.y/2);
+      screen.clearRect(0, 0, this.size.x, this.size.y);
+      ghost.clearRect(0, 0, this.size.x, this.size.y);
       for (var i = 0; i < this.cells.length; i++) {
         this.cells[i].draw(screen, ghost);
       }
@@ -189,13 +198,14 @@
 
     this.obj = obj
     this.name = cell.name;
-    this.mark = obj.mark;
+    this.mark = obj.id;
     this.fix = cell.fix;
-    this.position = cell.position;
+    this.position = { x: 0, y: 0}
     this.positions = obj.positions;
     this.sets = cell.sets;
     this.image = undefined;
     this.ghostImage = undefined;
+    this.visible = false;
 
     this.init(set);
     
@@ -219,11 +229,11 @@
       drawctxt.drawImage(this.image,
                          0,
                          0,
-                         width / 2,
-                         height / 2 );
+                         width,
+                         height);
       var ghostImageData = drawctxt.getImageData(0, 0,
-                                                 width/2,
-                                                 height/2);
+                                                 width,
+                                                 height);
       var data = ghostImageData.data;
 
       // Fill image data with obj color
@@ -236,7 +246,7 @@
       }
 
       // Clear ctxt and draw altered image
-      drawctxt.clearRect(0, 0, drawctxt.width, drawctxt.height);
+      drawctxt.clearRect(0, 0, set.size.x, set.size.y);
       drawctxt.putImageData(ghostImageData, 0, 0);
 
       // Save altered image as cel's ghost image
@@ -244,7 +254,7 @@
       this.ghostImage.src = drawcanvas.toDataURL('image/png');
 
       // Clear ctxt
-      drawctxt.clearRect(0, 0, drawctxt.width, drawctxt.height);
+      drawctxt.clearRect(0, 0, set.size.x, set.size.y);
 
     }, 
     
@@ -265,7 +275,7 @@
         screen.drawImage(this.image,
                          this.position.x, this.position.y);
         ghost.drawImage(this.ghostImage,
-                        this.position.x/2, this.position.y/2);
+                        this.position.x, this.position.y);
       }
     }
   };
@@ -281,8 +291,8 @@
     
     var mousemove = function(e) {
       if (isdrag) {
-        dobj.positions[curSet].x = tx + e.clientX - x;
-        dobj.positions[curSet].y = ty + e.clientY - y;
+        dobj.positions[curSet].x = tx + e.layerX - x;
+        dobj.positions[curSet].y = ty + e.layerY - y;
         that.set.update(that.set);
         that.set.draw(that.set.ctxt, that.set.ghost);
         return false;
@@ -290,14 +300,13 @@
     };
 
     var selectmouse = function(e) {
-      var fobj = e.target;
 
       var canvas = document.getElementById('ghost');
       var ctxt = canvas.getContext('2d');
 
       var x1 = e.layerX;
       var y1 = e.layerY;
-      var pixel = ctxt.getImageData(x1/2, y1/2, 1, 1);
+      var pixel = ctxt.getImageData(x1, y1, 1, 1);
       
       var data = pixel.data;
       var rgba = 'rgba(' + data[0] + ',' + data[1] +
@@ -313,11 +322,12 @@
         if (kobj && kobj.cells[0].fix < 1) {
           isdrag = true;
           dobj = kobj;
+          console.log(dobj);
           curSet = that.set.currentSet;
           tx = dobj.positions[curSet].x;
           ty = dobj.positions[curSet].y;
-          x = e.clientX;
-          y = e.clientY;
+          x = e.layerX;
+          y = e.layerY;
           document.onmousemove = mousemove;
           return false;
         }
@@ -338,7 +348,10 @@
 
   window.addEventListener('load', function() {
     var kissData = kissJson;
-    new Smooch(kissData);
+    var celData = celJson;
+    this.smooch = new Smooch(kissData, celData);
   });
 
-})();
+var debug_draw = function (x) {
+  this.smooch.set.objs[x].cells[0].draw(this.smooch.set.ctxt, this.smooch.set.ghost);
+}
