@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned char palette[256 * 3];
-char transparent[14]; // the red, green, blue of the transparent color, 
+static unsigned char palette[256 * 3];
+static char transparent[14]; // the red, green, blue of the transparent color, 
                      // as hex, with slashes between, prefaced by "rgb:"
                      // (for pnmtopng)
-int debug = 0;
-int output_offset = 0;
+static int debug = 0;
+static int output_offset = 0;
 
 static int parse_uint16(const unsigned char *bytes) {
     return bytes[0] + 256 * bytes[1];
 }
 
-int convert_cel(const char *celfile, const char *pnmfile) {
+static int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
             *fppnm,
             *fppgm;
@@ -224,7 +224,7 @@ int convert_cel(const char *celfile, const char *pnmfile) {
     return 0;
 }
 
-int read_palette(const char *palfile) {
+static int read_palette(const char *palfile) {
     FILE   *fppal;
     char    header[32],
             file_mark,
