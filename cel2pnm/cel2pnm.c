@@ -345,13 +345,13 @@ int main (int argc, char *argv[]) {
       fprintf(stdout, "%s", transparent);
       return 0;
     }
-    else {
-      int ap = 1; // arg pointer
-      
-      debug = 0;
-      output_offset = 0;
 
-      if (ap < argc && strncmp(argv[ap], "-d", 2) == 0) {
+    int ap = 1; // arg pointer
+      
+    debug = 0;
+    output_offset = 0;
+
+    if (ap < argc && strncmp(argv[ap], "-d", 2) == 0) {
         if (strncmp(argv[ap], "-d2", 3) == 0) {
             debug = 2;
         }
@@ -359,23 +359,23 @@ int main (int argc, char *argv[]) {
             debug = 1;
         }
         ++ap;
-      }
+    }
 
-      if (ap < argc && strcmp(argv[ap], "-o") == 0) {
+    if (ap < argc && strcmp(argv[ap], "-o") == 0) {
         output_offset = 1;
         ++ap;
-      }
+    }
 
-      if (ap+3 == argc) {
+    if (ap+3 == argc) {
         palette_file = argv[ap];
         input_file = argv[ap+1];
         output_file = argv[ap+2];
-      }
-      else {
+    }
+    else {
         fprintf(stderr, "Usage: cel2png (-d) (-t) (-o) <cel file> <palette file> <out file> \n");
         return 1;
-      }
     }
+
     fprintf(stderr,"Read palette %s \n", palette_file);
     err = read_palette (palette_file);
     if (err) return 1;
