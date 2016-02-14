@@ -27,7 +27,6 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     fpcel = fopen(celfile, "r");
 
     n_read = fread(header, 4, 1, fpcel);
-
     if (n_read < 1) {
         fprintf(stderr, "Unable to read header.\n");
         return -1;
@@ -45,8 +44,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
         offy   = 0;
     }
     else {
-        fread(header, 28, 1, fpcel);
-
+        n_read = fread(header, 28, 1, fpcel);
         if (n_read < 1) {
             fprintf(stderr, "Unable to read rest of header.\n");
             return -1;
