@@ -338,12 +338,12 @@ int main (int argc, char *argv[]) {
     char *output_file;
     
     if (strcmp(argv[1], "-t") == 0) {
-      palette_file = argv[2];
-      fprintf(stderr,"Read palette %s \n", palette_file);
-      err = read_palette (palette_file);
-      if (err) return 1;
-      fprintf(stdout, "%s", transparent);
-      return 0;
+        palette_file = argv[2];
+        fprintf(stderr,"Read palette %s \n", palette_file);
+        err = read_palette (palette_file);
+        if (err) return 1;
+        fprintf(stdout, "%s", transparent);
+        return 0;
     }
 
     int ap = 1; // arg pointer
