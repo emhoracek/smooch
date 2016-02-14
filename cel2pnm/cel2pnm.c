@@ -8,6 +8,10 @@ char transparent[14]; // the red, green, blue of the transparent color,
 int debug = 0;
 int output_offset = 0;
 
+static int parse_uint16(const unsigned char *bytes) {
+    return bytes[0] + 256 * bytes[1];
+}
+
 int convert_cel(const char *celfile, const char *pnmfile) {
     FILE    *fpcel,
             *fppnm,
@@ -34,11 +38,11 @@ int convert_cel(const char *celfile, const char *pnmfile) {
         if (debug) {
             fprintf(stderr, "Old style KiSS cell.\n");
         }
-        bpp = 4;
-        width = header[0] + (256 * header[1]);
-        height = header[2] + (256 * header[3]);
-        offx = 0;
-        offy = 0;
+        bpp    = 4;
+        width  = parse_uint16(header+0);
+        height = parse_uint16(header+2);
+        offx   = 0;
+        offy   = 0;
     }
     else {
         fread(header, 28, 1, fpcel);
@@ -54,11 +58,11 @@ int convert_cel(const char *celfile, const char *pnmfile) {
             return -1;
         }
         
-        bpp = header[1];
-        width = header[4] + (256 * header[5]);
-        height = header[6] + (256 * header[7]);
-        offx = header[8] + (256 * header[9]);
-        offy = header[10] + (256 * header[11]);
+        bpp    = header[1];
+        width  = parse_uint16(header+4);
+        height = parse_uint16(header+6);
+        offx   = parse_uint16(header+8);
+        offy   = parse_uint16(header+10);
     }
 
     if (output_offset) {
