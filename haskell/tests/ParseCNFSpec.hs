@@ -30,6 +30,17 @@ sampleKiss =
   "#2   body.cel   *0 : 0 1 2 3 \n" ++
   "#3   shirtb.cel *0 : 0 1 2 3 \n" ++
   "$0 * * *"
+  
+sampleKiss2 :: String
+sampleKiss2 = 
+  "; ** Palette files ** \n" ++ 
+  "%colors.kcf \n" ++
+  "(756,398) \n" ++
+  "[0 \n" ++
+  "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
+  "#2   body.cel   *0 : 0 1 2 3 \n" ++
+  "#1   shirtb.cel *0 : 0 1 2 3 \n" ++
+  "$0 * * *"
 
 spec = do
   describe "getKissData" $ do
@@ -39,6 +50,12 @@ spec = do
           [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0] [NoPosition],
             KissObject 2 [ KissCell 0 "body"  0 [0,1,2,3] 0] [NoPosition],
             KissObject 3 [ KissCell 0 "shirtb" 0 [0,1,2,3] 0] [NoPosition] ])
+    it "parses a CNF into KiSS data" $
+      runEitherT (getKissData sampleKiss2) `shouldReturn`
+        Right (KissData 0 0 ["colors.kcf"] (756, 398)
+          [ KissObject 1 [ KissCell 0 "shirt" 0 [0,1,2,3] 0,
+                           KissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [NoPosition],
+            KissObject 2 [ KissCell 0 "body"  0 [0,1,2,3] 0] [NoPosition]])
     it "returns an error message for a bad cnf" $
       pendingWith "oops"
 {--
