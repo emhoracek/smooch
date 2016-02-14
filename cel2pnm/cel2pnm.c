@@ -223,7 +223,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
 
 static int read_palette(const char *palfile) {
     FILE   *fppal;
-    char    header[32],
+    unsigned char header[32],
             file_mark,
             buffer[2],
             bpp;
@@ -280,7 +280,7 @@ static int read_palette(const char *palfile) {
         }
 
         bpp = header[5];
-        colors = header[8] + header[9] * 256;
+        colors = parse_uint16(header+8);
         
         if (debug) {
             fprintf(stderr,"Bits per pixel: %d \n", bpp);
