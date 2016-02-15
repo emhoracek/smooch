@@ -69,7 +69,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     }
 
     if (output_offset) {
-      fprintf(stdout, "%d %d\n", offx, offy);
+        fprintf(stdout, "%d %d\n", offx, offy);
     }
     
     if (debug) {
