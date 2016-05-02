@@ -11,10 +11,10 @@ import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
+import           Heist                      (( ## ))
 import qualified Heist.Interpreted          as H
 import           Network.HTTP.Types.Method
 import           Network.Wai
-import Heist ((##))
 import           Network.Wai.Handler.Warp
 import           System.Environment
 import           System.FilePath            ((</>))
@@ -34,11 +34,11 @@ instance RequestContext Ctxt where
   requestLens = req
 
 instance HeistContext Ctxt where
-  heistLens = heist
+  getHeist = _heist
 
 initializer :: IO Ctxt
 initializer = do
-  hs' <- heistInit ["templates"] mempty
+  hs' <- heistInit ["templates"] mempty mempty
   let hs = case hs' of
              Left ers -> errorL' ("Heist failed to load templates: \n" <> T.intercalate "\n" (map T.pack ers))
              Right hs'' -> hs''
@@ -52,7 +52,7 @@ app = do
 site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end ==> indexHandler
-             , path "upload" // method POST /? file "kissfile" ==> uploadHandler
+             , path "upload" // method POST /? file "kissfile" !=> uploadHandler
              , anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
@@ -66,14 +66,14 @@ uploadHandler ctxt (File name _ contents) = do
   case relDir of
     Right d -> case cels of
       Right cs -> renderWithSplices ctxt "kissSet" $ do
-                   tag' "set-listing" setListingSplice 
+                   tag' "set-listing" setListingSplice
                    "base" ## H.textSplice (T.pack d)
                    tag' "celImages" $ celsSplice d cs
       Left  e -> okText e
     Left e -> okText e
 
 setListingSplice :: Ctxt -> X.Node -> FnSplice Ctxt
-setListingSplice _ _ = 
+setListingSplice _ _ =
   H.mapSplices toSet (map (T.pack . show) ([0..9] :: [Int]))
   where toSet n =
           return [X.Element "li" []
