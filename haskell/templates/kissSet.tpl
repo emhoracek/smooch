@@ -22,9 +22,12 @@
 
     <div id="borderarea">
       <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
         <celImages />
       </div>
     </div>
+
 
     <div id="nav">
       <button id="editbutton">Edit</button>
@@ -41,6 +44,6 @@
     <script type="text/javascript" src="${base}/setdata.js"></script>
 
     <script type="text/javascript" src="/doll.js"></script>
-    
+
   </body>
 </html>
