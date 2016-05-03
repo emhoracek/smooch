@@ -3,7 +3,7 @@
 #include <string.h>
 
 static unsigned char palette[256 * 3];
-static char transparent[14]; // the red, green, blue of the transparent color, 
+static char transparent[14]; // the red, green, blue of the transparent color,
                      // as hex, with slashes between, prefaced by "rgb:"
                      // (for pnmtopng)
 static int debug = 0;
@@ -60,7 +60,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
             fprintf(stderr, "%s is not a CEL image file.\n", celfile);
             return -1;
         }
-        
+
         bpp    = header[1];
         width  = parse_uint16(header+4);
         height = parse_uint16(header+6);
@@ -71,7 +71,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     if (output_offset) {
         fprintf(stdout, "%d %d\n", offx, offy);
     }
-    
+
     if (debug) {
         fprintf(stderr, "Width: %d, height: %d \n", width, height);
         fprintf(stderr, "Offx: %d, offy: %d \n", offx, offy);
@@ -112,24 +112,24 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     // for each row in the picture
 
         switch (bpp) {
-            case 4: 
+            case 4:
                 for (j = 0; j < (width+1)/2; j++) {
                 // for every two pixels in each row
-                    
+
                     // read one byte into the buffer
                     unsigned char buffer;
                     n_read = fread(&buffer, 1, 1, fpcel);
                     if (n_read < 1) {
-                        fprintf(stderr, 
+                        fprintf(stderr,
                                 "Error reading pixels at row %d, column %d\n", i, j);
                         return -1;
                     }
-                    
+
                     // split the byte into two numbers
                     int num1 = (buffer & 0xf0) >> 4;
                     int num2 = buffer & 0x0f;
 
-                    // print the numbers if in debug mode 
+                    // print the numbers if in debug mode
                     if (debug > 1) {
                         fprintf(stderr, "%d ", num1);
                         fprintf(stderr, "%d ", num2);
@@ -139,19 +139,19 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
                     // if the width is even, or it's not the end of a line
                         // lookup the R, G, and B values and print
                         // both pixels to the output file
-                        fprintf(fppnm, "%u %u %u %u %u %u ", 
-                            (unsigned) palette[num1*3], 
+                        fprintf(fppnm, "%u %u %u %u %u %u ",
+                            (unsigned) palette[num1*3],
                             (unsigned) palette[num1*3+1],
                             (unsigned) palette[num1*3+2],
-                            (unsigned) palette[num2*3], 
+                            (unsigned) palette[num2*3],
                             (unsigned) palette[num2*3+1],
                             (unsigned) palette[num2*3+2]);
                     }
                     else {
                     // if this is the end of an uneven line
                         // print just the first pixel
-                        fprintf(fppnm, "%u %u %u ", 
-                            (unsigned) palette[num1*3], 
+                        fprintf(fppnm, "%u %u %u ",
+                            (unsigned) palette[num1*3],
                             (unsigned) palette[num1*3+1],
                             (unsigned) palette[num1*3+2]);
                     }
@@ -161,26 +161,26 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
             case 8:
                 for (j = 0; j < width; j++) {
                 // for each pixel in each row
-                    
+
                     // read one byte into the buffer,
                     unsigned char buffer;
                     n_read = fread(&buffer, 1, 1, fpcel);
                     if (n_read < 1) {
-                        fprintf(stderr, 
+                        fprintf(stderr,
                                 "Error reading pixels at row %d, column %d\n", i, j);
                         return -1;
                     }
                     // convert the byte to an int
                     int num;
                     num = buffer;
-                    
-                    // print the number if in debug mode 
+
+                    // print the number if in debug mode
                     if (debug > 1) {
                         fprintf(stderr, "%d ", num);
                     }
 
                     // lookup the R, G, and B values and print to file
-                    fprintf(fppnm, "%u %u %u ", (unsigned) palette[num*3], 
+                    fprintf(fppnm, "%u %u %u ", (unsigned) palette[num*3],
                                                 (unsigned) palette[num*3+1],
                                                 (unsigned) palette[num*3+2]);
 
@@ -190,7 +190,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
                 // read a line of pixels
                 n_read = fread(line, width*4, 1, fpcel);
                 if (n_read < 1) {
-                    fprintf(stderr, 
+                    fprintf(stderr,
                             "Error reading pixels at row %d, column %d\n", i, j);
                     return -1;
                 }
@@ -202,7 +202,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
                     blue = line[j*4];
                     green = line[j*4+1];
                     red = line[j*4+2];
-                    
+
                     // 8-bit alpha channel
                     unsigned char alpha;
                     alpha = line[j*4+3];
@@ -227,7 +227,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
         }
         fprintf(fppnm, "\n");
     }
-    
+
     fclose(fpcel);
     fclose(fppnm);
 
@@ -257,7 +257,7 @@ static int read_palette(const char *palfile) {
     }
 
     if (strncmp ((const char *) header, "KiSS", 4)) {
-        if (debug) {           
+        if (debug) {
             fprintf(stderr, "Old style palette\n");
         }
 
@@ -268,7 +268,7 @@ static int read_palette(const char *palfile) {
 
         // the rest of this is the same as "case 12" below"
         // DRY?
-        // could pull the switch case out of the if and 
+        // could pull the switch case out of the if and
         // switch on colors?
         for (i = 0; i < colors; i++) {
             n_read = fread(buffer, 1, 2, fppal);
@@ -289,7 +289,7 @@ static int read_palette(const char *palfile) {
         if (n_read < 1) {
             fprintf(stderr, "Can't read palette header after \"KiSS\".\n");
         }
-        
+
         file_mark = header[4];
         if (file_mark != 0x10) {
             fprintf(stderr, "Filemark should be %c and is actually %c.\n", 0x10, file_mark);
@@ -298,12 +298,12 @@ static int read_palette(const char *palfile) {
 
         bpp = header[5];
         colors = parse_uint16(header+8);
-        
+
         if (debug) {
             fprintf(stderr,"Bits per pixel: %d \n", bpp);
             fprintf(stderr, "Number colors: %d \n", colors);
         }
-    
+
         switch (bpp) {
             case 12:
                 //for each color
@@ -318,7 +318,7 @@ static int read_palette(const char *palfile) {
                     // three colors are stored in two bytes
                     //     buffer[0]    |    buffer[1]
                     //  0 1 2 3 4 5 6 7 | 0 1 2 3 4 5 6 7
-                    //  color 1 color 3 |   ---   color 2 
+                    //  color 1 color 3 |   ---   color 2
                     palette[i*3+0] =  buffer[0] & 0xf0;
                     palette[i*3+1] = (buffer[1] & 0x0f) * 16;
                     palette[i*3+2] = (buffer[0] & 0x0f) * 16;
@@ -339,7 +339,7 @@ static int read_palette(const char *palfile) {
         }
     }
 
-    sprintf(transparent, "rgb:%x/%x/%x", (unsigned) palette[0], 
+    sprintf(transparent, "rgb:%x/%x/%x", (unsigned) palette[0],
                                          (unsigned) palette[1],
                                          (unsigned) palette[2]);
 
@@ -355,7 +355,7 @@ int main (int argc, char *argv[]) {
     char *input_file;
     char *palette_file;
     char *output_file;
-    
+
     if (strcmp(argv[1], "-t") == 0) {
         palette_file = argv[2];
         fprintf(stderr,"Read palette %s \n", palette_file);
@@ -366,7 +366,7 @@ int main (int argc, char *argv[]) {
     }
 
     int ap = 1; // arg pointer
-      
+
     debug = 0;
     output_offset = 0;
 
@@ -391,7 +391,7 @@ int main (int argc, char *argv[]) {
         output_file = argv[ap+2];
     }
     else {
-        fprintf(stderr, "Usage: cel2png (-d) (-t) (-o) <cel file> <palette file> <out file> \n");
+        fprintf(stderr, "Usage: cel2png (-d) (-t) (-o) <palette file> <cel file> <out file> \n");
         return 1;
     }
 
@@ -402,8 +402,8 @@ int main (int argc, char *argv[]) {
     fprintf(stderr,"Read cel %s \n", input_file);
     err = convert_cel (input_file, output_file);
     if (err) return 1;
-    
+
     fprintf(stderr,"Done \n");
-    
+
     return 0;
 }
