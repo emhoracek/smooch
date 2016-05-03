@@ -27,7 +27,7 @@ var Smooch = function(kissdata, celData) {
     this.borderarea = document.getElementById("borderarea");
     borderarea.style.background = "pink";
 
-    this.set = new KissSet(kissdata/*, celData*/);
+    this.set = new KissSet(kissdata, celData);
 
     // This controls dragging and dropping.
     this.mouse = Mouser(this);
@@ -96,18 +96,34 @@ var KissSet = function(kissData, celData) {
 
     /* Build a list of the cells (images) in the doll. */
 
+    /* old
     this.images = []
     var images = document.getElementsByTagName('img');
 
     for (var i=0; i < images.length; i++) {
         this.images[i] = { name: images[i].id,
                           image: images[i] };
+                          }*/
+
+    // shouldn't be needed once Haskell/Aeson marshalling (is that the
+    // word I'm looking for?) is improved
+    for (var i=0; i < celData.length; i++) {
+        console.log(celData[i][0].name, celData[i]);
+        celData[i] = { name: celData[i][0].name,
+                       sets: celData[i][0].sets,
+                       fix: celData[i][0].fix,
+                       alpha: celData[i][0].alpha,
+                       offset: { x: celData[i][1][0],
+                                 y: celData[i][1][1] }
+                     };
+        console.log(celData[i].name, celData[i]);
     }
+
 
     /* Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */
 
-    this.cells = []
+    this.cells = celData;
     var objs = kissData.objs;
     this.objs = []
 
@@ -126,9 +142,9 @@ var KissSet = function(kissData, celData) {
         var obj_cells = objs[i].cells;
         // for each cel in the obj, find that cel in the celData list
         for (var j = 0; j < obj_cells.length; j++) {
-            for (var k = 0; k < this.images.length; k++) {
-                if (this.images[k].name === obj_cells[j].name) {
-                    obj_cells[j] = new KiSSCell(objs[i], obj_cells[j], this);
+            for (var k = 0; k < celData.length; k++) {
+                if (celData[k].name === obj_cells[j].name) {
+                    obj_cells[j] = new KiSSCell(objs[i], celData[k], this);
                     this.cells[k] = obj_cells[j];
                 }
             }
@@ -151,7 +167,7 @@ var KissSet = function(kissData, celData) {
         });
     }
 
-    //this.cells.reverse();
+    this.cells.reverse();
 
     this.currentSet = 0;
     this.update();
@@ -213,13 +229,15 @@ var KiSSCell = function(obj, cell, set) {
     this.obj = obj
     this.name = cell.name;
     this.mark = obj.id;
-    this.fix = 0; //cell.fix;
-    this.position = { x: 0, y: 0}
+    this.fix = cell.fix;
+    this.position = { x: 0, y: 0};
     this.positions = obj.positions;
-    this.sets = [1,2,3];// cell.sets;
+    this.sets = cell.sets;
     this.image = undefined;
     this.ghostImage = undefined;
     this.visible = false;
+
+    this.offset = cell.offset
 
     this.init(set);
 
@@ -286,9 +304,9 @@ KiSSCell.prototype = {
     draw: function (screen, ghost) {
         if (this.visible == true) {
             screen.drawImage(this.image,
-                             this.position.x, this.position.y);
+                             this.position.x + this.offset.x, this.position.y + this.offset.y);
             ghost.drawImage(this.ghostImage,
-                            this.position.x, this.position.y);
+                            this.position.x + this.offset.x, this.position.y + this.offset.y);
         }
     }
 };
@@ -361,8 +379,8 @@ KiSSCell.prototype = {
 
   window.addEventListener('load', function() {
     var kissData = kissJson;
-    //var celData = celJson;
-      this.smooch = new Smooch(kissData/*, celData*/);
+    var celData = celJson;
+    this.smooch = new Smooch(kissData, celData);
   });
 
 var debug_draw = function (x) {
