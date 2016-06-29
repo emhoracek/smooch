@@ -4,8 +4,11 @@
     <title>Smooch</title>
     <link rel="stylesheet" type="text/css" href="/screen.css">
     <script type="text/javascript">
-      window.onload = function () { document.getElementById('loading').style.display = 'none';};
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
     </script>
+    <style> img { display: none; }</style>
   </head>
   <body>
     <div id="loading">
@@ -25,6 +28,8 @@
            <canvas id="screen"></canvas>
            <canvas id="ghost"></canvas>
         <celImages />
+        <canvas id="screen"></canvas>
+        <canvas id="ghost"></canvas>
       </div>
     </div>
 
@@ -41,7 +46,7 @@
 
     <div id="footer">From OtakuWorld.com</div>
 
-    <script type="text/javascript" src="${base}/setdata.js"></script>
+    <script type="text/javascript" src="/${base}/setdata.js"></script>
 
     <script type="text/javascript" src="/doll.js"></script>
 

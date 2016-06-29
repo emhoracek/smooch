@@ -15,13 +15,14 @@ a { cursor: pointer;
            z-index: 100;
            text-align: center }
 
-#borderarea{ padding: 0; 
+#borderarea{ padding: 0;
              margin: 0 }
 
 #playarea { position: relative; 
             margin: auto;
             margin-top: 1em;
             margin-bottom: 1em;
+            overflow: auto;
             padding: 0;
             background: white }
 
@@ -45,4 +46,8 @@ a { cursor: pointer;
 #footer { text-align: center }
 
 li { display: inline }
+<<<<<<< Updated upstream
 img { position: absolute; display: none }
+=======
+img { display: none; }
+>>>>>>> Stashed changes
