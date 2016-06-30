@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
 
 module Upload where
 
@@ -27,7 +28,7 @@ processSet (fName, fileContents) = do
   liftIO $ putStrLn "Hello again"
   let staticDir = "static/sets/" <> takeBaseName fName
   tryIO $ B.writeFile ("static/sets" </> fName) fileContents
-  exists <- liftIO $ doesFileExist $ "static/set" </> fName 
+  exists <- liftIO $ doesFileExist $ "static/set" </> fName
   liftIO $ putStrLn $ "static/sets" </> fName <> " exists? " <>
     show exists
   let createParents = True
@@ -37,18 +38,19 @@ processSet (fName, fileContents) = do
   kissData <- getKissData cnf
   celData <- getKissCels cnf
   kissPalette <- getKissPalette kissData
-  celsWithOffsets <- convertCels kissPalette (map celName celData) staticDir
+  celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir
   let realCelData = addOffsetsToCelData celsWithOffsets celData
   let json = "var kissJson = " <> encode kissData <> ";\n" <>
              "var celJson = " <> encode realCelData <> ";\n"
   -- just using first palette found for now
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
-  return celData
+  return realCelData
 
-addOffsetsToCelData :: [(String, (Int, Int))] -> [KissCell] ->
-                       [(KissCell, (Int, Int))]
+addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
+                       [KissCell]
 addOffsetsToCelData offsets cells =
-  [ (cell, snd offset) | cell <- cells, offset <- offsets, celName cell == fst offset]
+  [ KissCell cnfCelFix cnfCelName cnfCelPalOffset cnfCelSets cnfCelAlpha (Position xoff yoff)
+     | cell@CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
 tryIO :: IO () -> EitherT Text IO ()
 tryIO f = do

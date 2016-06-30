@@ -52,7 +52,7 @@ app = do
 site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end ==> indexHandler
-             , path "upload" // method POST /? file "kissfile" !=> uploadHandler
+             , path "upload" // method POST // file "kissfile" !=> uploadHandler
              , anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
@@ -78,6 +78,7 @@ setListingSplice _ _ =
   where toSet n =
           return [X.Element "li" []
                    [X.Element "a" [("class", "set")] [ X.TextNode n ]]]
+
 
 celsSplice :: FilePath -> [KissCell] -> Ctxt -> X.Node -> FnSplice Ctxt
 celsSplice dir cels _ _ = H.mapSplices (celImageSplice dir ) (reverse cels)

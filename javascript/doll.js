@@ -105,20 +105,6 @@ var KissSet = function(kissData, celData) {
                           image: images[i] };
                           }*/
 
-    // shouldn't be needed once Haskell/Aeson marshalling (is that the
-    // word I'm looking for?) is improved
-    for (var i=0; i < celData.length; i++) {
-        console.log(celData[i][0].name, celData[i]);
-        celData[i] = { name: celData[i][0].name,
-                       sets: celData[i][0].sets,
-                       fix: celData[i][0].fix,
-                       alpha: celData[i][0].alpha,
-                       offset: { x: celData[i][1][0],
-                                 y: celData[i][1][1] }
-                     };
-        console.log(celData[i].name, celData[i]);
-    }
-
 
     /* Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */

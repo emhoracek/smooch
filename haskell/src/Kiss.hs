@@ -2,14 +2,14 @@
 
 module Kiss where
 
-import Data.Aeson
+import           Data.Aeson
 
 data KissData = KissData {
-                    kMemory :: Int,
-                    kBorder :: Int,
-                    kPalettes :: [String],
+                    kMemory     :: Int,
+                    kBorder     :: Int,
+                    kPalettes   :: [String],
                     kWindowSize :: (Int, Int),
-                    kObjects :: [KissObject] }
+                    kObjects    :: [KissObject] }
     deriving (Eq, Show)
 instance ToJSON KissData where
     toJSON (KissData _ _ _ win objs) =
@@ -17,9 +17,9 @@ instance ToJSON KissData where
                "objs" .= objs]
 
 data KissObject = KissObject {
-                    objNum :: Int,
+                    objNum   :: Int,
                     objCells :: [KissCell],
-                    objPos :: [SetPos] }
+                    objPos   :: [SetPos] }
     deriving (Eq, Show)
 instance ToJSON KissObject where
     toJSON (KissObject num cells pos) =
@@ -28,22 +28,24 @@ instance ToJSON KissObject where
                "positions" .= toJSON pos]
 
 data KissCell = KissCell {
-                    celFix :: Int,
-                    celName :: String,
+                    celFix       :: Int,
+                    celName      :: String,
                     celPalOffset :: Int,
-                    celSets :: [Int],
-                    celAlpha :: Int }
+                    celSets      :: [Int],
+                    celAlpha     :: Int,
+                    celOffset    :: SetPos}
     deriving (Eq, Show)
 instance ToJSON KissCell where
-    toJSON (KissCell fix name pal sets alpha) =
-        object["fix" .= fix, 
-               "name" .= name, 
+    toJSON (KissCell fix name pal sets alpha offset) =
+        object["fix" .= fix,
+               "name" .= name,
                "palette" .= pal,
                "sets" .= toJSON sets,
-               "alpha" .= alpha]       
+               "alpha" .= alpha,
+               "offset" .= toJSON offset]
 
 data KissSetPos = KissSetPos {
-            setPalette :: Int,
+            setPalette  :: Int,
             setPosition :: [SetPos] }
     deriving (Eq, Show)
 instance ToJSON KissSetPos where
@@ -52,11 +54,10 @@ instance ToJSON KissSetPos where
                "positions" .= toJSON positions]
 
 data SetPos = Position {
-                setx :: Int, 
+                setx :: Int,
                 sety :: Int }
             | NoPosition
     deriving (Eq, Show)
 instance ToJSON SetPos where
     toJSON (Position x y) = object["x" .= x, "y" .= y]
     toJSON NoPosition     = "none"
-

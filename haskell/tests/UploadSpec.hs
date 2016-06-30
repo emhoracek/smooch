@@ -2,39 +2,39 @@
 
 module UploadSpec where
 
-import Test.Hspec
-import Upload
-import Control.Monad.Trans.Either
-import Network.Wai.Parse
-import Kiss
+import           Control.Monad.Trans.Either
+import           Kiss
+import           Network.Wai.Parse
+import           Test.Hspec
+import           Upload
 
 sampleCell :: KissCell
-sampleCell = KissCell 0 "shirt"  0 [0,1,2,3] 0
+sampleCell = KissCell 0 "shirt"  0 [0,1,2,3] 0 (Position 0 0)
 
 {--
 
 shouldSucceed :: EitherT T.Text a -> a -> ??
-shouldSucceed m r = 
+shouldSucceed m r =
   if runEitherT m == Right ()
     then True
     else False
 
 shouldSucceedWith :: EitherT T.Text a -> a -> Bool???
 shouldSucceedWith m r =
-  if runEitherT m == Right r 
-    then True  
-    else False 
+  if runEitherT m == Right r
+    then True
+    else False
 
 shouldFailWith :: EitherT T.Text a  -> T.Text -> Bool???
-shouldFailWith m r = 
-  if runEitherT m == Left r 
+shouldFailWith m r =
+  if runEitherT m == Left r
     then True
     else False
 
 --}
 
 spec = do
-  describe "tryIO" $ do 
+  describe "tryIO" $ do
     it "returns a Right () if the action completed" $
       runEitherT (tryIO $ return ()) `shouldReturn`
         Right ()
@@ -46,7 +46,7 @@ spec = do
   {-- describe "getRelDir" $ do
     it "gets the path of a directory for the set, relative to static directory" $
       runEitherT (getRelDir [("file.lzh", FileInfo "file.lzh" "lzh" "content")]) `shouldReturn`
-        Right "sets/file" 
+        Right "sets/file"
     it "returns an error message if the list of files is empty" $
       runEitherT (getRelDir []) `shouldReturn` Left "Please upload exactly one file."
   describe "getCNF" $ do
@@ -55,11 +55,6 @@ spec = do
     it "gives an error if no CNF is found" $
       runEitherT (getCNF "./") `shouldReturn` Left "No configuration file found."
   describe "processSet" $ do
-    it "does a tooooooon of shit, fuck" $ 
+    it "does a tooooooon of shit, fuck" $
       pendingWith "fuuuuuuuuuuuuuuuck"
 --}
-
-  describe "addOffsetsToCelData" $ 
-    it "does what it says on the label" $
-      addOffsetsToCelData [("shirt", (0, 0))] [sampleCell] `shouldBe`
-        [(sampleCell, (0,0))]
