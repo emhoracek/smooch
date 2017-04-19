@@ -46,8 +46,3 @@ a { cursor: pointer;
 #footer { text-align: center }
 
 li { display: inline }
-<<<<<<< Updated upstream
-img { position: absolute; display: none }
-=======
-img { display: none; }
->>>>>>> Stashed changes
