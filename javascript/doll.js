@@ -10,19 +10,6 @@ var Smooch = function(kissdata, celData) {
 
     var that = this;
 
-    /*
-      editButton.addEventListener("click", function() {
-      if (that.editMode == true) {
-      that.editMode = false;
-      }
-      else {
-      that.editMode = true;
-      }
-      that.update();
-      });
-
-      this.toolbar = document.getElementById("toolbar");
-    */
     // The color of area around the play set.
     this.borderarea = document.getElementById("borderarea");
     borderarea.style.background = "pink";
@@ -39,26 +26,9 @@ var Smooch = function(kissdata, celData) {
 };
 
 Smooch.prototype = {
-    update: function() {/*
-                          if (this.editMode == true) {
-                          this.toolbar.style.display = "block";
-                          this.borderarea.style.width = "80%";
-                          }
-                          else {
-                          this.toolbar.style.display = "none";
-                          this.borderarea.style.width = "100%";
-                          }*/
+    update: function() {
     }
 };
-/*
-
-  var Toolbox = function () {
-
-  var infobox = document.getElementById("info");
-
-  infobox.innerHTML = dobj.name;
-
-  };*/
 
 var KissSet = function(kissData, celData) {
 
@@ -96,25 +66,16 @@ var KissSet = function(kissData, celData) {
 
     /* Build a list of the cells (images) in the doll. */
 
-    /* old
-    this.images = []
-    var images = document.getElementsByTagName('img');
-
-    for (var i=0; i < images.length; i++) {
-        this.images[i] = { name: images[i].id,
-                          image: images[i] };
-                          }*/
-
     // shouldn't be needed once Haskell/Aeson marshalling (is that the
     // word I'm looking for?) is improved
     for (var i=0; i < celData.length; i++) {
-        console.log(celData[i][0].name, celData[i]);
-        celData[i] = { name: celData[i][0].name,
-                       sets: celData[i][0].sets,
-                       fix: celData[i][0].fix,
-                       alpha: celData[i][0].alpha,
-                       offset: { x: celData[i][1][0],
-                                 y: celData[i][1][1] }
+        console.log(celData[i].name, celData[i]);
+        celData[i] = { name: celData[i].name,
+                       sets: celData[i].sets,
+                       fix: celData[i].fix,
+                       alpha: celData[i].alpha,
+                       offset: { x: celData[i].offset.x,
+                                 y: celData[i].offset.y }
                      };
         console.log(celData[i].name, celData[i]);
     }
