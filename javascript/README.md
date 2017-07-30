@@ -110,19 +110,12 @@ Here's JSON for a set with one object:
 
 ### celJson
 
-This is only the cel parts of the JSON. The first object is the cel, the
-list after it is the x and y offsets.
-
-This could be improved greatly!! Instead of a list of an object and an
-array, this really ought to be an object with two objects nested
-inside. If you'd like to fix that, though, the code to generate the JSON
-is in the Haskell part of the repo.
+This is only the cel parts of the JSON.
 
 ```(json)
- [
-    {
-      "palette": 0,
-      "sets": [
+ {
+ "palette": 0,
+ "sets": [
         1,
         2,
         3,
@@ -133,13 +126,12 @@ is in the Haskell part of the repo.
         8,
         9
       ],
-      "fix": 0,
-      "name": "fuzzskir",
-      "alpha": 0
-    },
-    [
-      0,
-      0
-    ]
-  ]
+  "fix": 0,
+  "name": "fuzzskir",
+  "alpha": 0
+  "offset": {
+    "x": 0,
+    "y": 0
+    }
+ }
 ```

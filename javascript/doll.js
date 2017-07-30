@@ -66,21 +66,6 @@ var KissSet = function(kissData, celData) {
 
     /* Build a list of the cells (images) in the doll. */
 
-    // shouldn't be needed once Haskell/Aeson marshalling (is that the
-    // word I'm looking for?) is improved
-    for (var i=0; i < celData.length; i++) {
-        console.log(celData[i].name, celData[i]);
-        celData[i] = { name: celData[i].name,
-                       sets: celData[i].sets,
-                       fix: celData[i].fix,
-                       alpha: celData[i].alpha,
-                       offset: { x: celData[i].offset.x,
-                                 y: celData[i].offset.y }
-                     };
-        console.log(celData[i].name, celData[i]);
-    }
-
-
     /* Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */
 
