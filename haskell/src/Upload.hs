@@ -14,6 +14,7 @@ import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
 
 import           Control.Exception
+import           Control.Monad              (unless)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
@@ -24,16 +25,23 @@ import           ParseCNF
 import           Shell
 
 processSet :: (FilePath, B.ByteString) -> EitherT Text IO [KissCell]
-processSet (fName, fileContents) = do
-  liftIO $ putStrLn "Hello again"
+processSet t@(fName, fileContents) = do
+  staticDir <- writeFiles t
+  createCels t staticDir
+
+writeFiles :: (FilePath, B.ByteString) -> EitherT Text IO FilePath
+writeFiles (fName, fileContents) = do
   let staticDir = "static/sets/" <> takeBaseName fName
   tryIO $ B.writeFile ("static/sets" </> fName) fileContents
   exists <- liftIO $ doesFileExist $ "static/set" </> fName
-  liftIO $ putStrLn $ "static/sets" </> fName <> " exists? " <>
-    show exists
-  let createParents = True
-  tryIO $ createDirectoryIfMissing createParents staticDir
-  unzipFile fName staticDir
+  unless exists $ do
+    let createParents = True
+    tryIO $ createDirectoryIfMissing createParents staticDir
+    unzipFile fName staticDir
+  return staticDir
+
+createCels :: (FilePath, B.ByteString) -> FilePath -> EitherT Text IO [KissCell]
+createCels (fName, fileContents) staticDir = do
   cnf <- getCNF staticDir
   kissData <- getKissData cnf
   celData <- getKissCels cnf
