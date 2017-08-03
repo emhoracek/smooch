@@ -49,10 +49,9 @@ It does not work very well.
 
 Roughly in order, except the last!!
 
-  * First JSON generated for cel data so that cel and offset are a single
-    object, not elements in a nested array.
   * Use the correct background color for a set.
   * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
+      * Display Japanese dolls (fix encoding issues)
   * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
       * Serve cels as binary blobs and let JavaScript display them?
       * Inline the C code for cel2pnm?
