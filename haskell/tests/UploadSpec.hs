@@ -42,12 +42,13 @@ spec = do
       runEitherT (tryIO $ readFile "potato" >> return ()) `shouldReturn`
         Left "potato: openFile: does not exist (No such file or directory)"
 
-{-
   describe "getCNF" $ do
     it "returns the contents of the first CNF file it finds" $
       runEitherT (getCNF "tests/samples") `shouldReturn` Right "okay\n"
     it "gives an error if no CNF is found" $
       runEitherT (getCNF "./") `shouldReturn` Left "No configuration file found."
+
+{--
   describe "processSet" $ do
     it "does a tooooooon of shit, fuck" $
       pendingWith "fuuuuuuuuuuuuuuuck"
