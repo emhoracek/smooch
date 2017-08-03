@@ -9,9 +9,10 @@ import           Control.Lens
 import           Control.Logging
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
+import           Data.Map.Syntax            (( ## ))
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
-import           Heist                      (( ## ))
+import qualified Data.Text.Encoding         as T
 import qualified Heist.Interpreted          as H
 import           Network.HTTP.Types.Method
 import           Network.Wai
@@ -61,9 +62,9 @@ indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = render ctxt "index"
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
-uploadHandler ctxt (File name _ contents) = do
+uploadHandler ctxt (File name _ filePath) = do
   let relDir = "sets" </> takeBaseName (T.unpack name)
-  cels <- liftIO $ runEitherT $ processSet (T.unpack name, contents)
+  cels <- liftIO $ runEitherT $ processSet (T.unpack name, filePath)
   case cels of
     Right cs -> renderWithSplices ctxt "kissSet" $ do
                   tag' "set-listing" setListingSplice

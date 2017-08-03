@@ -23,7 +23,7 @@ executable smooch
                        http-types,
                        resourcet,
                        lens,
-                       heist,
+                       heist, map-syntax,
                        parsec, aeson,
                        process, system-filepath, directory,
                        filepath, transformers, mtl,

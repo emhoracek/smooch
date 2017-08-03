@@ -19,27 +19,27 @@ import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 
-import           Data.Aeson.Encode          (encode)
+import           Data.Aeson                 (encode)
 import           Kiss
 import           ParseCNF
 import           Shell
 
-processSet :: (FilePath, B.ByteString) -> EitherT Text IO [KissCell]
-processSet t@(fName, fileContents) = do
-  tryIO $ B.writeFile ("static/sets" </> fName) fileContents
-  staticDir <- createSetDir t
+processSet :: (FilePath, FilePath) -> EitherT Text IO [KissCell]
+processSet t@(fName, filePath) = do
+  tryIO $ copyFile filePath ("static/sets" </> fName)
+  staticDir <- createSetDir (takeBaseName fName)
   unzipFile fName staticDir
-  createCels t staticDir
+  createCels staticDir
 
-createSetDir :: (FilePath, B.ByteString) -> EitherT Text IO FilePath
-createSetDir (fName, fileContents) = do
-  let staticDir = "static/sets/" <> takeBaseName fName
+createSetDir :: String -> EitherT Text IO FilePath
+createSetDir setName = do
+  let staticDir = "static/sets/" <> setName
   let createParents = True
   tryIO $ createDirectoryIfMissing createParents staticDir
   return staticDir
 
-createCels :: (FilePath, B.ByteString) -> FilePath -> EitherT Text IO [KissCell]
-createCels (fName, fileContents) staticDir = do
+createCels :: FilePath -> EitherT Text IO [KissCell]
+createCels staticDir = do
   cnf <- getCNF staticDir
   KissSet kissData celData kissPalette <- getKissSet cnf
   celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir

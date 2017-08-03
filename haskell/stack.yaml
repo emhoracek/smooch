@@ -1,10 +1,22 @@
 flags: {}
 packages:
 - '.'
+- location:
+    git: https://github.com/positiondev/fn
+    commit: 6989eca99cc02da5e2268e1aa79157bdd6220ab5
+  subdirs:
+    - fn
+    - fn-extra
+  extra-dep: true
+- location:
+    git: https://github.com/positiondev/hspec-fn
+    commit: a36fc89a32f05968795dedf6d919e854d96082ea
+  extra-dep: true
 extra-deps:
-- fn-0.3.0.1
-- fn-extra-0.3.0.1
+- digestive-functors-0.8.2.0
+- heist-1.0.1.0
+- logging-3.0.4
 - http-accept-0.2
+- map-syntax-0.2.0.2
 - wai-util-0.8
-- logging-3.0.2
-resolver: lts-5.15
+resolver: lts-8.15
