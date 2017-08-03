@@ -26,31 +26,26 @@ import           Shell
 
 processSet :: (FilePath, B.ByteString) -> EitherT Text IO [KissCell]
 processSet t@(fName, fileContents) = do
-  staticDir <- writeFiles t
+  tryIO $ B.writeFile ("static/sets" </> fName) fileContents
+  staticDir <- createSetDir t
+  unzipFile fName staticDir
   createCels t staticDir
 
-writeFiles :: (FilePath, B.ByteString) -> EitherT Text IO FilePath
-writeFiles (fName, fileContents) = do
+createSetDir :: (FilePath, B.ByteString) -> EitherT Text IO FilePath
+createSetDir (fName, fileContents) = do
   let staticDir = "static/sets/" <> takeBaseName fName
-  tryIO $ B.writeFile ("static/sets" </> fName) fileContents
-  exists <- liftIO $ doesFileExist $ "static/set" </> fName
-  unless exists $ do
-    let createParents = True
-    tryIO $ createDirectoryIfMissing createParents staticDir
-    unzipFile fName staticDir
+  let createParents = True
+  tryIO $ createDirectoryIfMissing createParents staticDir
   return staticDir
 
 createCels :: (FilePath, B.ByteString) -> FilePath -> EitherT Text IO [KissCell]
 createCels (fName, fileContents) staticDir = do
   cnf <- getCNF staticDir
-  kissData <- getKissData cnf
-  celData <- getKissCels cnf
-  kissPalette <- getKissPalette kissData
+  KissSet kissData celData kissPalette <- getKissSet cnf
   celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir
   let realCelData = addOffsetsToCelData celsWithOffsets celData
   let json = "var kissJson = " <> encode kissData <> ";\n" <>
              "var celJson = " <> encode realCelData <> ";\n"
-  -- just using first palette found for now
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   return realCelData
 

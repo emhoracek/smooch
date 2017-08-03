@@ -14,6 +14,13 @@ import qualified Data.Text                     as T
 import           Kiss
 import           Text.ParserCombinators.Parsec
 
+getKissSet :: String -> EitherT T.Text IO KissSet
+getKissSet file = do
+  kissData <- getKissData file
+  kissCels <- getKissCels file
+  kissPalette <- getKissPalette kissData
+  return $ KissSet kissData kissCels kissPalette
+
 getKissData :: String -> EitherT T.Text IO KissData
 getKissData file =
     case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
@@ -205,14 +212,6 @@ data CNFLine = CNFMemory Int
              | CNFSetPos KissSetPos
              | CNFComment String
     deriving (Eq, Show)
-
-data CNFKissCell = CNFKissCell {
-  cnfCelFix       :: Int,
-  cnfCelName      :: String,
-  cnfCelPalOffset :: Int,
-  cnfCelSets      :: [Int],
-  cnfCelAlpha     :: Int }
-  deriving (Eq, Show)
 
 -- Parse the CNF one "line" (including mult-line set descriptions) at a time
 parseCNFLines :: Parser [CNFLine]

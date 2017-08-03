@@ -4,6 +4,11 @@ module Kiss where
 
 import           Data.Aeson
 
+data KissSet = KissSet { kData    :: KissData
+                       , kCells   :: [CNFKissCell]
+                       , kPalette :: String
+                       } deriving (Eq, Show)
+
 data KissData = KissData {
                     kMemory     :: Int,
                     kBorder     :: Int,
@@ -26,6 +31,14 @@ instance ToJSON KissObject where
         object["id" .= num,
                "cells" .= toJSON cells,
                "positions" .= toJSON pos]
+
+data CNFKissCell = CNFKissCell {
+  cnfCelFix       :: Int,
+  cnfCelName      :: String,
+  cnfCelPalOffset :: Int,
+  cnfCelSets      :: [Int],
+  cnfCelAlpha     :: Int }
+  deriving (Eq, Show)
 
 data KissCell = KissCell {
                     celFix       :: Int,
