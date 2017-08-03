@@ -35,7 +35,8 @@ createSetDir :: String -> EitherT Text IO FilePath
 createSetDir setName = do
   let staticDir = "static/sets/" <> setName
   let createParents = True
-  tryIO $ createDirectoryIfMissing createParents staticDir
+  tryIO $ removeDirectoryRecursive staticDir
+  tryIO $ createDirectory staticDir
   return staticDir
 
 createCels :: FilePath -> EitherT Text IO [KissCell]
