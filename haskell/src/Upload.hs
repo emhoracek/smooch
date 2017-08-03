@@ -59,9 +59,6 @@ tryIO f = do
     Right () -> return ()
     Left ex  -> EitherT $ return $ Left (T.pack $ show ex)
 
-getRelDir :: (FilePath, B.ByteString) -> EitherT Text IO FilePath
-getRelDir (fName, _) = return $ "sets" </> takeBaseName fName
-
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> EitherT Text IO String
 getCNF dir = do

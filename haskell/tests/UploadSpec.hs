@@ -42,13 +42,7 @@ spec = do
       runEitherT (tryIO $ readFile "potato" >> return ()) `shouldReturn`
         Left "potato: openFile: does not exist (No such file or directory)"
 
-
-  {-- describe "getRelDir" $ do
-    it "gets the path of a directory for the set, relative to static directory" $
-      runEitherT (getRelDir [("file.lzh", FileInfo "file.lzh" "lzh" "content")]) `shouldReturn`
-        Right "sets/file"
-    it "returns an error message if the list of files is empty" $
-      runEitherT (getRelDir []) `shouldReturn` Left "Please upload exactly one file."
+{-
   describe "getCNF" $ do
     it "returns the contents of the first CNF file it finds" $
       runEitherT (getCNF "tests/samples") `shouldReturn` Right "okay\n"
