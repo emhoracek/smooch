@@ -17,6 +17,7 @@ import           Network.HTTP.Types.Method
 import           Network.Wai
 import           Network.Wai.Handler.Warp
 import           System.Environment
+import           System.FilePath            (takeBaseName)
 import           System.FilePath            ((</>))
 import qualified Text.XmlHtml               as X
 import           Web.Fn
@@ -61,16 +62,14 @@ indexHandler ctxt = render ctxt "index"
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ contents) = do
-  relDir <- liftIO $ runEitherT $ getRelDir (T.unpack name, contents)
+  let relDir = "sets" </> takeBaseName (T.unpack name)
   cels <- liftIO $ runEitherT $ processSet (T.unpack name, contents)
-  case relDir of
-    Right d -> case cels of
-      Right cs -> renderWithSplices ctxt "kissSet" $ do
-                   tag' "set-listing" setListingSplice
-                   "base" ## H.textSplice (T.pack d)
-                   tag' "celImages" $ celsSplice d cs
-      Left  e -> okText e
-    Left e -> okText e
+  case cels of
+    Right cs -> renderWithSplices ctxt "kissSet" $ do
+                  tag' "set-listing" setListingSplice
+                  "base" ## H.textSplice (T.pack relDir)
+                  tag' "celImages" $ celsSplice relDir cs
+    Left  e -> okText e
 
 setListingSplice :: Ctxt -> X.Node -> FnSplice Ctxt
 setListingSplice _ _ =
