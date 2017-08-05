@@ -14,10 +14,12 @@ import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
 
 import           Control.Exception
-import           Control.Monad              (unless)
+import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
+
+import           Control.Logging            (log')
 
 import           Data.Aeson                 (encode)
 import           Kiss
@@ -31,23 +33,37 @@ processSet t@(fName, filePath) = do
   unzipFile fName staticDir
   createCels staticDir
 
+staticDirFromSetName :: String -> FilePath
+staticDirFromSetName setName = "static/sets/" <> setName
+
 createSetDir :: String -> EitherT Text IO FilePath
 createSetDir setName = do
   let staticDir = "static/sets/" <> setName
   let createParents = True
-  tryIO $ removeDirectoryRecursive staticDir
+  exists <- liftIO $ doesDirectoryExist staticDir
+  when exists $ tryIO $ removeDirectoryRecursive staticDir
   tryIO $ createDirectory staticDir
+  log' $ "Created static directory: " <> T.pack staticDir
   return staticDir
+
+deleteCels :: FilePath -> IO ()
+deleteCels staticDir = do
+  allFiles <- listDirectory staticDir
+  let cels = filter (\f -> takeExtension f == "cel") allFiles
+  mapM_ removeFile cels
 
 createCels :: FilePath -> EitherT Text IO [KissCell]
 createCels staticDir = do
   cnf <- getCNF staticDir
   KissSet kissData celData kissPalette <- getKissSet cnf
+  log' $ "Parsed CNF"
   celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir
+  log' $ "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
   let json = "var kissJson = " <> encode kissData <> ";\n" <>
              "var celJson = " <> encode realCelData <> ";\n"
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
+  log' $ "Wrote JSON"
   return realCelData
 
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->

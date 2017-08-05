@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Smooch</title>
-    <link rel="stylesheet" type="text/css" href="/screen.css">
+    <link rel="stylesheet" type="text/css" href="/static/screen.css">
     <script type="text/javascript">
      window.onload = function () {
        document.getElementById('loading').style.display = 'none';
@@ -48,7 +48,7 @@
 
     <script type="text/javascript" src="/${base}/setdata.js"></script>
 
-    <script type="text/javascript" src="/doll.js"></script>
+    <script type="text/javascript" src="/static/doll.js"></script>
 
   </body>
 </html>

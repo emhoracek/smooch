@@ -9,7 +9,7 @@ import           Control.Lens
 import           Control.Logging
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
-import           Data.Map.Syntax            (( ## ))
+import           Data.Map.Syntax            (MapSyntaxM, ( ## ))
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
@@ -55,7 +55,8 @@ site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end ==> indexHandler
              , path "upload" // method POST // file "kissfile" !=> uploadHandler
-             , anything ==> staticServe "static" ]
+             , path "sets" // segment // end ==> setHandler
+             , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
 indexHandler :: Ctxt -> IO (Maybe Response)
@@ -63,14 +64,27 @@ indexHandler ctxt = render ctxt "index"
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath) = do
-  let relDir = "sets" </> takeBaseName (T.unpack name)
+  let staticDir = staticDirFromSetName (takeBaseName (T.unpack name))
   cels <- liftIO $ runEitherT $ processSet (T.unpack name, filePath)
+  renderKissSet ctxt staticDir cels
+
+setHandler :: Ctxt -> T.Text -> IO (Maybe Response)
+setHandler ctxt setName = do
+  let staticDir = staticDirFromSetName (T.unpack setName)
+  cels <- liftIO $ runEitherT $ createCels staticDir
+  renderKissSet ctxt staticDir cels
+
+renderKissSet :: Ctxt -> String -> Either T.Text [KissCell] -> IO (Maybe Response)
+renderKissSet ctxt staticDir cels =
   case cels of
-    Right cs -> renderWithSplices ctxt "kissSet" $ do
-                  tag' "set-listing" setListingSplice
-                  "base" ## H.textSplice (T.pack relDir)
-                  tag' "celImages" $ celsSplice relDir cs
+    Right cs -> renderWithSplices ctxt "kissSet" $ setSplices staticDir cs
     Left  e -> okText e
+
+setSplices :: String -> [KissCell] -> MapSyntaxM T.Text (FnSplice Ctxt) ()
+setSplices staticDir cs = do
+  tag' "set-listing" $ setListingSplice
+  "base" ## H.textSplice (T.pack staticDir)
+  tag' "celImages" $ celsSplice staticDir cs
 
 setListingSplice :: Ctxt -> X.Node -> FnSplice Ctxt
 setListingSplice _ _ =
@@ -85,7 +99,7 @@ celsSplice dir cels _ _ = H.mapSplices (celImageSplice dir ) (reverse cels)
 
 celImageSplice :: FilePath -> KissCell -> FnSplice Ctxt
 celImageSplice dir cel = return
-  [X.Element "img" [("src", T.pack (dir </> celName cel <> ".png")),
+  [X.Element "img" [("src", T.pack ("/" <> dir </> celName cel <> ".png")),
                     ("id", T.pack (celName cel)) ] []]
 
 main :: IO ()
