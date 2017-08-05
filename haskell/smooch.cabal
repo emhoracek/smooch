@@ -45,7 +45,7 @@ test-suite tests
                        warp,
                        http-types,
                        resourcet,
-                       parsec, aeson,
+                       parsec, aeson, logging,
                        process, system-filepath, directory,
                        filepath, transformers, mtl,
                        text, bytestring, fn, fn-extra,
