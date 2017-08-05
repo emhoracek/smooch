@@ -9,7 +9,6 @@ import           Control.Monad.Trans.Either
 import           Data.Char                     (toLower)
 import           Data.List                     hiding (lines)
 import           Data.Maybe
-import           Data.Ord                      (comparing)
 import qualified Data.Text                     as T
 import           Kiss
 import           Text.ParserCombinators.Parsec
@@ -55,31 +54,36 @@ linesToScript xs =
           objects = linesToObjects [ a | CNFCell a <- xs ] positions
 
 cnfToKissCell :: (Int, Int) -> CNFKissCell ->  KissCell
-cnfToKissCell (xoff, yoff) cell@CNFKissCell{..} =
+cnfToKissCell (xoff, yoff) CNFKissCell{..} =
   KissCell cnfCelFix cnfCelName cnfCelPalOffset cnfCelSets cnfCelAlpha (Position xoff yoff)
 
 linesToObjects :: [(Int, CNFKissCell)] -> [KissSetPos] -> [KissObject]
 linesToObjects xs ys =
-    map (\((celNo,cels),pos) -> KissObject celNo (map (cnfToKissCell (0,0)) cels) pos) positions'
-    where cells = nubBy (\x y -> fst x == fst y)$ map (\x -> combineCells (fst x) xs) xs
-          positions = zip (sort $ map fst xs) (cellPositions ys)
-          positions' = cellPos cells (cellPositions ys)
+    map (\(objNo,cels,pos) -> KissObject objNo (addDefaultPosition cels) pos) combinedCels
+    where addDefaultPosition = map (cnfToKissCell (0,0))
+          combinedCels = combineCelsAndPositions xs objpos
+          objpos = addObjNumberToPositions (groupPositionsByObj ys)
 
-cellPos :: [(Int, [CNFKissCell])] -> [[SetPos]] ->
-           [((Int, [CNFKissCell]), [SetPos])]
-cellPos cells positions = zip (sortBy (comparing fst) cells) positions
+-- A CNF's [KissSetPos] is 10 lists each containing one SetPos for each integer
+-- between 0 and the highest number given to an Object.
+-- This turns them into many lists of 10 SetPos. Later the lists will
+-- be zipped up with cels, and any SetPos without cels will be discarded.
+groupPositionsByObj :: [KissSetPos] -> [[SetPos]]
+groupPositionsByObj xs = transpose $ map (\(KissSetPos _ pos) -> pos) xs
 
+addObjNumberToPositions :: [[SetPos]] -> [(Int, [SetPos])]
+addObjNumberToPositions xs = reverse $ foldl (\acc objPos -> (length acc, objPos):acc) [] xs
 
-zipIt :: [(Int, [CNFKissCell])] -> [(Int,[SetPos])] -> [((Int, [CNFKissCell]), [SetPos])]
-zipIt cells positions = [ (cell, snd pos) | cell <- cells, pos <- positions, fst cell == fst pos]
-
--- A CNF's [KissSetPos] is 10 lists of SetPos each `#objs` long.
--- This turns them into `#objs` lists of 10 SetPos.
-cellPositions :: [KissSetPos] -> [[SetPos]]
-cellPositions xs = transpose $ map (\(KissSetPos pal pos) -> pos) xs
-
-combineCells :: Int -> [(Int, CNFKissCell)] -> (Int, [CNFKissCell])
-combineCells n xs = (n, map snd (filter (\x -> fst x == n) xs))
+combineCelsAndPositions :: [(Int, CNFKissCell)]
+                        -> [(Int, [SetPos])]
+                        -> [(Int, [CNFKissCell], [SetPos])]
+combineCelsAndPositions objs positions =
+  reverse $ foldl combine [] positions
+  where findCels objNum =  map snd $ filter (\(n,_) -> n == objNum) objs
+        combine acc (objNumber, pPositions) =
+          case findCels objNumber of
+            [] -> acc
+            cels ->  (objNumber, cels, pPositions) : acc
 
 linesToCells :: [CNFLine] -> [CNFKissCell]
 linesToCells xs = [ snd a | CNFCell a <- xs ]
