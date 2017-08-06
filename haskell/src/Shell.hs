@@ -2,9 +2,9 @@
 
 module Shell where
 
+import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
-import Control.Monad.IO.Class (liftIO)
 import qualified Data.Text                  as T
 import           System.Exit                (ExitCode (..))
 import           System.IO                  (hGetContents)
@@ -26,8 +26,26 @@ transColor paletteLoc = EitherT $ do
     ExitFailure n -> return $ Left $ T.pack ("Error while finding transparency color. Exit code: " <> show n <> ". Error: " <> errMsg)
 
 
+-- Gets an indexed color from a kcf palette.
+colorByIndex :: Int -> String -> EitherT T.Text IO String
+colorByIndex colorNum paletteLoc = EitherT $ do
+  (_,colorOut, err, ph)  <- createProcess (shell $ "cel2pnm -c " <> show colorNum <> " " <> paletteLoc) { std_out = CreatePipe, std_err = CreatePipe }
+  result <- waitForProcess ph
+  errMsg <- case err of
+              Just x  -> hGetContents x
+              Nothing -> return "no error message"
+  color <- case colorOut of
+              Just x -> hGetContents x
+              Nothing -> return "no color"
+  case result of
+    ExitSuccess   -> return $ Right color
+    ExitFailure n -> return $ Left $ T.pack ("Error while finding background color. Exit code: " <> show n <> ". Error: " <> errMsg)
+
+
+
+
 -- Convert a whole list of cels given a palette. Put the files in target directory. Return list of cels with offset information
-convertCels :: String -> [String] -> String -> EitherT T.Text IO [ (String, (Int, Int)) ] 
+convertCels :: String -> [String] -> String -> EitherT T.Text IO [ (String, (Int, Int)) ]
 convertCels pal cels base = do
   trans <- transColor $ base ++ "/" ++ pal
   mapM (\ cel -> convertCel pal cel trans base) cels
@@ -47,7 +65,7 @@ convertCel palette cel bg base = do
 convertAndGetOffsets :: String -> String -> EitherT T.Text IO (Int, Int)
 convertAndGetOffsets paletteFile celFile = EitherT $ do
   (_,offsetOut, err, ph)  <- createProcess (shell ("cel2pnm -o " <> paletteFile <> " " <> celFile <> " pnm")) { std_out = CreatePipe, std_err = CreatePipe }
-  result <- waitForProcess ph   
+  result <- waitForProcess ph
   errMsg <- case err of
               Just x  -> hGetContents x
               Nothing -> return "no error message"
@@ -55,7 +73,7 @@ convertAndGetOffsets paletteFile celFile = EitherT $ do
               Just x -> hGetContents x
               Nothing -> return "no color"
   case result of
-    ExitSuccess   -> return $ 
+    ExitSuccess   -> return $
                      case words offsets of
                        [] ->  Left "no offset data returned"
                        (x: y: _ ) -> Right (read x, read y)

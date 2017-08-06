@@ -32,3 +32,9 @@ spec = do
     it "returns an error if the palette isn't there" $
       runEitherT (transColor "potato") `shouldReturn`
         Left "Error while finding transparency color. Exit code: 1. Error: Read palette potato \npotato: No such file or directory\n"
+  describe "borderColor" $ do
+    it "gets the transparent color from a palette" $
+      runEitherT (colorByIndex 3 (sampleDir <> "/aurora/color.kcf")) `shouldReturn` Right "#ffff94"
+    it "returns an error if the palette isn't there" $
+      runEitherT (colorByIndex 15 "potato") `shouldReturn`
+        Left "Error while finding background color. Exit code: 1. Error: Read palette potato \npotato: No such file or directory\n"

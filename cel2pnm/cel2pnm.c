@@ -348,13 +348,26 @@ static int read_palette(const char *palfile) {
     return 0;
 }
 
-
 int main (int argc, char *argv[]) {
     int err;
 
     char *input_file;
     char *palette_file;
     char *output_file;
+
+    if (strcmp(argv[1], "-c") == 0) {
+      palette_file = argv[3];
+      fprintf(stderr,"Read palette %s \n", palette_file);
+      err = read_palette (palette_file);
+      if (err) return 1;
+      char * color_string;
+      int color_number = strtol(argv[2], &color_string, 10);
+      int n = color_number *3;
+      fprintf(stdout, "#%x%x%x", (unsigned) palette[n],
+                                  (unsigned) palette[n+1],
+                                  (unsigned) palette[n+2]);
+      return 0;
+    }
 
     if (strcmp(argv[1], "-t") == 0) {
         palette_file = argv[2];
