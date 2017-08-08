@@ -70,7 +70,7 @@ createCels staticDir = do
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
                        [KissCell]
 addOffsetsToCelData offsets cells =
-  [ KissCell cnfCelFix cnfCelName cnfCelPalOffset cnfCelSets cnfCelAlpha (Position xoff yoff)
+  [ KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
 tryIO :: IO () -> EitherT Text IO ()

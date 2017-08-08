@@ -6,13 +6,13 @@ import           Data.Aeson
 
 data KissSet = KissSet { kData    :: KissData
                        , kCells   :: [CNFKissCell]
-                       , kPalette :: String
+                       , kPalette :: PaletteFilename
                        } deriving (Eq, Show)
 
 data KissData = KissData {
                     kMemory     :: Int,
                     kBorder     :: Int,
-                    kPalettes   :: [String],
+                    kPalettes   :: [PaletteFilename],
                     kWindowSize :: (Int, Int),
                     kObjects    :: [KissObject] }
     deriving (Eq, Show)
@@ -33,20 +33,20 @@ instance ToJSON KissObject where
                "positions" .= toJSON pos]
 
 data CNFKissCell = CNFKissCell {
-  cnfCelFix       :: Int,
-  cnfCelName      :: String,
-  cnfCelPalOffset :: Int,
-  cnfCelSets      :: [Int],
-  cnfCelAlpha     :: Int }
+  cnfCelFix     :: Int,
+  cnfCelName    :: String,
+  cnfCelPalette :: Int,
+  cnfCelSets    :: [Int],
+  cnfCelAlpha   :: Int }
   deriving (Eq, Show)
 
 data KissCell = KissCell {
-                    celFix       :: Int,
-                    celName      :: String,
-                    celPalOffset :: Int,
-                    celSets      :: [Int],
-                    celAlpha     :: Int,
-                    celOffset    :: SetPos}
+                    celFix     :: Int,
+                    celName    :: String,
+                    celPalette :: Int,
+                    celSets    :: [Int],
+                    celAlpha   :: Int,
+                    celOffset  :: SetPos}
     deriving (Eq, Show)
 instance ToJSON KissCell where
     toJSON (KissCell fix name pal sets alpha offset) =
@@ -74,3 +74,6 @@ data SetPos = Position {
 instance ToJSON SetPos where
     toJSON (Position x y) = object["x" .= x, "y" .= y]
     toJSON NoPosition     = "none"
+
+type PaletteFilename = String
+type CelFilename = String

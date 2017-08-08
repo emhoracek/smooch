@@ -55,7 +55,7 @@ linesToScript xs =
 
 cnfToKissCell :: (Int, Int) -> CNFKissCell ->  KissCell
 cnfToKissCell (xoff, yoff) CNFKissCell{..} =
-  KissCell cnfCelFix cnfCelName cnfCelPalOffset cnfCelSets cnfCelAlpha (Position xoff yoff)
+  KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
 
 linesToObjects :: [(Int, CNFKissCell)] -> [KissSetPos] -> [KissObject]
 linesToObjects xs ys =
