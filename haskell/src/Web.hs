@@ -2,7 +2,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell     #-}
 
-module Main where
+module Web where
 
 import           Control.Exception          (SomeException (..), catch)
 import           Control.Lens
@@ -101,12 +101,3 @@ celImageSplice :: FilePath -> KissCell -> FnSplice Ctxt
 celImageSplice dir cel = return
   [X.Element "img" [("src", T.pack ("/" <> dir </> celName cel <> ".png")),
                     ("id", T.pack (celName cel)) ] []]
-
-main :: IO ()
-main = withStdoutLogging $ do
-  port <- maybe 8000 read <$> lookupEnv "PORT"
-  log' $ "Starting server on port " <> T.pack (show port) <> "..."
-  app' <- app
-  catch (run port app')
-        (\(_ :: SomeException) ->
-           log' "Shutting down...")
