@@ -1,9 +1,5 @@
 # The Haskell backend
 
-*Windows users: The Haskell web app will not build on Windows because
-of network library problems. :( If you use Windows, you'll need to
-work in a Linux VM to get this code to run.*
-
 Here's how the Haskell code is organized:
 
   * src/
@@ -27,6 +23,8 @@ To work on this codebase, you need to install
 [Stack](https://github.com/commercialhaskell/stack/wiki/Downloads). You
 also need to compile `cel2pnm` and put it in your PATH.
 
+To compile: `gcc cel2pnm.c -o cel2pnm`.
+
 If you haven't installed Haskell before, run `stack setup` on your
 command line, in this directory.
 
@@ -35,6 +33,13 @@ To test, run `stack test`.
 Build: `stack build`.
 
 Run: `stack exec smooch`. This serves the app on localhost:8000.
+
+If you have *any issues at all* with this process, it would be extremely 
+helpful to me if you emailed me at libby@daydrea.me with some information 
+about your system and what trouble you're having, or if you filed a 
+ticket in the "Issues" section on Github! I want to know about any 
+obstactles anyone is facing in using Smooch -- if you're having trouble, 
+someone else probably will, too!
 
 ## What it does
 
@@ -49,7 +54,6 @@ It does not work very well.
 
 Roughly in order, except the last!!
 
-  * Use the correct background color for a set.
   * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
       * Display Japanese dolls (fix encoding issues)
   * Figure out how NOT to use shell commands to unzip LHAs or convert cels.

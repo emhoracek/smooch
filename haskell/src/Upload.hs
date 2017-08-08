@@ -9,6 +9,7 @@ import qualified Data.ByteString.Char8      as BS
 import qualified Data.ByteString.Lazy       as B
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
+import qualified Data.Text.Encoding         as T
 
 import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
@@ -27,7 +28,7 @@ import           ParseCNF
 import           Shell
 
 processSet :: (FilePath, FilePath) -> EitherT Text IO [KissCell]
-processSet t@(fName, filePath) = do
+processSet (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   staticDir <- createSetDir (takeBaseName fName)
   unzipFile fName staticDir
@@ -39,7 +40,6 @@ staticDirFromSetName setName = "static/sets/" <> setName
 createSetDir :: String -> EitherT Text IO FilePath
 createSetDir setName = do
   let staticDir = "static/sets/" <> setName
-  let createParents = True
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ tryIO $ removeDirectoryRecursive staticDir
   tryIO $ createDirectory staticDir
@@ -60,8 +60,12 @@ createCels staticDir = do
   celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir
   log' $ "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
+  bgColor <- colorByIndex (kBorder kissData) (staticDir </> kissPalette)
   let json = "var kissJson = " <> encode kissData <> ";\n" <>
-             "var celJson = " <> encode realCelData <> ";\n"
+             "var celJson = " <> encode realCelData <> ";\n" <>
+             "var borderColor = \"" <>
+             B.fromStrict (T.encodeUtf8 (T.pack bgColor)) <> "\";\n"
+  log' $ T.pack $ show json
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   log' $ "Wrote JSON"
   return realCelData
@@ -70,7 +74,7 @@ addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
                        [KissCell]
 addOffsetsToCelData offsets cells =
   [ KissCell cnfCelFix cnfCelName cnfCelPalOffset cnfCelSets cnfCelAlpha (Position xoff yoff)
-     | cell@CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+     | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
 tryIO :: IO () -> EitherT Text IO ()
 tryIO f = do

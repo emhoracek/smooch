@@ -363,9 +363,9 @@ int main (int argc, char *argv[]) {
       char * color_string;
       int color_number = strtol(argv[2], &color_string, 10);
       int n = color_number *3;
-      fprintf(stdout, "#%x%x%x", (unsigned) palette[n],
-                                  (unsigned) palette[n+1],
-                                  (unsigned) palette[n+2]);
+      fprintf(stdout, "#%02x%02x%02x", (unsigned) palette[n],
+                                       (unsigned) palette[n+1],
+                                       (unsigned) palette[n+2]);
       return 0;
     }
 

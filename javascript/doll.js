@@ -2,7 +2,7 @@
 
 var colorids = [];
 
-var Smooch = function(kissdata, celData) {
+var Smooch = function(kissdata, celData, borderColor) {
 
     this.editMode = false;
 
@@ -12,9 +12,9 @@ var Smooch = function(kissdata, celData) {
 
     // The color of area around the play set.
     this.borderarea = document.getElementById("borderarea");
-    borderarea.style.background = "pink";
+    borderarea.style.background = borderColor;
 
-    this.set = new KissSet(kissdata, celData);
+    this.set = new KissSet(kissdata, celData, borderColor);
 
     // This controls dragging and dropping.
     this.mouse = Mouser(this);
@@ -30,16 +30,16 @@ Smooch.prototype = {
     }
 };
 
-var KissSet = function(kissData, celData) {
+var KissSet = function(kissData, celData, borderColor) {
 
     // Size of the play area.
     this.size = { x: kissData.window_size[0],
-                  y: kissData.window_size[1] }
-
+                  y: kissData.window_size[1] };
 
     var playarea = document.getElementById("playarea");
     playarea.style.width = this.size.x + "px";
     playarea.style.height = this.size.y + "px";
+    playarea.style.background = borderColor;
 
     var drawcanvas = document.getElementById("screen");
     var drawctxt = drawcanvas.getContext("2d");
@@ -71,7 +71,7 @@ var KissSet = function(kissData, celData) {
 
     this.cells = celData;
     var objs = kissData.objs;
-    this.objs = []
+    this.objs = [];
 
     for (var i = 0; i < objs.length; i++) {
         var objid = objs[i].id;
@@ -172,7 +172,7 @@ KiSSObj.prototype = {
 
 var KiSSCell = function(obj, cell, set) {
 
-    this.obj = obj
+    this.obj = obj;
     this.name = cell.name;
     this.mark = obj.id;
     this.fix = cell.fix;
@@ -183,7 +183,7 @@ var KiSSCell = function(obj, cell, set) {
     this.ghostImage = undefined;
     this.visible = false;
 
-    this.offset = cell.offset
+    this.offset = cell.offset;
 
     this.init(set);
 
@@ -214,7 +214,7 @@ KiSSCell.prototype = {
         var data = ghostImageData.data;
 
         // Fill image data with obj color
-        color = this.obj.color
+        color = this.obj.color;
 
         for (var k = 0; k < data.length; k=k+4) {
             data[k]   = color.red;
@@ -273,6 +273,8 @@ KiSSCell.prototype = {
         that.set.update(that.set);
         that.set.draw(that.set.ctxt, that.set.ghost);
         return false;
+      } else {
+        return true;
       }
     };
 
@@ -292,7 +294,8 @@ KiSSCell.prototype = {
       var colorid = data[0] + data[1] + data[2] + 255;
 
       if (data[3] === 0) {
-        console.log("not draggable");
+          console.log("not draggable");
+          return true;
       }
       else {
         var kobj = that.set.objs[colorids[colorid]];
@@ -307,9 +310,10 @@ KiSSCell.prototype = {
           y = e.layerY;
           document.onmousemove = mousemove;
           return false;
+        } else {
+          return true;
         }
       }
-
     };
 
     document.onmousedown = selectmouse;
@@ -326,7 +330,7 @@ KiSSCell.prototype = {
   window.addEventListener('load', function() {
     var kissData = kissJson;
     var celData = celJson;
-    this.smooch = new Smooch(kissData, celData);
+    this.smooch = new Smooch(kissData, celData, borderColor);
   });
 
 var debug_draw = function (x) {

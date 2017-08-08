@@ -11,7 +11,7 @@ You can use cel2pnm this way:
 
 ```(sh)
 cel2pnm <palette file> <cel image> <output file>
-``
+```
 or with debugging:
 ```(sh)
 cel2pnm -d <palette file> <cel image> <output file>
@@ -25,6 +25,12 @@ flag and cel2pnm will print the color instead of converting any cell. The
 color will be printed in the format "rbg:x/x/x" where each is x is a 2-digit
 hex value.
 
+To grab *any* color from a palette by index, use:
+
+```(sh)
+cel2pnm -c <color index> <palette file>
+```
+
 ## Converting to png
 
 Sorry, this is ugly. Install pnmtools, then:
@@ -33,3 +39,4 @@ Sorry, this is ugly. Install pnmtools, then:
 cel2pnm examples/smoon.kcf examples/luna.cel examples/luna.pnm
 pnmtopng -transparent `./cel2pnm -t examples/smoon.kcf` examples/luna.pnm > luna.png
 ```
+
