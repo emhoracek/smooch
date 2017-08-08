@@ -3,9 +3,6 @@
 
 module Upload where
 
-import           Network.Wai.Parse
-
-import qualified Data.ByteString.Char8      as BS
 import qualified Data.ByteString.Lazy       as B
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T

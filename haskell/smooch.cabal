@@ -1,5 +1,5 @@
 name:                smooch
-version:             0.1.0.3
+version:             0.2.0.0
 -- synopsis:
 -- description:
 license:             GPL-3
@@ -15,7 +15,24 @@ cabal-version:       >=1.10
 executable smooch
   hs-source-dirs:      src, templates
   main-is:             Main.hs
-  other-modules:       Kiss, ParseCNF, Shell, Upload
+  build-depends:       base,
+                       wai, wai-extra,
+                       warp,
+                       http-types,
+                       resourcet,
+                       lens,
+                       heist, map-syntax,
+                       parsec, aeson,
+                       process, system-filepath, directory,
+                       filepath, transformers, mtl,
+                       text, bytestring,
+                       wai-middleware-static, either,
+                       fn, fn-extra, xmlhtml, logging
+  default-language:    Haskell2010
+
+library
+  hs-source-dirs:      src, templates
+  exposed-modules:       Kiss, ParseCNF, Shell, Upload
   -- other-extensions:
   build-depends:       base,
                        wai, wai-extra,
@@ -30,23 +47,19 @@ executable smooch
                        text, bytestring,
                        wai-middleware-static, either,
                        fn, fn-extra, xmlhtml, logging
-  -- hs-source-dirs:
   default-language:    Haskell2010
 
 test-suite tests
-  hs-source-dirs: src, templates, tests
-  ghc-options: -Wall
-  default-language: Haskell2010
-  main-is: Spec.hs
-  other-modules: ParseCNFSpec, ShellSpec, UploadSpec, Kiss, ParseCNF, Main, Shell, Upload
-  type: exitcode-stdio-1.0
+  hs-source-dirs:      tests
+  ghc-options:         -Wall
+  default-language:    Haskell2010
+  main-is:             Spec.hs
+  other-modules:       ParseCNFSpec, ShellSpec, UploadSpec
+  type:                exitcode-stdio-1.0
   build-depends:       base,
-                       wai, wai-extra,
-                       warp,
-                       http-types,
-                       resourcet,
-                       parsec, aeson, logging,
-                       process, system-filepath, directory,
-                       filepath, transformers, mtl,
-                       text, bytestring, fn, fn-extra,
-                       wai-middleware-static, either, hspec
+                       smooch,
+                       hspec,
+                       either,
+                       wai-extra,
+                       process,
+                       parsec
