@@ -13,40 +13,48 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 executable smooch
-  hs-source-dirs:      src, templates
+  hs-source-dirs:      exe
   main-is:             Main.hs
   build-depends:       base,
-                       wai, wai-extra,
+                       smooch,
+                       wai,
                        warp,
-                       http-types,
-                       resourcet,
-                       lens,
-                       heist, map-syntax,
-                       parsec, aeson,
-                       process, system-filepath, directory,
-                       filepath, transformers, mtl,
-                       text, bytestring,
-                       wai-middleware-static, either,
-                       fn, fn-extra, xmlhtml, logging
+                       text,
+                       logging
   default-language:    Haskell2010
 
 library
   hs-source-dirs:      src, templates
-  exposed-modules:       Kiss, ParseCNF, Shell, Upload
-  -- other-extensions:
+  exposed-modules:     Kiss,
+                       ParseCNF,
+                       Shell,
+                       Upload,
+                       Web
   build-depends:       base,
-                       wai, wai-extra,
-                       warp,
+                       aeson,
+                       bytestring,
+                       directory,
+                       either,
+                       filepath,
+                       fn,
+                       fn-extra,
+                       heist,
                        http-types,
-                       resourcet,
                        lens,
-                       heist, map-syntax,
-                       parsec, aeson,
-                       process, system-filepath, directory,
-                       filepath, transformers, mtl,
-                       text, bytestring,
-                       wai-middleware-static, either,
-                       fn, fn-extra, xmlhtml, logging
+                       logging,
+                       map-syntax,
+                       mtl,
+                       parsec,
+                       process,
+                       resourcet,
+                       system-filepath,
+                       text,
+                       transformers,
+                       wai,
+                       wai-extra
+                       wai-middleware-static,
+                       warp,
+                       xmlhtml
   default-language:    Haskell2010
 
 test-suite tests

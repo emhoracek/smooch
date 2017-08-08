@@ -2,8 +2,9 @@
 
 Here's how the Haskell code is organized:
 
+  * exe/Main runs the Warp webserver.
   * src/
-    * Main runs the Warp webserver and does routing.
+    * Web does routing and request handling 
     * ParseCNF parses the configuration file
     * Kiss contains the KiSS data types (and Aeson instances)
     * Shell converts the files (hmmm... maybe it should be
