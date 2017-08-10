@@ -79,7 +79,7 @@ combineCelsAndPositions :: [(Int, CNFKissCell)]
                         -> [(Int, [CNFKissCell], [SetPos])]
 combineCelsAndPositions objs positions =
   reverse $ foldl combine [] positions
-  where findCels objNum =  map snd $ filter (\(n,_) -> n == objNum) objs
+  where findCels objNum = map snd $ filter (\(n,_) -> n == objNum) objs
         combine acc (objNumber, pPositions) =
           case findCels objNumber of
             [] -> acc
@@ -110,7 +110,7 @@ parseCell = do
     skipMany space
     optional (char ':')
     skipMany space
-    sets <- option [] parseSets
+    sets <- option [0..9] parseSets
     skipMany space
     transp <- option 0 (try parseTransp)
     return $ CNFKissCell fix file palette sets transp
