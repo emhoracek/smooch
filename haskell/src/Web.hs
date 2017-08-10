@@ -4,7 +4,6 @@
 
 module Web where
 
-import           Control.Exception          (SomeException (..), catch)
 import           Control.Lens
 import           Control.Logging
 import           Control.Monad.IO.Class     (liftIO)
@@ -12,12 +11,9 @@ import           Control.Monad.Trans.Either
 import           Data.Map.Syntax            (MapSyntaxM, ( ## ))
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
-import qualified Data.Text.Encoding         as T
 import qualified Heist.Interpreted          as H
 import           Network.HTTP.Types.Method
 import           Network.Wai
-import           Network.Wai.Handler.Warp
-import           System.Environment
 import           System.FilePath            (takeBaseName)
 import           System.FilePath            ((</>))
 import qualified Text.XmlHtml               as X
@@ -63,9 +59,9 @@ indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = render ctxt "index"
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
-uploadHandler ctxt (File name _ filePath) = do
+uploadHandler ctxt (File name _ filePath') = do
   let staticDir = staticDirFromSetName (takeBaseName (T.unpack name))
-  cels <- liftIO $ runEitherT $ processSet (T.unpack name, filePath)
+  cels <- liftIO $ runEitherT $ processSet (T.unpack name, filePath')
   renderKissSet ctxt staticDir cels
 
 setHandler :: Ctxt -> T.Text -> IO (Maybe Response)

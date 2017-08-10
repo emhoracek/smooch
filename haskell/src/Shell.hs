@@ -2,7 +2,6 @@
 
 module Shell where
 
-import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
@@ -40,9 +39,6 @@ colorByIndex colorNum paletteLoc = EitherT $ do
   case result of
     ExitSuccess   -> return $ Right color
     ExitFailure n -> return $ Left $ T.pack ("Error while finding background color. Exit code: " <> show n <> ". Error: " <> errMsg)
-
-
-
 
 -- Convert a whole list of cels given a palette. Put the files in target directory. Return list of cels with offset information
 convertCels :: String -> [String] -> String -> EitherT T.Text IO [ (String, (Int, Int)) ]

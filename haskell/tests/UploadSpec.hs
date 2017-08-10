@@ -3,9 +3,9 @@
 module UploadSpec where
 
 import           Control.Monad.Trans.Either
-import           Kiss
-import           Network.Wai.Parse
 import           Test.Hspec
+
+import           Kiss
 import           Upload
 
 sampleCell :: KissCell
@@ -33,6 +33,7 @@ shouldFailWith m r =
 
 --}
 
+spec :: Spec
 spec = do
   describe "tryIO" $ do
     it "returns a Right () if the action completed" $

@@ -19,15 +19,8 @@ var Smooch = function(kissdata, celData, borderColor) {
     // This controls dragging and dropping.
     this.mouse = Mouser(this);
 
-    this.update();
-
     return this;
 
-};
-
-Smooch.prototype = {
-    update: function() {
-    }
 };
 
 var KissSet = function(kissData, celData, borderColor) {

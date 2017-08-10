@@ -1,10 +1,11 @@
 module ParseCNFSpec (spec) where
 
 import           Control.Monad.Trans.Either
-import           Kiss
-import           ParseCNF
 import           Test.Hspec
 import           Text.ParserCombinators.Parsec
+
+import           Kiss
+import           ParseCNF
 
 fakeKissCell :: Int -> String -> Int -> [Int] -> Int -> KissCell
 fakeKissCell a s b cs d = KissCell a s b cs d (Position 0 0)
@@ -55,7 +56,7 @@ sampleKiss3 =
   "#1   shirtb.CEL *0 : 0 1 2 3 \n" ++
   "$0 * 1,1 2,2"
 
-
+spec :: Spec
 spec = do
   describe "getKissData" $ do
     it "parses a CNF into KiSS data" $

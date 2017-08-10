@@ -14,6 +14,7 @@ cabal-version:       >=1.10
 
 executable smooch
   hs-source-dirs:      exe
+  ghc-options:         -Wall
   main-is:             Main.hs
   build-depends:       base,
                        smooch,
@@ -25,6 +26,7 @@ executable smooch
 
 library
   hs-source-dirs:      src, templates
+  ghc-options:         -Wall
   exposed-modules:     Kiss,
                        ParseCNF,
                        Shell,
@@ -47,9 +49,7 @@ library
                        parsec,
                        process,
                        resourcet,
-                       system-filepath,
                        text,
-                       transformers,
                        wai,
                        wai-extra,
                        wai-middleware-static,
@@ -62,12 +62,13 @@ test-suite tests
   ghc-options:         -Wall
   default-language:    Haskell2010
   main-is:             Spec.hs
-  other-modules:       ParseCNFSpec, ShellSpec, UploadSpec
+  other-modules:       ParseCNFSpec,
+                       ShellSpec,
+                       UploadSpec
   type:                exitcode-stdio-1.0
   build-depends:       base,
                        smooch,
                        hspec,
                        either,
                        wai-extra,
-                       process,
                        parsec

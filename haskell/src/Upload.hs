@@ -62,7 +62,6 @@ createCels staticDir = do
              "var celJson = " <> encode realCelData <> ";\n" <>
              "var borderColor = \"" <>
              B.fromStrict (T.encodeUtf8 (T.pack bgColor)) <> "\";\n"
-  log' $ T.pack $ show json
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   log' $ "Wrote JSON"
   return realCelData

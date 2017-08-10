@@ -5,11 +5,12 @@ module ShellSpec (spec) where
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 import           Shell
-import           System.Process
 import           Test.Hspec
 
+sampleDir :: [Char]
 sampleDir = "tests/samples"
 
+spec :: Spec
 spec = do
   describe "convertCel" $ do
     it "converts a cel to png" $
