@@ -2,12 +2,15 @@
 
 module Kiss where
 
-import           Data.Aeson
+import           Data.Aeson hiding (Array)
+import           Data.Array (Array)
 
 data KissSet = KissSet { kData    :: KissData
                        , kCells   :: [CNFKissCell]
-                       , kPalette :: PaletteFilename
+                       , kPalette :: Array Int PaletteFilename
                        } deriving (Eq, Show)
+
+type Palettes = Array Int PaletteFilename
 
 data KissData = KissData {
                     kMemory     :: Int,

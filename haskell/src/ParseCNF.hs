@@ -6,6 +6,8 @@
 module ParseCNF where
 
 import           Control.Monad.Trans.Either
+import           Data.Array                    ((!))
+import qualified Data.Array                    as A
 import           Data.Char                     (toLower)
 import           Data.List                     hiding (lines)
 import           Data.Maybe
@@ -17,8 +19,8 @@ getKissSet :: String -> EitherT T.Text IO KissSet
 getKissSet file = do
   kissData <- getKissData file
   kissCels <- getKissCels file
-  kissPalette <- getKissPalette kissData
-  return $ KissSet kissData kissCels kissPalette
+  kissPalettes <- getKissPalettes kissData
+  return $ KissSet kissData kissCels kissPalettes
 
 getKissData :: String -> EitherT T.Text IO KissData
 getKissData file =
@@ -32,11 +34,18 @@ getKissCels file =
       Right ls -> return $ linesToCells ls
       Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
-getKissPalette :: KissData -> EitherT T.Text IO String
-getKissPalette file =
-  case kPalettes file of
-    (x:_) -> return x
-    []     -> EitherT $ return $ Left "no palette found"
+getKissPalettes :: KissData -> EitherT T.Text IO Palettes
+getKissPalettes file = return $ toArray (kPalettes file)
+  where toArray l = A.listArray (0, length l) l
+
+lookupPalette :: Int -> Palettes -> EitherT T.Text IO PaletteFilename
+lookupPalette n palettes =
+  if snd (A.bounds palettes) >= n
+    then return (palettes ! n)
+    else EitherT $ return $ Left "Palette not found"
+
+defaultPalette :: Palettes -> EitherT T.Text IO PaletteFilename
+defaultPalette = lookupPalette 0
 
 -- Converting CNF lines to useable KiSS data
 linesToScript :: [CNFLine] -> KissData
@@ -108,8 +117,6 @@ parseCell = do
     skipMany1 space
     palette <- option 0 (try parseCellPalette)
     skipMany space
-    optional (char ':')
-    skipMany space
     sets <- option [0..9] parseSets
     skipMany space
     transp <- option 0 (try parseTransp)
@@ -133,7 +140,10 @@ parseFix = do
 
 -- This parses all the list of sets the cell will be displayed in
 parseSets :: Parser [Int]
-parseSets = many1 parseSet
+parseSets = do
+  char ':'
+  skipMany space
+  many parseSet
 
 parseSet :: Parser Int
 parseSet = do

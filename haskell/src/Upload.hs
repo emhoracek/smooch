@@ -52,12 +52,13 @@ deleteCels staticDir = do
 createCels :: FilePath -> EitherT Text IO [KissCell]
 createCels staticDir = do
   cnf <- getCNF staticDir
-  KissSet kissData celData kissPalette <- getKissSet cnf
+  KissSet kissData celData kissPalettes <- getKissSet cnf
   log' $ "Parsed CNF"
-  celsWithOffsets <- convertCels kissPalette (map cnfCelName celData) staticDir
+  celsWithOffsets <- convertCels kissPalettes celData staticDir
   log' $ "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
-  bgColor <- colorByIndex (kBorder kissData) (staticDir </> kissPalette)
+  defPalette <- defaultPalette kissPalettes
+  bgColor <- colorByIndex (kBorder kissData) (staticDir </> defPalette)
   let json = "var kissJson = " <> encode kissData <> ";\n" <>
              "var celJson = " <> encode realCelData <> ";\n" <>
              "var borderColor = \"" <>
