@@ -175,6 +175,7 @@ var KiSSCell = function(obj, cell, set) {
     this.image = undefined;
     this.ghostImage = undefined;
     this.visible = false;
+    this.alpha = cell.alpha;
 
     this.offset = cell.offset;
 
@@ -241,9 +242,15 @@ KiSSCell.prototype = {
     },
 
     draw: function (screen, ghost) {
+
+        if (this.alpha) {
+            screen.globalAlpha = (255-this.alpha)/255;
+        }
+
         if (this.visible == true) {
             screen.drawImage(this.image,
                              this.position.x + this.offset.x, this.position.y + this.offset.y);
+            screen.globalAlpha = 1;
             ghost.drawImage(this.ghostImage,
                             this.position.x + this.offset.x, this.position.y + this.offset.y);
         }
