@@ -22,7 +22,7 @@ getKissSet file = do
   kissPalettes <- getKissPalettes kissData
   return $ KissSet kissData kissCels kissPalettes
 
-getKissData :: String -> EitherT T.Text IO KissData
+getKissData :: String -> EitherT T.Text IO CNFKissData
 getKissData file =
     case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
       Right ls -> return $ linesToScript ls
@@ -34,8 +34,8 @@ getKissCels file =
       Right ls -> return $ linesToCells ls
       Left e  -> EitherT $ return $ Left $ T.pack $ show e
 
-getKissPalettes :: KissData -> EitherT T.Text IO Palettes
-getKissPalettes file = return $ toArray (kPalettes file)
+getKissPalettes :: CNFKissData -> EitherT T.Text IO Palettes
+getKissPalettes file = return $ toArray (cnfkPalettes file)
   where toArray l = A.listArray (0, length l) l
 
 lookupPalette :: Int -> Palettes -> EitherT T.Text IO PaletteFilename
@@ -48,9 +48,9 @@ defaultPalette :: Palettes -> EitherT T.Text IO PaletteFilename
 defaultPalette = lookupPalette 0
 
 -- Converting CNF lines to useable KiSS data
-linesToScript :: [CNFLine] -> KissData
+linesToScript :: [CNFLine] -> CNFKissData
 linesToScript xs =
-    KissData memory border palettes windowSize objects
+    CNFKissData memory border palettes windowSize objects
     where -- memory and border are optional
           memory   = fromMaybe 0 (listToMaybe [ a | CNFMemory a <- xs ])
           border   = fromMaybe 0 (listToMaybe [ a | CNFBorder a <- xs ])

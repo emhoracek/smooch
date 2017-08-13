@@ -2,7 +2,7 @@
 
 var colorids = [];
 
-var Smooch = function(kissdata, celData, borderColor) {
+var Smooch = function(kissData) {
 
     this.editMode = false;
 
@@ -12,9 +12,9 @@ var Smooch = function(kissdata, celData, borderColor) {
 
     // The color of area around the play set.
     this.borderarea = document.getElementById("borderarea");
-    borderarea.style.background = borderColor;
+    borderarea.style.background = kissData.border;
 
-    this.set = new KissSet(kissdata, celData, borderColor);
+    this.set = new KissSet(kissData);
 
     // This controls dragging and dropping.
     this.mouse = Mouser(this);
@@ -23,7 +23,7 @@ var Smooch = function(kissdata, celData, borderColor) {
 
 };
 
-var KissSet = function(kissData, celData, borderColor) {
+var KissSet = function(kissData) {
 
     // Size of the play area.
     this.size = { x: kissData.window_size[0],
@@ -32,7 +32,7 @@ var KissSet = function(kissData, celData, borderColor) {
     var playarea = document.getElementById("playarea");
     playarea.style.width = this.size.x + "px";
     playarea.style.height = this.size.y + "px";
-    playarea.style.background = borderColor;
+    playarea.style.background = kissData.background;
 
     var drawcanvas = document.getElementById("screen");
     var drawctxt = drawcanvas.getContext("2d");
@@ -62,7 +62,7 @@ var KissSet = function(kissData, celData, borderColor) {
     /* Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */
 
-    this.cells = celData;
+    this.cells = kissData.cels;
     var objs = kissData.objs;
     this.objs = [];
 
@@ -81,9 +81,9 @@ var KissSet = function(kissData, celData, borderColor) {
         var obj_cells = objs[i].cells;
         // for each cel in the obj, find that cel in the celData list
         for (var j = 0; j < obj_cells.length; j++) {
-            for (var k = 0; k < celData.length; k++) {
-                if (celData[k].name === obj_cells[j].name) {
-                    obj_cells[j] = new KiSSCell(objs[i], celData[k], this);
+            for (var k = 0; k < this.cells.length; k++) {
+                if (this.cells[k].name === obj_cells[j].name) {
+                    obj_cells[j] = new KiSSCell(objs[i], this.cells[k], this);
                     this.cells[k] = obj_cells[j];
                 }
             }
@@ -110,9 +110,6 @@ var KissSet = function(kissData, celData, borderColor) {
 
     this.currentSet = 0;
     this.update();
-
-    this.ctxt.clearRect(0, 0, that.size.x, that.size.y);
-    this.ghost.clearRect(0,0, that.size.x, that.size.y);
     this.draw(drawctxt, ghostctxt);
 };
 
@@ -329,8 +326,7 @@ KiSSCell.prototype = {
 
   window.addEventListener('load', function() {
     var kissData = kissJson;
-    var celData = celJson;
-    this.smooch = new Smooch(kissData, celData, borderColor);
+    this.smooch = new Smooch(kissData);
   });
 
 var debug_draw = function (x) {

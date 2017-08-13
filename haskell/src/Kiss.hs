@@ -5,24 +5,35 @@ module Kiss where
 import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
-data KissSet = KissSet { kData    :: KissData
+data KissSet = KissSet { kData    :: CNFKissData
                        , kCells   :: [CNFKissCell]
                        , kPalette :: Array Int PaletteFilename
                        } deriving (Eq, Show)
 
 type Palettes = Array Int PaletteFilename
 
-data KissData = KissData {
-                    kMemory     :: Int,
-                    kBorder     :: Int,
-                    kPalettes   :: [PaletteFilename],
-                    kWindowSize :: (Int, Int),
-                    kObjects    :: [KissObject] }
+data KissData = KissData { kMemory     :: Int
+                         , kBorder     :: Color
+                         , kBackground :: Color
+                         , kPalettes   :: [PaletteFilename]
+                         , kWindowSize :: (Int, Int)
+                         , kObjects    :: [KissObject]
+                         , kCels       :: [KissCell] }
     deriving (Eq, Show)
 instance ToJSON KissData where
-    toJSON (KissData _ _ _ win objs) =
+    toJSON (KissData _ border bg _ win objs cels) =
         object["window_size" .= win,
-               "objs" .= objs]
+               "objs" .= objs,
+               "border" .= border,
+               "background" .= bg,
+               "cels" .= cels]
+
+data CNFKissData = CNFKissData { cnfkMemory     :: Int,
+                                 cnfkBorder     :: Int,
+                                 cnfkPalettes   :: [PaletteFilename],
+                                 cnfkWindowSize :: (Int, Int),
+                                 cnfkObjects    :: [KissObject] }
+    deriving (Eq, Show)
 
 data KissObject = KissObject {
                     objNum   :: Int,
@@ -80,3 +91,4 @@ instance ToJSON SetPos where
 
 type PaletteFilename = String
 type CelFilename = String
+type Color = String

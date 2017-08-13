@@ -6,7 +6,6 @@ module Upload where
 import qualified Data.ByteString.Lazy       as B
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
-import qualified Data.Text.Encoding         as T
 
 import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
@@ -52,17 +51,16 @@ deleteCels staticDir = do
 createCels :: FilePath -> EitherT Text IO [KissCell]
 createCels staticDir = do
   cnf <- getCNF staticDir
-  KissSet kissData celData kissPalettes <- getKissSet cnf
+  KissSet cnfKissData celData kissPalettes <- getKissSet cnf
   log' $ "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes celData staticDir
   log' $ "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
   defPalette <- defaultPalette kissPalettes
-  bgColor <- colorByIndex (kBorder kissData) (staticDir </> defPalette)
-  let json = "var kissJson = " <> encode kissData <> ";\n" <>
-             "var celJson = " <> encode realCelData <> ";\n" <>
-             "var borderColor = \"" <>
-             B.fromStrict (T.encodeUtf8 (T.pack bgColor)) <> "\";\n"
+  bgColor <- colorByIndex 0 (staticDir </> defPalette)
+  borderColor <- colorByIndex (cnfkBorder cnfKissData) (staticDir </> defPalette)
+  let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
+  let json = "var kissJson = " <> encode kissData <> ";\n"
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   log' $ "Wrote JSON"
   return realCelData
@@ -72,6 +70,10 @@ addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
 addOffsetsToCelData offsets cells =
   [ KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+
+addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> KissData
+addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
+  KissData m borderColor bgColor p ws o cels
 
 tryIO :: IO () -> EitherT Text IO ()
 tryIO f = do
