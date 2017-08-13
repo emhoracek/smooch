@@ -1,10 +1,10 @@
-html, body {
+body {
     margin: 0px;
-    font-family: sans;
+    font-family: helvetica, arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
-
-a { cursor: pointer;
-    color: grey }
 
 #loading { background: white;
            margin: 0;
@@ -15,34 +15,38 @@ a { cursor: pointer;
            z-index: 100;
            text-align: center }
 
-#borderarea{ padding: 0; 
-             margin: 0 }
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;}
 
-#playarea { position: relative; 
-            margin: auto;
-            margin-top: 1em;
-            margin-bottom: 1em;
-            padding: 0;
-            background: white }
+#sets { display: flex; }
+#sets ul { padding-left: 0;  }
+#sets p {  }
 
-#toolbar { background: #cccccc;
-           border-left: 1px solid black;
-           display: none;
-           margin: 0;
-           padding: 0;         
-           width: 20%;
-           height: 100%;
-           position: absolute;
-           right: 0;
-           top: 0 }
+li { display: inline;
+     margin: 0.25em; }
+a.set { cursor: pointer;
+        color: grey;
+        padding: 0.5em;
+        background-color: lightpink }
 
-#buttons {  }
+a.set:hover { color: grey;
+              background-color: pink }
 
-#toolbar h1 { font-size: 1.5em }
+#borderarea{ padding: 0;
+             margin: 0;
+             flex-grow: 1;
+             display: flex;
+             overflow: auto; }
 
-#infobox { margin: 1em }
+#playarea { background: white;
+            border: 1px solid black;
+            margin: auto }
 
-#footer { text-align: center }
+#footer { text-align: center; margin: 1em; }
 
-li { display: inline }
 img { position: absolute; display: none }
+
+a { color: grey }

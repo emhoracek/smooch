@@ -239,14 +239,13 @@ KiSSCell.prototype = {
     },
 
     draw: function (screen, ghost) {
-
-        if (this.alpha) {
-            screen.globalAlpha = (255-this.alpha)/255;
-        }
-
         if (this.visible == true) {
+            if (this.alpha) {
+                screen.globalAlpha = (255-this.alpha)/255;
+            }
             screen.drawImage(this.image,
                              this.position.x + this.offset.x, this.position.y + this.offset.y);
+
             screen.globalAlpha = 1;
             ghost.drawImage(this.ghostImage,
                             this.position.x + this.offset.x, this.position.y + this.offset.y);
@@ -275,14 +274,24 @@ KiSSCell.prototype = {
       }
     };
 
+      // from http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
+    var getMousePos = function(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    };
+
     var selectmouse = function(e) {
 
+      var screen = document.getElementById('screen');
       var canvas = document.getElementById('ghost');
       var ctxt = canvas.getContext('2d');
 
-      var x1 = e.layerX;
-      var y1 = e.layerY;
-      var pixel = ctxt.getImageData(x1, y1, 1, 1);
+      var pos = getMousePos(screen, e);
+
+      var pixel = ctxt.getImageData(pos.x, pos.y, 1, 1);
 
       var data = pixel.data;
       var rgba = 'rgba(' + data[0] + ',' + data[1] +
@@ -299,7 +308,6 @@ KiSSCell.prototype = {
         if (kobj && kobj.cells[0].fix < 1) {
           isdrag = true;
           dobj = kobj;
-          console.log(dobj);
           curSet = that.set.currentSet;
           tx = dobj.positions[curSet].x;
           ty = dobj.positions[curSet].y;
