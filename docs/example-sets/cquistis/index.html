@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Smooch</title>
+    <link rel='stylesheet' type='text/css' href='../../screen.css' />
+    <script type='text/javascript'>
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+    <div id='loading'>
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id='sets'>
+      <ul>
+        <li><a class='set'>0</a></li><li><a class='set'>1</a></li><li><a class='set'>2</a></li><li><a class='set'>3</a></li><li><a class='set'>4</a></li><li><a class='set'>5</a></li><li><a class='set'>6</a></li><li><a class='set'>7</a></li><li><a class='set'>8</a></li><li><a class='set'>9</a></li>
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id='borderarea'>
+      <div id='playarea'>
+           <canvas id='screen'></canvas>
+           <canvas id='ghost'></canvas>
+        <img src='edc.png' id='edc' /><img src='eleb.png' id='eleb' /><img src='edrb.png' id='edrb' /><img src='jurb.png' id='jurb' /><img src='ricsb.png' id='ricsb' /><img src='rajtb.png' id='rajtb' /><img src='watb.png' id='watb' /><img src='septb.png' id='septb' /><img src='rinrb.png' id='rinrb' /><img src='lagtb.png' id='lagtb' /><img src='aerrb.png' id='aerrb' /><img src='sqtb.png' id='sqtb' /><img src='sqtlb.png' id='sqtlb' /><img src='eltb.png' id='eltb' /><img src='irtb.png' id='irtb' /><img src='seitb.png' id='seitb' /><img src='irtlb.png' id='irtlb' /><img src='seitlb.png' id='seitlb' /><img src='ztb.png' id='ztb' /><img src='elpb.png' id='elpb' /><img src='tinrb.png' id='tinrb' /><img src='selrb.png' id='selrb' /><img src='qjb.png' id='qjb' /><img src='sqjlb.png' id='sqjlb' /><img src='seijlb.png' id='seijlb' /><img src='irjlb.png' id='irjlb' /><img src='sepjb.png' id='sepjb' /><img src='irjb.png' id='irjb' /><img src='sqjb.png' id='sqjb' /><img src='zjb.png' id='zjb' /><img src='qtb.png' id='qtb' /><img src='fuvb.png' id='fuvb' /><img src='rigb.png' id='rigb' /><img src='rajgb.png' id='rajgb' /><img src='wsvfb.png' id='wsvfb' /><img src='svfb.png' id='svfb' /><img src='wsvmb.png' id='wsvmb' /><img src='svmb.png' id='svmb' /><img src='qsvb.png' id='qsvb' /><img src='aervb.png' id='aervb' /><img src='zvb.png' id='zvb' /><img src='sqvb.png' id='sqvb' /><img src='lagvb.png' id='lagvb' /><img src='sepvb.png' id='sepvb' /><img src='seivb.png' id='seivb' /><img src='irvb.png' id='irvb' /><img src='aern.png' id='aern' /><img src='vicc.png' id='vicc' /><img src='corps.png' id='corps' /><img src='vicb.png' id='vicb' /><img src='culotte.png' id='culotte' /><img src='soutieng.png' id='soutieng' /><img src='qsch.png' id='qsch' /><img src='wsch.png' id='wsch' /><img src='sch.png' id='sch' /><img src='ranch.png' id='ranch' /><img src='fuch.png' id='fuch' /><img src='zch.png' id='zch' /><img src='tifch.png' id='tifch' /><img src='qbr.png' id='qbr' /><img src='tifbd.png' id='tifbd' /><img src='edg.png' id='edg' /><img src='sepg.png' id='sepg' /><img src='kirg.png' id='kirg' /><img src='clog.png' id='clog' /><img src='sqg.png' id='sqg' /><img src='seig.png' id='seig' /><img src='irg.png' id='irg' /><img src='wabr.png' id='wabr' /><img src='qg.png' id='qg' /><img src='tifg.png' id='tifg' /><img src='lagg.png' id='lagg' /><img src='zg.png' id='zg' /><img src='ribd.png' id='ribd' /><img src='rajbr.png' id='rajbr' /><img src='clobr.png' id='clobr' /><img src='tifbr.png' id='tifbr' /><img src='selbr.png' id='selbr' /><img src='ribr.png' id='ribr' /><img src='ranb.png' id='ranb' /><img src='fubd.png' id='fubd' /><img src='jub.png' id='jub' /><img src='aerbr.png' id='aerbr' /><img src='kirc.png' id='kirc' /><img src='rics.png' id='rics' /><img src='rajt.png' id='rajt' /><img src='wat.png' id='wat' /><img src='sept.png' id='sept' /><img src='tift.png' id='tift' /><img src='rinr.png' id='rinr' /><img src='lagt.png' id='lagt' /><img src='elp.png' id='elp' /><img src='clot.png' id='clot' /><img src='sqt.png' id='sqt' /><img src='sqtl.png' id='sqtl' /><img src='elt.png' id='elt' /><img src='zt.png' id='zt' /><img src='was.png' id='was' /><img src='edch.png' id='edch' /><img src='rinc.png' id='rinc' /><img src='juc.png' id='juc' /><img src='tinc.png' id='tinc' /><img src='elc.png' id='elc' /><img src='fuc.png' id='fuc' /><img src='ranc.png' id='ranc' /><img src='qsc.png' id='qsc' /><img src='wscf.png' id='wscf' /><img src='scf.png' id='scf' /><img src='wscm.png' id='wscm' /><img src='scm.png' id='scm' /><img src='zb.png' id='zb' /><img src='qbt.png' id='qbt' /><img src='seibt.png' id='seibt' /><img src='irbt.png' id='irbt' /><img src='lagb.png' id='lagb' /><img src='sqb.png' id='sqb' /><img src='seib.png' id='seib' /><img src='qb.png' id='qb' /><img src='irb.png' id='irb' /><img src='kirb.png' id='kirb' /><img src='rajb.png' id='rajb' /><img src='rib.png' id='rib' /><img src='sepb.png' id='sepb' /><img src='vib.png' id='vib' /><img src='wab.png' id='wab' /><img src='clob.png' id='clob' /><img src='tifb.png' id='tifb' /><img src='aerb.png' id='aerb' /><img src='selb.png' id='selb' /><img src='qch.png' id='qch' /><img src='edr.png' id='edr' /><img src='jur.png' id='jur' /><img src='aerr.png' id='aerr' /><img src='ranj.png' id='ranj' /><img src='fup.png' id='fup' /><img src='wsp.png' id='wsp' /><img src='sp.png' id='sp' /><img src='kircr.png' id='kircr' /><img src='tinr.png' id='tinr' /><img src='vicr.png' id='vicr' /><img src='selr.png' id='selr' /><img src='qj.png' id='qj' /><img src='qsj.png' id='qsj' /><img src='lagjl.png' id='lagjl' /><img src='sqjl.png' id='sqjl' /><img src='seijl.png' id='seijl' /><img src='irjl.png' id='irjl' /><img src='sepj.png' id='sepj' /><img src='cloj.png' id='cloj' /><img src='tifj.png' id='tifj' /><img src='lagj.png' id='lagj' /><img src='irj.png' id='irj' /><img src='seij2.png' id='seij2' /><img src='seij1.png' id='seij1' /><img src='rij.png' id='rij' /><img src='sqj.png' id='sqj' /><img src='wsj.png' id='wsj' /><img src='sj.png' id='sj' /><img src='irt.png' id='irt' /><img src='seit.png' id='seit' /><img src='irtl.png' id='irtl' /><img src='seitl.png' id='seitl' /><img src='war.png' id='war' /><img src='rajj.png' id='rajj' /><img src='zj.png' id='zj' /><img src='vicn.png' id='vicn' /><img src='qce2.png' id='qce2' /><img src='qce1.png' id='qce1' /><img src='tifc.png' id='tifc' /><img src='sqc.png' id='sqc' /><img src='kirce.png' id='kirce' /><img src='qcn.png' id='qcn' /><img src='qt.png' id='qt' /><img src='ranp.png' id='ranp' /><img src='fuv.png' id='fuv' /><img src='rig.png' id='rig' /><img src='rajg.png' id='rajg' /><img src='wsvf.png' id='wsvf' /><img src='svf.png' id='svf' /><img src='wsvm.png' id='wsvm' /><img src='svm.png' id='svm' /><img src='sn.png' id='sn' /><img src='qsv.png' id='qsv' /><img src='aerv.png' id='aerv' /><img src='zv.png' id='zv' /><img src='sqv.png' id='sqv' /><img src='lagv.png' id='lagv' /><img src='sepv.png' id='sepv' /><img src='seiv.png' id='seiv' /><img src='irv.png' id='irv' /><img src='ele.png' id='ele' /><img src='cloe.png' id='cloe' /><img src='vibd.png' id='vibd' /><img src='vica.png' id='vica' /><img src='meches.png' id='meches' /><img src='irc.png' id='irc' /><img src='wabd.png' id='wabd' /><img src='p35.png' id='p35' /><img src='p34.png' id='p34' /><img src='p33.png' id='p33' /><img src='p32.png' id='p32' /><img src='p31.png' id='p31' /><img src='p30.png' id='p30' /><img src='p22.png' id='p22' /><img src='p21.png' id='p21' /><img src='p20.png' id='p20' /><img src='p18.png' id='p18' /><img src='p17.png' id='p17' /><img src='p16.png' id='p16' /><img src='p15.png' id='p15' /><img src='p14.png' id='p14' /><img src='p13.png' id='p13' /><img src='p12.png' id='p12' /><img src='p11.png' id='p11' /><img src='p10.png' id='p10' /><img src='p08.png' id='p08' /><img src='p07.png' id='p07' /><img src='p06.png' id='p06' /><img src='p05.png' id='p05' /><img src='p04.png' id='p04' /><img src='p03.png' id='p03' /><img src='p02.png' id='p02' /><img src='p01.png' id='p01' /><img src='ff8b.png' id='ff8b' /><img src='ff8g.png' id='ff8g' /><img src='ff7.png' id='ff7' /><img src='ff8.png' id='ff8' /><img src='ff.png' id='ff' />
+      </div>
+    </div>
+
+    <div id='footer'>
+      <p>All sets are © their original artists. Learn more about Smooch <a href='https://github.com/emhoracek/smooch'>from the Github repo</a>.</p>
+
+      <p style='font-size: 0.75em'>Note: Because of <a href='https://github.com/emhoracek/smooch/issues/12'>a bug</a>, if click-and-drag doesn't work, try switching to different set # and back.</p>
+    </div>
+
+    </div>
+
+    <script type='text/javascript' src='setdata.js'></script>
+
+    <script type='text/javascript' src='../../doll.js'></script>
+  </body>
+</html>
