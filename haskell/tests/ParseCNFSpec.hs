@@ -61,18 +61,18 @@ spec = do
   describe "getKissData" $ do
     it "parses a CNF into KiSS data" $
       runEitherT (getKissData sampleKiss) `shouldReturn`
-        Right (KissData 0 0 ["colors.kcf"] (756, 398)
+        Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCell 0 "shirt" 0 [0,1,2,3] 0] [Position 1 1],
             KissObject 2 [ fakeKissCell 0 "body"  0 [0,1,2,3] 0] [Position 2 2],
             KissObject 3 [ fakeKissCell 0 "shirtb" 0 [0,1,2,3] 0] [Position 3 3]])
     it "parses a CNF into KiSS data" $
       runEitherT (getKissData sampleKiss2) `shouldReturn`
-        Right (KissData 0 0 ["colors.kcf"] (756, 398)
+        Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCell 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [Position 0 0]])
     it "parses a CNF into KiSS data even with idiosyncratic caps" $
       runEitherT (getKissData sampleKiss3) `shouldReturn`
-        Right (KissData 0 0 ["colors.kcf"] (756, 398)
+        Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCell 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [Position 1 1],
             KissObject 2 [ fakeKissCell 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])

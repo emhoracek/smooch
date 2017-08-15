@@ -3,27 +3,37 @@
 module ShellSpec (spec) where
 
 import           Control.Monad.Trans.Either
+import qualified Data.Array                 as A
 import           Data.Monoid                ((<>))
 import           Shell
 import           Test.Hspec
 
+import           Kiss
+
 sampleDir :: [Char]
 sampleDir = "tests/samples"
+
+samplePalettes :: Palettes
+samplePalettes = toArray ["color.kcf"]
+  where toArray l = A.listArray (0, length l) l
+
+fakeCel :: CNFKissCell
+fakeCel = CNFKissCell 0 "aurora" 0 [] 0
 
 spec :: Spec
 spec = do
   describe "convertCel" $ do
     it "converts a cel to png" $
-      runEitherT (convertCel "color.kcf" "aurora" "rgb:ff/f7/ff" (sampleDir <> "/aurora")) `shouldReturn` Right ("aurora", (0,0))
+      runEitherT (convertCel samplePalettes 0 "aurora" (sampleDir <> "/aurora")) `shouldReturn` Right ("aurora", (0,0))
     it "gives an error if the file isn't there" $
-      runEitherT (convertCel "color.kcf" "aurora.cel" "rgb:ff/f7/ff" (sampleDir <> "/aurora")) `shouldReturn`
+      runEitherT (convertCel samplePalettes 0 "aurora.cel" (sampleDir <> "/aurora")) `shouldReturn`
         Left "Error while converting cel tests/samples/aurora/aurora.cel.cel. Exit code: 1. Error: Read palette tests/samples/aurora/color.kcf \nNew style palette\nRead cel tests/samples/aurora/aurora.cel.cel \ntests/samples/aurora/aurora.cel.cel: No such file or directory\n"
 
   describe "convertCels" $ do
     it "finds the transparent color and converts all the cels" $
-      runEitherT (convertCels "color.kcf" ["aurora"] (sampleDir <> "/aurora")) `shouldReturn` Right [("aurora", (0,0))]
+      runEitherT (convertCels samplePalettes [fakeCel] (sampleDir <> "/aurora")) `shouldReturn` Right [("aurora", (0,0))]
     it "returns an error if a cel is missing" $
-      runEitherT (convertCels "color.kcf" ["aurora.cel"] (sampleDir <> "/aurora")) `shouldReturn`
+      runEitherT (convertCels samplePalettes [fakeCel { cnfCelName = "aurora.cel"}] (sampleDir <> "/aurora")) `shouldReturn`
         Left "Error while converting cel tests/samples/aurora/aurora.cel.cel. Exit code: 1. Error: Read palette tests/samples/aurora/color.kcf \nNew style palette\nRead cel tests/samples/aurora/aurora.cel.cel \ntests/samples/aurora/aurora.cel.cel: No such file or directory\n"
 
 
