@@ -36,7 +36,7 @@ getKissCels file =
 
 getKissPalettes :: CNFKissData -> EitherT T.Text IO Palettes
 getKissPalettes file = return $ toArray (cnfkPalettes file)
-  where toArray l = A.listArray (0, length l) l
+  where toArray l = A.listArray (0, length l - 1) l
 
 lookupPalette :: Int -> Palettes -> EitherT T.Text IO PaletteFilename
 lookupPalette n palettes =
