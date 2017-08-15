@@ -28,6 +28,7 @@ processSet (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   staticDir <- createSetDir (takeBaseName fName)
   unzipFile fName staticDir
+  log' "Unzipped file!"
   createCels staticDir
 
 staticDirFromSetName :: String -> FilePath
@@ -50,16 +51,23 @@ deleteCels staticDir = do
 
 createCels :: FilePath -> EitherT Text IO [KissCell]
 createCels staticDir = do
+  log' "About to get CNF"
   cnf <- getCNF staticDir
+  log' "Got CNF"
   KissSet cnfKissData celData kissPalettes <- getKissSet cnf
-  log' $ "Parsed CNF"
+  log' "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes celData staticDir
-  log' $ "Converted cels"
+  log' "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
+  log' "Added offsets"
   defPalette <- defaultPalette kissPalettes
+  log' "Got default palette"
   bgColor <- colorByIndex 0 (staticDir </> defPalette)
+  log' "Got bg color"
   borderColor <- colorByIndex (cnfkBorder cnfKissData) (staticDir </> defPalette)
+  log' "Got border color"
   let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
+  log' "Added cels and colors to kiss data"
   let json = "var kissJson = " <> encode kissData <> ";\n"
   tryIO $ B.writeFile (staticDir <> "/setdata.js") json
   log' $ "Wrote JSON"
