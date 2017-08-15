@@ -135,7 +135,7 @@ parseCellPalette = do
 parseFix :: Parser Int
 parseFix = do
     char '.'
-    num <- many digit
+    num <- option "0" (try $ many1 digit)
     return $ read num
 
 -- This parses all the list of sets the cell will be displayed in

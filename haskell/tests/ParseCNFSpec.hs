@@ -32,7 +32,7 @@ sampleKiss =
   "[0 \n" ++
   "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
   "#2   body.cel   *0 : 0 1 2 3 \n" ++
-  "#3   shirtb.cel *0 : 0 1 2 3 \n" ++
+  "#3.   shirtb.cel *0 : 0 1 2 3 \n" ++
   "$0 * 1,1 2,2 3,3"
 
 sampleKiss2 :: String
