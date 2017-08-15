@@ -1,24 +1,28 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE RecordWildCards     #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Upload where
 
-import qualified Data.ByteString.Lazy       as B
+import qualified Data.ByteString            as BS
+import qualified Data.ByteString.Lazy       as LBS
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
+import qualified Data.Text.Encoding         as T
+import           Data.Text.ICU.Convert
 
 import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
 
 import           Control.Exception
+import           Control.Logging            (log')
 import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
 
-import           Control.Logging            (log')
-
 import           Data.Aeson                 (encode)
+
 import           Kiss
 import           ParseCNF
 import           Shell
@@ -69,8 +73,8 @@ createCels staticDir = do
   let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
   let json = "var kissJson = " <> encode kissData <> ";\n"
-  tryIO $ B.writeFile (staticDir <> "/setdata.js") json
-  log' $ "Wrote JSON"
+  tryIO $ LBS.writeFile (staticDir <> "/setdata.js") json
+  log' "Wrote JSON"
   return realCelData
 
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
@@ -96,5 +100,11 @@ getCNF dir = do
   files <- liftIO $ getDirectoryContents dir
   let cnfs = filter (\x -> takeExtension x == ".cnf") files
   case cnfs of
-    (x:_xs)     -> liftIO $ readFile $ dir </> x
+    (f:_fs)     -> liftIO $ do
+                     cnf <- BS.readFile (dir </> f)
+                     c <- catch (return $! T.decodeUtf8 cnf)
+                                (\(_ :: SomeException) ->
+                                   do convert <- toUnicode <$> open "SHIFT_JIS" Nothing
+                                      return $ convert cnf)
+                     return $ T.unpack c
     _otherwise -> EitherT $ return $ Left "No configuration file found."
