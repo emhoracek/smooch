@@ -100,11 +100,15 @@ getCNF dir = do
   files <- liftIO $ getDirectoryContents dir
   let cnfs = filter (\x -> takeExtension x == ".cnf") files
   case cnfs of
-    (f:_fs)     -> liftIO $ do
-                     cnf <- BS.readFile (dir </> f)
-                     c <- catch (return $! T.decodeUtf8 cnf)
-                                (\(_ :: SomeException) ->
-                                   do convert <- toUnicode <$> open "SHIFT_JIS" Nothing
-                                      return $ convert cnf)
-                     return $ T.unpack c
-    _otherwise -> EitherT $ return $ Left "No configuration file found."
+    (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
+    _ -> EitherT $ return $ Left "No configuration file found."
+
+readUtf8OrShiftJis :: String -> IO String
+readUtf8OrShiftJis fp = do
+  fileBS <- BS.readFile fp
+  fileText <- catch (return $! T.decodeUtf8 fileBS)
+                   (\(_ :: SomeException) -> decodeShiftJiS fileBS)
+  return $ T.unpack fileText
+  where decodeShiftJiS bs = do
+          convert <- toUnicode <$> open "SHIFT_JIS" Nothing
+          return $ convert bs
