@@ -86,8 +86,8 @@ data SetPos = Position {
             | NoPosition
     deriving (Eq, Show)
 instance ToJSON SetPos where
-    toJSON (Position x y) = object["x" .= x, "y" .= y]
-    toJSON NoPosition     = "none"
+    toJSON (Position x y) = object ["x" .= x, "y" .= y]
+    toJSON NoPosition     = object ["x" .= (0 :: Int), "y" .= (0 :: Int) ]
 
 type PaletteFilename = String
 type CelFilename = String
