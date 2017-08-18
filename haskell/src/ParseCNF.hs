@@ -106,6 +106,7 @@ parseCellLine = do
     num <- many digit
     cell <- parseCell
     optional parseComment
+    skipMany digit
     return $ CNFCell (read num, cell)
 
 parseCell :: Parser CNFKissCell
@@ -186,7 +187,7 @@ parsePalette = do
 parseBorder :: Parser CNFLine
 parseBorder = do
     char '['
-    num <- many digit
+    num <- option "0" (many1 digit)
     return $ CNFBorder (read num)
 
 -- The following four functions parse the cel positions for each set of cells.
@@ -231,6 +232,7 @@ data CNFLine = CNFMemory Int
 parseCNFLines :: Parser [CNFLine]
 parseCNFLines = do
     ls <- many parseCNFLine
+    optional (char '\FS')
     eof
     return ls
 

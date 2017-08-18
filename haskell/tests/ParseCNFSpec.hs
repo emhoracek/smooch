@@ -56,6 +56,20 @@ sampleKiss3 =
   "#1   shirtb.CEL *0 : 0 1 2 3 \n" ++
   "$0 * 1,1 2,2"
 
+sampleKiss4 :: String
+sampleKiss4 =
+  "; ** Palette files ** \n" ++
+  "%colors.kcf \n" ++
+  "(756,398) \n" ++
+  "[ ; lol no border number \n" ++
+  "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
+  "#2   body.Cel   *0 : 0 1 2 3 \n" ++
+  "; let's just throw some random numbers in the next line \n" ++
+  "#1   shirtb.CEL  3234 \n" ++
+  "$0 * 1,1 2,2 \n" ++
+  "; better end this with file separator character \n" ++
+  ['\FS']
+
 spec :: Spec
 spec = do
   describe "getKissData" $ do
@@ -76,6 +90,13 @@ spec = do
           [ KissObject 1 [ fakeKissCell 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCell 0 "shirtb" 0 [0,1,2,3] 0 ] [Position 1 1],
             KissObject 2 [ fakeKissCell 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])
+    it "parses a CNF into KiSS data even with odd formatting/encoding" $
+      runEitherT (getKissData sampleKiss4) `shouldReturn`
+        Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
+          [ KissObject 1 [ fakeKissCell 0 "shirt" 0 [0,1,2,3] 0,
+                           fakeKissCell 0 "shirtb" 0 [0..9] 0 ] [Position 1 1],
+            KissObject 2 [ fakeKissCell 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])
+
     it "returns an error message for a bad cnf" $
       pendingWith "oops"
 {--
