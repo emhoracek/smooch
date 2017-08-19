@@ -20,6 +20,7 @@ import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
+import           Data.Bifunctor             (first)
 
 import           Data.Aeson                 (encode)
 
@@ -87,12 +88,10 @@ addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> Kis
 addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
   KissData m borderColor bgColor p ws o cels
 
-tryIO :: IO () -> EitherT Text IO ()
-tryIO f = do
-  result <-liftIO (try f :: IO (Either IOException ()))
-  case result of
-    Right () -> return ()
-    Left ex  -> EitherT $ return $ Left (T.pack $ show ex)
+tryIO :: IO a -> EitherT Text IO a
+tryIO m = EitherT $ first showIOException <$> try m
+  where
+    showIOException = T.pack . show :: IOException -> Text
 
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> EitherT Text IO String
