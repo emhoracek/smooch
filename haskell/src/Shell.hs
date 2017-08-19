@@ -15,13 +15,13 @@ import           ParseCNF
 -- Gets the transparency color from a kcf palette.
 transColor :: PaletteFilename -> EitherT T.Text IO String
 transColor paletteLoc = EitherT $ do
-  (_,colorOut, err, ph)  <- createProcess (shell $ "cel2pnm -t " <> paletteLoc) { std_out = CreatePipe, std_err = CreatePipe }
+  (_, colorOut, err, ph)  <- createProcess (shell $ "cel2pnm -t " <> paletteLoc) { std_out = CreatePipe, std_err = CreatePipe }
   result <- waitForProcess ph
   errMsg <- case err of
               Just x  -> hGetContents x
               Nothing -> return "no error message"
   color <- case colorOut of
-              Just x -> hGetContents x
+              Just x  -> hGetContents x
               Nothing -> return "no color"
   case result of
     ExitSuccess   -> return $ Right color
