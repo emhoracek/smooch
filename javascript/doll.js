@@ -1,15 +1,13 @@
 /* SMOOCH */
 
 var colorids = [];
+var loaded = 0;
 
 var Smooch = function(kissData) {
 
     this.editMode = false;
 
     var editButton = document.getElementById("edit");
-
-    var that = this;
-
 
     this.set = new KissSet(kissData);
     this.set.update();
@@ -195,7 +193,7 @@ var KiSSCell = function(obj, cell, set) {
     this.name = cell.name;
     this.mark = obj.id;
     this.fix = cell.fix;
-    this.position = { x: 0, y: 0};
+    this.position = obj.positions[0];
     this.positions = obj.positions;
     this.sets = cell.sets;
     this.image = undefined;
@@ -221,22 +219,15 @@ KiSSCell.prototype = {
         var width = image.width;
         var height = image.height;
 
-        // Draw image to ctxt to get image data
+        this.image = image;
+
+        // Draw image to ctxt and get image data
         drawctxt.drawImage(image,
                            0,
                            0,
                            width,
                            height);
 
-        var imageData = drawctxt.getImageData(0,0, width, height).data;
-
-        /* Save drawn image as cel's image -- note this is not quite necesary
-           but it makes it visible what's going on with the ghost image, which is
-           stored the same way */
-        this.image = new Image();
-        this.image.src = drawcanvas.toDataURL('image/png');
-
-        // get image again for ghost image
         var ghostImageData = drawctxt.getImageData(0,0, width, height);
         var data = ghostImageData.data;
 
@@ -256,6 +247,11 @@ KiSSCell.prototype = {
         // Save altered image as cel's ghost image
         this.ghostImage = new Image();
         this.ghostImage.src = drawcanvas.toDataURL('image/png');
+
+        // Let Smooch know when image is loaded
+        this.ghostImage.onload = function() {
+            loaded = loaded + 1;
+        };
 
         // Clear ctxt
         drawctxt.clearRect(0, 0, set.size.x, set.size.y);
@@ -279,12 +275,16 @@ KiSSCell.prototype = {
             if (this.alpha) {
                 screen.globalAlpha = (255-this.alpha)/255;
             }
+
             screen.drawImage(this.image,
-                             this.position.x + this.offset.x, this.position.y + this.offset.y);
+                             this.position.x + this.offset.x,
+                             this.position.y + this.offset.y);
 
             screen.globalAlpha = 1;
+
             ghost.drawImage(this.ghostImage,
-                            this.position.x + this.offset.x, this.position.y + this.offset.y);
+                            this.position.x + this.offset.x,
+                            this.position.y + this.offset.y);
         }
     }
 };
@@ -370,5 +370,15 @@ var Mouser = function(that) {
 window.addEventListener('load', function() {
     var kissData = kissJson;
     this.smooch = new Smooch(kissData);
-    /*window.setTimeout(function() {console.log("draw!"); this.smooch.set.draw();}, 300);*/
+    var blah = 0;
+    var checkLoaded = function () {
+        if (loaded < kissData.cels.length) {
+            console.log("loading...");
+            window.setTimeout(checkLoaded, 500);
+        } else {
+            this.smooch.set.draw();
+        }
+    };
+
+    window.setTimeout(checkLoaded, 500);
 });
