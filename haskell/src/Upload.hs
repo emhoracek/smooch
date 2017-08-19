@@ -4,6 +4,7 @@
 
 module Upload where
 
+import           Data.List                  (nub)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Lazy       as LBS
 import           Data.Text                  (Text)
@@ -60,7 +61,7 @@ createCels staticDir = do
   log' "Got CNF"
   KissSet cnfKissData celData kissPalettes <- getKissSet cnf
   log' "Parsed CNF"
-  celsWithOffsets <- convertCels kissPalettes celData staticDir
+  celsWithOffsets <- convertCels kissPalettes (nub celData) staticDir
   log' "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets celData
   log' "Added offsets"
