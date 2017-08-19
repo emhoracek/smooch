@@ -96,11 +96,11 @@ tryIO m = EitherT $ first showIOException <$> try m
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> EitherT Text IO String
 getCNF dir = do
-  files <- liftIO $ getDirectoryContents dir
+  files <- tryIO $ getDirectoryContents dir
   let cnfs = filter (\x -> takeExtension x == ".cnf") files
   case cnfs of
-    (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
-    _ -> EitherT $ return $ Left "No configuration file found."
+    (f:_fs) -> tryIO $ readUtf8OrShiftJis (dir </> f)
+    _ -> left "No configuration file found."
 
 readUtf8OrShiftJis :: String -> IO String
 readUtf8OrShiftJis fp = do
