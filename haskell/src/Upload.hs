@@ -20,7 +20,7 @@ import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
-import           Data.Bifunctor             (first)
+import           Data.Either.Combinators    (mapLeft)
 
 import           Data.Aeson                 (encode)
 
@@ -89,7 +89,7 @@ addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
   KissData m borderColor bgColor p ws o cels
 
 tryIO :: IO a -> EitherT Text IO a
-tryIO m = EitherT $ first showIOException <$> try m
+tryIO m = EitherT $ mapLeft showIOException <$> try m
   where
     showIOException = T.pack . show :: IOException -> Text
 
