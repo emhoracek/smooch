@@ -41,13 +41,35 @@ actually just JavaScript -- it's also the HTML, CSS, and all the images for a
 single doll ("Aurora" by Punky). I don't know JavaScript very well so if you
 can help that would be amazing.
 
+## Thanks
+
+I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn't have gotten where it is now without the efforts of many other people! That includes:
+
+ * the international KiSS community
+  * the Japanese KiSS community that developed KiSS as an open standard in the first place
+  * Dov Sherman, who maintained the Big KiSS Page (an incredible resource) for many years
+  * Stephan Lepisto, who has kept the Big KiSS Page going even after the community died out
+  * Nick Lamb, who wrote GnomeKiSS, which I learned and copied a lot from for cel2pnm
+  * William Miles, who wrote UltraKiSS, the Java app that I use as a benchmark for compatibility
+  * all the incredible artists who made over 4,500 sets for this system
+ * Github contributors
+  * ear/bpaf helped with Haskell refactoring
+  * Darius improved cel2pnm and added tests
+  * huggablemonad has helped debug several sets
+ * mentors
+  * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
+  * Mark Dominus helped me write cel2pmn
+
 ## Feedback
 
 I would very much appreciate input on how to make this program better.
 
 Please let me know if cel2pnm doesn't convert a cell correctly and I will
-attempt to fix it. (If smooch doesn't display a doll correctly, that's because it
-doesn't display hardly anything correctly right now.)
+attempt to fix it. 
+
+Smooch should display any plain KiSS/GS doll correctly. FKiSS and Cherry KiSS
+aren't supported yet. If you find a plain KiSS doll that Smooch doesn't display
+right, please submit an issue along with an error message, so we can figure out why!
 
 If you would like to help with this or other tools for KiSS, please let me know!
 Email me at libby@daydrea.me, submit an issue, or send a pull request. THANKS!! :D
