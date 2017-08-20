@@ -57,6 +57,15 @@ KissSet.prototype = {
            are drawn, and they have to be drawn in a certain order to preserve
            the layering effect. */
 
+        // Helper function for matching objects and cels
+        var matches = function(obj_cell, cel) {
+            var unmatched = !obj_cell.matched;
+            var name_matches = obj_cell.name === cel.name;
+            var pal_matches = obj_cell.palette === cel.palette;
+            return unmatched && name_matches && pal_matches;
+        };
+
+
         /* Go through each KiSS object, add information from the object to the
            cells within the object, then add those cells to the list. */
         for (var i = 0; i < objs.length; i++) {
@@ -84,7 +93,7 @@ KissSet.prototype = {
                     // TODO: This is going to cause trouble if we have multiple cels with
                     // the same name, but they have different palettes applied.
                     // Could make sure that the palette of the object and the cel match
-                    if (cels[k].name === obj_cells[j].name && !obj_cells[j].matched) {
+                    if (matches(obj_cells[j], cels[k], this.cels[k])) {
                         if (this.cels[k] && this.cels[k].obj) {
                             console.log("already matched");
                         } else {
