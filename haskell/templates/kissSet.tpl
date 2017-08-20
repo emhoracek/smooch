@@ -35,8 +35,6 @@
 
     <div id="footer">
       <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
-
-      <p style="font-size: 0.75em">Note: Because of <a href="https://github.com/emhoracek/smooch/issues/12">a bug</a>, if click-and-drag doesn't work, try switching to different set # and back.</p>
     </div>
 
     </div>
