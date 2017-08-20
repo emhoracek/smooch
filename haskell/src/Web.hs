@@ -6,7 +6,6 @@ module Web where
 
 import           Control.Lens
 import           Control.Logging
-import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Map.Syntax            (MapSyntaxM, ( ## ))
 import           Data.Monoid                ((<>))
@@ -61,13 +60,13 @@ indexHandler ctxt = render ctxt "index"
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath') = do
   let staticDir = staticDirFromSetName (takeBaseName (T.unpack name))
-  cels <- liftIO $ runEitherT $ processSet (T.unpack name, filePath')
+  cels <- runEitherT $ processSet (T.unpack name, filePath')
   renderKissSet ctxt staticDir cels
 
 setHandler :: Ctxt -> T.Text -> IO (Maybe Response)
 setHandler ctxt setName = do
   let staticDir = staticDirFromSetName (T.unpack setName)
-  cels <- liftIO $ runEitherT $ createCels staticDir
+  cels <- runEitherT $ createCels staticDir
   renderKissSet ctxt staticDir cels
 
 renderKissSet :: Ctxt -> String -> Either T.Text [KissCell] -> IO (Maybe Response)

@@ -21,6 +21,7 @@ import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Monoid                ((<>))
+import           Data.Either.Combinators    (mapLeft)
 
 import           Data.Aeson                 (encode)
 
@@ -88,21 +89,19 @@ addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> Kis
 addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
   KissData m borderColor bgColor p ws o cels
 
-tryIO :: IO () -> EitherT Text IO ()
-tryIO f = do
-  result <-liftIO (try f :: IO (Either IOException ()))
-  case result of
-    Right () -> return ()
-    Left ex  -> EitherT $ return $ Left (T.pack $ show ex)
+tryIO :: IO a -> EitherT Text IO a
+tryIO m = EitherT $ mapLeft showIOException <$> try m
+  where
+    showIOException = T.pack . show :: IOException -> Text
 
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> EitherT Text IO String
 getCNF dir = do
-  files <- liftIO $ getDirectoryContents dir
+  files <- tryIO $ getDirectoryContents dir
   let cnfs = filter (\x -> takeExtension x == ".cnf") files
   case cnfs of
-    (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
-    _ -> EitherT $ return $ Left "No configuration file found."
+    (f:_fs) -> tryIO $ readUtf8OrShiftJis (dir </> f)
+    _ -> left "No configuration file found."
 
 readUtf8OrShiftJis :: String -> IO String
 readUtf8OrShiftJis fp = do

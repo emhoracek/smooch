@@ -24,25 +24,25 @@ getKissSet file = do
 
 getKissData :: String -> EitherT T.Text IO CNFKissData
 getKissData file =
-    case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
-      Right ls -> return $ linesToScript ls
-      Left e  -> EitherT $ return $ Left $ T.pack $ show e
+  case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
+    Right ls -> right $ linesToScript ls
+    Left  e  -> left  $ T.pack $ show e
 
 getKissCels :: String -> EitherT T.Text IO [CNFKissCell]
 getKissCels file =
-    case parse parseCNFLines "KiSS cel error: " (map toLower file) of
-      Right ls -> return $ linesToCells ls
-      Left e  -> EitherT $ return $ Left $ T.pack $ show e
+  case parse parseCNFLines "KiSS cel error: " (map toLower file) of
+    Right ls -> right $ linesToCells ls
+    Left  e  -> left  $ T.pack $ show e
 
 getKissPalettes :: CNFKissData -> EitherT T.Text IO Palettes
-getKissPalettes file = return $ toArray (cnfkPalettes file)
+getKissPalettes file = right $ toArray (cnfkPalettes file)
   where toArray l = A.listArray (0, length l - 1) l
 
 lookupPalette :: Int -> Palettes -> EitherT T.Text IO PaletteFilename
 lookupPalette n palettes =
   if snd (A.bounds palettes) >= n
-    then return (palettes ! n)
-    else EitherT $ return $ Left "Palette not found"
+    then right (palettes ! n)
+    else left "Palette not found"
 
 defaultPalette :: Palettes -> EitherT T.Text IO PaletteFilename
 defaultPalette = lookupPalette 0
