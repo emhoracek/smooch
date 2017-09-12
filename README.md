@@ -46,19 +46,19 @@ can help that would be amazing.
 I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn't have gotten where it is now without the efforts of many other people! That includes:
 
  * the international KiSS community
-  * the Japanese KiSS community that developed KiSS as an open standard in the first place
-  * Dov Sherman, who maintained the Big KiSS Page (an incredible resource) for many years
-  * Stephan Lepisto, who has kept the Big KiSS Page going even after the community died out
-  * Nick Lamb, who wrote GnomeKiSS, which I learned and copied a lot from for cel2pnm
-  * William Miles, who wrote UltraKiSS, the Java app that I use as a benchmark for compatibility
-  * all the incredible artists who made over 4,500 sets for this system
+   * the Japanese KiSS community that developed KiSS as an open standard in the first place
+   * Dov Sherman, who maintained the Big KiSS Page (an incredible resource) for many years
+   * Stephan Lepisto, who has kept the Big KiSS Page going even after the community died out
+   * Nick Lamb, who wrote GnomeKiSS, which I learned and copied a lot from for cel2pnm
+   * William Miles, who wrote UltraKiSS, the Java app that I use as a benchmark for compatibility
+   * all the incredible artists who made over 4,500 sets for this system
  * Github contributors
-  * ear/bpaf helped with Haskell refactoring
-  * Darius improved cel2pnm and added tests
-  * huggablemonad has helped debug several sets
+   * ear/bpaf helped with Haskell refactoring
+   * Darius improved cel2pnm and added tests
+   * huggablemonad has helped debug several sets
  * mentors
-  * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
-  * Mark Dominus helped me write cel2pmn
+   * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
+   * Mark Dominus helped me write cel2pmn
 
 ## Feedback
 
