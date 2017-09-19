@@ -1,3 +1,10 @@
+# Contents
+
+  * [JavaScript front-end](#javascript-front-end)
+    * [doll.js](#dolljs)
+    * [setdata.js](#setdatajs)
+  * [reader.html and reader.js](#readerhtml-and-readerjs)
+
 # JavaScript front-end
 
 The "front-end" of Smooch is just a few files. There's some HTML, a
@@ -13,7 +20,16 @@ no libraries or anything.
 I'm using a game coding technique called a "ghost buffer" to detect
 what images are being clicked on.
 
-I'll write a blog post soon explaining it in detail!
+If you load a doll and right click and inspect the DOM, you'll see there's a
+undisplayed second canvas besides the one that you can see and interact with.
+That's the ghost canvas. If you remove the `display: none` from the CSS, you'll
+be able to see it -- it's right below the actual canvas and has a bright blue
+background. Each item in the real canvas is also drawn on the ghost canvas, but
+in shades of black to red. Each item is a subtly different color.
+
+When a player clicks on the real canvas, the JavaScript looks up the
+corresponding pixel on the ghost canvas. Each color on the ghost canvas maps to
+one object in the set, so the script knows which object you clicked!
 
 ## setdata.js
 
@@ -134,4 +150,10 @@ This is only the cel parts of the JSON.
     "y": 0
     }
  }
+
 ```
+
+# reader.html and reader.js
+
+These two files are an experiment with reading cels directly in JavaScript. They
+aren't currently used by the app at all.
