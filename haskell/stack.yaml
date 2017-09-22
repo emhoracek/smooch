@@ -5,18 +5,23 @@ packages:
     git: https://github.com/positiondev/fn
     commit: 6989eca99cc02da5e2268e1aa79157bdd6220ab5
   subdirs:
-    - fn
-    - fn-extra
+  - fn
+  - fn-extra
   extra-dep: true
 - location:
-    git: https://github.com/positiondev/hspec-fn
-    commit: a36fc89a32f05968795dedf6d919e854d96082ea
+    git: https://github.com/positiondev/rivet
+    commit: 51b627cbc568e98fd424b4d3049554685c5da310
+  subdirs:
+  - rivet-core
+  - rivet-autoimporter
+  - rivet-adaptor-postgresql
   extra-dep: true
 extra-deps:
 - digestive-functors-0.8.2.0
 - heist-1.0.1.0
 - logging-3.0.4
-- http-accept-0.2
 - map-syntax-0.2.0.2
 - wai-util-0.8
+- http-accept-0.2
+- rivet-core-0.2.0.0
 resolver: lts-8.15
