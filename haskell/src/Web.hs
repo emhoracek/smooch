@@ -25,6 +25,7 @@ import           Web.Fn.Extra.Heist
 import           Ctxt
 import           Kiss
 import           Upload
+import           Users.Controller
 
 initializer :: IO Ctxt
 initializer = do
@@ -56,6 +57,7 @@ site ctxt =
   route ctxt [ end ==> indexHandler
              , path "upload" // method POST // file "kissfile" !=> uploadHandler
              , path "sets" // segment // end ==> setHandler
+             , path "users" ==> userRoutes
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
