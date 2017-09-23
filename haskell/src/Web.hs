@@ -22,20 +22,9 @@ import qualified Text.XmlHtml               as X
 import           Web.Fn
 import           Web.Fn.Extra.Heist
 
+import           Ctxt
 import           Kiss
 import           Upload
-
-data Ctxt = Ctxt { _req   :: FnRequest,
-                   _heist :: FnHeistState Ctxt,
-                   _pool  :: Pool PG.Connection }
-
-makeLenses ''Ctxt
-
-instance RequestContext Ctxt where
-  requestLens = req
-
-instance HeistContext Ctxt where
-  getHeist = _heist
 
 initializer :: IO Ctxt
 initializer = do
