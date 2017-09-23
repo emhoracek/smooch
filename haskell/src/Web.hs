@@ -7,9 +7,12 @@ module Web where
 import           Control.Lens
 import           Control.Logging
 import           Control.Monad.Trans.Either
+import qualified Data.Configurator          as C
 import           Data.Map.Syntax            (MapSyntaxM, ( ## ))
 import           Data.Monoid                ((<>))
+import           Data.Pool
 import qualified Data.Text                  as T
+import qualified Database.PostgreSQL.Simple as PG
 import qualified Heist.Interpreted          as H
 import           Network.HTTP.Types.Method
 import           Network.Wai
@@ -23,7 +26,8 @@ import           Kiss
 import           Upload
 
 data Ctxt = Ctxt { _req   :: FnRequest,
-                   _heist :: FnHeistState Ctxt}
+                   _heist :: FnHeistState Ctxt,
+                   _pool  :: Pool PG.Connection }
 
 makeLenses ''Ctxt
 
@@ -35,11 +39,23 @@ instance HeistContext Ctxt where
 
 initializer :: IO Ctxt
 initializer = do
+  conf <- C.load [C.Required "devel.cfg"]
+  dbHost <- C.require conf "postgresql-simple.host"
+  dbPort <- C.require conf "postgresql-simple.port"
+  dbUser <- C.require conf "postgresql-simple.user"
+  dbPass <- C.require conf "postgresql-simple.pass"
+  dbName <- C.require conf "postgresql-simple.db"
+  dbPool <- createPool (PG.connect (PG.ConnectInfo dbHost
+                                                   dbPort
+                                                   dbUser
+                                                   dbPass
+                                                   dbName))
+            PG.close 1 60 20
   hs' <- heistInit ["templates"] mempty mempty
   let hs = case hs' of
              Left ers -> errorL' ("Heist failed to load templates: \n" <> T.intercalate "\n" (map T.pack ers))
              Right hs'' -> hs''
-  return (Ctxt defaultFnRequest hs)
+  return (Ctxt defaultFnRequest hs dbPool)
 
 app :: IO Application
 app = do
