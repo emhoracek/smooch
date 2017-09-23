@@ -48,6 +48,7 @@ library
                        Shell,
                        Upload,
                        Web,
+                       Users.Model
   build-depends:       base,
                        aeson,
                        array,
