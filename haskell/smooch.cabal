@@ -50,6 +50,7 @@ library
                        Web,
                        Ctxt,
                        Users.Model,
+                       Users.View,
                        Users.Controller
   build-depends:       base,
                        aeson,
