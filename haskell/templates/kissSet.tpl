@@ -29,7 +29,11 @@
       <div id="playarea">
            <canvas id="screen"></canvas>
            <canvas id="ghost"></canvas>
-        <celImages />
+           <div id ="celImages">
+             <celImages>
+               <img src="/${dir}/${cel-name}.png" id="${cel-name}" />
+             </celImages>
+           </div>
       </div>
     </div>
 
