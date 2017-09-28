@@ -2,12 +2,14 @@
 
 module Users.Controller where
 
-import           Control.Lens
+import           Data.Maybe         (catMaybes)
+import           Data.Monoid        ((<>))
 import           Data.Text          (Text)
 import qualified Data.Text          as T
 import           Network.HTTP.Types (StdMethod (..))
 import           Network.Wai        (Response)
 import           Web.Fn
+import           Web.Larceny        hiding (renderWith)
 
 import           Ctxt
 import           Users.Model
@@ -29,12 +31,49 @@ usersHandler ctxt = do
   renderWith ctxt ["users", "index"] (usersSplices users)
 
 usersCreateHandler :: Ctxt -> Text -> Text -> Text -> Text -> IO (Maybe Response)
-usersCreateHandler ctxt username email password passwordConfirmation =
-  if password == passwordConfirmation
-  then
-    do let newUser = NewUser username email password
-       rows <- createUser ctxt newUser
-       if rows == 1
+usersCreateHandler ctxt username email password passwordConfirmation = do
+  eNewUser <-
+    validateNewUser ctxt username email password passwordConfirmation
+  case eNewUser of
+    Left errors ->
+      renderWith ctxt ["index"] (errorSplices errors)
+    Right newUser -> do
+      success <- createUser ctxt newUser
+      if success
          then okHtml "created!"
          else errHtml "couldn't create user"
-  else errHtml "Your passwords don't match"
+ where errorSplices errors =
+         newErrorSplices errors <> createUserErrorSplices
+       newErrorSplices errors =
+         (subs $ map (\(k,v) -> (k <> "Errors", textFill v)) errors)
+
+type Errors = [(Text, Text)]
+
+validateNewUser :: Ctxt -> Text -> Text -> Text -> Text -> IO (Either Errors NewUser)
+validateNewUser ctxt username email password passwordConfirmation = do
+  let passwordsDontMatch =
+        if password == passwordConfirmation
+        then Nothing
+        else Just ("password", "Your passwords don't match.")
+  usernameTaken <-
+     (fmap. fmap)
+       (const ("username", "That username is already in use."))
+       (getUserByUsername ctxt username)
+  emailTaken <-
+       (fmap . fmap)
+       (const ("email", "That email is already in use."))
+       (getUserByEmail ctxt email)
+  let emailInvalid =
+        if "@" `T.isInfixOf` email
+        then Nothing
+        else Just ("email", "Please enter a valid email.")
+  let errors = catMaybes [passwordsDontMatch, usernameTaken, emailTaken, emailInvalid]
+  if null errors
+    then return $ Right $ NewUser username email password
+    else return $ Left errors
+
+createUserErrorSplices :: Substitutions Ctxt
+createUserErrorSplices =
+          subs [ ("usernameErrors", textFill "")
+               , ("emailErrors", textFill "")
+               , ("passwordErrors", textFill "")]

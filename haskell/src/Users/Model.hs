@@ -44,8 +44,8 @@ getUsers ctxt =
      "SELECT id, username, email, created_at, updated_at FROM users"
        :: IO [ User ])
 
-createUser :: Ctxt -> NewUser -> IO Int64
-createUser ctxt newUser =
+createUser :: Ctxt -> NewUser -> IO Bool
+createUser ctxt newUser = (==) 1 <$>
   withResource (ctxt ^. pool) (\conn ->
     PG.execute
      conn
