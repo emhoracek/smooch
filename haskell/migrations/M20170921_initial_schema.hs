@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id serial primary key,
   username text not null,
-  email text not null,
+  email text not null unique,
   password text not null,
   created_at timestamptz,
   updated_at timestamptz
