@@ -24,7 +24,7 @@ userRoutes ctxt =
 
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
-  users <- getUsers (ctxt ^. pool)
+  users <- getUsers ctxt
   putStrLn (T.unpack $ T.intercalate "\n" (map (T.pack . show) users))
   renderWith ctxt ["users", "index"] (usersSplices users)
 
@@ -33,7 +33,7 @@ usersCreateHandler ctxt username email password passwordConfirmation =
   if password == passwordConfirmation
   then
     do let newUser = NewUser username email password
-       rows <- createUser (ctxt ^. pool) newUser
+       rows <- createUser ctxt newUser
        if rows == 1
          then okHtml "created!"
          else errHtml "couldn't create user"
