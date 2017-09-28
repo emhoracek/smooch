@@ -51,26 +51,39 @@ type Errors = [(Text, Text)]
 
 validateNewUser :: Ctxt -> Text -> Text -> Text -> Text -> IO (Either Errors NewUser)
 validateNewUser ctxt username email password passwordConfirmation = do
+  let pwMissing =
+        errBool "password" "Please enter a password."
+          (password == "")
+  let emailMissing =
+        errBool "email" "Please enter your email."
+          (email == "")
+  let usernameMissing =
+        errBool "username" "Please enter a username."
+          (username == "")
   let passwordsDontMatch =
-        if password == passwordConfirmation
-        then Nothing
-        else Just ("password", "Your passwords don't match.")
+        errBool "password" "Your passwords don't match."
+                (password /= passwordConfirmation)
   usernameTaken <-
-     (fmap. fmap)
-       (const ("username", "That username is already in use."))
+     errMaybe "username" "That username is already in use."
        (getUserByUsername ctxt username)
   emailTaken <-
-       (fmap . fmap)
-       (const ("email", "That email is already in use."))
+     errMaybe "email" "That email is already in use."
        (getUserByEmail ctxt email)
   let emailInvalid =
-        if "@" `T.isInfixOf` email
-        then Nothing
-        else Just ("email", "Please enter a valid email.")
-  let errors = catMaybes [passwordsDontMatch, usernameTaken, emailTaken, emailInvalid]
+        errBool "email" "Please enter a valid email."
+          (not $ "@" `T.isInfixOf` email)
+  let errors = catMaybes [passwordsDontMatch, usernameTaken,
+                          emailTaken, emailInvalid, pwMissing,
+                          emailMissing, usernameMissing]
   if null errors
     then return $ Right $ NewUser username email password
     else return $ Left errors
+  where errBool field msg cond =
+          if cond then Just (field, msg) else Nothing
+        errMaybe field msg maybeAction =
+          (fmap . fmap)
+          (const (field, msg))
+          maybeAction
 
 createUserErrorSplices :: Substitutions Ctxt
 createUserErrorSplices =
