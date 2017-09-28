@@ -1,19 +1,38 @@
 <html>
   <head>
-    <title>Kiss dolls!</title>
+    <title>Smooch!</title>
   </head>
   <body>
 
-    <h1>Smooch</h1>
+    <h1>Smooch!</h1>
 
-    <h2>Dress-up dolls</h2>
+    <!-- demo doll -->
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <!-- create your account! -->
 
-      <input type="file" name="kissfile">
-      <input type="submit" value="Upload!">
+    <form action="/users/create" method="post">
+      <div>
+        <label for="username">
+          Username: <input name="username" />
+        </label>
+      </div>
+      <div>
+        <label for="email">
+          Email: <input name="email" />
+        </label>
+      </div>
+      <div>
+        <label for="password">
+          Password: <input name="password" />
+        </label>
+      </div>
+      <div>
+        <label for="password-confirmation">Password (again):
+          <input name="password-confirmation" />
+        </label>
+      </div>
 
+      <input type="submit" />
     </form>
-
   </body>
 </html>
