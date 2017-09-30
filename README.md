@@ -15,10 +15,7 @@ if you want to learn more.
 I built a tool for converting KiSS cells (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats).
 
-Now, I'm making a KiSS doll viewer for the browser -- and you can help Check  
-out the 
-[CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) 
-for details.
+Now, I'm making a KiSS doll viewer for the browser -- and you can help! Check out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
 ## Structure
 
