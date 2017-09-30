@@ -24,6 +24,8 @@ lost just because technology has moved on.
 
 A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/ki_spark.htm)
 
+![Playing with a KiSS doll](http://i.imgur.com/UnxpRmL.gif)
+
 Check out Smooch's [GitHub wiki](https://github.com/emhoracek/smooch/wiki) if you want to learn more about KiSS.
 
 `cel2pnm` is a tool for converting KiSS cells (the individual graphics) to pnm
