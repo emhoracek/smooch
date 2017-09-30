@@ -27,7 +27,6 @@ userRoutes ctxt =
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
   users <- getUsers ctxt
-  putStrLn (T.unpack $ T.intercalate "\n" (map (T.pack . show) users))
   renderWith ctxt ["users", "index"] (usersSplices users)
 
 usersCreateHandler :: Ctxt -> Text -> Text -> Text -> Text -> IO (Maybe Response)
