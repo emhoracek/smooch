@@ -17,6 +17,8 @@ format (which is then simple to convert to lots of other formats).
 
 Now, I'm making a KiSS doll viewer for the browser -- and you can help! Check out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
+[!http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square](http://www.firsttimersonly.com/)
+
 ## Structure
 
 To display a KiSS doll, an application has to do four things:
