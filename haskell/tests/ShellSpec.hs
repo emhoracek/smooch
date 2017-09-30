@@ -5,9 +5,9 @@ module ShellSpec (spec) where
 import           Control.Monad.Trans.Either
 import qualified Data.Array                 as A
 import           Data.Monoid                ((<>))
-import           Shell
 import           Test.Hspec
 
+import           Shell
 import           Kiss
 
 sampleDir :: [Char]
