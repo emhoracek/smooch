@@ -6,9 +6,12 @@
 
     <h1>Smooch!</h1>
 
-    <!-- demo doll -->
+    <!-- demo doll should go here -->
 
-    <!-- create your account! -->
+    <h2> Create an account</h2>
+
+    <p>Note to contributors: you don't need to create an account unless you're
+      working on users -- if you're testing dolls then you can skip to the upload form.</p>
 
     <form action="/users/create" method="post">
       <div>
@@ -37,5 +40,17 @@
 
       <input type="submit" />
     </form>
+
+    <h2>Upload and play with a KiSS set </h2>
+
+    <p> Eventually this form will be under the user account page, but that's not ready yet.</p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+
+      <input type="file" name="kissfile">
+      <input type="submit" value="Upload!">
+
+    </form>
+
   </body>
 </html>
