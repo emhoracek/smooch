@@ -173,3 +173,5 @@ Now you can run `stack exec smooch` and open `localhost:8000` in your browser.
 You should see Smooch running!
 
 You can also run tests with `stack test` or open a REPL with `stack ghci smooch:smooch`.
+
+add-branch
