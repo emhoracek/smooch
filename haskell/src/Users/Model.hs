@@ -2,15 +2,18 @@
 
 module Users.Model where
 
+import           Control.Lens                       ((^.))
 import           Data.Int                           (Int64)
 import           Data.Maybe                         (listToMaybe)
-import           Data.Pool                          (Pool, withResource)
+import           Data.Pool                          (withResource)
 import           Data.Text                          (Text)
 import           Data.Time.Clock                    (UTCTime)
 import qualified Database.PostgreSQL.Simple         as PG
 import           Database.PostgreSQL.Simple.FromRow
 import           Database.PostgreSQL.Simple.ToField
 import           Database.PostgreSQL.Simple.ToRow
+
+import           Ctxt
 
 data User = User { userId        :: Int
                  , userUsername  :: Text
@@ -33,25 +36,25 @@ instance ToRow NewUser where
   toRow (NewUser username email password) =
     [toField username, toField email, toField password ]
 
-getUsers :: Pool PG.Connection -> IO [User]
-getUsers pgpool =
-  withResource pgpool (\conn ->
+getUsers :: Ctxt -> IO [User]
+getUsers ctxt =
+  withResource (ctxt ^. pool) (\conn ->
     PG.query_
      conn
      "SELECT id, username, email, created_at, updated_at FROM users"
        :: IO [ User ])
 
-createUser :: Pool PG.Connection -> NewUser -> IO Int64
-createUser pgpool newUser =
-  withResource pgpool (\conn ->
+createUser :: Ctxt -> NewUser -> IO Bool
+createUser ctxt newUser = (==) 1 <$>
+  withResource (ctxt ^. pool) (\conn ->
     PG.execute
      conn
      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)"
      newUser)
 
-getUserByUsername :: Pool PG.Connection -> Text -> IO (Maybe User)
-getUserByUsername pgpool username = listToMaybe <$>
-  withResource pgpool (\conn ->
+getUserByUsername :: Ctxt -> Text -> IO (Maybe User)
+getUserByUsername ctxt username = listToMaybe <$>
+  withResource (ctxt ^. pool) (\conn ->
     PG.query
      conn
      "SELECT id, username, email, created_at, updated_at FROM users\
@@ -59,12 +62,22 @@ getUserByUsername pgpool username = listToMaybe <$>
      (PG.Only username)
        :: IO [ User ])
 
-authenticateUser :: Pool PG.Connection -> Text -> Text -> IO (Maybe User)
-authenticateUser pgpool username password = listToMaybe <$>
-    withResource pgpool (\conn ->
+authenticateUser :: Ctxt -> Text -> Text -> IO (Maybe User)
+authenticateUser ctxt username password = listToMaybe <$>
+    withResource (ctxt ^. pool) (\conn ->
     PG.query
      conn
      "SELECT id, username, email, created_at, updated_at FROM users\
      \ WHERE username = ? AND crypt(?, password) = password"
      (username, password)
+       :: IO [ User ])
+
+getUserByEmail :: Ctxt -> Text -> IO (Maybe User)
+getUserByEmail ctxt email = listToMaybe <$>
+  withResource (ctxt ^. pool) (\conn ->
+    PG.query
+     conn
+     "SELECT id, username, email, created_at, updated_at FROM users\
+     \ WHERE email = ?"
+     (PG.Only email)
        :: IO [ User ])

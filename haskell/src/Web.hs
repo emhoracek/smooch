@@ -52,7 +52,7 @@ site ctxt =
     `fallthrough` notFoundText "Page not found."
 
 indexHandler :: Ctxt -> IO (Maybe Response)
-indexHandler ctxt = renderWith ctxt ["index"] mempty
+indexHandler ctxt = renderWith ctxt ["index"] createUserErrorSplices
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath') = do
