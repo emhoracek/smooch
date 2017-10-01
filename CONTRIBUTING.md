@@ -15,7 +15,7 @@ and all of them would mean so much to this project.
 
 ## Filing an issue
 
-You'll need to try and [get Smooch working on your own computer]() first (for
+You'll need to try and [get Smooch working on your own computer](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md#run-smooch-on-your-computer) first (for
 now anyway), but one of the easiest ways you can contribute to Smooch is by
 trying to load a set and see if it works!
 
@@ -80,7 +80,7 @@ Smooch.
  * Improve performance
  * Move cel and palette parsing into JavaScript from cel2pnm`*`
  * Add editing capabilities `*`
-   * Artists change the layering of cels (raising or lowering in relation to other items)
+   * Artists can change the layering of cels (raising or lowering in relation to other items)
    * Artists can change the offset of a cel in relation its object
    * Artists can change which palette a cel uses
    * Artists can edit a palette
@@ -108,14 +108,17 @@ Items maked a `*` will need work on the frontend as well.
 
 ## Run Smooch on your computer
 
-If any of this is confusing or doesn't work -- don't hesitate to let me know and
+If any of this is confusing or doesn't work -- don't hesitate to let me know by opening an issue @emhoracek and
 I'll help you out.
 
 ### Install `cel2pnm`
 
 You'll need a C compiler to compile the program.
 
-On Mac OSX you can use [Homebrew] to install `gcc` with `brew install gcc`
+* On Mac OSX you can use [Homebrew] to install `gcc` with `brew install gcc`
+* On Windows / Linux or other OS, follow the [GCC installation guide](https://gcc.gnu.org/install/).
+
+![alt text](https://preview.ibb.co/fmhcrG/brew_install.png "Brew install screenshot")
 
 Now change to the `cel2pnm` directory. Run `gcc cel2pnm.c -o cel2pnm`. That will
 result in the compiled program, `cel2pnm`.
