@@ -12,7 +12,7 @@ I've added information about KiSS to the
 [GitHub wiki](https://github.com/emhoracek/smooch/wiki), please check it out
 if you want to learn more.
 
-I built a tool for converting KiSS cells (the individual graphics) to pnm
+I built a tool for converting KiSS cels (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats).
 
 Now, I'm making a KiSS doll viewer for the browser -- and you can help! Check out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
@@ -23,7 +23,7 @@ Now, I'm making a KiSS doll viewer for the browser -- and you can help! Check ou
 
 To display a KiSS doll, an application has to do four things:
   1. Decompress the old, obsure Japanese compression format and extract the files.
-  2. Read the specialized image files (cells and palettes).
+  2. Read the specialized image files (cels and palettes).
   3. Read the configuration file.
   4. Display the sets so the user can interact with them.
 
@@ -66,7 +66,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
 
 I would very much appreciate input on how to make this program better.
 
-Please let me know if cel2pnm doesn't convert a cell correctly and I will
+Please let me know if cel2pnm doesn't convert a cel correctly and I will
 attempt to fix it. 
 
 Smooch should display any plain KiSS/GS doll correctly. FKiSS and Cherry KiSS

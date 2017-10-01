@@ -58,7 +58,7 @@ linesToScript xs =
           palettes = [ a | CNFPalette a <- xs ]
           -- window is (600, 480) by default
           windowSize = fromMaybe (600, 480) (listToMaybe [ a | CNFWindowSize a <- xs ])
-          -- turn object #, cell, set positions to objects
+          -- turn object #, cel, set positions to objects
           positions = [ a | CNFSetPos a <- xs ]
           objects = linesToObjects [ a | CNFCell a <- xs ] positions
 
@@ -99,15 +99,15 @@ linesToCells xs = [ snd a | CNFCell a <- xs ]
 
 -- KiSS Parser Combinators
 
--- Parses the lines describing cells and objects.
+-- Parses the lines describing cels and objects.
 parseCellLine :: Parser CNFLine
 parseCellLine = do
     char '#'
     num <- many digit
-    cell <- parseCell
+    cel <- parseCell
     optional parseComment
     skipMany digit
-    return $ CNFCell (read num, cell)
+    return $ CNFCell (read num, cel)
 
 parseCell :: Parser CNFKissCell
 parseCell = do
@@ -139,7 +139,7 @@ parseFix = do
     num <- option "0" (try $ many1 digit)
     return $ read num
 
--- This parses all the list of sets the cell will be displayed in
+-- This parses all the list of sets the cel will be displayed in
 parseSets :: Parser [Int]
 parseSets = do
   char ':'
@@ -190,7 +190,7 @@ parseBorder = do
     num <- option "0" (many1 digit)
     return $ CNFBorder (read num)
 
--- The following four functions parse the cel positions for each set of cells.
+-- The following four functions parse the cel positions for each set of cels.
 parseSetPos :: Parser CNFLine
 parseSetPos = do
     char '$'

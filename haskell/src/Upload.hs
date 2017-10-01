@@ -81,9 +81,9 @@ createCels staticDir = do
 
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
                        [KissCell]
-addOffsetsToCelData offsets cells =
+addOffsetsToCelData offsets cels =
   [ KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
-     | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+     | CNFKissCell{..} <- cels, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
 addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> KissData
 addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =

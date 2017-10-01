@@ -41,9 +41,9 @@ data KissObject = KissObject {
                     objPos   :: [SetPos] }
     deriving (Eq, Show)
 instance ToJSON KissObject where
-    toJSON (KissObject num cells pos) =
+    toJSON (KissObject num cels pos) =
         object["id" .= num,
-               "cells" .= toJSON cells,
+               "cels" .= toJSON cels,
                "positions" .= toJSON pos]
 
 data CNFKissCell = CNFKissCell {
