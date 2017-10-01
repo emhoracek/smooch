@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Smooch</title>
+    <link rel='stylesheet' type='text/css' href='../../screen.css' />
+    <script type='text/javascript'>
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+    <div id='loading'>
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id='sets'>
+      <ul>
+        <li><a class='set'>0</a></li><li><a class='set'>1</a></li><li><a class='set'>2</a></li><li><a class='set'>3</a></li><li><a class='set'>4</a></li><li><a class='set'>5</a></li><li><a class='set'>6</a></li><li><a class='set'>7</a></li><li><a class='set'>8</a></li><li><a class='set'>9</a></li>
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id='borderarea'>
+      <div id='playarea'>
+           <canvas id='screen'></canvas>
+           <canvas id='ghost'></canvas>
+        <img src='bg.png' id='bg' /><img src='sh2a.png' id='sh2a' /><img src='s1a.png' id='s1a' /><img src='washu.png' id='washu' /><img src='undi.png' id='undi' /><img src='st1.png' id='st1' /><img src='st2.png' id='st2' /><img src='s1.png' id='s1' /><img src='s2.png' id='s2' /><img src='bath1.png' id='bath1' /><img src='bath2.png' id='bath2' /><img src='p1.png' id='p1' /><img src='sh1.png' id='sh1' /><img src='p2.png' id='p2' /><img src='sh3.png' id='sh3' /><img src='vest.png' id='vest' /><img src='sh2.png' id='sh2' />
+      </div>
+    </div>
+
+    <div id='footer'>
+      <p>All sets are © their original artists. Learn more about Smooch <a href='https://github.com/emhoracek/smooch'>from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script type='text/javascript' src='setdata.js'></script>
+
+    <script type='text/javascript' src='../../doll.js'></script>
+  </body>
+</html>

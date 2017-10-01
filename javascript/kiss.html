@@ -1,0 +1,164 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>KiSS dolls!</title>
+
+    <link rel="stylesheet" href="screen.css">
+
+    <script type="text/javascript">
+
+    window.onload = function() {
+      var loader = document.getElementById("loading");
+      loader.style.display = "none";
+    }
+
+    </script>
+
+</head>
+
+<body>
+
+<div id="loading">
+  <progress></progress>
+</div>
+
+<div id="sets">
+  <ul>
+    <li><a class="set0">0</a></li>
+    <li><a class="set1">1</a></li>
+    <li><a class="set2">2</a></li>
+    <li><a class="set3">3</a></li>
+    <li><a class="set4">4</a></li>
+    <li><a class="set5">5</a></li>
+    <li><a class="set6">6</a></li>
+    <li><a class="set7">7</a></li>
+    <li><a class="set8">8</a></li>
+    <li><a class="set9">9</a></li>
+  </ul>
+</div>
+
+<div id="borderarea">
+
+<div id="playarea">
+
+  <canvas id="screen"></canvas>
+
+  <canvas id="ghost"></canvas>
+
+<img src="images/intro.png" id="intro">
+<img src="images/aurora.png" id="aurora">
+<img src="images/blink.png" id="blink">
+<img src="images/underwea.png" id="underwea">
+<img src="images/blacktig.png" id="blacktig">
+<img src="images/pinktigh.png" id="pinktigh">
+<img src="images/buttert.png" id="buttert">
+<img src="images/fishnet.png" id="fishnet">
+<img src="images/cutup.png" id="cutup">
+<img src="images/pstripe.png" id="pstripe">
+<img src="images/bstripe.png" id="bstripe">
+<img src="images/rstripe.png" id="rstripe">
+<img src="images/socks.png" id="socks">
+<img src="images/boot.png" id="boot">
+<img src="images/pboot.png" id="pboot">
+<img src="images/redboot.png" id="redboot">
+<img src="images/punkbts.png" id="punkbts">
+<img src="images/starbt.png" id="starbt">
+<img src="images/mary.png" id="mary">
+<img src="images/sandals.png" id="sandals">
+<img src="images/tennie1.png" id="tennie1">
+<img src="images/tennie2.png" id="tennie2">
+<img src="images/dickies.png" id="dickies">
+<img src="images/raver.png" id="raver">
+<img src="images/lpants.png" id="lpants">
+<img src="images/pants.png" id="pants">
+<img src="images/patchies.png" id="patchies">
+<img src="images/plaidp.png" id="plaidp">
+<img src="images/short2.png" id="short2">
+<img src="images/short1.png" id="short1">
+<img src="images/wskirt.png" id="wskirt">
+<img src="images/jean.png" id="jean">
+<img src="images/wrap.png" id="wrap">
+<img src="images/sparkle.png" id="sparkle">
+<img src="images/mini.png" id="mini">
+<img src="images/fuzzskir.png" id="fuzzskir">
+<img src="images/multi.png" id="multi">
+<img src="images/japan.png" id="japan">
+<img src="images/butterfl.png" id="butterfl">
+<img src="images/patchg.png" id="patchg">
+<img src="images/army.png" id="army">
+<img src="images/plaid2.png" id="plaid2">
+<img src="images/plaid1.png" id="plaid1">
+<img src="images/polka.png" id="polka">
+<img src="images/patch.png" id="patch">
+<img src="images/design.png" id="design">
+<img src="images/hoochie.png" id="hoochie">
+<img src="images/short.png" id="short">
+<img src="images/black.png" id="black">
+<img src="images/slice.png" id="slice">
+<img src="images/plaid.png" id="plaid">
+<img src="images/chain.png" id="chain">
+<img src="images/belt2.png" id="belt2">
+<img src="images/belt1.png" id="belt1">
+<img src="images/hi.png" id="hi">
+<img src="images/ham.png" id="ham">
+<img src="images/fruit.png" id="fruit">
+<img src="images/army2.png" id="army2">
+<img src="images/emo.png" id="emo">
+<img src="images/starshir.png" id="starshir">
+<img src="images/star.png" id="star">
+<img src="images/yanyan.png" id="yanyan">
+<img src="images/green.png" id="green">
+<img src="images/fuxxshir.png" id="fuxxshir">
+<img src="images/bltank.png" id="bltank">
+<img src="images/rtank.png" id="rtank">
+<img src="images/btank.png" id="btank">
+<img src="images/lbtank.png" id="lbtank">
+<img src="images/wtank.png" id="wtank">
+<img src="images/lovers.png" id="lovers">
+<img src="images/stripe.png" id="stripe">
+<img src="images/ordress.png" id="ordress">
+<img src="images/fuzzyswe.png" id="fuzzyswe">
+<img src="images/halfred.png" id="halfred">
+<img src="images/corset.png" id="corset">
+<img src="images/ccs.png" id="ccs">
+<img src="images/orange.png" id="orange">
+<img src="images/spiker.png" id="spiker">
+<img src="images/spikel.png" id="spikel">
+<img src="images/cute.png" id="cute">
+<img src="images/jacket.png" id="jacket">
+<img src="images/neck.png" id="neck">
+<img src="images/glow.png" id="glow">
+
+</div>
+
+</div>
+
+<div id="buttons">
+  <button id="edit">Edit</button>
+</div>
+
+<div id="toolbar">
+
+  <div id="infobox">
+    <h1>Edit</h1>
+  </div>
+</div>
+
+<div id="footer">
+
+<p><a href="http://otakuworld.com/index.html?/kiss/dolls/?/kiss/dolls/pages/a/aurora.htm">Aurora by Punky</a></p>
+
+<p><a href="https://www.github.com/emhoracek/smooch">Smooch on Github</a></div>
+
+<script type="text/javascript" src="setdata-new.js"></script>
+
+<script type="text/javascript" src="doll.js"></script>
+
+</body>
+
+</html>

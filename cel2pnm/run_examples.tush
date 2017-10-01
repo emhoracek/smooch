@@ -1,0 +1,46 @@
+A quick-and-dirty automated test using https://github.com/darius/tush
+
+N.B. we recompile cel2pnm, overwriting the binary.
+(The ../ in the paths here is because tush runs everything from a 
+temporary subdirectory it creates, for ease of cleanup.)
+
+$ gcc -g2 -Wall -o ../cel2pnm ../cel2pnm.c 
+
+OK, now the actual tests.
+
+$ ../cel2pnm -d ../examples/smoon.kcf ../examples/luna.cel luna.pnm
+@ Read palette ../examples/smoon.kcf 
+@ New style palette
+@ Bits per pixel: 24 
+@ Number colors: 256 
+@ Read cel ../examples/luna.cel 
+@ Width: 77, height: 119 
+@ Offx: 0, offy: 0 
+@ Bits-per-pixel: 8 
+@ Done 
+
+$ cmp ../luna.pnm luna.pnm
+
+$ ../cel2pnm -o ../examples/smoon.kcf ../examples/luna.cel luna.pnm
+| 0 0
+@ Read palette ../examples/smoon.kcf 
+@ New style palette
+@ Read cel ../examples/luna.cel 
+@ Done 
+
+$ cmp ../luna.pnm luna.pnm
+
+$ ../cel2pnm -t ../examples/smoon.kcf
+| rgb:c6/a8/fd
+@ Read palette ../examples/smoon.kcf 
+@ New style palette
+
+$ cmp ../luna.pnm luna.pnm
+
+$ ../cel2pnm ../examples/smoon.kcf ../examples/luna.cel luna.pnm
+@ Read palette ../examples/smoon.kcf 
+@ New style palette
+@ Read cel ../examples/luna.cel 
+@ Done 
+
+$ cmp ../luna.pnm luna.pnm

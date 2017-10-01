@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Smooch</title>
+    <link rel='stylesheet' type='text/css' href='../../screen.css' />
+    <script type='text/javascript'>
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+    <div id='loading'>
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id='sets'>
+      <ul>
+        <li><a class='set'>0</a></li><li><a class='set'>1</a></li><li><a class='set'>2</a></li><li><a class='set'>3</a></li><li><a class='set'>4</a></li><li><a class='set'>5</a></li><li><a class='set'>6</a></li><li><a class='set'>7</a></li><li><a class='set'>8</a></li><li><a class='set'>9</a></li>
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id='borderarea'>
+      <div id='playarea'>
+           <canvas id='screen'></canvas>
+           <canvas id='ghost'></canvas>
+        <img src='title.png' id='title' /><img src='cape5.png' id='cape5' /><img src='veil2b.png' id='veil2b' /><img src='cloakb.png' id='cloakb' /><img src='capeb.png' id='capeb' /><img src='cape2.png' id='cape2' /><img src='cape4b.png' id='cape4b' /><img src='shawlb.png' id='shawlb' /><img src='neckb.png' id='neckb' /><img src='neck2b.png' id='neck2b' /><img src='neck3b.png' id='neck3b' /><img src='strapb.png' id='strapb' /><img src='belt2b.png' id='belt2b' /><img src='dress14a.png' id='dress14a' /><img src='dress14a.png' id='dress14a' /><img src='dress15b.png' id='dress15b' /><img src='dress10b.png' id='dress10b' /><img src='jacketb.png' id='jacketb' /><img src='top8b.png' id='top8b' /><img src='vestb.png' id='vestb' /><img src='top5b.png' id='top5b' /><img src='top2b.png' id='top2b' /><img src='dress4b.png' id='dress4b' /><img src='topb.png' id='topb' /><img src='tank2b.png' id='tank2b' /><img src='dress7b.png' id='dress7b' /><img src='shirt2b.png' id='shirt2b' /><img src='top3b.png' id='top3b' /><img src='skirt78b.png' id='skirt78b' /><img src='bra2b.png' id='bra2b' /><img src='netb.png' id='netb' /><img src='shu2b.png' id='shu2b' /><img src='shub.png' id='shub' /><img src='swim5b.png' id='swim5b' /><img src='under2b.png' id='under2b' /><img src='base.png' id='base' /><img src='tatoo.png' id='tatoo' /><img src='tite.png' id='tite' /><img src='shu3.png' id='shu3' /><img src='shu.png' id='shu' /><img src='shu2.png' id='shu2' /><img src='under2.png' id='under2' /><img src='under.png' id='under' /><img src='brief.png' id='brief' /><img src='bra.png' id='bra' /><img src='bra2.png' id='bra2' /><img src='swim5.png' id='swim5' /><img src='swim4.png' id='swim4' /><img src='swim3.png' id='swim3' /><img src='swim2.png' id='swim2' /><img src='swim.png' id='swim' /><img src='towel.png' id='towel' /><img src='glove.png' id='glove' /><img src='glove3.png' id='glove3' /><img src='glove2.png' id='glove2' /><img src='gloveb.png' id='gloveb' /><img src='glove3b.png' id='glove3b' /><img src='glove2b.png' id='glove2b' /><img src='gaun2b.png' id='gaun2b' /><img src='gaun2.png' id='gaun2' /><img src='gaunb.png' id='gaunb' /><img src='gaun.png' id='gaun' /><img src='cap.png' id='cap' /><img src='net.png' id='net' /><img src='helm.png' id='helm' /><img src='mask.png' id='mask' /><img src='veil.png' id='veil' /><img src='veila.png' id='veila' /><img src='crown2.png' id='crown2' /><img src='crown.png' id='crown' /><img src='crown3.png' id='crown3' /><img src='corset5.png' id='corset5' /><img src='pants3.png' id='pants3' /><img src='pants2.png' id='pants2' /><img src='capri.png' id='capri' /><img src='boots4.png' id='boots4' /><img src='boots3.png' id='boots3' /><img src='boots.png' id='boots' /><img src='boots2.png' id='boots2' /><img src='skirt2.png' id='skirt2' /><img src='skirt9.png' id='skirt9' /><img src='skirt78.png' id='skirt78' /><img src='skirt7.png' id='skirt7' /><img src='skirt6.png' id='skirt6' /><img src='skirt5.png' id='skirt5' /><img src='skirt4.png' id='skirt4' /><img src='skirt3.png' id='skirt3' /><img src='shirt.png' id='shirt' /><img src='top3.png' id='top3' /><img src='top4.png' id='top4' /><img src='shirt2.png' id='shirt2' /><img src='pants.png' id='pants' /><img src='top6.png' id='top6' /><img src='shirt3.png' id='shirt3' /><img src='shirt4.png' id='shirt4' /><img src='top5.png' id='top5' /><img src='dress12.png' id='dress12' /><img src='dress11.png' id='dress11' /><img src='dress4.png' id='dress4' /><img src='tank4.png' id='tank4' /><img src='tank3.png' id='tank3' /><img src='tank2.png' id='tank2' /><img src='tank.png' id='tank' /><img src='top.png' id='top' /><img src='tunic.png' id='tunic' /><img src='vest.png' id='vest' /><img src='tunic2.png' id='tunic2' /><img src='dress3.png' id='dress3' /><img src='dress18.png' id='dress18' /><img src='dress2.png' id='dress2' /><img src='dress8.png' id='dress8' /><img src='dress7.png' id='dress7' /><img src='corset7.png' id='corset7' /><img src='corset6.png' id='corset6' /><img src='corset4.png' id='corset4' /><img src='corset3.png' id='corset3' /><img src='corset2.png' id='corset2' /><img src='corset.png' id='corset' /><img src='slip3.png' id='slip3' /><img src='slip6.png' id='slip6' /><img src='slip5.png' id='slip5' /><img src='slip4.png' id='slip4' /><img src='slip.png' id='slip' /><img src='slip2.png' id='slip2' /><img src='skirt.png' id='skirt' /><img src='top7.png' id='top7' /><img src='top2.png' id='top2' /><img src='top8.png' id='top8' /><img src='jacket.png' id='jacket' /><img src='dress10.png' id='dress10' /><img src='dress.png' id='dress' /><img src='toga.png' id='toga' /><img src='dress16.png' id='dress16' /><img src='dress9.png' id='dress9' /><img src='dress15.png' id='dress15' /><img src='dress14a.png' id='dress14a' /><img src='dress14a.png' id='dress14a' /><img src='dress17.png' id='dress17' /><img src='dress13.png' id='dress13' /><img src='dress5.png' id='dress5' /><img src='belt8.png' id='belt8' /><img src='belt.png' id='belt' /><img src='belt7.png' id='belt7' /><img src='belt6.png' id='belt6' /><img src='belt5.png' id='belt5' /><img src='belt4.png' id='belt4' /><img src='belt3.png' id='belt3' /><img src='belt2.png' id='belt2' /><img src='strap.png' id='strap' /><img src='dress5a.png' id='dress5a' /><img src='pj.png' id='pj' /><img src='neck3.png' id='neck3' /><img src='neck2.png' id='neck2' /><img src='neck.png' id='neck' /><img src='collar.png' id='collar' /><img src='sword.png' id='sword' /><img src='shawl2.png' id='shawl2' /><img src='shawl.png' id='shawl' /><img src='cape4.png' id='cape4' /><img src='cape3.png' id='cape3' /><img src='cape2b.png' id='cape2b' /><img src='cape.png' id='cape' /><img src='cloak.png' id='cloak' /><img src='strand.png' id='strand' /><img src='veil2.png' id='veil2' /><img src='cape5a.png' id='cape5a' /><img src='clip.png' id='clip' />
+      </div>
+    </div>
+
+    <div id='footer'>
+      <p><em>Arwen</em> by Aragonite and Anime Craze (2003) (<a href="http://otakuworld.com/kiss/dolls/pages/a/arwen.htm">on Otakuworld</a>)</p>
+      <p>Learn more about Smooch <a href='https://github.com/emhoracek/smooch'>from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script type='text/javascript' src='setdata.js'></script>
+
+    <script type='text/javascript' src='../../doll.js'></script>
+  </body>
+</html>

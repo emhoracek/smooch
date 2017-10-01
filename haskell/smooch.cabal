@@ -1,0 +1,122 @@
+name:                smooch
+version:             0.2.0.0
+-- synopsis:
+-- description:
+license:             GPL-3
+license-file:        LICENSE
+author:              Libby H.
+maintainer:          libby@daydrea.me
+-- copyright:
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+executable migrate
+  hs-source-dirs:      migrations
+ -- other-modules:
+  ghc-options:         -Wall
+  main-is:             Rivet.hs
+  build-depends:       base,
+                       dotenv,
+                       configurator,
+                       rivet-core >= 0.2,
+                       rivet-adaptor-postgresql,
+                       directory,
+                       logging,
+                       string-qq,
+                        text
+  default-language:    Haskell2010
+
+executable smooch
+  hs-source-dirs:      exe
+  ghc-options:         -Wall
+  main-is:             Main.hs
+  build-depends:       base,
+                       smooch,
+                       wai,
+                       warp,
+                       text,
+                       logging
+  default-language:    Haskell2010
+
+library
+  hs-source-dirs:      src, templates
+  ghc-options:         -Wall
+  exposed-modules:     Kiss,
+                       ParseCNF,
+                       Shell,
+                       Upload,
+                       Web,
+                       Ctxt,
+                       Users.Model,
+                       Users.View,
+                       Users.Controller
+  build-depends:       base,
+                       aeson,
+                       array,
+                       bytestring,
+                       configurator,
+                       directory,
+                       either,
+                       filepath,
+                       fn,
+                       fn-extra,
+                       http-types,
+                       larceny,
+                       lens,
+                       logging,
+                       map-syntax,
+                       mtl,
+                       parsec,
+                       postgresql-simple,
+                       process,
+                       resource-pool,
+                       resourcet,
+                       text,
+                       text-icu,
+                       time,
+                       wai,
+                       wai-extra,
+                       wai-middleware-static,
+                       warp,
+                       xmlhtml
+  default-language:    Haskell2010
+
+test-suite tests
+  hs-source-dirs:      tests
+  ghc-options:         -Wall
+  default-language:    Haskell2010
+  main-is:             Spec.hs
+  other-modules:       ParseCNFSpec,
+                       ShellSpec,
+                       UploadSpec
+  type:                exitcode-stdio-1.0
+  build-depends:       base,
+                       smooch,
+                       hspec,
+                       aeson,
+                       array,
+                       bytestring,
+                       directory,
+                       either,
+                       filepath,
+                       fn,
+                       fn-extra,
+                       http-types,
+                       larceny,
+                       lens,
+                       logging,
+                       map-syntax,
+                       mtl,
+                       parsec,
+                       process,
+                       resourcet,
+                       text,
+                       text-icu,
+                       time,
+                       wai,
+                       wai-extra,
+                       wai-middleware-static,
+                       warp,
+                       xmlhtml

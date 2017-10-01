@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Smooch</title>
+    <link rel='stylesheet' type='text/css' href='../../screen.css' />
+    <script type='text/javascript'>
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+    <div id='loading'>
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id='sets'>
+      <ul>
+        <li><a class='set'>0</a></li><li><a class='set'>1</a></li><li><a class='set'>2</a></li><li><a class='set'>3</a></li><li><a class='set'>4</a></li><li><a class='set'>5</a></li><li><a class='set'>6</a></li><li><a class='set'>7</a></li><li><a class='set'>8</a></li><li><a class='set'>9</a></li>
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id='borderarea'>
+      <div id='playarea'>
+           <canvas id='screen'></canvas>
+           <canvas id='ghost'></canvas>
+        <img src='hair_b.png' id='hair_b' /><img src='suit5_b.png' id='suit5_b' /><img src='suit4_b.png' id='suit4_b' /><img src='suit2_b.png' id='suit2_b' /><img src='suit3_b.png' id='suit3_b' /><img src='suit6_b.png' id='suit6_b' /><img src='skrt3_b.png' id='skrt3_b' /><img src='suit_b.png' id='suit_b' /><img src='torena_b.png' id='torena_b' /><img src='sebr2_b.png' id='sebr2_b' /><img src='sebrzr_b.png' id='sebrzr_b' /><img src='suit2u_b.png' id='suit2u_b' /><img src='best_b.png' id='best_b' /><img src='sesk2_b.png' id='sesk2_b' /><img src='sesk3_b.png' id='sesk3_b' /><img src='seskrt_b.png' id='seskrt_b' /><img src='buraus_b.png' id='buraus_b' /><img src='skrt5_b.png' id='skrt5_b' /><img src='skrt4_b.png' id='skrt4_b' /><img src='skrt6_b.png' id='skrt6_b' /><img src='skrt_b.png' id='skrt_b' /><img src='skrt2_b.png' id='skrt2_b' /><img src='taisou_b.png' id='taisou_b' /><img src='noslev_b.png' id='noslev_b' /><img src='srip_b.png' id='srip_b' /><img src='blma_b.png' id='blma_b' /><img src='kutu5_b.png' id='kutu5_b' /><img src='kutu_b.png' id='kutu_b' /><img src='kutu2_b.png' id='kutu2_b' /><img src='kutu3_b.png' id='kutu3_b' /><img src='kutu4_b.png' id='kutu4_b' /><img src='sox2_b.png' id='sox2_b' /><img src='sox1_b.png' id='sox1_b' /><img src='rabit_b.png' id='rabit_b' /><img src='mizugi_b.png' id='mizugi_b' /><img src='school_b.png' id='school_b' /><img src='amitai_b.png' id='amitai_b' /><img src='stoki1_b.png' id='stoki1_b' /><img src='stoki2_b.png' id='stoki2_b' /><img src='sbura_b.png' id='sbura_b' /><img src='bura_b.png' id='bura_b' /><img src='pantu_b.png' id='pantu_b' /><img src='panty_b.png' id='panty_b' /><img src='body1.png' id='body1' /><img src='body2.png' id='body2' /><img src='kao_2.png' id='kao_2' /><img src='kao_1.png' id='kao_1' /><img src='namida.png' id='namida' /><img src='namida2.png' id='namida2' /><img src='hair_m.png' id='hair_m' /><img src='panty_f.png' id='panty_f' /><img src='pantu_f.png' id='pantu_f' /><img src='bura_f.png' id='bura_f' /><img src='sbura_f.png' id='sbura_f' /><img src='stoki2_f.png' id='stoki2_f' /><img src='stoki1_f.png' id='stoki1_f' /><img src='amitai_f.png' id='amitai_f' /><img src='school_f.png' id='school_f' /><img src='mizugi_f.png' id='mizugi_f' /><img src='rabit_f.png' id='rabit_f' /><img src='sox1_f.png' id='sox1_f' /><img src='sox2_f.png' id='sox2_f' /><img src='kutu4_f.png' id='kutu4_f' /><img src='kutu3_f.png' id='kutu3_f' /><img src='kutu2_f.png' id='kutu2_f' /><img src='kutu_f.png' id='kutu_f' /><img src='kutu5_f.png' id='kutu5_f' /><img src='blma_f.png' id='blma_f' /><img src='srip_f.png' id='srip_f' /><img src='noslev_f.png' id='noslev_f' /><img src='taisou_f.png' id='taisou_f' /><img src='skrt4_f.png' id='skrt4_f' /><img src='skrt5_f.png' id='skrt5_f' /><img src='skrt2_f.png' id='skrt2_f' /><img src='skrt_f.png' id='skrt_f' /><img src='skrt6_f.png' id='skrt6_f' /><img src='buraus_f.png' id='buraus_f' /><img src='seskrt_f.png' id='seskrt_f' /><img src='sesk3_f.png' id='sesk3_f' /><img src='ribon.png' id='ribon' /><img src='nekutai.png' id='nekutai' /><img src='sesk2_f.png' id='sesk2_f' /><img src='best_f.png' id='best_f' /><img src='suit2u_f.png' id='suit2u_f' /><img src='sebrzr_f.png' id='sebrzr_f' /><img src='sebr2_f.png' id='sebr2_f' /><img src='torena_f.png' id='torena_f' /><img src='suit_f.png' id='suit_f' /><img src='skrt3_f.png' id='skrt3_f' /><img src='suit6_f.png' id='suit6_f' /><img src='torena_e.png' id='torena_e' /><img src='suit3_f.png' id='suit3_f' /><img src='suit2_f.png' id='suit2_f' /><img src='suit4_f.png' id='suit4_f' /><img src='suit5_f.png' id='suit5_f' /><img src='remoco_b.png' id='remoco_b' /><img src='hand_rb.png' id='hand_rb' /><img src='grb_rb.png' id='grb_rb' /><img src='romin.png' id='romin' /><img src='b_hanmer.png' id='b_hanmer' /><img src='s_hanmer.png' id='s_hanmer' /><img src='isyoku.png' id='isyoku' /><img src='driver.png' id='driver' /><img src='remoco_f.png' id='remoco_f' /><img src='hand_l.png' id='hand_l' /><img src='grb_l.png' id='grb_l' /><img src='hand_rf.png' id='hand_rf' /><img src='grb_rf.png' id='grb_rf' /><img src='sk_bom2.png' id='sk_bom2' /><img src='sk_bom5.png' id='sk_bom5' /><img src='usamimi.png' id='usamimi' /><img src='hair_f.png' id='hair_f' /><img src='sk_bom.png' id='sk_bom' /><img src='sk_bom3.png' id='sk_bom3' /><img src='sk_bom4.png' id='sk_bom4' /><img src='bug.png' id='bug' /><img src='megane.png' id='megane' /><img src='fukidasi.png' id='fukidasi' />
+      </div>
+    </div>
+
+    <div id='footer'>
+      <p>All sets are © their original artists. Learn more about Smooch <a href='https://github.com/emhoracek/smooch'>from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script type='text/javascript' src='setdata.js'></script>
+
+    <script type='text/javascript' src='../../doll.js'></script>
+  </body>
+</html>

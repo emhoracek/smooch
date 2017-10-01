@@ -1,0 +1,32 @@
+flags: {}
+packages:
+- '.'
+- location:
+    git: https://github.com/positiondev/larceny
+    commit: 03fad5250c58d8e3bd0d26f3528c0da448cf4122
+  extra-dep: true
+- location:
+    git: https://github.com/positiondev/fn
+    commit: 6989eca99cc02da5e2268e1aa79157bdd6220ab5
+  subdirs:
+  - fn
+  - fn-extra
+  extra-dep: true
+- location:
+    git: https://github.com/positiondev/rivet
+    commit: 51b627cbc568e98fd424b4d3049554685c5da310
+  subdirs:
+  - rivet-core
+  - rivet-autoimporter
+  - rivet-adaptor-postgresql
+  extra-dep: true
+extra-deps:
+- digestive-functors-0.8.2.0
+- fn-0.3.0.2
+- heist-1.0.1.0
+- html-entities-1.1.4.1
+- http-accept-0.2
+- logging-3.0.4
+- map-syntax-0.2.0.2
+- wai-util-0.8
+resolver: lts-8.15
