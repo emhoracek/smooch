@@ -8,6 +8,7 @@ import           Control.Monad.Trans.Either
 import qualified Data.Configurator          as C
 import           Data.Monoid                ((<>))
 import           Data.Pool
+import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Database.PostgreSQL.Simple as PG
 import           Network.HTTP.Types.Method
@@ -21,6 +22,7 @@ import           Ctxt
 import           Kiss
 import           Upload
 import           Users.Controller
+import           Users.Model
 
 initializer :: IO Ctxt
 initializer = do
@@ -55,9 +57,19 @@ site ctxt =
   route ctxt [ end ==> indexHandler
              , path "upload" // method POST // file "kissfile" !=> uploadHandler
              , path "sets" // segment // end ==> setHandler
+             , method POST // path "login"
+                           // param "username"
+                           // param "password" !=> loginHandler
              , path "users" ==> userRoutes
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
+
+loginHandler :: Ctxt -> Text -> Text ->IO (Maybe Response)
+loginHandler ctxt username password = do
+  mUser <- authenticateUser ctxt username password
+  case mUser of
+    Just _user -> okText "you're logged in!!! (lie)"
+    Nothing    -> errText "Your username or password was wrong :("
 
 indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = renderWith ctxt ["index"] createUserErrorSplices

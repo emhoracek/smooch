@@ -28,13 +28,30 @@
       </div>
       <div>
         <label for="password">
-          Password: <input name="password" />
+          Password: <input type="password" name="password" />
         </label>
         <p><passwordErrors /></p>
       </div>
       <div>
         <label for="password-confirmation">Password (again):
-          <input name="password-confirmation" />
+          <input type="password" name="password-confirmation" />
+        </label>
+      </div>
+
+      <input type="submit" />
+    </form>
+
+    <h2>Login</h2>
+
+    <form action="/login" method="post">
+      <div>
+        <label for="username">
+          Username: <input name="username" />
+        </label>
+      </div>
+      <div>
+        <label for="password">
+          Password: <input type="password" name="password" />
         </label>
       </div>
 
