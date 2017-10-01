@@ -6,11 +6,13 @@ module Web where
 
 import           Control.Monad.Trans.Either
 import qualified Data.Configurator          as C
+import           Data.Monoid                ((<>))
 import           Data.Pool
 import qualified Data.Text                  as T
 import qualified Database.PostgreSQL.Simple as PG
 import           Network.HTTP.Types.Method
 import           Network.Wai
+import           System.Environment         (getEnv)
 import           System.FilePath            (takeBaseName)
 import           Web.Fn
 import           Web.Larceny                hiding (renderWith)
@@ -22,7 +24,9 @@ import           Users.Controller
 
 initializer :: IO Ctxt
 initializer = do
-  conf <- C.load [C.Required "devel.cfg"]
+  env <- getEnv "ENV"
+  let env' = if env == "" then "devel" else env
+  conf <- C.load [C.Required (env' <> ".cfg")]
   dbHost <- C.require conf "postgresql-simple.host"
   dbPort <- C.require conf "postgresql-simple.port"
   dbUser <- C.require conf "postgresql-simple.user"
