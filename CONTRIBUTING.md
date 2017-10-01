@@ -11,7 +11,7 @@ and all of them would mean so much to this project.
  * [Contributing code](#contributing-code)
    * [Frontend](#frontend-javascripthtmlcss)
    * [Backend](#backend-haskell)
- * [Running Smooch on your computer](#running-smooch-on-your-computer)
+ * [Running Smooch on your computer](#run-smooch-on-your-computer)
 
 ## Filing an issue
 
