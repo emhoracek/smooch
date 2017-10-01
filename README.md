@@ -1,47 +1,41 @@
+# Here for Hacktoberfest? 
+
+Please comment on the issue you want to work on to claim it *before* you start
+work. That way you can take your time working instead of racing to get the first
+pull request in. 
+
+Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute!
+
+I'll be on [Twitch](https://www.twitch.tv/horrorcheck) working on this project most Sundays. 
+Please feel free to ask questions in the chat there and let me know if you need any help getting the project running!
+
+Thank you!!
+
 # smooch
 
-I'm making a set of tools for viewing, converting, and creating KiSS dolls.
-KiSS stands for Kisekae (Japanese for "dress up") Set System. KiSS dolls
-have been around for a long time, but there's only one modern viewer (and it
-has some drawbacks) and no way to play with these dolls online. Many very
-talented artists spent countless hours making these fun digital toys. Some are
-wonderful examples of pixel artistry. It would be a shame for them to be lost
-just because technology has moved on.
+Smooch is a set of tools for viewing, converting, and eventually creating KiSS
+dolls. KiSS stands for Kisekae (Japanese for "dress up") Set System. 
 
-I've added information about KiSS to the
-[GitHub wiki](https://github.com/emhoracek/smooch/wiki), please check it out
-if you want to learn more.
+KiSS dolls have been around for a long time, but there's only one modern viewer
+(and it has some drawbacks) and no way to play with these dolls online. Many
+very talented artists spent countless hours making these fun digital toys. Some
+are wonderful examples of pixel artistry. It would be a shame for them to be
+lost just because technology has moved on.
 
-I built a tool for converting KiSS cells (the individual graphics) to pnm
-format (which is then simple to convert to lots of other formats).
+A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/ki_spark.htm)
 
-Now, I'm making a KiSS doll viewer for the browser -- and you can help! Check out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
+![Playing with a KiSS doll](http://i.imgur.com/UnxpRmL.gif)
+
+Check out Smooch's [GitHub wiki](https://github.com/emhoracek/smooch/wiki) if you want to learn more about KiSS.
+
+`cel2pnm` is a tool for converting KiSS cells (the individual graphics) to pnm
+format (which is then simple to convert to lots of other formats). It should
+work with all cel formats.
+
+Now, we're making a KiSS doll viewer for the browser -- and you can help! Check
+out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
-
-## Structure
-
-To display a KiSS doll, an application has to do four things:
-  1. Decompress the old, obsure Japanese compression format and extract the files.
-  2. Read the specialized image files (cells and palettes).
-  3. Read the configuration file.
-  4. Display the sets so the user can interact with them.
-
-For the second part I had kludge together some code from a couple different
-open source projects (GNOME KiSS and GIMP) in order produce something I could
-understand. [Mark Dominus](http://blog.plover.com) helped me a lot with this
-when he was a resident at [Recurse Center](http://www.recurse.com). That part
-is `cel2pnm` and it's written in C. You can learn more about it in the "cel2pnm" directory's README.
-
-The third involves parsing text into JSON, so I knew exactly what tool I wanted
-to use. Haskell has two awesome libraries for this: Parsec and Aeson.
-If you'd like to hack on the Haskell, check out the README in the "haskell" directory. The backend of the web app is also in Haskell.
-
-The fourth part is where JavaScript comes in. If you want to hack on Smooch
-but don't want to mess with Haskell, try the "javascript" folder. It's not
-actually just JavaScript -- it's also the HTML, CSS, and all the images for a
-single doll ("Aurora" by Punky). I don't know JavaScript very well so if you
-can help that would be amazing.
 
 ## Thanks
 
@@ -67,7 +61,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
 I would very much appreciate input on how to make this program better.
 
 Please let me know if cel2pnm doesn't convert a cell correctly and I will
-attempt to fix it. 
+attempt to fix it.
 
 Smooch should display any plain KiSS/GS doll correctly. FKiSS and Cherry KiSS
 aren't supported yet. If you find a plain KiSS doll that Smooch doesn't display
