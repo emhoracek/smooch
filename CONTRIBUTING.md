@@ -121,13 +121,13 @@ Please make sure you have the following general software installed
 | ✔ | [stack ](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
 |  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
 
-### Install Homebrew
+### Install `Homebrew`
 
 Following the [Homebrew install guide here](https://brew.sh/).
-* Open your terminal, copy and paste in this command into your Terminal:
+* Open your terminal, copy and paste this command into your Terminal:
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-### Install GCC
+### Install `GCC`
 
 You'll need a C compiler to compile the `cel2pnm` program for smooch, let's install the GCC compiler.
 
@@ -148,26 +148,25 @@ cd smooch
 
 
 ### Install `cel2pnm`
-Now change to the `cel2pnm` directory. Run . That will
-result in the compiled program, `cel2pnm`.
+Now change to the `cel2pnm` directory.
 
 * Now that you are in the top-level folder of this project, change into the `cel2pnm` directory: `cd cel2pnm`
-* Compile Smooch's cel2pnm program by running this command:
+* Compile Smooch's `cel2pnm` program by running this command:
 
 ```
 gcc cel2pnm.c -o cel2pnm
 ```
 ![alt text](https://preview.ibb.co/npWqdw/compile_smooch.png "Compile cel2pnm program")
 
-* Put `cel2pnm` in your PATH.
+* Put `cel2pnm` in your [$PATH](https://askubuntu.com/questions/551990/what-does-path-mean).
 
-### Install stack
+### Install `stack`
 
 You'll need `stack` to build Smooch. [`stack`](https://github.com/commercialhaskell/stack) is a Haskell dependency management
 tool (kinda like `npm` for JavaScript). 
 
 * Following the `stack` [install guide here](https://docs.haskellstack.org/en/stable/README/#how-to-install)
-* Copy and paste in this command into your Terminal:
+* Copy and paste this command into your Terminal:
 
 ```
 curl -sSL https://get.haskellstack.org/ | sh
@@ -175,11 +174,15 @@ curl -sSL https://get.haskellstack.org/ | sh
 
 ![alt text](https://preview.ibb.co/cYhc8w/install_stack.png "Install stack")
 
-Once you have `stack` installed, change to the `haskell` directory and run
-`stack setup`. That will install the correct Haskell version (this will take a
-while if you don't already have it).
+* Once you have `stack` installed, change to the `app` directory and run `stack setup`. 
+This will install the correct Haskell version (this will take a while if you don't already have it).
 
-Next, run `stack build`, followed by `stack install rivet-autoimporter`
+![alt text](https://preview.ibb.co/dNNoFb/stack_setup.png "stack setup")
+
+* Next, run `stack build` which will install project dependencies
+![alt text](https://preview.ibb.co/iC64ow/stack_build.png "stack build")
+
+* Next, run `stack install rivet-autoimporter`
 
 That will compile the Smooch app.
 
