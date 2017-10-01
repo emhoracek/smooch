@@ -35,7 +35,7 @@ is `cel2pnm` and it's written in C. You can learn more about it in the "cel2pnm"
 
 The third involves parsing text into JSON, so I knew exactly what tool I wanted
 to use. Haskell has two awesome libraries for this: Parsec and Aeson.
-If you'd like to hack on the Haskell, check out the README in the "haskell" directory. The backend of the web app is also in Haskell.
+If you'd like to hack on the Haskell, check out the README in the "app" directory. The backend of the web app is also in Haskell.
 
 The fourth part is where JavaScript comes in. If you want to hack on Smooch
 but don't want to mess with Haskell, try the "javascript" folder. It's not
