@@ -111,24 +111,55 @@ Items maked a `*` will need work on the frontend as well.
 If any of this is confusing or doesn't work -- don't hesitate to let me know by opening an issue @emhoracek and
 I'll help you out.
 
-### Install `cel2pnm`
+## General Packages
 
-You'll need a C compiler to compile the program.
+Please make sure you have the following general software installed
 
-* On Mac OSX you can use [Homebrew] to install `gcc` with `brew install gcc`
+| Required | Library | Version Range | Notes |
+| ------------- | ------------- | ---| --- |
+| ✔ | [GCC compiler](https://gcc.gnu.org/)  | >= 7.2 | GCC is the compiler for [GNU operating system](http://www.gnu.org/gnu/thegnuproject.html), which includes C, C++, Objective-C, Fortran, Ada, and Go |
+|  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
+
+## Install `Homebrew`
+
+Following the [Homebrew install guide here](https://brew.sh/).
+* Open your terminal, copy and paste in this command into your Terminal:
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+## Install `GCC`
+
+You'll need a C compiler to compile the `cel2pnm` program for smooch, let's install the GCC compiler.
+
+* On Mac OSX you can use `Homebrew` to install `gcc`, copy and past this command into your Terminal: `brew install gcc`
 * On Windows / Linux or other OS, follow the [GCC installation guide](https://gcc.gnu.org/install/).
 
 ![alt text](https://preview.ibb.co/fmhcrG/brew_install.png "Brew install screenshot")
 
-Now change to the `cel2pnm` directory. Run `gcc cel2pnm.c -o cel2pnm`. That will
+## Project setup
+
+First, clone this project from Github
+
+```
+git clone https://github.com/emhoracek/smooch.git
+cd smooch
+```
+![alt text](https://preview.ibb.co/exRHQb/gitclone.png "Git clone repo")
+
+
+### Install `cel2pnm`
+Now change to the `cel2pnm` directory. Run . That will
 result in the compiled program, `cel2pnm`.
 
-Put `cel2pnm` in your PATH.
+* Now that you are in the top-level folder of this project, change into the `cel2pnm` directory: `cd cel2pnm`
+* Compile Smooch's cel2pnm program by running this command:
 
-(A really helpful contribution would be to make this section irrelevant by
-moving the functionality of `cel2pnm` to JavaScript or Haskell! Or, providing
-more documentation of how to compile and install `cel2pnm` on different
-platforms.)
+```
+gcc cel2pnm.c -o cel2pnm
+```
+![alt text](https://preview.ibb.co/npWqdw/compile_smooch.png "Compile cel2pnm program")
+
+* Put `cel2pnm` in your PATH.
+
 
 ### Build Smooch
 
