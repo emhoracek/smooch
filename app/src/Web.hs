@@ -40,7 +40,11 @@ initializer = do
 app :: IO Application
 app = do
   ctxt <- initializer
-  return $ toWAI ctxt site
+  appBase ctxt
+
+-- appBase is used with hspec-fn for testing
+appBase :: Ctxt -> IO Application
+appBase ctxt = return $ toWAI ctxt site
 
 site :: Ctxt -> IO Response
 site ctxt =
