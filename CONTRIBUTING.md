@@ -118,15 +118,16 @@ Please make sure you have the following general software installed
 | Required | Library | Version Range | Notes |
 | ------------- | ------------- | ---| --- |
 | ✔ | [GCC compiler](https://gcc.gnu.org/)  | >= 7.2 | GCC is the compiler for [GNU operating system](http://www.gnu.org/gnu/thegnuproject.html), which includes C, C++, Objective-C, Fortran, Ada, and Go |
+| ✔ | [stack ](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
 |  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
 
-## Install `Homebrew`
+### Install Homebrew
 
 Following the [Homebrew install guide here](https://brew.sh/).
 * Open your terminal, copy and paste in this command into your Terminal:
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-## Install `GCC`
+### Install GCC
 
 You'll need a C compiler to compile the `cel2pnm` program for smooch, let's install the GCC compiler.
 
@@ -160,18 +161,27 @@ gcc cel2pnm.c -o cel2pnm
 
 * Put `cel2pnm` in your PATH.
 
+### Install stack
 
-### Build Smooch
+You'll need `stack` to build Smooch. [`stack`](https://github.com/commercialhaskell/stack) is a Haskell dependency management
+tool (kinda like `npm` for JavaScript). 
 
-You'll need `stack` to build Smooch. `stack` is a Haskell dependency management
-tool (kinda like `npm` for JavaScript). You can learn how to install it for
-various platforms in the [`stack` documentation].
+* Following the `stack` [install guide here](https://docs.haskellstack.org/en/stable/README/#how-to-install)
+* Copy and paste in this command into your Terminal:
+
+```
+curl -sSL https://get.haskellstack.org/ | sh
+```
+
+![alt text](https://preview.ibb.co/cYhc8w/install_stack.png "Install stack")
 
 Once you have `stack` installed, change to the `haskell` directory and run
 `stack setup`. That will install the correct Haskell version (this will take a
 while if you don't already have it).
 
-Next, run `stack build`. That will compile the Smooch app.
+Next, run `stack build`, followed by `stack install rivet-autoimporter`
+
+That will compile the Smooch app.
 
 ### Setting up your database
 
