@@ -114,6 +114,7 @@ test-suite tests
                        parsec,
                        postgresql-simple,
                        process,
+                       random,
                        resource-pool,
                        resourcet,
                        text,
