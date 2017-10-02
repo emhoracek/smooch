@@ -118,14 +118,9 @@ Please make sure you have the following general software installed
 | Required | Library | Version Range | Notes |
 | ------------- | ------------- | ---| --- |
 | ✔ | [GCC compiler](https://gcc.gnu.org/)  | >= 7.2 | GCC is the compiler for [GNU operating system](http://www.gnu.org/gnu/thegnuproject.html), which includes C, C++, Objective-C, Fortran, Ada, and Go |
-| ✔ | [stack ](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
+| ✔ | [stack](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
+| ✔ | [Netpbm](http://brewformulas.org/Netpbm)  | >= 10.73.14 | Netpbm is a toolkit for manipulation of graphic images, including conversion of images between a variety of different formats |
 |  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
-
-### Install `Homebrew`
-
-Following the [Homebrew install guide here](https://brew.sh/).
-* Open your terminal, copy and paste this command into your Terminal:
-`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 ### Install `GCC`
 
@@ -135,6 +130,19 @@ You'll need a C compiler to compile the `cel2pnm` program for smooch, let's inst
 * On Windows / Linux or other OS, follow the [GCC installation guide](https://gcc.gnu.org/install/).
 
 ![alt text](https://preview.ibb.co/fmhcrG/brew_install.png "Brew install screenshot")
+
+### Install `Netpbm`
+
+This is how the images are converted from the *.pnm format that `cel2pnm` creates into a PNG image that a browser can display.
+* On Mac OSX you can use `Homebrew` to install `netpbm`, copy and past this command into your Terminal: `brew install netpbm`
+* On Windows / Linux or other OS, follow the [Netpbm installation guide](http://netpbm.sourceforge.net/getting_netpbm.php).
+
+
+### Install `Homebrew`
+
+Following the [Homebrew install guide here](https://brew.sh/).
+* Open your terminal, copy and paste this command into your Terminal:
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 ## Project setup
 
