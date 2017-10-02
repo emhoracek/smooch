@@ -52,6 +52,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
    * ear/bpaf helped with Haskell refactoring
    * Darius improved cel2pnm and added tests
    * huggablemonad has helped debug several sets
+   * lisaychuang improved documentation for contributors
  * mentors
    * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
    * Mark Dominus helped me write cel2pmn
