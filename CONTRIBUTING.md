@@ -187,12 +187,10 @@ This will install the correct Haskell version (this will take a while if you don
 
 ![alt text](https://preview.ibb.co/dNNoFb/stack_setup.png "stack setup")
 
-* Next, run `stack build` which will install project dependencies
+* Run `stack install rivet-autoimporter`, this is a tool for migrating the database.
+
+* Finally, run `stack build` which will install project dependencies and compile the Smooch app.
 ![alt text](https://preview.ibb.co/iC64ow/stack_build.png "stack build")
-
-* Next, run `stack install rivet-autoimporter`
-
-That will compile the Smooch app.
 
 ### Setting up your database
 
