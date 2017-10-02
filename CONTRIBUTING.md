@@ -97,7 +97,7 @@ The ones marked with a `*` will need some work on the backend as well.
 
 #### Backend (Haskell)
 
-You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/haskell) of Smooch.
+You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/app) of Smooch.
 
  * Add a database/storage layer
    * Add users and limit uploading to users`*``
@@ -173,5 +173,3 @@ Now you can run `stack exec smooch` and open `localhost:8000` in your browser.
 You should see Smooch running!
 
 You can also run tests with `stack test` or open a REPL with `stack ghci smooch:smooch`.
-
-fix-cell

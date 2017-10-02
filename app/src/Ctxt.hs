@@ -1,11 +1,13 @@
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE TemplateHaskell     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 module Ctxt where
 
 import           Control.Lens
 import           Data.Monoid                ((<>))
 import           Data.Pool
+import           Data.Text                  (Text)
+import qualified Data.Text                  as T
 import qualified Database.PostgreSQL.Simple as PG
 import           Network.Wai                (Response)
 import           Web.Fn
@@ -30,3 +32,6 @@ renderWith ctxt tplPath addSubs = do
   case mRendered of
     Nothing -> return Nothing
     Just rendered -> okHtml rendered
+
+tshow :: Int -> Text
+tshow = T.pack . show
