@@ -27,14 +27,13 @@ Here's how the Haskell code is organized:
 
 To work on this codebase, follow the directions in the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md#run-smooch-on-your-computer) file.
 
-If you have *any issues at all* with this process, it would be extremely 
-helpful to me if you emailed me at libby@daydrea.me with some information 
-about your system and what trouble you're having, or if you filed a 
-ticket in the "Issues" section on Github! I want to know about any 
-obstactles anyone is facing in using Smooch -- if you're having trouble, 
+If you have *any issues at all* getting started with Smooch, it would be 
+extremely helpful to me if you filed a ticket in the "Issues" section on 
+Github and tagged me (@emhoracek)! I want to know about any 
+obstacles anyone is facing in using Smooch -- if you're having trouble, 
 someone else probably will, too!
 
-## What it does
+## Current state of the app
 
 Right now, a user is greeted with an invitation to create an account, 
 login, or upload a file. Only uploading a file does anything interesting. 
