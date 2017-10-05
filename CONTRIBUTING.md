@@ -40,10 +40,24 @@ When filing a issues:
 
 KiSS set bugs are a special category for Smooch.
 
-Right now, Smooch *only supports* the first KiSS specification from 1992. It
-doesn't support F(rench)KiSS, FKiSS2, FKiSS3.. etc, or Enhanced Palettes or
-Cherry KiSS. I want to add editing capabilities before moving on to scripting
-support, or fancy paletting that few dolls ever used.
+One really helpful contribution you can make is to try out KiSS dolls from
+[Okatuworld](http://www.otakuworld.com/kiss) and see which ones work
+and which don't. I would look for dolls that are as simple as possible
+-- a single palette, a small wardrobe, no animations or special
+effects (no "FKiSS"). (Please be aware that many dolls on Otakuworld are 
+not appropriate for children or even worksafe.)
+
+Try the doll you've chosen in a KiSS doll viewer like [GnomeKiSS for
+Linux](http://devel.tlrmx.org/kiss/), [Direct KiSS or PlayKiSS for
+Windows](http://otakuworld.com/index.html?/kiss/viewers.htm) or
+[UltraKiSS for anything with
+Java](http://www.wmiles.com/projects/ultrakiss). Then, fire up Smooch
+and try uploading the doll. The doll may not look right or it
+may cause an error in the Haskell or Javascript!
+
+If you can add an issue describing the problems with the doll and
+perhaps even start investigating what is causing the problem that
+would be super helpful <3 <3 <3
 
 If a supported set has a bug:
  * Please link to somewhere the set can be downloaded (such as the specific page
@@ -53,6 +67,11 @@ If a supported set has a bug:
  * If the problem is visual, add a screenshot of the doll in a working viewer
    such as UltraKiSS or GnomeKiSS as well as a screenshot of the problem in
    Smooch.
+   
+If the doll is small and has lots of interesting problems, it
+may be a good candidate for being included in the repo as a
+sample doll.
+
 
 ## Writing documentation
 
@@ -100,7 +119,7 @@ The ones marked with a `*` will need some work on the backend as well.
 You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/app) of Smooch.
 
  * Add a database/storage layer
-   * Add users and limit uploading to users`*``
+   * Add users and limit uploading to users`*`
    * Store set data somewhere other than local filesystem
  * Figure out how to make handling LZH archives safe and secure.
 
