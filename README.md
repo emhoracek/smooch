@@ -37,6 +37,26 @@ out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRI
 
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
 
+
+## Roadmap
+
+  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
+      * Lots of dolls are not quite working still, especially multi-palette 
+      dolls.
+  * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
+      * Serve cels as binary blobs and let JavaScript display them?
+      * Inline the C code for cel2pnm?
+      * Write a Haskell library for decompressing LHAs? (O.O)
+  * Support multiple palettes (dependent on how the above situation
+    with cels as blobs vs pngs turns out)
+  * Figure out how users view dolls, whether dolls are stored on
+    server, etc.
+  * Release a usable vanilla KiSS viewer.
+  * Allow users to edit sets.
+  * Allow users to create sets from scratch.
+  * Add FKiSS1, FKiSS2, FKiSS3, CherryKiSS, Enhanced Palettes, FKiSS4,
+    FKiSS5...
+
 ## Thanks
 
 I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn't have gotten where it is now without the efforts of many other people! That includes:
