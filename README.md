@@ -4,7 +4,7 @@ Please comment on the issue you want to work on to claim it *before* you start
 work. That way you can take your time working instead of racing to get the first
 pull request in. 
 
-Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute!
+Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute! If a feature idea there looks interesting, please create an issue for it so we can discuss different approaches and so other people can know that you're working on it.
 
 I'll be on [Twitch](https://www.twitch.tv/horrorcheck) working on this project most Sundays. 
 Please feel free to ask questions in the chat there and let me know if you need any help getting the project running!
