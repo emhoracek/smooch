@@ -35,6 +35,8 @@ work with all cel formats.
 Now, we're making a KiSS doll viewer for the browser -- and you can help! Check
 out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
+Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
+
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
 
 
