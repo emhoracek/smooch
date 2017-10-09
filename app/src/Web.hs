@@ -4,15 +4,16 @@
 
 module Web where
 
-import           Control.Monad.Trans.Either
+import           Control.Lens               ((^.))
+import           Control.Monad.Trans.Either (runEitherT)
 import qualified Data.Configurator          as C
 import           Data.Monoid                ((<>))
-import           Data.Pool
-import           Data.Text                  (Text)
+import           Data.Pool                  (createPool)
 import qualified Data.Text                  as T
+import qualified Data.Vault.Lazy            as V
 import qualified Database.PostgreSQL.Simple as PG
-import           Network.HTTP.Types.Method
-import           Network.Wai
+import           Network.HTTP.Types.Method  (StdMethod (..))
+import           Network.Wai                (Application, Response)
 import           System.Environment         (getEnv)
 import           System.FilePath            (takeBaseName)
 import           Web.Fn
@@ -20,9 +21,9 @@ import           Web.Larceny                hiding (renderWith)
 
 import           Ctxt
 import           Kiss
+import           Session
 import           Upload
 import           Users.Controller
-import           Users.Model
 
 initializer :: IO Ctxt
 initializer = do
@@ -41,7 +42,9 @@ initializer = do
                                                    dbName))
             PG.close 1 60 20
   lib <- loadTemplates "templates" defaultOverrides
-  return (Ctxt defaultFnRequest lib mempty dbPool)
+  vaultKey <- V.newKey
+  let globalSubs = subs [("if", ifFill)]
+  return (Ctxt defaultFnRequest vaultKey lib globalSubs dbPool)
 
 app :: IO Application
 app = do
@@ -50,7 +53,10 @@ app = do
 
 -- appBase is used with hspec-fn for testing
 appBase :: Ctxt -> IO Application
-appBase ctxt = return $ toWAI ctxt site
+appBase ctxt = do
+  let key = ctxt ^. sessionKey
+  sessionMid <- sessionMiddleware key
+  return $ sessionMid (toWAI ctxt site)
 
 site :: Ctxt -> IO Response
 site ctxt =
@@ -64,15 +70,8 @@ site ctxt =
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
-loginHandler :: Ctxt -> Text -> Text ->IO (Maybe Response)
-loginHandler ctxt username password = do
-  mUser <- authenticateUser ctxt username password
-  case mUser of
-    Just _user -> okText "you're logged in!!! (lie)"
-    Nothing    -> errText "Your username or password was wrong :("
-
 indexHandler :: Ctxt -> IO (Maybe Response)
-indexHandler ctxt = renderWith ctxt ["index"] createUserErrorSplices
+indexHandler ctxt = renderWith ctxt ["index"] (createUserErrorSplices <> loggedInUserSplices)
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath') = do

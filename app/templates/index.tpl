@@ -6,6 +6,10 @@
 
     <h1>Smooch!</h1>
 
+    <if exists="${loggedInUser}">
+      <then> Hello, <loggedInUser />! </then>
+    </if>
+
     <!-- demo doll should go here -->
 
     <h2> Create an account</h2>
