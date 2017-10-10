@@ -29,37 +29,17 @@ import           Kiss
 import           ParseCNF
 import           Shell
 
-processSet :: (FilePath, FilePath) -> EitherT Text IO [KissCell]
-processSet (fName, filePath) = do
-  tryIO $ copyFile filePath ("static/sets" </> fName)
-  staticDir <- createSetDir (takeBaseName fName)
-  unzipFile fName staticDir
-  log' "Unzipped file!"
-  createCels staticDir
-
-processUserSet :: Text
-               -> (FilePath, FilePath)
-               -> EitherT Text IO (FilePath, [KissCell])
-processUserSet username (fName, filePath) = do
+processSet :: Text
+           -> (FilePath, FilePath)
+           -> EitherT Text IO (FilePath, [KissCell])
+processSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
-  staticDir <- createSetDir' userDir (takeBaseName fName)
+  staticDir <- createSetDir userDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
   cels <- createCels staticDir
   return (staticDir, cels)
-
-staticDirFromSetName :: String -> FilePath
-staticDirFromSetName setName = "static/sets/" <> setName
-
-createSetDir :: String -> EitherT Text IO FilePath
-createSetDir setName = do
-  let staticDir = "static/sets/" <> setName
-  exists <- liftIO $ doesDirectoryExist staticDir
-  when exists $ tryIO $ removeDirectoryRecursive staticDir
-  tryIO $ createDirectory staticDir
-  log' $ "Created static directory: " <> T.pack staticDir
-  return staticDir
 
 staticUserDir :: Text -> FilePath
 staticUserDir username = "static/sets/" <> T.unpack username
@@ -71,11 +51,11 @@ createUserDir username = do
   log' $ "Created static user sets directory if missing: " <> T.pack staticDir
   return staticDir
 
-staticUserSetDir :: FilePath -> String -> FilePath
-staticUserSetDir userDir setName =  userDir <> "/" <> setName
+staticSetDir :: FilePath -> String -> FilePath
+staticSetDir userDir setName =  userDir <> "/" <> setName
 
-createSetDir' :: FilePath -> String -> EitherT Text IO FilePath
-createSetDir' userDir setName = do
+createSetDir :: FilePath -> String -> EitherT Text IO FilePath
+createSetDir userDir setName = do
   let staticDir = userDir <> "/" <> setName
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ tryIO $ removeDirectoryRecursive staticDir

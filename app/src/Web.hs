@@ -17,7 +17,6 @@ import           Web.Larceny                hiding (renderWith)
 
 import           Ctxt
 import           Session
-import           Sets.Controller
 import           Users.Controller
 import           Users.Model
 import           Users.View

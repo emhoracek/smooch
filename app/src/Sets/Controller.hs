@@ -15,14 +15,14 @@ import           Users.Model
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  output <- runEitherT $ processUserSet (userUsername user)
-                                        (T.unpack name, filePath')
-  renderKissSet' ctxt output
+  output <- runEitherT $ processSet (userUsername user)
+                                    (T.unpack name, filePath')
+  renderKissSet ctxt output
 
 userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userSetHandler user ctxt setName = do
   let userDir = staticUserDir (userUsername user)
-  let staticDir = staticUserSetDir userDir (T.unpack setName)
+  let staticDir = staticSetDir userDir (T.unpack setName)
   output <- (fmap . fmap) ((,) staticDir) (runEitherT $ createCels staticDir)
   -- The previous line is a bit weird.
   -- the result of runEitherT is an `IO (Either Text [KissCell])`.
@@ -31,10 +31,10 @@ userSetHandler user ctxt setName = do
   -- `(fmap . fmap)` let's us map into two layers of functions -- first the
   -- IO functor, then then Either functor. This makes the Right side of
   -- the Either a tuple! Whew.
-  renderKissSet' ctxt output
+  renderKissSet ctxt output
 
-renderKissSet' :: Ctxt -> Either T.Text (FilePath, [KissCell]) -> IO (Maybe Response)
-renderKissSet' ctxt eOutputError =
+renderKissSet :: Ctxt -> Either T.Text (FilePath, [KissCell]) -> IO (Maybe Response)
+renderKissSet ctxt eOutputError =
   case eOutputError of
     Right (staticDir, cels) ->
       renderWith ctxt ["users", "kiss-set"] $ setSplices staticDir cels
