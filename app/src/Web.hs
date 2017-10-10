@@ -69,7 +69,7 @@ site ctxt =
              , method POST // path "login"
                            // param "username"
                            // param "password" !=> loginHandler
-             , path "users" ==> userRoutes
+             , path "users" ==> usersRoutes
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 

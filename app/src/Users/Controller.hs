@@ -15,8 +15,8 @@ import           Ctxt
 import           Users.Model
 import           Users.View
 
-userRoutes :: Ctxt -> IO (Maybe Response)
-userRoutes ctxt =
+usersRoutes :: Ctxt -> IO (Maybe Response)
+usersRoutes ctxt =
   route ctxt [ (end ==> usersHandler)
              , (method POST // path "create"
                             // param "username"
@@ -24,6 +24,8 @@ userRoutes ctxt =
                             // param "password"
                             // param "password-confirmation" !=> usersCreateHandler)
              , (segment ==> requireAuthentication userHandler )]
+
+
 
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
