@@ -36,8 +36,16 @@ userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userSetHandler user ctxt setName = do
   let userDir = staticUserDir (userUsername user)
   let staticDir = staticUserSetDir userDir (T.unpack setName)
-  cels <- runEitherT $ createCels staticDir
-  renderKissSet ctxt staticDir cels
+  output <- (fmap . fmap) ((,) staticDir) (runEitherT $ createCels staticDir)
+  -- The previous line is a bit weird.
+  -- the result of runEitherT is an `IO (Either Text [KissCell])`.
+  -- `renderKissSet` wants an `Either Text (FilePath, [KissCell])`
+  -- The `(,)` lets us turn two things into a tuple.
+  -- `(fmap . fmap)` let's us map into two layers of functions -- first the
+  -- IO functor, then then Either functor. This makes the Right side of
+  -- the Either a tuple! Whew.
+  renderKissSet' ctxt output
+
 
 renderKissSet :: Ctxt -> String -> Either T.Text [KissCell] -> IO (Maybe Response)
 renderKissSet ctxt staticDir cels =
