@@ -9,6 +9,7 @@ import           Control.Monad.Trans.Either (runEitherT)
 import qualified Data.Configurator          as C
 import           Data.Monoid                ((<>))
 import           Data.Pool                  (createPool)
+import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Data.Vault.Lazy            as V
 import qualified Database.PostgreSQL.Simple as PG
@@ -24,6 +25,8 @@ import           Kiss
 import           Session
 import           Upload
 import           Users.Controller
+import           Users.Model
+import           Users.View
 
 initializer :: IO Ctxt
 initializer = do
@@ -72,6 +75,15 @@ site ctxt =
 
 indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = renderWith ctxt ["index"] (createUserErrorSplices <> loggedInUserSplices)
+
+loginHandler :: Ctxt -> Text -> Text ->IO (Maybe Response)
+loginHandler ctxt username password = do
+  mUser <- authenticateUser ctxt username password
+  case mUser of
+    Just user -> do
+      setLoggedInUser ctxt user
+      okText $ userUsername user <> " is logged in!"
+    Nothing    -> errText "Your username or password was wrong :("
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath') = do

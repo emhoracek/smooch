@@ -2,7 +2,8 @@
 
 module Users.View where
 
-import qualified Data.Text   as T
+import           Control.Monad.State (get, liftIO)
+import qualified Data.Text           as T
 import           Data.Time
 import           Web.Larceny
 
@@ -19,6 +20,16 @@ userSplices user = subs
   ,("email", textFill (userEmail user))
   ,("created-at", dateSplice (userCreatedAt user))
   ,("updated-at", dateSplice (userUpdatedAt user))]
+
+loggedInUserSplices :: Substitutions Ctxt
+loggedInUserSplices =
+  subs [("loggedInUser", userFill)]
+  where userFill = fillChildrenWith' $ do
+          ctxt <- get
+          mUser <- liftIO $ getLoggedInUser ctxt
+          case mUser of
+            Just user -> return $ userSplices user
+            Nothing -> return mempty
 
 dateSplice :: UTCTime -> Fill Ctxt
 dateSplice = textFill . formatTimestamp

@@ -28,6 +28,8 @@ makeLenses ''Ctxt
 instance RequestContext Ctxt where
   requestLens = req
 
+type Handler k = Ctxt -> k -> IO (Maybe Response)
+
 renderWith :: Ctxt -> Path -> Substitutions Ctxt -> IO (Maybe Response)
 renderWith ctxt tplPath addSubs = do
   mRendered <- L.renderWith (ctxt ^. library)

@@ -22,7 +22,22 @@ userRoutes ctxt =
                             // param "username"
                             // param "email"
                             // param "password"
-                            // param "password-confirmation" !=> usersCreateHandler)]
+                            // param "password-confirmation" !=> usersCreateHandler)
+             , (segment ==> requireAuthentication userHandler )]
+
+userHandler :: Ctxt -> Text -> IO (Maybe Response)
+userHandler ctxt username = do
+  mUser <- getUserByUsername ctxt username
+  case mUser of
+    Just _user -> okText "this is your settings page"
+    Nothing -> errText "User not found"
+
+requireAuthentication :: Handler k -> Handler k
+requireAuthentication handler = \ctxt k -> do
+  mUser <- getLoggedInUser ctxt
+  case mUser of
+    Just _user -> handler ctxt k
+    Nothing -> errText "you're not logged in"
 
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
