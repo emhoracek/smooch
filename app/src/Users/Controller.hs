@@ -23,9 +23,7 @@ usersRoutes ctxt =
                             // param "email"
                             // param "password"
                             // param "password-confirmation" !=> usersCreateHandler)
-             , (segment ==> requireAuthentication userHandler )]
-
-
+             , (segment ==> requireAuthentication loggedInUserRoutes)]
 
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
@@ -47,11 +45,15 @@ requireAuthentication handler = \ctxt k -> do
     Just user -> handler ctxt user k
     Nothing -> errText "you're not logged in"
 
-userHandler :: Ctxt -> User -> Text -> IO (Maybe Response)
-userHandler ctxt loggedInUser username = do
+loggedInUserRoutes :: Ctxt -> User -> Text -> IO (Maybe Response)
+loggedInUserRoutes ctxt loggedInUser username = do
   if userUsername loggedInUser == username
-    then renderWith ctxt ["users", "show"] (userSplices loggedInUser)
+    then route ctxt [ (end ==> userHandler loggedInUser)]
     else return Nothing
+
+userHandler ::  User -> Ctxt -> IO (Maybe Response)
+userHandler loggedInUser ctxt = do
+  renderWith ctxt ["users", "show"] (userSplices loggedInUser)
 
 usersCreateHandler :: Ctxt -> Text -> Text -> Text -> Text -> IO (Maybe Response)
 usersCreateHandler ctxt username email password passwordConfirmation = do
