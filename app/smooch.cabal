@@ -50,6 +50,8 @@ library
                        Web,
                        Ctxt,
                        Session,
+                       Sets.Controller,
+                       Sets.View,
                        Users.Model,
                        Users.View,
                        Users.Controller
