@@ -42,6 +42,7 @@ processUserSet :: Text
                -> EitherT Text IO [KissCell]
 processUserSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
+  userDir <- createUserDir username
   staticDir <- createSetDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
@@ -56,7 +57,17 @@ createSetDir setName = do
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ tryIO $ removeDirectoryRecursive staticDir
   tryIO $ createDirectory staticDir
-  log' $ "Created static directory: " <> T.pack staticDir
+  log' $ "Created static directory if missing: " <> T.pack staticDir
+  return staticDir
+
+staticUserDir :: Text -> FilePath
+staticUserDir username = "static/sets/" <> T.unpack username
+
+createUserDir :: Text -> EitherT Text IO FilePath
+createUserDir username = do
+  let staticDir = staticUserDir username
+  tryIO $ createDirectoryIfMissing True staticDir
+  log' $ "Created static user sets directory: " <> T.pack staticDir
   return staticDir
 
 deleteCels :: FilePath -> IO ()
