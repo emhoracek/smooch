@@ -32,6 +32,13 @@ setHandler ctxt setName = do
   cels <- runEitherT $ createCels staticDir
   renderKissSet ctxt staticDir cels
 
+userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
+userSetHandler user ctxt setName = do
+  let userDir = staticUserDir (userUsername user)
+  let staticDir = staticUserSetDir userDir (T.unpack setName)
+  cels <- runEitherT $ createCels staticDir
+  renderKissSet ctxt staticDir cels
+
 renderKissSet :: Ctxt -> String -> Either T.Text [KissCell] -> IO (Maybe Response)
 renderKissSet ctxt staticDir cels =
   case cels of

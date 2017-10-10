@@ -52,7 +52,10 @@ loggedInUserRoutes ctxt loggedInUser username = do
     then route ctxt [ end ==> userHandler loggedInUser
                     , path "upload" // method POST
                                     // file "kissfile"
-                                    !=> userUploadHandler loggedInUser ]
+                                    !=> userUploadHandler loggedInUser
+                    , path "sets" // segment
+                                  // end
+                                  ==> userSetHandler loggedInUser ]
     else return Nothing
 
 userHandler ::  User -> Ctxt -> IO (Maybe Response)
