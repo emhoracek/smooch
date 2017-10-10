@@ -46,9 +46,9 @@ requireAuthentication handler = \ctxt k -> do
     Nothing -> errText "you're not logged in"
 
 userHandler :: Ctxt -> User -> Text -> IO (Maybe Response)
-userHandler _ctxt loggedInUser username = do
+userHandler ctxt loggedInUser username = do
   if userUsername loggedInUser == username
-    then okText "this is your settings page"
+    then renderWith ctxt ["users", "show"] (userSplices loggedInUser)
     else return Nothing
 
 usersCreateHandler :: Ctxt -> Text -> Text -> Text -> Text -> IO (Maybe Response)
