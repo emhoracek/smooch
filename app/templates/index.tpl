@@ -61,17 +61,5 @@
 
       <input type="submit" />
     </form>
-
-    <h2>Upload and play with a KiSS set </h2>
-
-    <p> Eventually this form will be under the user account page, but that's not ready yet.</p>
-
-    <form action="/upload" method="post" enctype="multipart/form-data">
-
-      <input type="file" name="kissfile">
-      <input type="submit" value="Upload!">
-
-    </form>
-
   </body>
 </html>
