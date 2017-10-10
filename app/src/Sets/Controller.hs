@@ -5,7 +5,6 @@ module Sets.Controller where
 import           Control.Monad.Trans.Either (runEitherT)
 import qualified Data.Text                  as T
 import           Network.Wai                (Response)
-import           System.FilePath            (takeBaseName)
 import           Web.Fn
 
 import           Ctxt
@@ -19,7 +18,6 @@ userUploadHandler user ctxt (File name _ filePath') = do
   output <- runEitherT $ processUserSet (userUsername user)
                                         (T.unpack name, filePath')
   renderKissSet' ctxt output
-
 
 userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userSetHandler user ctxt setName = do
