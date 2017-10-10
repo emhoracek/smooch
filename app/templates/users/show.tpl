@@ -32,7 +32,7 @@
 
     <h2>Upload a set</h2>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="/users/${username}/upload" method="post" enctype="multipart/form-data">
 
       <input type="file" name="kissfile">
       <input type="submit" value="Upload!">

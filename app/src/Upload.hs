@@ -43,7 +43,7 @@ processUserSet :: Text
 processUserSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
-  staticDir <- createSetDir (takeBaseName fName)
+  staticDir <- createSetDir' userDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
   createCels staticDir
@@ -57,7 +57,7 @@ createSetDir setName = do
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ tryIO $ removeDirectoryRecursive staticDir
   tryIO $ createDirectory staticDir
-  log' $ "Created static directory if missing: " <> T.pack staticDir
+  log' $ "Created static directory: " <> T.pack staticDir
   return staticDir
 
 staticUserDir :: Text -> FilePath
@@ -67,7 +67,19 @@ createUserDir :: Text -> EitherT Text IO FilePath
 createUserDir username = do
   let staticDir = staticUserDir username
   tryIO $ createDirectoryIfMissing True staticDir
-  log' $ "Created static user sets directory: " <> T.pack staticDir
+  log' $ "Created static user sets directory if missing: " <> T.pack staticDir
+  return staticDir
+
+staticUserSetDir :: FilePath -> String -> FilePath
+staticUserSetDir userDir setName =  userDir <> "/" <> setName
+
+createSetDir' :: FilePath -> String -> EitherT Text IO FilePath
+createSetDir' userDir setName = do
+  let staticDir = userDir <> "/" <> setName
+  exists <- liftIO $ doesDirectoryExist staticDir
+  when exists $ tryIO $ removeDirectoryRecursive staticDir
+  tryIO $ createDirectory staticDir
+  log' $ "Created static directory: " <> T.pack staticDir
   return staticDir
 
 deleteCels :: FilePath -> IO ()
