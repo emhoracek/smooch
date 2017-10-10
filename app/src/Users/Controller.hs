@@ -12,6 +12,7 @@ import           Web.Fn
 import           Web.Larceny        hiding (renderWith)
 
 import           Ctxt
+import           Sets.Controller
 import           Users.Model
 import           Users.View
 
@@ -48,7 +49,10 @@ requireAuthentication handler = \ctxt k -> do
 loggedInUserRoutes :: Ctxt -> User -> Text -> IO (Maybe Response)
 loggedInUserRoutes ctxt loggedInUser username = do
   if userUsername loggedInUser == username
-    then route ctxt [ (end ==> userHandler loggedInUser)]
+    then route ctxt [ end ==> userHandler loggedInUser
+                    , path "upload" // method POST
+                                    // file "kissfile"
+                                    !=> userUploadHandler loggedInUser ]
     else return Nothing
 
 userHandler ::  User -> Ctxt -> IO (Maybe Response)

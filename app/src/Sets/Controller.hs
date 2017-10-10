@@ -12,11 +12,19 @@ import           Ctxt
 import           Kiss
 import           Sets.View
 import           Upload
+import           Users.Model
 
 uploadHandler :: Ctxt -> File -> IO (Maybe Response)
 uploadHandler ctxt (File name _ filePath') = do
   let staticDir = staticDirFromSetName (takeBaseName (T.unpack name))
   cels <- runEitherT $ processSet (T.unpack name, filePath')
+  renderKissSet ctxt staticDir cels
+
+userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
+userUploadHandler user ctxt (File name _ filePath') = do
+  let staticDir = staticDirFromSetName (takeBaseName (T.unpack name))
+  cels <- runEitherT $ processUserSet (userUsername user)
+                                      (T.unpack name, filePath')
   renderKissSet ctxt staticDir cels
 
 setHandler :: Ctxt -> T.Text -> IO (Maybe Response)

@@ -4,9 +4,9 @@
 
 module Upload where
 
-import           Data.List                  (nub)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Lazy       as LBS
+import           Data.List                  (nub)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
@@ -20,8 +20,8 @@ import           Control.Logging            (log')
 import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
-import           Data.Monoid                ((<>))
 import           Data.Either.Combinators    (mapLeft)
+import           Data.Monoid                ((<>))
 
 import           Data.Aeson                 (encode)
 
@@ -31,6 +31,16 @@ import           Shell
 
 processSet :: (FilePath, FilePath) -> EitherT Text IO [KissCell]
 processSet (fName, filePath) = do
+  tryIO $ copyFile filePath ("static/sets" </> fName)
+  staticDir <- createSetDir (takeBaseName fName)
+  unzipFile fName staticDir
+  log' "Unzipped file!"
+  createCels staticDir
+
+processUserSet :: Text
+               -> (FilePath, FilePath)
+               -> EitherT Text IO [KissCell]
+processUserSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   staticDir <- createSetDir (takeBaseName fName)
   unzipFile fName staticDir
