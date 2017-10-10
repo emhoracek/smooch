@@ -25,24 +25,31 @@ userRoutes ctxt =
                             // param "password-confirmation" !=> usersCreateHandler)
              , (segment ==> requireAuthentication userHandler )]
 
-userHandler :: Ctxt -> Text -> IO (Maybe Response)
-userHandler ctxt username = do
-  mUser <- getUserByUsername ctxt username
-  case mUser of
-    Just _user -> okText "this is your settings page"
-    Nothing -> errText "User not found"
-
-requireAuthentication :: Handler k -> Handler k
-requireAuthentication handler = \ctxt k -> do
-  mUser <- getLoggedInUser ctxt
-  case mUser of
-    Just _user -> handler ctxt k
-    Nothing -> errText "you're not logged in"
-
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
   users <- getUsers ctxt
   renderWith ctxt ["users", "index"] (usersSplices users)
+
+requireAuthentication :: (Ctxt -> User -> k -> IO (Maybe Response))
+                      -> Ctxt -> k -> IO (Maybe Response)
+-- This is a weird type signature! Here's what is going on.
+-- `k` is the type of any params or segment arguments.
+-- For example, `(segment ==> requireAuthentication userHandler)`
+-- passes one `Text` argument, so `k` is `Text`. But if it was
+-- `(segment // path "id" ==> requireAuthentication otherHandler)`
+-- then `k` might be `Text -> Int`. Keeping `k` abstract lets us
+-- handle all sorts of different types of arguments to our handlers.
+requireAuthentication handler = \ctxt k -> do
+  mUser <- getLoggedInUser ctxt
+  case mUser of
+    Just user -> handler ctxt user k
+    Nothing -> errText "you're not logged in"
+
+userHandler :: Ctxt -> User -> Text -> IO (Maybe Response)
+userHandler _ctxt loggedInUser username = do
+  if userUsername loggedInUser == username
+    then okText "this is your settings page"
+    else return Nothing
 
 usersCreateHandler :: Ctxt -> Text -> Text -> Text -> Text -> IO (Maybe Response)
 usersCreateHandler ctxt username email password passwordConfirmation = do
