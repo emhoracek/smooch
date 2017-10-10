@@ -22,12 +22,9 @@ uploadHandler ctxt (File name _ filePath') = do
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  let username = userUsername user
-  let userDir = staticUserDir username
-  let staticDir = staticUserSetDir userDir (takeBaseName (T.unpack name))
-  cels <- runEitherT $ processUserSet username
-                                      (T.unpack name, filePath')
-  renderKissSet' ctxt staticDir cels
+  output <- runEitherT $ processUserSet (userUsername user)
+                                        (T.unpack name, filePath')
+  renderKissSet' ctxt output
 
 setHandler :: Ctxt -> T.Text -> IO (Maybe Response)
 setHandler ctxt setName = do
@@ -41,8 +38,9 @@ renderKissSet ctxt staticDir cels =
     Right cs -> renderWith ctxt ["kissSet"] $ setSplices staticDir cs
     Left  e -> errText e
 
-renderKissSet' :: Ctxt -> String -> Either T.Text [KissCell] -> IO (Maybe Response)
-renderKissSet' ctxt staticDir cels =
-  case cels of
-    Right cs -> renderWith ctxt ["users", "kissSet"] $ setSplices staticDir cs
+renderKissSet' :: Ctxt -> Either T.Text (FilePath, [KissCell]) -> IO (Maybe Response)
+renderKissSet' ctxt eOutputError =
+  case eOutputError of
+    Right (staticDir, cels) ->
+      renderWith ctxt ["users", "kiss-set"] $ setSplices staticDir cels
     Left  e -> errText e

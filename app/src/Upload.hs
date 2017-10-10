@@ -39,14 +39,15 @@ processSet (fName, filePath) = do
 
 processUserSet :: Text
                -> (FilePath, FilePath)
-               -> EitherT Text IO [KissCell]
+               -> EitherT Text IO (FilePath, [KissCell])
 processUserSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
   staticDir <- createSetDir' userDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
-  createCels staticDir
+  cels <- createCels staticDir
+  return (staticDir, cels)
 
 staticDirFromSetName :: String -> FilePath
 staticDirFromSetName setName = "static/sets/" <> setName
