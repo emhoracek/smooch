@@ -58,8 +58,6 @@ appBase ctxt = do
 site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end ==> indexHandler
-             , path "upload" // method POST // file "kissfile" !=> uploadHandler
-             , path "sets" // segment // end ==> setHandler
              , method POST // path "login"
                            // param "username"
                            // param "password" !=> loginHandler
