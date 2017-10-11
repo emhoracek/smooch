@@ -90,6 +90,12 @@ public, you're also welcome to send an email to libby@daydrea.me!
 
 Pick an [issue](https://github.com/emhoracek/smooch/issues), or below are some more general things you can work on.
 
+Please comment on the issue you want to work on to claim it *before* you start
+work. That way you can take your time working instead of racing to get the first
+pull request in. 
+
+Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute! If a feature idea there looks interesting, please create an issue for it so we can discuss different approaches and so other people can know that you're working on it.
+
 #### Frontend (JavaScript/HTML/CSS)
 
 You can work on the [JavaScript frontend](https://github.com/emhoracek/smooch/tree/master/javascript) of
