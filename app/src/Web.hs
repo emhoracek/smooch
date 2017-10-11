@@ -73,5 +73,5 @@ loginHandler ctxt username password = do
   case mUser of
     Just user -> do
       setLoggedInUser ctxt user
-      okText (userUsername user <> " is logged in!")
+      redirect ("/users/" <> username)
     Nothing    -> errText "Your username or password was wrong :("
