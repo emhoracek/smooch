@@ -6,6 +6,10 @@
 
     <h1>Smooch!</h1>
 
+    <if exists="${loggedInUser}">
+      <then> Hello, <loggedInUser />! </then>
+    </if>
+
     <!-- demo doll should go here -->
 
     <h2> Create an account</h2>
@@ -28,29 +32,34 @@
       </div>
       <div>
         <label for="password">
-          Password: <input name="password" />
+          Password: <input type="password" name="password" />
         </label>
         <p><passwordErrors /></p>
       </div>
       <div>
         <label for="password-confirmation">Password (again):
-          <input name="password-confirmation" />
+          <input type="password" name="password-confirmation" />
         </label>
       </div>
 
       <input type="submit" />
     </form>
 
-    <h2>Upload and play with a KiSS set </h2>
+    <h2>Login</h2>
 
-    <p> Eventually this form will be under the user account page, but that's not ready yet.</p>
+    <form action="/login" method="post">
+      <div>
+        <label for="username">
+          Username: <input name="username" />
+        </label>
+      </div>
+      <div>
+        <label for="password">
+          Password: <input type="password" name="password" />
+        </label>
+      </div>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
-
-      <input type="file" name="kissfile">
-      <input type="submit" value="Upload!">
-
+      <input type="submit" />
     </form>
-
   </body>
 </html>

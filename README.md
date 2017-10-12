@@ -4,7 +4,7 @@ Please comment on the issue you want to work on to claim it *before* you start
 work. That way you can take your time working instead of racing to get the first
 pull request in. 
 
-Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute!
+Don't see an interesting issue, or all the issues are claimed? Check out the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for ideas and more ways to contribute! If a feature idea there looks interesting, please create an issue for it so we can discuss different approaches and so other people can know that you're working on it.
 
 I'll be on [Twitch](https://www.twitch.tv/horrorcheck) working on this project most Sundays. 
 Please feel free to ask questions in the chat there and let me know if you need any help getting the project running!
@@ -39,7 +39,29 @@ work with all cel formats.
 Now, we're making a KiSS doll viewer for the browser -- and you can help! Check
 out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
+Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
+
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
+
+
+## Roadmap
+
+  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
+      * Lots of dolls are not quite working still, especially multi-palette 
+      dolls.
+  * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
+      * Serve cels as binary blobs and let JavaScript display them?
+      * Inline the C code for cel2pnm?
+      * Write a Haskell library for decompressing LHAs? (O.O)
+  * Support multiple palettes (dependent on how the above situation
+    with cels as blobs vs pngs turns out)
+  * Figure out how users view dolls, whether dolls are stored on
+    server, etc.
+  * Release a usable vanilla KiSS viewer.
+  * Allow users to edit sets.
+  * Allow users to create sets from scratch.
+  * Add FKiSS1, FKiSS2, FKiSS3, CherryKiSS, Enhanced Palettes, FKiSS4,
+    FKiSS5...
 
 ## Thanks
 
@@ -56,6 +78,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
    * ear/bpaf helped with Haskell refactoring
    * Darius improved cel2pnm and added tests
    * huggablemonad has helped debug several sets
+   * lisaychuang improved documentation for contributors
  * mentors
    * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
    * Mark Dominus helped me write cel2pmn
