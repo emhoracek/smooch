@@ -247,7 +247,7 @@ stack exec migrate test up
 
 ### Running Smooch
 
-Now you can run `stack exec smooch` and open `localhost:8000` in your browser.
+Now you can run `ENV=devel stack exec smooch` and open `localhost:8000` in your browser.
 You should see Smooch running!
 
 You can also run tests with `stack test` or open a REPL with `stack ghci smooch:smooch`.
