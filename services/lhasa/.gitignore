@@ -1,0 +1,4 @@
+deploy.env
+event.json
+.env
+.lambda
