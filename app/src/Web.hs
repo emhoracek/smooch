@@ -60,6 +60,7 @@ site ctxt =
              , method POST // path "login"
                            // param "username"
                            // param "password" !=> loginHandler
+             , method POST // path "logout" !=> logoutHandler
              , path "users" ==> usersRoutes
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
@@ -67,7 +68,7 @@ site ctxt =
 indexHandler :: Ctxt -> IO (Maybe Response)
 indexHandler ctxt = renderWith ctxt ["index"] (createUserErrorSplices <> loggedInUserSplices)
 
-loginHandler :: Ctxt -> Text -> Text ->IO (Maybe Response)
+loginHandler :: Ctxt -> Text -> Text -> IO (Maybe Response)
 loginHandler ctxt username password = do
   mUser <- authenticateUser ctxt username password
   case mUser of
@@ -75,3 +76,8 @@ loginHandler ctxt username password = do
       setLoggedInUser ctxt user
       redirect ("/users/" <> username)
     Nothing    -> errText "Your username or password was wrong :("
+
+logoutHandler :: Ctxt -> IO (Maybe Response)
+logoutHandler ctxt = do
+    setLoggedOut ctxt
+    redirect "/"

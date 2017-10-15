@@ -90,5 +90,9 @@ getLoggedInUser ctxt = do
     Nothing -> return Nothing
 
 setLoggedInUser :: Ctxt -> User -> IO ()
-setLoggedInUser ctxt user = do
-  setInSession ctxt "user" (userUsername user)
+setLoggedInUser ctxt =
+  setInSession ctxt "user" . Just . userUsername
+
+setLoggedOut :: Ctxt -> IO ()
+setLoggedOut ctxt =
+  setInSession ctxt "user" Nothing
