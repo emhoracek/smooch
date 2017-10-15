@@ -4,6 +4,7 @@ module Web where
 
 import           Control.Lens               ((^.))
 import qualified Data.Configurator          as C
+import           Data.Maybe                 (fromMaybe)
 import           Data.Monoid                ((<>))
 import           Data.Pool                  (createPool)
 import           Data.Text                  (Text)
@@ -11,7 +12,7 @@ import qualified Data.Vault.Lazy            as V
 import qualified Database.PostgreSQL.Simple as PG
 import           Network.HTTP.Types.Method  (StdMethod (..))
 import           Network.Wai                (Application, Response)
-import           System.Environment         (getEnv)
+import           System.Environment         (lookupEnv)
 import           Web.Fn
 import           Web.Larceny                hiding (renderWith)
 
@@ -23,7 +24,7 @@ import           Users.View
 
 initializer :: IO Ctxt
 initializer = do
-  env <- getEnv "ENV"
+  env <- fromMaybe "devel" <$> lookupEnv "ENV"
   let env' = if env == "" then "devel" else env
   conf <- C.load [C.Required (env' <> ".cfg")]
   dbHost <- C.require conf "postgresql-simple.host"
