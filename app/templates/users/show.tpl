@@ -11,6 +11,10 @@
 
     <h1>Welcome, <username /></h1>
 
+    <form action="/logout" method="post">
+      <input type="submit" value="Logout">
+    </form>
+
     <h2>Your sets</h2>
 
     <!-- Contirbutors: the bind tag below is a weird hack to get around a

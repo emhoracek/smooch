@@ -21,7 +21,7 @@ sessionMiddleware vaultKey = do
 lookupSession :: Ctxt -> Maybe SmoochSession
 lookupSession ctxt = V.lookup (ctxt ^. sessionKey) (vault (fst $ ctxt ^. req))
 
-setInSession :: Ctxt -> Text -> Text -> IO ()
+setInSession :: Ctxt -> Text -> Maybe Text -> IO ()
 setInSession ctxt k v =
   case lookupSession ctxt of
     Just (_, setSession) -> setSession k v
@@ -30,5 +30,9 @@ setInSession ctxt k v =
 getFromSession :: Ctxt -> Text -> IO (Maybe Text)
 getFromSession ctxt k =
   case lookupSession ctxt of
-    Just (getSession, _) -> getSession k
+    Just (getSession, _) -> do
+      mbValue <- getSession k
+      case mbValue of
+        Just (Just v) -> return (Just v)
+        _             -> return Nothing
     Nothing -> error "getFromSession: no session in vault"

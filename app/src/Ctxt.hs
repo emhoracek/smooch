@@ -16,7 +16,7 @@ import           Web.Fn
 import           Web.Larceny                hiding (renderWith)
 import qualified Web.Larceny                as L
 
-type SmoochSession = Session IO Text Text
+type SmoochSession = Session IO Text (Maybe Text)
 
 data Ctxt = Ctxt { _req           :: FnRequest
                  , _sessionKey    :: V.Key SmoochSession
