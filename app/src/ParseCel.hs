@@ -34,6 +34,9 @@ import           Data.Bits                  ((.&.))
 import qualified Data.Bits                  as Bits
 import           Data.ByteString            (ByteString)
 import qualified Data.ByteString            as BS
+import qualified Data.ByteString.Builder    as BS
+import qualified Data.ByteString.Lazy       as BSL
+import           Data.Monoid                ((<>))
 import           Data.Text                  (Text)
 import           Data.Word                  (Word16, Word8)
 import           Formatting                 ((%))
@@ -86,9 +89,10 @@ parseCelData headerStyle = do
         height = fromIntegral (celHeight celHeader)
         celSize = width * height
         parser = if is4bpp then parse4bpp else parse8bpp
-    pixels <- BP.sized celSize (CA.some parser)
+    pixels <- BP.bytesOfSize celSize
+    let celPixels = parser pixels
     BP.endOfInput
-    return (celHeader, concat pixels)
+    return (celHeader, celPixels)
 
 -- * Cel header
 
@@ -172,10 +176,19 @@ isValidWidthAndHeight width height = width > 0 && height > 0
 -- > |<-  byte   ->|  |<-  byte   ->|  |<-  byte   ->|
 -- > MSB         LSB  MSB         LSB  MSB         LSB
 -- > | pix0 | pix1 |  | pix2 | pix3 |  | pix4 | pix5 |  ......... | pixN |
-parse4bpp :: BinaryParser CelPixels
-parse4bpp = do
-    pixel <- BP.byte
-    return [hiNibble pixel, loNibble pixel]
+parse4bpp :: ByteString -> CelPixels
+parse4bpp pixels =
+    BSL.unpack $ parse pixels (BS.byteString BS.empty)
+  where
+    parse pix acc
+        | BS.null pix = BS.toLazyByteString acc
+        | otherwise =
+            let byte = BS.head pix
+                rest = BS.tail pix
+                hi = BS.word8 . hiNibble $ byte
+                lo = BS.word8 . loNibble $ byte
+                acc' = hi <> lo <> acc
+            in parse rest acc'
 
 -- | Return the high nibble.
 hiNibble :: Word8 -> Word8
@@ -186,7 +199,5 @@ loNibble :: Word8 -> Word8
 loNibble = (.&.) 0x0F
 
 -- | Parse an 8-bit color pixel.
-parse8bpp :: BinaryParser CelPixels
-parse8bpp = do
-    pixel <- BP.byte
-    return [pixel]
+parse8bpp :: ByteString -> CelPixels
+parse8bpp pixels = BS.unpack pixels
