@@ -74,9 +74,18 @@ isNewStyleCel = (==) (BS.pack [0x4B, 0x69, 0x53, 0x53])
 parseCelData :: HeaderStyle -> BinaryParser (CelHeader, CelPixels)
 parseCelData headerStyle = do
     celHeader <- if headerStyle == Old then parseOldHeader else parseHeader
-    let celSize = fromIntegral (celWidth celHeader)
-                * fromIntegral (celHeight celHeader)
-        parser = if celBpp celHeader == 4 then parse4bpp else parse8bpp
+    let is4bpp = celBpp celHeader == 4
+        -- For 4bpp cels, a padding pixel is added if the width is odd. We'll
+        -- need to take this extra pixel into account when calculating the
+        -- number of bytes to read.
+        width4bpp = if odd (celWidth celHeader)
+                        then (celWidth celHeader + 1) `div` 2
+                        else celWidth celHeader `div` 2
+        width8bpp = celWidth celHeader
+        width = fromIntegral $ if is4bpp then width4bpp else width8bpp
+        height = fromIntegral (celHeight celHeader)
+        celSize = width * height
+        parser = if is4bpp then parse4bpp else parse8bpp
     pixels <- BP.sized celSize (CA.some parser)
     BP.endOfInput
     return (celHeader, concat pixels)
