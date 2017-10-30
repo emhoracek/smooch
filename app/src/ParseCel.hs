@@ -88,7 +88,7 @@ parseCelData headerStyle = do
         width = fromIntegral $ if is4bpp then width4bpp else width8bpp
         height = fromIntegral (celHeight celHeader)
         celSize = width * height
-        parser = if is4bpp then parse4bpp else parse8bpp
+        parser = if is4bpp then parse4bpp (celWidth celHeader) else parse8bpp
     pixels <- BP.bytesOfSize celSize
     let celPixels = parser pixels
     BP.endOfInput
@@ -176,19 +176,29 @@ isValidWidthAndHeight width height = width > 0 && height > 0
 -- > |<-  byte   ->|  |<-  byte   ->|  |<-  byte   ->|
 -- > MSB         LSB  MSB         LSB  MSB         LSB
 -- > | pix0 | pix1 |  | pix2 | pix3 |  | pix4 | pix5 |  ......... | pixN |
-parse4bpp :: ByteString -> CelPixels
-parse4bpp pixels =
-    BSL.unpack $ parse pixels (BS.byteString BS.empty)
+parse4bpp :: Word16 -- ^ Cel width.
+          -> ByteString -- ^ Cel pixel data.
+          -> CelPixels
+parse4bpp rasterWidth pixels =
+    BSL.unpack $ parse 1 pixels (BS.byteString BS.empty)
   where
-    parse pix acc
+    parse xPos pix acc
         | BS.null pix = BS.toLazyByteString acc
         | otherwise =
             let byte = BS.head pix
                 rest = BS.tail pix
                 hi = BS.word8 . hiNibble $ byte
                 lo = BS.word8 . loNibble $ byte
-                acc' = hi <> lo <> acc
-            in parse rest acc'
+                isPaddingPixel = odd rasterWidth && xPos == width
+                acc' = if isPaddingPixel
+                           then acc <> hi -- Skip the padding pixel.
+                           else acc <> hi <> lo
+                xPos' = if xPos == width then 1 else xPos + 1
+            in parse xPos' rest acc'
+    -- Number of bytes that the raster width of the cel takes up.
+    width = if odd rasterWidth
+                then (rasterWidth + 1) `div` 2
+                else rasterWidth `div` 2
 
 -- | Return the high nibble.
 hiNibble :: Word8 -> Word8

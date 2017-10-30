@@ -181,13 +181,13 @@ testParseCel =
         Right 1
     it "parses new cel (4/1/1/0/0) into CelPixels" $
       checkLength validNewCel2 `shouldReturn`
-        Right 2
+        Right 1
     it "parses new cel (8/2/1/0/0) into CelPixels" $
       checkLength validNewCel3 `shouldReturn`
         Right 2
     it "parses old cel (4/1/1/0/0) into CelPixels" $
       checkLength validOldCel1 `shouldReturn`
-        Right 2
+        Right 1
     it "returns an error message for empty cel" $
       runParseCel BS.empty `shouldReturn`
         Left "End of input"
