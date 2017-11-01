@@ -211,9 +211,16 @@ parse12bpp :: BinaryParser PalEntry
 parse12bpp = do
     redBlueByte <- BP.byte
     greenByte <- BP.byte
-    let red = hiNibble redBlueByte
-        green = loNibble greenByte
-        blue = loNibble redBlueByte
+    let -- We multiply each color component (red, green, and blue) by
+        -- rgbColorStep in order to map it to the RGB color space. So we have
+        -- rgb(0, 0, 0), rgb(17, 17, 17), ..., to rgb(255, 255, 255). Choosing
+        -- a slightly lower value for rgbColorStep, like 16 for example, will
+        -- create colors that are a shade darker (a 6% difference: 100 - 16 /
+        -- 17 * 100 = 5.88).
+        rgbColorStep = 17
+        red = hiNibble redBlueByte * rgbColorStep
+        green = loNibble greenByte * rgbColorStep
+        blue = loNibble redBlueByte * rgbColorStep
     return $ PalEntry red green blue
 
 -- | Return the high nibble.
