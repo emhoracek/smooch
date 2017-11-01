@@ -171,13 +171,47 @@ Following the [Homebrew install guide here](https://brew.sh/).
 
 ## Project setup
 
-First, clone this project from Github
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this project, clone your fork, and add the original repo as a remote:
 
-```
-git clone https://github.com/emhoracek/smooch.git
-cd smooch
-```
-![alt text](https://preview.ibb.co/exRHQb/gitclone.png "Git clone repo")
+   ```bash
+   # Clone your fork of the repo
+   git clone https://github.com/<your-username>/smooch
+   # Navigate to the newly cloned directory
+   cd smooch
+   # Assign the original repo to a remote called "upstream"
+   git remote add upstream https://github.com/emhoracek/smooch.git
+   ```
+
+    *NOTE*: You can type `git remote -v` to check which repositories your origin and upstream are pointing to.
+
+
+2. Whenever you want to sync your fork with the original repo, do the following:
+
+    ```bash
+   git checkout master
+   git pull upstream master
+   git push
+   ```
+3. If you want to work on an issue, create a new topic branch (off of `master`) to contain your feature, change,
+   or fix.
+
+   **IMPORTANT**: Making changes in `master` is discouraged. You should always
+   keep your local `master` in sync with upstream `master` and make your
+   changes in topic branches.
+
+   ```bash
+   git checkout -b <topic-branch-name>
+   ```
+
+4. Commit your changes in logical chunks. Keep your commit messages organized, with a short description in the first line and more detailed information on the following lines.
+
+5. Push your topic branch up to your fork:
+
+   ```bash
+   git push origin <topic-branch-name>
+   ```
+
+6. [Open a Pull Request](https://help.github.com/articles/about-pull-requests/) with a clear title and description.
 
 
 ### Install `cel2pnm`
