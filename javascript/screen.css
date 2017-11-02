@@ -6,6 +6,22 @@ body {
     height: 100%;
 }
 
+header h1 {
+  border-bottom: 1px solid black;
+}
+
+main {
+  display: flex;
+}
+
+section {
+  display: flex;
+  border: 1px solid red;
+  flex-direction: column;
+}
+
+
+
 #loading { background: white;
            margin: 0;
            padding: 0;
