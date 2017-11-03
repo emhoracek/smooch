@@ -1,13 +1,17 @@
-body {
-    margin: 0px;
-    font-family: helvetica, arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+html {
+  box-sizing: border-box;
+  font-size: 18px;
 }
 
-header h1 {
-  border-bottom: 1px solid black;
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 main {
@@ -16,28 +20,61 @@ main {
 
 section {
   display: flex;
-  border: 1px solid red;
   flex-direction: column;
+  padding: 0 1em;
 }
 
+/*Header*/
+.logo {
+  font-size: 2em;
+  padding: .25em .5em;
+  border-bottom: 1px solid black;
+}
 
+/*Authentication*/
+.authenticate {
+  width: 30%;
+  border-bottom: 1px solid black;
+  justify-content: flex-end;
+}
 
-#loading { background: white;
-           margin: 0;
-           padding: 0;
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           z-index: 100;
-           text-align: center }
+.authenticate > * {
+  margin-bottom: 3em;
+  padding: 1em;
+  border: 3px solid black;
+}
+
+.login {
+  border: 3px solid black;
+}
+
+/*Demo doll*/
+.demo {
+  width: 70%;
+}
+
+#loading { 
+  background: white;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  text-align: center 
+}
 
 #wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
 
-#sets { display: flex; }
+#sets { 
+  display: flex; 
+  padding: 2em 0;
+}
 #sets ul { padding-left: 0;  }
 #sets p {  }
 
