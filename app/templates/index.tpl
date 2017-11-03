@@ -55,58 +55,65 @@
       </section>
 
       <!-- End demo doll, start login -->
-      <section class="login">
-        
-      <h2> Create an account</h2>
 
-      <p>Note to contributors: you don't need to create an account unless you're
-        working on users -- if you're testing dolls then you can skip to the upload form.</p>
+      <!-- Login/Signup Section-->
+      <section class="authenticate">
+        <!-- Signup form -->
+        <div class="signup">
+          <h2> Create an account</h2>
 
-      <form action="/users/create" method="post">
-        <div>
-          <label for="username">
-            Username: <input name="username" />
-          </label>
-          <p><usernameErrors /></p>
-        </div>
-        <div>
-          <label for="email">
-            Email: <input name="email" />
-          </label>
-          <p><emailErrors /></p>
-        </div>
-        <div>
-          <label for="password">
-            Password: <input type="password" name="password" />
-          </label>
-          <p><passwordErrors /></p>
-        </div>
-        <div>
-          <label for="password-confirmation">Password (again):
-            <input type="password" name="password-confirmation" />
-          </label>
-        </div>
+          <p>Note to contributors: you don't need to create an account unless you're
+            working on users -- if you're testing dolls then you can skip to the upload form.</p>
 
-        <input type="submit" />
-      </form>
+          <form action="/users/create" method="post">
+            <div>
+              <label for="username">
+                Username: <input name="username" />
+              </label>
+              <p><usernameErrors /></p>
+            </div>
+            <div>
+              <label for="email">
+                Email: <input name="email" />
+              </label>
+              <p><emailErrors /></p>
+            </div>
+            <div>
+              <label for="password">
+                Password: <input type="password" name="password" />
+              </label>
+              <p><passwordErrors /></p>
+            </div>
+            <div>
+              <label for="password-confirmation">Password (again):
+                <input type="password" name="password-confirmation" />
+              </label>
+            </div>
 
-      <h2>Login</h2>
+            <input type="submit" />
+          </form>
+        </div>  
 
-      <form action="/login" method="post">
-        <div>
-          <label for="username">
-            Username: <input name="username" />
-          </label>
-        </div>
-        <div>
-          <label for="password">
-            Password: <input type="password" name="password" />
-          </label>
-        </div>
+        <!-- Login form -->
+        <div class="login">
+          <h2>Login</h2>
 
-        <input type="submit" />
-      </form>
-      </section>
+          <form action="/login" method="post">
+            <div>
+              <label for="username">
+                Username: <input name="username" />
+              </label>
+            </div>
+            <div>
+              <label for="password">
+                Password: <input type="password" name="password" />
+              </label>
+            </div>
+
+            <input type="submit" />
+          </form>
+        </section>
+      </div>
     </main>
 
     <!-- Doll scripts -->
