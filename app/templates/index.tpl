@@ -23,10 +23,10 @@
     </if>
 
     <main>
-      <!-- Maybe should be a partial? -->
-      <section class="demo-doll">
+      <!-- TODO: Maybe should be a partial? -->
+      <section class="demo">
         
-      <!-- demo doll should go here -->
+      <!-- Demo doll should go here -->
       <div id='wrapper'>
         <div id='loading'>
           <p>Loading...</p>
@@ -39,7 +39,7 @@
           </ul>
           <p>Click through the set by choosing a number.</p>
         </div>
-        <!-- I had to change the path, might have to think about making a partial to make it dynamic and not have to write a path -->
+        <!-- NOTE: I had to change the path, might have to think about making a partial to make it dynamic and not have to write a path -->
         <div id='borderarea'>
           <div id='playarea'>
             <canvas id='screen'></canvas>
