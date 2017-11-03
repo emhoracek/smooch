@@ -32,6 +32,7 @@ module ParseKCF
 import           BinaryParser               (BinaryParser)
 import qualified BinaryParser               as BP
 import qualified Control.Applicative        as CA
+import           Control.Monad              as CM
 import           Control.Monad.Trans.Either (EitherT)
 import qualified Control.Monad.Trans.Either as ET
 import           Data.Bits                  ((.&.))
@@ -113,9 +114,14 @@ lengthPalEntries (PalEntries entries) = length entries
 parsePalette :: HeaderStyle -> BinaryParser PalEntries
 parsePalette headerStyle = do
     kcfHeader <- if headerStyle == Old then parseOldHeader else parseHeader
-    entries <- parsePalGroup (kcfBpp kcfHeader) (kcfColors kcfHeader)
+    let numPalGroups = fromIntegral (kcfGroups kcfHeader)
+        bpp = kcfBpp kcfHeader
+        colors = kcfColors kcfHeader
+        parseOnePalGroup = parsePalGroup bpp colors
+        parseAllPalGroups = CM.replicateM numPalGroups parseOnePalGroup
+    entries <- parseAllPalGroups
     BP.endOfInput
-    return $ PalEntries entries
+    return $ PalEntries (head entries)
 
 -- * Palette header
 
@@ -189,10 +195,8 @@ data PalEntry = PalEntry
 parsePalGroup :: Word8 -- ^ Bits per pixel (12 or 24).
               -> Word16 -- ^ No. of colors in a palette group (1-256).
               -> BinaryParser [PalEntry]
-parsePalGroup bpp colors = do
-    entries <- BP.sized (fromIntegral groupSize) (CA.some parser)
-    BP.endOfInput
-    return entries
+parsePalGroup bpp colors =
+    BP.sized (fromIntegral groupSize) (CA.some parser)
   where
     -- A 12-bit color palette entry uses 2 bytes; a 24-bit one uses 3.
     (groupSize, parser) =

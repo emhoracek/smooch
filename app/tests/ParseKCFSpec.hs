@@ -78,7 +78,7 @@ validNewPal3 =
 
 -- | Old style, 12 bpp, 16 colors, and 10 palette groups.
 validOldPal1 :: ByteString
-validOldPal1 = BS.pack $ replicate 32 0xAB
+validOldPal1 = BS.pack $ replicate 320 0xAB
 
 -- * Invalid palettes
 
@@ -116,7 +116,7 @@ invalidOldPal1 = BS.pack $ replicate 31 0xF0
 
 -- | Old style with extra palette entries.
 invalidOldPal2 :: ByteString
-invalidOldPal2 = BS.pack $ replicate 34 0xF0
+invalidOldPal2 = BS.pack $ replicate 321 0xF0
 
 -- * Tests
 
@@ -177,7 +177,7 @@ testTransColor =
         Right "rgb:f0/f8/ff"
     it "returns the transparent color for old KCF" $
       runTransColor validOldPal1 `shouldReturn`
-        Right "rgb:a/b/b"
+        Right "rgb:aa/bb/bb"
   where runTransColor pal =
           fmap transColor <$> ET.runEitherT (parseKCF pal)
 
