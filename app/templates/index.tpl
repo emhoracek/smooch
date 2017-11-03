@@ -13,8 +13,9 @@
     </script>
   </head>
   <body>
+    <!-- Header and logo -->
     <header>
-      <h1>Smooch</h1>
+      <h1 class="logo">Smooch</h1>
     </header>
 
     <if exists="${loggedInUser}">
