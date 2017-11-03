@@ -1,6 +1,8 @@
 <html>
   <head>
     <title>Smooch!</title>
+    <!-- Reset stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../static/reset.css">
     <!-- Doll stylesheet -->
     <link rel='stylesheet' type='text/css' href='../static/screen.css' />
     <!-- Script for dolls -->
