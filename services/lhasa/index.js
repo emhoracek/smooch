@@ -1,127 +1,112 @@
-var fs = require('fs');
-var Q = require('q');
-var spawn = require('child_process').spawn;
-var path = require('path');
-var async = require('async');
+var promisify = require('promisify-node');
+
+var fs = promisify('fs');
+var spawn = require('child-process-promise').spawn;
 var AWS = require('aws-sdk');
-var _ = require('lodash/core');
 
-
-var credentials = new AWS.SharedIniFileCredentials({profile: 'smooch'});
-AWS.config.credentials = credentials;
-
+//var credentials = new AWS.SharedIniFileCredentials({profile: 'smooch'});
+//AWS.config.credentials = credentials;
 
 var set_file = "/tmp/set.lzh";
 var set_dir = "/tmp/set";
 
-// Download the image from S3, transform, and upload to a different S3 bucket.
-function download(event, context) {
-    var s3 = new AWS.S3();
+// Make sure you append the path with the lambda deployment path, so you can
+// execute your own binaries in, say, bin/
+// (This is from https://gist.github.com/rayh/1ee0f6ce54cc9fafbb06)
+process.env["PATH"] = process.env["PATH"] + ":" + process.env["LAMBDA_TASK_ROOT"];
+
+function process_archive(event, callback) {
     var srcBucket = event.Records[0].s3.bucket.name;
     var srcKey =
         decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 
+    var bucket_params = {
+        Bucket: srcBucket,
+        Key: srcKey
+    };
+
+    download(bucket_params)
+        .then(unzip)
+        .then(delete_archive)
+        .then(removeDirRecursive)
+        .then(function() {
+            return callback(null, "yay!");
+        })
+        .catch(function (err) {
+            return callback(err);
+        });
+}
+
+// Download the image from S3, transform, and upload to a different S3 bucket.
+function download(bucket_params) {
+    var s3 = new AWS.S3();
     var writeStream = fs.createWriteStream(set_file);
 
     console.log("downloading lzh");
 
     // Download the archive from S3 into a buffer.
-    var getBlah = s3.getObject({
-        Bucket: srcBucket,
-        Key: srcKey
-    }).createReadStream();
+    var getArchive = s3.getObject(bucket_params).createReadStream();
+    getArchive.pipe(writeStream);
 
-    getBlah.pipe(writeStream);
+    return new Promise(function(resolve, reject) {
+        getArchive.on("finish", resolve);
+        getArchive.on("error", reject);
+    });
+}
 
-    getBlah.on("finish", function() { unzip(context); } );
-};
-
-function unzip(context) {
-    // var root =  process.env["LAMBDA_TASK_ROOT"];
-
-    console.log("unzipping set");
-    fs.mkdir(set_dir);
-
-    console.log("context", context);
-
-    spawnCmd("lha", ["-xw=" + set_dir, set_file], {
+// Use lha to decompress the archive
+function unzip() {
+    return spawnCmd("lha", ["-xw=" + set_dir, set_file], {
         cwd: '/tmp'
-    }).then(function(result) {
-        fs.unlink(set_file);
-        console.log("removing directory");
-        removeDirForce(set_dir + "/", context);
-    }, function(err) {
-        context.fail(err);
     });
 };
 
-function removeDirForce(path, context) {
-    fs.readdir(path, function(err, files) {
-		    if (err) {
-		        console.log(err.toString());
-		    }
-		    else {
-            function deleteDirectory(err) {
-                console.log("deleting directory");
-                if (err) {
-		                console.log(err.toString());
-                    removeDirForce(path, context);
-		            }
-		            else {
-			              fs.rmdir(path);
-                    context.success("Everything's cleaned up!");
-		            }
-            }
-
-            function deleteFile(file, callback) {
-                filePath = path + file;
-				        err = fs.unlinkSync(filePath);
-                callback(err);
-            }
-
-			      async.eachSeries(files, deleteFile, deleteDirectory);
-		    }
-	  });
+function delete_archive(result) {
+    return fs.unlink(set_file);
 }
 
-// Make sure you append the path with the lambda deployment path, so you can
-// execute your own binaries in, say, bin/
-process.env["PATH"] = process.env["PATH"] + ":" + process.env["LAMBDA_TASK_ROOT"];
+function removeDirRecursive() {
+    console.log("removing directory at ", set_dir + '/');
+    return fs.readdir(set_dir + '/').then(function(files) {
+        return Promise.all(files.map(function(file) {
+            return deleteFileOrDirectory(file);
+        }));
+    }).then(function(result) {
+            fs.rmdir(set_dir);
+    });
+}
 
+function deleteFileOrDirectory(file) {
+    var path = set_dir + '/' + file;
+    return fs.stat(path).then(function(stats) {
+        if (stats.isDirectory()) {
+            return removeDirRecursive(path + '/');
+        } else {
+            return fs.unlink(path);
+        }
+    });
+}
+
+// function heavily modified from https://gist.github.com/rayh/1ee0f6ce54cc9fafbb06
 function spawnCmd(cmd, args, opts) {
     var opts = opts||{};
-    var basename = path.basename(cmd);
-
     console.log("[spawn]", cmd, args.join(' '), opts);
 
-    var deferred = Q.defer();
-    child = spawn(cmd, args, opts);
+    var cmd_promise = spawn(cmd, args, opts);
+    var child = cmd_promise.childProcess;
+
     child.stdout.on('data', function(chunk) {
-        console.log("[" + basename + ":stdout] " + chunk);
+        console.log("[" + cmd + ":stdout] " + chunk);
     });
 
     child.stderr.on('data', function(chunk) {
-        console.log("[" + basename + ":stderr] " + chunk);
-    });
-    child.on('error', function (error) {
-        console.log("[" + basename + "] unhandled error:",error);
-        deferred.reject(new Error(error));
-    });
-    child.on('close', function (code, signal) {
-        if(signal) {
-            deferred.reject("Process killed with signal " + signal);
-        } else if(code==0) {
-            deferred.resolve(code);
-        } else {
-            deferred.reject("Process exited with code " + code);
-        }
-        console.log("[" + basename + "] child process exited with code",code, "signal", signal);
+        console.log("[" + cmd + ":stderr] " + chunk);
     });
 
-    return deferred.promise;
+    return cmd_promise;
 }
 
-exports.handler = function(event, context) {
+exports.handler = function(event, context, callback) {
     console.log('Received event:', JSON.stringify(event, null, 2));
-    download(event, context);
+    process_archive(event, callback);
 };
