@@ -10,6 +10,8 @@ var AWS = require('aws-sdk');
 var set_file = "/tmp/set.lzh";
 var set_dir = "/tmp/set";
 
+var s3 = new AWS.S3();
+
 // Make sure you append the path with the lambda deployment path, so you can
 // execute your own binaries in, say, bin/
 // (This is from https://gist.github.com/rayh/1ee0f6ce54cc9fafbb06)
@@ -28,6 +30,9 @@ function process_archive(event, callback) {
     download(bucket_params)
         .then(unzip)
         .then(delete_archive)
+        .then(function(result) {
+            return put_files_to_s3(srcKey);
+        })
         .then(removeDirRecursive)
         .then(function() {
             return callback(null, "yay!");
@@ -39,7 +44,6 @@ function process_archive(event, callback) {
 
 // Download the image from S3, transform, and upload to a different S3 bucket.
 function download(bucket_params) {
-    var s3 = new AWS.S3();
     var writeStream = fs.createWriteStream(set_file);
 
     console.log("downloading lzh");
@@ -63,6 +67,37 @@ function unzip() {
 
 function delete_archive(result) {
     return fs.unlink(set_file);
+}
+
+function put_files_to_s3(folder_name) {
+    return fs.readdir(set_dir + '/').then(function(files) {
+        return Promise.all(files.map(function(file) {
+            return put_file_to_s3(folder_name, file);
+        }));
+    });
+}
+
+function put_file_to_s3(folder_name, file) {
+    return fs.readFile(set_dir + '/' + file).then(function(result) {
+        return {
+            Body: result,
+            Bucket: "kiss-sets",
+            Key: folder_name + "/" + file
+        };
+    }).then(put_object);
+}
+
+function put_object(params) {
+    return new Promise(function(resolve, reject) {
+        console.log("putting object");
+        s3.putObject(params, function(err, data) {
+            if (err) {
+                return reject(err);
+            } else {
+                return resolve(data);
+            }
+        });
+    });
 }
 
 function removeDirRecursive() {
