@@ -221,5 +221,5 @@ testParseCel =
     it "returns an error message for old cel with invalid height" $
       runParseCel invalidOldCel4 `shouldReturn`
         Left "Invalid width or height"
-  where runParseCel = ET.runEitherT . parseCel
+  where runParseCel cel = ET.runEitherT (parseCel cel)
         checkLength cel = fmap (length . snd) <$> runParseCel cel

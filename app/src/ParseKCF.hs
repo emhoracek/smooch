@@ -60,7 +60,7 @@ parseKCF palData = do
 
 -- | Return 'True' if the palette is new-style (starts with @KiSS@).
 isNewStylePalette :: ByteString -> Bool
-isNewStylePalette = (==) (BS.pack [0x4B, 0x69, 0x53, 0x53])
+isNewStylePalette kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
 
 -- | Return the transparent color.
 --
@@ -233,7 +233,7 @@ hiNibble n = Bits.shiftR n 4 .&. 0x0F
 
 -- | Return the low nibble.
 loNibble :: Word8 -> Word8
-loNibble = (.&.) 0x0F
+loNibble n = n .&. 0x0F
 
 -- | Parse a 24-bit color palette entry.
 parse24bpp :: BinaryParser PalEntry

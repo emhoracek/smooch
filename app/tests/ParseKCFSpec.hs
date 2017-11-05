@@ -165,7 +165,7 @@ testParseKCF =
     it "returns an error message for old KCF with extra palette data" $
       runParseKCF invalidOldPal2 `shouldReturn`
         Left "Not the end of input"
-  where runParseKCF = ET.runEitherT . parseKCF
+  where runParseKCF pal = ET.runEitherT (parseKCF pal)
         checkLength pal = fmap lengthPalEntries <$> runParseKCF pal
 
 -- | Test 'transColor'.

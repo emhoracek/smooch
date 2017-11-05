@@ -63,7 +63,7 @@ parseCel celData = do
 
 -- | Return 'True' if the cel is new-style (starts with @KiSS@).
 isNewStyleCel :: ByteString -> Bool
-isNewStyleCel = (==) (BS.pack [0x4B, 0x69, 0x53, 0x53])
+isNewStyleCel kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
 
 -- * Parser
 
@@ -206,7 +206,7 @@ hiNibble n = Bits.shiftR n 4 .&. 0x0F
 
 -- | Return the low nibble.
 loNibble :: Word8 -> Word8
-loNibble = (.&.) 0x0F
+loNibble n = n .&. 0x0F
 
 -- | Parse an 8-bit color pixel.
 parse8bpp :: ByteString -> CelPixels
