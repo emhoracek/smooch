@@ -4,8 +4,10 @@ var fs = promisify('fs');
 var spawn = require('child-process-promise').spawn;
 var AWS = require('aws-sdk');
 
-//var credentials = new AWS.SharedIniFileCredentials({profile: 'smooch'});
-//AWS.config.credentials = credentials;
+if (process.env["is_local"] === "local") {
+    var credentials = new AWS.SharedIniFileCredentials({profile: 'smooch'});
+    AWS.config.credentials = credentials;
+}
 
 var set_file = "/tmp/set.lzh";
 var set_dir = "/tmp/set";
