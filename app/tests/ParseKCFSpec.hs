@@ -124,7 +124,6 @@ invalidOldPal2 = BS.pack $ replicate 321 0xF0
 spec :: Spec
 spec = do
   testParseKCF
-  testTransColor
   testColorByIndex
   testPalEntryByIndex
 
@@ -167,19 +166,6 @@ testParseKCF =
         Left "Not the end of input"
   where runParseKCF pal = ET.runEitherT (parseKCF pal)
         checkLength pal = fmap lengthPalEntries <$> runParseKCF pal
-
--- | Test 'transColor'.
-testTransColor :: Spec
-testTransColor =
-  describe "transColor" $ do
-    it "returns the transparent color for new KCF (24/1/1)" $
-      runTransColor validNewPal1 `shouldReturn`
-        Right "rgb:f0/f8/ff"
-    it "returns the transparent color for old KCF" $
-      runTransColor validOldPal1 `shouldReturn`
-        Right "rgb:aa/bb/bb"
-  where runTransColor pal =
-          fmap transColor <$> ET.runEitherT (parseKCF pal)
 
 -- | Test 'colorByIndex'.
 testColorByIndex :: Spec

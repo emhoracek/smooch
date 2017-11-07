@@ -20,7 +20,6 @@ module ParseKCF
       -- * API
       PalEntries
     , parseKCF
-    , transColor
     , colorByIndex
     , palEntryByIndex
     , lengthPalEntries
@@ -61,16 +60,6 @@ parseKCF palData = do
 -- | Return 'True' if the palette is new-style (starts with @KiSS@).
 isNewStylePalette :: ByteString -> Bool
 isNewStylePalette kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
-
--- | Return the transparent color.
---
--- >>> fmap transColor <$> runEitherT (parseKCF palette)
--- Right "rbg:0/ff/ff"
-transColor :: PalEntries -> String
-transColor (PalEntries entries) =
-    let (PalEntry red green blue) = head entries
-        formatString = "rgb:" % Fmt.hex % "/" % Fmt.hex % "/" % Fmt.hex
-    in Fmt.formatToString formatString red green blue
 
 -- | Return the indexed color.
 --
