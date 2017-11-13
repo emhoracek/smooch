@@ -17,8 +17,9 @@ module CelToPng
       celToPng
     ) where
 
-import           Codec.Picture (Image (..), PixelRGBA8 (..))
+import           Codec.Picture (Image (..), Pixel8, PixelRGBA8 (..))
 import qualified Codec.Picture as Pic
+import qualified Data.ByteString.Lazy as BSL
 
 import           ParseCel
 import           ParseKCF
@@ -30,22 +31,32 @@ celToPng :: FilePath -- ^ Output file.
          -> CelPixels
          -> IO ()
 celToPng outputFile entries celHeader celPixels =
-    Pic.writePng outputFile image
+    case Pic.encodePalettedPng palette image of
+        Left _    -> return ()
+        Right png -> BSL.writeFile outputFile png
     where width = fromIntegral (celWidth celHeader)
           height = fromIntegral (celHeight celHeader)
-          image = celToRGBA8 width height entries celPixels
+          image = celToRGBA8 width height celPixels
+          palette = palToRGBA8 entries
 
--- | Return the RBGA8 representation of the given cel.
+-- | Return the 'Pixel8' representation of the given cel.
 celToRGBA8 :: Int -- ^ Cel width.
            -> Int -- ^ Cel height.
-           -> PalEntries
            -> CelPixels
-           -> Image PixelRGBA8
-celToRGBA8 width height entries celPixels =
+           -> Image Pixel8
+celToRGBA8 width height celPixels =
     snd $ Pic.generateFoldImage generator celPixels width height
     where generator pixels x y =
               let pixel = head pixels
-                  alpha = (if pixel == 0 then 0x00 else 0xFF)
+              in (tail pixels, pixel)
+
+-- | Return the RGBA8 representation of the given palette.
+palToRGBA8 :: PalEntries -> Image PixelRGBA8
+palToRGBA8 entries = Pic.generateImage generator width height
+    where width = lengthPalEntries entries
+          height = 1
+          generator x y =
+              let alpha = if x == 0 then 0x00 else 0xFF
                   (PalEntry red green blue) =
-                      palEntryByIndex (fromIntegral pixel) entries
-              in (tail pixels, PixelRGBA8 red green blue alpha)
+                      palEntryByIndex (fromIntegral x) entries
+              in PixelRGBA8 red green blue alpha
