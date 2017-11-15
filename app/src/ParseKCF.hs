@@ -109,7 +109,6 @@ parsePalette headerStyle = do
         parseOnePalGroup = parsePalGroup bpp colors
         parseAllPalGroups = CM.replicateM numPalGroups parseOnePalGroup
     entries <- parseAllPalGroups
-    BP.endOfInput
     return $ PalEntries (head entries)
 
 -- * Palette header

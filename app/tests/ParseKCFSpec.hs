@@ -76,9 +76,20 @@ validNewPal3 =
       palData = BS.pack [0xF0, 0xF8, 0xFF, 0x9A, 0xCD, 0x32]
   in BS.concat [header, palData]
 
+-- | New style with extra palette entries.
+validNewPal4 :: ByteString
+validNewPal4 =
+  let header = makeHeader 0x10 0x18 0x01 0x01
+      palData = BS.pack [0xF0, 0xF8, 0xFF, 0xA9, 0xA9, 0xA9]
+  in BS.concat [header, palData]
+
 -- | Old style, 12 bpp, 16 colors, and 10 palette groups.
 validOldPal1 :: ByteString
 validOldPal1 = BS.pack $ replicate 320 0xAB
+
+-- | Old style with extra palette entries.
+validOldPal2 :: ByteString
+validOldPal2 = BS.pack $ replicate 321 0xF0
 
 -- * Invalid palettes
 
@@ -103,20 +114,9 @@ invalidNewPal3 =
       palData = BS.pack [0xF0, 0xF8]
   in BS.concat [header, palData]
 
--- | New style with extra palette entries.
-invalidNewPal4 :: ByteString
-invalidNewPal4 =
-  let header = makeHeader 0x10 0x18 0x01 0x01
-      palData = BS.pack [0xF0, 0xF8, 0xFF, 0xA9, 0xA9, 0xA9]
-  in BS.concat [header, palData]
-
 -- | Old style with insufficient palette entries.
 invalidOldPal1 :: ByteString
 invalidOldPal1 = BS.pack $ replicate 31 0xF0
-
--- | Old style with extra palette entries.
-invalidOldPal2 :: ByteString
-invalidOldPal2 = BS.pack $ replicate 321 0xF0
 
 -- * Tests
 
@@ -140,8 +140,14 @@ testParseKCF =
     it "parses new KCF (24/2/1) into [PalEntry]" $
       checkLength validNewPal3 `shouldReturn`
         Right 2
+    it "parses new KCF with extra palette data" $
+      checkLength validNewPal4 `shouldReturn`
+        Right 1
     it "parses old KCF into [PalEntry]" $
       checkLength validOldPal1 `shouldReturn`
+        Right 16
+    it "parses old KCF with extra palette data" $
+      checkLength validOldPal2 `shouldReturn`
         Right 16
     it "returns an error message for empty KCF" $
       runParseKCF BS.empty `shouldReturn`
@@ -155,15 +161,9 @@ testParseKCF =
     it "returns an error message for new KCF with truncated palette data" $
       runParseKCF invalidNewPal3 `shouldReturn`
         Left "End of input"
-    it "returns an error message for new KCF with extra palette data" $
-      runParseKCF invalidNewPal4 `shouldReturn`
-        Left "Not the end of input"
     it "returns an error message for old KCF with truncated palette data" $
       runParseKCF invalidOldPal1 `shouldReturn`
         Left "End of input"
-    it "returns an error message for old KCF with extra palette data" $
-      runParseKCF invalidOldPal2 `shouldReturn`
-        Left "Not the end of input"
   where runParseKCF pal = ET.runEitherT (parseKCF pal)
         checkLength pal = fmap lengthPalEntries <$> runParseKCF pal
 
