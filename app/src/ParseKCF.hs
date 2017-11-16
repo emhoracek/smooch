@@ -97,9 +97,6 @@ lengthPalEntries (PalEntries entries) = length entries
 --
 -- This is the top-level parser that does the actual work of parsing a KiSS
 -- palette.
---
--- It returns an error if there are trailing bytes (extra palette entries) in
--- the KCF file.
 parsePalette :: HeaderStyle -> BinaryParser PalEntries
 parsePalette headerStyle = do
     kcfHeader <- if headerStyle == Old then parseOldHeader else parseHeader
