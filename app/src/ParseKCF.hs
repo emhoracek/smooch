@@ -42,6 +42,7 @@ import           Data.Text                  (Text)
 import           Data.Word                  (Word16, Word8)
 import           Formatting                 ((%), (%.))
 import qualified Formatting                 as Fmt
+import qualified Safe                       as Safe
 
 -- * API
 
@@ -61,7 +62,8 @@ parseKCF palData = do
 isNewStylePalette :: ByteString -> Bool
 isNewStylePalette kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
 
--- | Return the indexed color.
+-- | Return the indexed color, or @#000000@ (black) if the index is out of
+-- range.
 --
 -- >>> fmap (colorByIndex 13) <$> runEitherT (parseKCF palette)
 -- Right "#800080"
@@ -69,12 +71,13 @@ colorByIndex :: Int -- ^ Index of desired color.
              -> PalEntries
              -> String
 colorByIndex index (PalEntries entries) =
-    let (PalEntry red green blue) = entries !! index
+    let (PalEntry red green blue) = Safe.atDef (PalEntry 0 0 0) entries index
         paddedHex = Fmt.left 2 '0' %. Fmt.hex
         formatString = "#" % paddedHex % paddedHex % paddedHex
     in Fmt.formatToString formatString red green blue
 
--- | Return the indexed 'PalEntry'.
+-- | Return the indexed 'PalEntry', or @PalEntry 0 0 0@ (black) if the index is
+-- out of range.
 --
 -- >>> fmap (palEntryByIndex 16) <$> runEitherT (parseKCF palette)
 -- Right (PalEntry {palRed = 193, palGreen = 108, palBlue = 155})
@@ -82,7 +85,7 @@ palEntryByIndex :: Int -- ^ Index of desired 'PalEntry'.
                 -> PalEntries
                 -> PalEntry
 palEntryByIndex index (PalEntries entries) =
-    entries !! index
+    Safe.atDef (PalEntry 0 0 0) entries index
 
 -- | Return the number of palette entries.
 --
@@ -106,7 +109,7 @@ parsePalette headerStyle = do
         parseOnePalGroup = parsePalGroup bpp colors
         parseAllPalGroups = CM.replicateM numPalGroups parseOnePalGroup
     entries <- parseAllPalGroups
-    return $ PalEntries (head entries)
+    return $ PalEntries (Safe.headDef [] entries)
 
 -- * Palette header
 
