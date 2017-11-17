@@ -17,10 +17,10 @@ module CelToPng
       celToPng
     ) where
 
-import           Codec.Picture (Image (..), Pixel8, PixelRGBA8 (..))
-import qualified Codec.Picture as Pic
+import           Codec.Picture        (Image (..), Pixel8, PixelRGBA8 (..))
+import qualified Codec.Picture        as Pic
 import qualified Data.ByteString.Lazy as BSL
-import qualified Safe as Safe
+import qualified Safe                 as Safe
 
 import           ParseCel
 import           ParseKCF
