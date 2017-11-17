@@ -20,6 +20,8 @@ module ParseCel
       -- * API
       CelPixels
     , parseCel
+    , pixelByIndex
+    , lengthCelPixels
 
       -- * Cel header
     , CelHeader(celWidth, celHeight, celXoffset, celYoffset)
@@ -44,7 +46,7 @@ import qualified Formatting                 as Fmt
 -- * API
 
 -- | Cel pixels.
-type CelPixels = [Word8]
+newtype CelPixels = CelPixels BSL.ByteString deriving (Eq, Show)
 
 -- | Parse a KiSS cel.
 --
@@ -63,6 +65,27 @@ parseCel celData = do
 -- | Return 'True' if the cel is new-style (starts with @KiSS@).
 isNewStyleCel :: ByteString -> Bool
 isNewStyleCel kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
+
+-- | Return the indexed cel pixel, or @0@ if the index is out of range.
+--
+-- >>> fmap (pixelByIndex 1960 . snd) <$> runEitherT (parseCel celData)
+-- Right 7
+pixelByIndex :: Int -- ^ Index of desired pixel.
+             -> CelPixels
+             -> Word8
+pixelByIndex index (CelPixels celPixels) =
+    let subscript = fromIntegral index
+        isValidSubscript = subscript >= 0 && subscript < BSL.length celPixels
+    in if isValidSubscript
+           then BSL.index celPixels subscript
+           else 0
+
+-- | Return the number of cel pixels.
+--
+-- Under normal circumstances, there shouldn't be any need to call this
+-- function. It's intended for testing purposes only.
+lengthCelPixels :: CelPixels -> Int
+lengthCelPixels (CelPixels celPixels) = fromIntegral (BSL.length celPixels)
 
 -- * Parser
 
@@ -179,7 +202,7 @@ parse4bpp :: Word16 -- ^ Cel width.
           -> ByteString -- ^ Cel pixel data.
           -> CelPixels
 parse4bpp rasterWidth pixels =
-    BSL.unpack $ parse 1 pixels (BS.byteString BS.empty)
+    CelPixels $ parse 1 pixels (BS.byteString BS.empty)
   where
     parse xPos pix acc
         | BS.null pix = BS.toLazyByteString acc
@@ -209,4 +232,4 @@ loNibble n = n .&. 0x0F
 
 -- | Parse an 8-bit color pixel.
 parse8bpp :: ByteString -> CelPixels
-parse8bpp pixels = BS.unpack pixels
+parse8bpp pixels = CelPixels (BSL.fromStrict pixels)

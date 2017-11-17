@@ -222,4 +222,4 @@ testParseCel =
       runParseCel invalidOldCel4 `shouldReturn`
         Left "Invalid width or height"
   where runParseCel cel = ET.runEitherT (parseCel cel)
-        checkLength cel = fmap (length . snd) <$> runParseCel cel
+        checkLength cel = fmap (lengthCelPixels . snd) <$> runParseCel cel

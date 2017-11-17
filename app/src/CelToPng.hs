@@ -20,7 +20,6 @@ module CelToPng
 import           Codec.Picture        (Image (..), Pixel8, PixelRGBA8 (..))
 import qualified Codec.Picture        as Pic
 import qualified Data.ByteString.Lazy as BSL
-import qualified Safe                 as Safe
 
 import           ParseCel
 import           ParseKCF
@@ -46,10 +45,8 @@ celToRGBA8 :: Int -- ^ Cel width.
            -> CelPixels
            -> Image Pixel8
 celToRGBA8 width height celPixels =
-    snd $ Pic.generateFoldImage generator celPixels width height
-    where generator pixels x y =
-              let pixel = Safe.headDef 0 pixels
-              in (Safe.tailSafe pixels, pixel)
+    Pic.generateImage generator width height
+    where generator x y = pixelByIndex (y * width + x) celPixels
 
 -- | Return the RGBA8 representation of the given palette.
 palToRGBA8 :: PalEntries -> Image PixelRGBA8
