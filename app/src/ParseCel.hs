@@ -27,7 +27,6 @@ module ParseCel
 
 import           BinaryParser               (BinaryParser)
 import qualified BinaryParser               as BP
-import qualified Control.Applicative        as CA
 import           Control.Monad.Trans.Either (EitherT)
 import qualified Control.Monad.Trans.Either as ET
 import           Data.Bits                  ((.&.))
