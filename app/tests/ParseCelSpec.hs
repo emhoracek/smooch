@@ -170,7 +170,9 @@ invalidOldCel4 =
 
 -- | Test suite for running all the tests.
 spec :: Spec
-spec = testParseCel
+spec = do
+  testParseCel
+  testPixelByIndex
 
 -- | Test 'parseCel'.
 testParseCel :: Spec
@@ -223,3 +225,19 @@ testParseCel =
         Left "Invalid width or height"
   where runParseCel cel = ET.runEitherT (parseCel cel)
         checkLength cel = fmap (lengthCelPixels . snd) <$> runParseCel cel
+
+-- | Test 'pixelByIndex'.
+testPixelByIndex :: Spec
+testPixelByIndex =
+  describe "pixelByIndex" $ do
+    it "returns the first cel pixel for new cel (8/1/1/0/0)" $
+      runPixelByIndex 0 validNewCel1 `shouldReturn`
+        Right 0
+    it "returns 0 if the index is less than 0" $
+      runPixelByIndex (-1) validNewCel1 `shouldReturn`
+        Right 0
+    it "returns 0 if the index is more than the number of pixels" $
+      runPixelByIndex 10 validNewCel1 `shouldReturn`
+        Right 0
+  where runPixelByIndex index cel =
+          fmap (pixelByIndex index . snd) <$> ET.runEitherT (parseCel cel)
