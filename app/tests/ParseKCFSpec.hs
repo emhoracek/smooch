@@ -170,10 +170,16 @@ testParseKCF =
 -- | Test 'colorByIndex'.
 testColorByIndex :: Spec
 testColorByIndex =
-  describe "colorByIndex" $
+  describe "colorByIndex" $ do
     it "returns the indexed color for new KCF (24/2/2)" $
       runColorByIndex 1 validNewPal3 `shouldReturn`
         Right "#9acd32"
+    it "returns #000000 if the index is less than 0" $
+      runColorByIndex (-1) validNewPal3 `shouldReturn`
+        Right "#000000"
+    it "returns #000000 if the index is more than the number of palette entries" $
+      runColorByIndex 10 validNewPal3 `shouldReturn`
+        Right "#000000"
   where runColorByIndex index pal =
           fmap (colorByIndex index) <$> ET.runEitherT (parseKCF pal)
 
