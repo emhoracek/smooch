@@ -186,9 +186,15 @@ testColorByIndex =
 -- | Test 'palEntryByIndex'.
 testPalEntryByIndex :: Spec
 testPalEntryByIndex =
-  describe "palEntryByIndex" $
+  describe "palEntryByIndex" $ do
     it "returns the indexed PalEntry for new KCF (24/2/2)" $
       runPalEntryByIndex 1 validNewPal3 `shouldReturn`
         Right PalEntry {palRed = 154, palGreen = 205, palBlue = 50}
+    it "returns PalEntry 0 0 0 if the index is less than 0" $
+      runPalEntryByIndex (-1) validNewPal3 `shouldReturn`
+        Right PalEntry {palRed = 0, palGreen = 0, palBlue = 0}
+    it "returns PalEntry 0 0 0 if the index is more than the number of palette entries" $
+      runPalEntryByIndex 10 validNewPal3 `shouldReturn`
+        Right PalEntry {palRed = 0, palGreen = 0, palBlue = 0}
   where runPalEntryByIndex index pal =
           fmap (palEntryByIndex index) <$> ET.runEitherT (parseKCF pal)
