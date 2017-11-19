@@ -34,10 +34,11 @@ celToPng outputFile entries celHeader celPixels =
     case Pic.encodePalettedPng palette image of
         Left _    -> return ()
         Right png -> BSL.writeFile outputFile png
-    where width = fromIntegral (celWidth celHeader)
-          height = fromIntegral (celHeight celHeader)
-          image = celToRGBA8 width height celPixels
-          palette = palToRGBA8 entries
+  where
+    width = fromIntegral (celWidth celHeader)
+    height = fromIntegral (celHeight celHeader)
+    image = celToRGBA8 width height celPixels
+    palette = palToRGBA8 entries
 
 -- | Return the 'Pixel8' representation of the given cel.
 celToRGBA8 :: Int -- ^ Cel width.
@@ -46,15 +47,17 @@ celToRGBA8 :: Int -- ^ Cel width.
            -> Image Pixel8
 celToRGBA8 width height celPixels =
     Pic.generateImage generator width height
-    where generator x y = pixelByIndex (y * width + x) celPixels
+  where
+    generator x y = pixelByIndex (y * width + x) celPixels
 
 -- | Return the RGBA8 representation of the given palette.
 palToRGBA8 :: PalEntries -> Image PixelRGBA8
 palToRGBA8 entries = Pic.generateImage generator width height
-    where width = lengthPalEntries entries
-          height = 1
-          generator x y =
-              let alpha = if x == 0 then 0x00 else 0xFF
-                  (PalEntry red green blue) =
-                      palEntryByIndex (fromIntegral x) entries
-              in PixelRGBA8 red green blue alpha
+  where
+    width = lengthPalEntries entries
+    height = 1
+    generator x y =
+        let alpha = if x == 0 then 0x00 else 0xFF
+            (PalEntry red green blue) =
+                palEntryByIndex (fromIntegral x) entries
+        in PixelRGBA8 red green blue alpha
