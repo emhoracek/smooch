@@ -52,10 +52,10 @@ newtype CelPixels = CelPixels BSL.ByteString deriving (Eq, Show)
 --
 -- For a new-style, 8bpp, 4x4 cel:
 --
--- >>> fmap fst <$> ET.runEitherT (parseCel celData)
+-- >>> fmap fst <$> runEitherT (parseCel celData)
 -- Right (CelHeader {celBpp = 8, celWidth = 4, celHeight = 4, celXoffset = 0, celYoffset = 0})
 --
--- >>> fmap snd <$> ET.runEitherT (parseCel celData)
+-- >>> fmap snd <$> runEitherT (parseCel celData)
 -- Right [128,255,17,23,0,0,40,56,103,11,0,0,0,90,159,238]
 parseCel :: ByteString -> EitherT Text IO (CelHeader, CelPixels)
 parseCel celData = do
