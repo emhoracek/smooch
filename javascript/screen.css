@@ -13,9 +13,19 @@ body {
   flex-direction: column;
   height: 100%;
 }
+h2 { 
+  font-size: 1.5em;
+}
+
+p { 
+  font-weight: lighter;
+  margin: .5em 0;
+}
 
 main {
   display: flex;
+  justify-content: space-between;
+  padding: 1em;
 }
 
 section {
@@ -25,6 +35,10 @@ section {
 }
 
 /*Header*/
+header {
+  padding: 1em;
+}
+
 .logo {
   font-size: 2em;
   padding: .25em .5em;
@@ -33,24 +47,51 @@ section {
 
 /*Authentication*/
 .authenticate {
+  align-items: center;
+  justify-content: flex-start;
   width: 30%;
-  border-bottom: 1px solid black;
-  justify-content: flex-end;
 }
 
 .authenticate > * {
+  border: 3px solid black;
   margin-bottom: 3em;
   padding: 1em;
-  border: 3px solid black;
+  width: 100%;
 }
 
-.login {
-  border: 3px solid black;
+form {
+  margin: .5em 0;
+}
+
+.field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.field label {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.field > label + * {
+  flex: 1 0 220px;
+}
+
+.submit {
+  background: lightpink;
+  border: none;
+  font-weight: bolder;
+  letter-spacing: .09em;
+  margin: .5em 0;
+  padding: 8px 16px;
+  text-transform: uppercase;
 }
 
 /*Demo doll*/
 .demo {
-  width: 70%;
+  width: 60%;
 }
 
 #loading { 
@@ -67,16 +108,15 @@ section {
 #wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100vh;
+  /*justify-content: center;*/
+  /*height: 100vh;*/
 }
 
 #sets { 
   display: flex; 
-  padding: 2em 0;
 }
+
 #sets ul { padding-left: 0;  }
-#sets p {  }
 
 li { display: inline;
      margin: 0.25em; }
@@ -88,11 +128,12 @@ a.set { cursor: pointer;
 a.set:hover { color: grey;
               background-color: pink }
 
-#borderarea{ padding: 0;
+#borderarea{ padding: 1em;
              margin: 0;
              flex-grow: 1;
              display: flex;
-             overflow: auto; }
+             /*overflow: auto; */
+           }
 
 #playarea { background: white;
             border: 1px solid black;
