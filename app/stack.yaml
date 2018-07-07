@@ -26,10 +26,8 @@ packages:
   extra-dep: true
 extra-deps:
 - digestive-functors-0.8.2.0
-- fn-0.3.0.2
 - heist-1.0.1.0
 - html-entities-1.1.4.1
-- hspec-fn-0.1.1.0
 - http-accept-0.2
 - logging-3.0.4
 - map-syntax-0.2.0.2
