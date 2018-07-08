@@ -57,12 +57,21 @@ var KissSet = function(kissData) {
     // Start with set 0.
     this.currentSet = 0;
 
+<<<<<<< HEAD
     /* Build a list of the cells (images) in the doll. */
 
     /* Go through each KiSS object, add information from the object to the
        cells within the object, then add those cells to the list. */
 
     this.cells = kissData.cels;
+=======
+    /* Build a list of the cels (images) in the doll. */
+
+    /* Go through each KiSS object, add information from the object to the
+       cels within the object, then add those cels to the list. */
+
+    this.cels = kissData.cels;
+>>>>>>> fix-cel
     var objs = kissData.objs;
     this.objs = [];
 
@@ -78,6 +87,7 @@ var KissSet = function(kissData) {
         }
 
         // now lets go through the cels
+<<<<<<< HEAD
         var obj_cells = objs[i].cells;
         // for each cel in the obj, find that cel in the celData list
         for (var j = 0; j < obj_cells.length; j++) {
@@ -85,6 +95,15 @@ var KissSet = function(kissData) {
                 if (this.cells[k].name === obj_cells[j].name) {
                     obj_cells[j] = new KiSSCell(objs[i], this.cells[k], this);
                     this.cells[k] = obj_cells[j];
+=======
+        var obj_cels = objs[i].cels;
+        // for each cel in the obj, find that cel in the celData list
+        for (var j = 0; j < obj_cels.length; j++) {
+            for (var k = 0; k < this.cels.length; k++) {
+                if (this.cels[k].name === obj_cels[j].name) {
+                    obj_cels[j] = new KiSSCell(objs[i], this.cels[k], this);
+                    this.cels[k] = obj_cels[j];
+>>>>>>> fix-cel
                 }
             }
         }
@@ -106,7 +125,11 @@ var KissSet = function(kissData) {
         });
     }
 
+<<<<<<< HEAD
     this.cells.reverse();
+=======
+    this.cels.reverse();
+>>>>>>> fix-cel
 
     this.currentSet = 0;
     this.update();
@@ -116,7 +139,11 @@ var KissSet = function(kissData) {
 KissSet.prototype = {
     update: function () {
 
+<<<<<<< HEAD
         // Update cells
+=======
+        // Update cels
+>>>>>>> fix-cel
         for (var i = 0; i < this.objs.length; i++) {
             this.objs[i].update(this);
         }
@@ -135,9 +162,15 @@ KissSet.prototype = {
     draw: function(screen, ghost) {
         screen.clearRect(0, 0, this.size.x, this.size.y);
         ghost.clearRect(0, 0, this.size.x, this.size.y);
+<<<<<<< HEAD
         for (var i = 0; i < this.cells.length; i++) {
             if (this.cells[i]) {
                 this.cells[i].draw(screen, ghost);
+=======
+        for (var i = 0; i < this.cels.length; i++) {
+            if (this.cels[i]) {
+                this.cels[i].draw(screen, ghost);
+>>>>>>> fix-cel
             }
         }
     }
@@ -147,19 +180,31 @@ var KiSSObj = function (obj) {
     this.currentSet = 0;
     this.positions = obj.positions;
     this.position = obj.positions[this.currentSet];
+<<<<<<< HEAD
     this.cells = obj.cells;
+=======
+    this.cels = obj.cels;
+>>>>>>> fix-cel
 }
 
 KiSSObj.prototype = {
     update: function(that) {
+<<<<<<< HEAD
         for (var i = 0; i < this.cells.length; i++) {
             this.cells[i].currentSet = that.currentSet;
             this.cells[i].position = this.positions[that.currentSet];
             this.cells[i].update(that);
+=======
+        for (var i = 0; i < this.cels.length; i++) {
+            this.cels[i].currentSet = that.currentSet;
+            this.cels[i].position = this.positions[that.currentSet];
+            this.cels[i].update(that);
+>>>>>>> fix-cel
         }
     }
 };
 
+<<<<<<< HEAD
 var KiSSCell = function(obj, cell, set) {
 
     this.obj = obj;
@@ -175,6 +220,23 @@ var KiSSCell = function(obj, cell, set) {
     this.alpha = cell.alpha;
 
     this.offset = cell.offset;
+=======
+var KiSSCell = function(obj, cel, set) {
+
+    this.obj = obj;
+    this.name = cel.name;
+    this.mark = obj.id;
+    this.fix = cel.fix;
+    this.position = { x: 0, y: 0};
+    this.positions = obj.positions;
+    this.sets = cel.sets;
+    this.image = undefined;
+    this.ghostImage = undefined;
+    this.visible = false;
+    this.alpha = cel.alpha;
+
+    this.offset = cel.offset;
+>>>>>>> fix-cel
 
     this.init(set);
 
@@ -305,7 +367,11 @@ KiSSCell.prototype = {
       }
       else {
         var kobj = that.set.objs[colorids[colorid]];
+<<<<<<< HEAD
         if (kobj && kobj.cells[0].fix < 1) {
+=======
+        if (kobj && kobj.cels[0].fix < 1) {
+>>>>>>> fix-cel
           isdrag = true;
           dobj = kobj;
           curSet = that.set.currentSet;
@@ -338,5 +404,9 @@ KiSSCell.prototype = {
   });
 
 var debug_draw = function (x) {
+<<<<<<< HEAD
   this.smooch.set.objs[x].cells[0].draw(this.smooch.set.ctxt, this.smooch.set.ghost);
+=======
+  this.smooch.set.objs[x].cels[0].draw(this.smooch.set.ctxt, this.smooch.set.ghost);
+>>>>>>> fix-cel
 }

@@ -40,7 +40,11 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     if (strncmp ((const char *) header, "KiSS", 4)) {
         // if the header does NOT start with KiSS
         if (debug) {
+<<<<<<< HEAD
             fprintf(stderr, "Old style KiSS cell.\n");
+=======
+            fprintf(stderr, "Old style KiSS cel.\n");
+>>>>>>> fix-cel
         }
         bpp    = 4;
         width  = parse_uint16(header+0);
