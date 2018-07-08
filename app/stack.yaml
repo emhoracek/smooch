@@ -26,12 +26,12 @@ packages:
   extra-dep: true
 extra-deps:
 - digestive-functors-0.8.2.0
-- fn-0.3.0.2
 - heist-1.0.1.0
 - html-entities-1.1.4.1
-- hspec-fn-0.1.1.0
 - http-accept-0.2
 - logging-3.0.4
 - map-syntax-0.2.0.2
+- binary-parser-0.5.5
 - wai-util-0.8
-resolver: lts-8.15
+- xmlhtml-0.2.5.2
+resolver: lts-9.21
