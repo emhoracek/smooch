@@ -31,6 +31,7 @@ extra-deps:
 - http-accept-0.2
 - logging-3.0.4
 - map-syntax-0.2.0.2
+- binary-parser-0.5.5
 - wai-util-0.8
 - xmlhtml-0.2.5.2
 resolver: lts-9.21
