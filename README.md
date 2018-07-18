@@ -58,10 +58,12 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
    * William Miles, who wrote UltraKiSS, the Java app that I use as a benchmark for compatibility
    * all the incredible artists who made over 4,500 sets for this system
  * Github contributors
-   * ear/bpaf helped with Haskell refactoring
+   * @ear/bpaf helped with Haskell refactoring
    * Darius improved cel2pnm and added tests
-   * huggablemonad has helped debug several sets
-   * lisaychuang improved documentation for contributors
+   * @huggablemonad has helped debug several sets and wrote a cel parser in Haskell
+   * @lisaychuang improved documentation for contributors
+   * Alexis (@aklap) found many many documentation bugs for installing the Haskell app
+   * Alice (@wuworkshop) added issue and PR templates
  * mentors
    * Daniel Patterson (dbp) taught me about monad transformers and error handling in Haskell
    * Mark Dominus helped me write cel2pmn
