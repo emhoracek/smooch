@@ -33,9 +33,9 @@ Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
       * Lots of dolls are not quite working still, especially multi-palette 
       dolls.
   * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
-      * Serve cels as binary blobs and let JavaScript display them?
-      * Inline the C code for cel2pnm?
-      * Write a Haskell library for decompressing LHAs? (O.O)
+      * We now have an LHA unzipper on AWS Lambda, but need to make the app put the archives on S3 and retrieve the unzipped sets from another S3 bucket.
+      * We also have a cel parser, but the set processing is set up to call it yet. 
+      * We could also trying serving cels as binary blobs and letting JavaScript display them.
   * Support multiple palettes (dependent on how the above situation
     with cels as blobs vs pngs turns out)
   * Figure out how users view dolls, whether dolls are stored on
