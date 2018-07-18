@@ -6,4 +6,4 @@ What is the current behavior?
 
 What is the expected behavior?
 
-Which browser / OS are affected by this issue? (An *isolated* way to reproduce the bug)
+Which browser / OS are affected by this issue?
