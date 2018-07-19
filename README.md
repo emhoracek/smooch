@@ -1,7 +1,7 @@
 # smooch
 
 Smooch is a set of tools for viewing, converting, and eventually creating KiSS
-dolls. KiSS stands for Kisekae (Japanese for "dress up") Set System. 
+dolls. KiSS stands for Kisekae (Japanese for "dress up") Set System.
 
 KiSS dolls have been around for a long time, but there's only one modern viewer
 (and it has some drawbacks) and no way to play with these dolls online. Many
@@ -15,7 +15,7 @@ A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/
 
 Check out Smooch's [GitHub wiki](https://github.com/emhoracek/smooch/wiki) if you want to learn more about KiSS.
 
-`cel2pnm` is a tool for converting KiSS cells (the individual graphics) to pnm
+`cel2pnm` is a tool for converting KiSS cels (the individual graphics) to pnm
 format (which is then simple to convert to lots of other formats). It should
 work with all cel formats.
 
@@ -30,11 +30,11 @@ Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
 ## Roadmap
 
   * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
-      * Lots of dolls are not quite working still, especially multi-palette 
+      * Lots of dolls are not quite working still, especially multi-palette
       dolls.
   * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
       * We now have an LHA unzipper on AWS Lambda, but need to make the app put the archives on S3 and retrieve the unzipped sets from another S3 bucket.
-      * We also have a cel parser, but the set processing is set up to call it yet. 
+      * We also have a cel parser, but the set processing is set up to call it yet.
       * We could also trying serving cels as binary blobs and letting JavaScript display them.
   * Support multiple palettes (dependent on how the above situation
     with cels as blobs vs pngs turns out)
@@ -72,7 +72,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
 
 I would very much appreciate input on how to make this program better.
 
-Please let me know if cel2pnm doesn't convert a cell correctly and I will
+Please let me know if cel2pnm doesn't convert a cel correctly and I will
 attempt to fix it.
 
 Smooch should display any plain KiSS/GS doll correctly. FKiSS and Cherry KiSS
