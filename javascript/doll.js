@@ -379,7 +379,6 @@ var Mouser = function(that) {
 window.addEventListener('load', function() {
     var kissData = kissJson;
     this.smooch = new Smooch(kissData);
-    var blah = 0;
     var checkLoaded = function () {
         if (loaded < kissData.cels.length) {
             console.log("loading...");
