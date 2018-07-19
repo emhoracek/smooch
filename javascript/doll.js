@@ -66,30 +66,34 @@ KissSet.prototype = {
         };
 
 
-
         /* Go through each KiSS object, add information from the object to the
            cells within the object, then add those cells to the list. */
 
+        // supports up to 765 objects
+
         var red = 0;
-        var blue = 0;
         var green = 0;
+        var blue = 0;
 
         for (var i = 0; i < objs.length; i++) {
             var objid = objs[i].id;
 
             // create a unique color for each obj based on the obj id
             // and register it in the global colorids array
-            // supports up to 255*3 objects
+            
+            // red will increase while blue and green remain 0
             if (i < 255){
                 red = i;
             }
+            // green will increase while red and blue remain 0
             else if ((i > 255) && (i < 255*2)){
                 red = 0;
-                green = i;
+                green += 1;
             }
+            // blue will increase while red and green remain 0
             else if ((i > 255*2) && (i < 255*3)){
                 green = 0;
-                blue = i;
+                blue += 1;
             }
             
             var colorid = red + green + blue + 255;
