@@ -66,20 +66,36 @@ KissSet.prototype = {
         };
 
 
+
         /* Go through each KiSS object, add information from the object to the
            cells within the object, then add those cells to the list. */
+
+        var red = 0;
+        var blue = 0;
+        var green = 0;
+
         for (var i = 0; i < objs.length; i++) {
             var objid = objs[i].id;
 
             // create a unique color for each obj based on the obj id
             // and register it in the global colorids array
-            // TODO: Handle ids larger than 255
-            //       Need to map each integer to a unique color
-            if (i < 255) {
-                var colorid = i + 0 + 0 + 255;
-                colorids[colorid] = i;
-                objs[i].color = { red: i, green: 0, blue: 0, alpha: 255 };
+            // supports up to 255*3 objects
+            if (i < 255){
+                red = i;
             }
+            else if ((i > 255) && (i < 255*2)){
+                red = 0;
+                green = i;
+            }
+            else if ((i > 255*2) && (i < 255*3)){
+                green = 0;
+                blue = i;
+            }
+            
+            var colorid = red + green + blue + 255;
+            colorids[colorid] = i;
+            objs[i].color = { red: red, green: green, blue: blue, alpha: 255 };
+            
 
             // now lets go through the cels
             var obj_cells = objs[i].cells;
