@@ -5,10 +5,6 @@ var loaded = 0;
 
 var Smooch = function(kissData) {
 
-    this.editMode = false;
-
-    var editButton = document.getElementById("edit");
-
     this.set = new KissSet(kissData);
     this.set.update();
     this.set.draw();
