@@ -58,16 +58,16 @@ KissSet.prototype = {
            the layering effect. */
 
         // Helper function for matching objects and cels
-        var matches = function(obj_cell, cel) {
-            var unmatched = !obj_cell.matched;
-            var name_matches = obj_cell.name === cel.name;
-            var pal_matches = obj_cell.palette === cel.palette;
+        var matches = function(obj_cel, cel) {
+            var unmatched = !obj_cel.matched;
+            var name_matches = obj_cel.name === cel.name;
+            var pal_matches = obj_cel.palette === cel.palette;
             return unmatched && name_matches && pal_matches;
         };
 
 
         /* Go through each KiSS object, add information from the object to the
-           cells within the object, then add those cells to the list. */
+           cels within the object, then add those cels to the list. */
         for (var i = 0; i < objs.length; i++) {
             var objid = objs[i].id;
 
@@ -82,9 +82,9 @@ KissSet.prototype = {
             }
 
             // now lets go through the cels
-            var obj_cells = objs[i].cells;
+            var obj_cels = objs[i].cels;
             // for each cel in the obj, find that cel in the celData list
-            for (var j = 0; j < obj_cells.length; j++) {
+            for (var j = 0; j < obj_cels.length; j++) {
                 for (var k = 0; k < cels.length; k++) {
                     // The only way we can match cels is by name.
                     // If multiple objects share the same cel, the cel list has
@@ -93,13 +93,13 @@ KissSet.prototype = {
                     // TODO: This is going to cause trouble if we have multiple cels with
                     // the same name, but they have different palettes applied.
                     // Could make sure that the palette of the object and the cel match
-                    if (matches(obj_cells[j], cels[k], this.cels[k])) {
+                    if (matches(obj_cels[j], cels[k], this.cels[k])) {
                         if (this.cels[k] && this.cels[k].obj) {
                             console.log("already matched");
                         } else {
-                            obj_cells[j] = new KiSSCell(objs[i], cels[k], this);
-                            this.cels[k] = obj_cells[j];
-                            obj_cells[j].matched = true;
+                            obj_cels[j] = new KiSSCel(objs[i], cels[k], this);
+                            this.cels[k] = obj_cels[j];
+                            obj_cels[j].matched = true;
                         }
                     }
                 }
@@ -149,7 +149,7 @@ KissSet.prototype = {
     },
 
     update: function () {
-        // Update cells
+        // Update cels
         for (var i = 0; i < this.objs.length; i++) {
             this.objs[i].update(this);
         }
@@ -181,43 +181,43 @@ var KiSSObj = function (obj) {
     this.currentSet = 0;
     this.positions = obj.positions;
     this.position = obj.positions[this.currentSet];
-    this.cells = obj.cells;
+    this.cels = obj.cels;
 
     return this;
 };
 
 KiSSObj.prototype = {
     update: function(that) {
-        for (var i = 0; i < this.cells.length; i++) {
-            this.cells[i].currentSet = that.currentSet;
-            this.cells[i].position = this.positions[that.currentSet];
-            this.cells[i].update(that);
+        for (var i = 0; i < this.cels.length; i++) {
+            this.cels[i].currentSet = that.currentSet;
+            this.cels[i].position = this.positions[that.currentSet];
+            this.cels[i].update(that);
         }
     }
 };
 
-var KiSSCell = function(obj, cell, set) {
+var KiSSCel = function(obj, cel, set) {
 
     this.obj = obj;
-    this.name = cell.name;
+    this.name = cel.name;
     this.mark = obj.id;
-    this.fix = cell.fix;
+    this.fix = cel.fix;
     this.position = obj.positions[0];
     this.positions = obj.positions;
-    this.sets = cell.sets;
+    this.sets = cel.sets;
     this.image = undefined;
     this.ghostImage = undefined;
     this.visible = false;
-    this.alpha = cell.alpha;
+    this.alpha = cel.alpha;
 
-    this.offset = cell.offset;
+    this.offset = cel.offset;
 
     this.init(set);
 
     return this;
 };
 
-KiSSCell.prototype = {
+KiSSCel.prototype = {
 
     init: function(set) {
         var drawctxt = set.ctxt;
@@ -349,7 +349,7 @@ var Mouser = function(that) {
         }
         else {
             var kobj = that.set.objs[colorids[colorid]];
-            if (kobj && kobj.cells[0].fix < 1) {
+            if (kobj && kobj.cels[0].fix < 1) {
                 isdrag = true;
                 dobj = kobj;
                 curSet = that.set.currentSet;
