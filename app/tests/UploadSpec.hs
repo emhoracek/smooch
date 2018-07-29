@@ -8,8 +8,8 @@ import           Test.Hspec
 import           Kiss
 import           Upload
 
-sampleCell :: KissCell
-sampleCell = KissCell 0 "shirt"  0 [0,1,2,3] 0 (Position 0 0)
+sampleCel :: KissCel
+sampleCel = KissCel 0 "shirt"  0 [0,1,2,3] 0 (Position 0 0)
 
 {--
 
