@@ -31,7 +31,7 @@ import           Shell
 
 processSet :: Text
            -> (FilePath, FilePath)
-           -> EitherT Text IO (FilePath, [KissCell])
+           -> EitherT Text IO (FilePath, [KissCel])
 processSet username (fName, filePath) = do
   tryIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
@@ -69,7 +69,7 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
-createCels :: FilePath -> EitherT Text IO [KissCell]
+createCels :: FilePath -> EitherT Text IO [KissCel]
 createCels staticDir = do
   log' "About to get CNF"
   cnf <- getCNF staticDir
@@ -93,13 +93,13 @@ createCels staticDir = do
   log' "Wrote JSON"
   return realCelData
 
-addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
-                       [KissCell]
-addOffsetsToCelData offsets cells =
-  [ KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
-     | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCel] ->
+                       [KissCel]
+addOffsetsToCelData offsets cels =
+  [ KissCel cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
+     | CNFKissCel{..} <- cels, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
-addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> KissData
+addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
 addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
   KissData m borderColor bgColor p ws o cels
 
