@@ -17,8 +17,8 @@ samplePalettes :: Palettes
 samplePalettes = toArray ["color.kcf"]
   where toArray l = A.listArray (0, length l) l
 
-fakeCel :: CNFKissCell
-fakeCel = CNFKissCell 0 "aurora" 0 [] 0
+fakeCel :: CNFKissCel
+fakeCel = CNFKissCel 0 "aurora" 0 [] 0
 
 spec :: Spec
 spec = do
