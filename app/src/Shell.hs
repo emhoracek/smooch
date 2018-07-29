@@ -30,11 +30,11 @@ colorByIndex colorNum paletteLoc =
 
 -- Convert a whole list of cels given a palette. Put the files in target directory. Return list of cels with offset information
 convertCels :: Palettes
-            -> [CNFKissCell]
+            -> [CNFKissCel]
             -> String
             -> EitherT T.Text IO [ (String, (Int, Int)) ]
 convertCels pals cels base = do
-  mapM (\(CNFKissCell _ name pal _ _) -> convertCel pals pal name base) cels
+  mapM (\(CNFKissCel _ name pal _ _) -> convertCel pals pal name base) cels
 
 -- Convert cel to pnm, pnm to png, delete pnm
 convertCel :: Palettes
