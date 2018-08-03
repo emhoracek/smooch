@@ -60,6 +60,8 @@ library
                        Users.Controller
   build-depends:       base,
                        aeson,
+                       amazonka,
+                       amazonka-s3,
                        array,
                        binary-parser,
                        bytestring,

@@ -15,9 +15,12 @@ import           Data.Text.ICU.Convert
 import           System.Directory
 import           System.FilePath            (takeBaseName, takeExtension, (</>))
 
+import           Network.AWS
+import           Network.AWS.S3
+
 import           Control.Exception
 import           Control.Logging            (log')
-import           Control.Monad              (when)
+import           Control.Monad              (when, void)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Either
 import           Data.Either.Combinators    (mapLeft)
@@ -30,9 +33,10 @@ import           ParseCNF
 import           Shell
 
 processSet :: Text
-           -> (FilePath, FilePath)
+           -> (String, FilePath)
            -> EitherT Text IO (FilePath, [KissCell])
 processSet username (fName, filePath) = do
+  void $ tryIO $ putInS3 username fName filePath
   tryIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
   staticDir <- createSetDir userDir (takeBaseName fName)
@@ -40,6 +44,16 @@ processSet username (fName, filePath) = do
   log' "Unzipped file!"
   cels <- createCels staticDir
   return (staticDir, cels)
+
+-- copied from the Amazonka docs
+putInS3 :: Text -> String -> FilePath -> IO PutObjectResponse
+putInS3 _username fileName filePath = do
+  env <- newEnv Discover
+  body <- chunkedFile defaultChunkSize filePath
+  runResourceT $
+    runAWS env $
+    within Ohio $
+    send (putObject "kiss-lzh" (ObjectKey $ T.pack fileName) body)
 
 staticUserDir :: Text -> FilePath
 staticUserDir username = "static/sets/" <> T.unpack username
