@@ -44,7 +44,7 @@ One really helpful contribution you can make is to try out KiSS dolls from
 [Okatuworld](http://www.otakuworld.com/kiss) and see which ones work
 and which don't. I would look for dolls that are as simple as possible
 -- a single palette, a small wardrobe, no animations or special
-effects (no "FKiSS"). (Please be aware that many dolls on Otakuworld are 
+effects (no "FKiSS"). (Please be aware that many dolls on Otakuworld are
 not appropriate for children or even worksafe.)
 
 Try the doll you've chosen in a KiSS doll viewer like [GnomeKiSS for
@@ -67,7 +67,7 @@ If a supported set has a bug:
  * If the problem is visual, add a screenshot of the doll in a working viewer
    such as UltraKiSS or GnomeKiSS as well as a screenshot of the problem in
    Smooch.
-   
+
 If the doll is small and has lots of interesting problems, it
 may be a good candidate for being included in the repo as a
 sample doll.
@@ -92,7 +92,7 @@ Pick an [issue](https://github.com/emhoracek/smooch/issues), or below are some m
 
 Please comment on the issue you want to work on to claim it *before* you start
 work. That way you can take your time working instead of racing to get the first
-pull request in. 
+pull request in.
 
 Don't see an interesting issue, or all the issues are claimed? Below are some more ideas. If any looks interesting, please create an issue for it so we can discuss different approaches and so other people can know that you're working on it.
 
@@ -115,7 +115,7 @@ Smooch.
    * Artists can select cels from the cel sheet and name them
    * Artists can insert cels into a set
    * Artists can group cels into objects
-   * Artists can save a set 
+   * Artists can save a set
    * Artists can publish sets to share with others
 
 The ones marked with a `*` will need some work on the backend as well.
@@ -146,6 +146,8 @@ Please make sure you have the following general software installed
 | ✔ | [stack](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
 | ✔ | [Netpbm](http://brewformulas.org/Netpbm)  | >= 10.73.14 | Netpbm is a toolkit for manipulation of graphic images, including conversion of images between a variety of different formats |
 |  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
+|  | [lhasa](https://fragglet.github.io/lhasa/) |  | Lhasa decompresses .lzh (LHA / LHarc) and .lzs (LArc) archives |
+
 
 ### Install `GCC`
 
@@ -168,6 +170,10 @@ This is how the images are converted from the *.pnm format that `cel2pnm` create
 Following the [Homebrew install guide here](https://brew.sh/).
 * Open your terminal, copy and paste this command into your Terminal:
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+### Install `lhasa`
+
+* On Mac OSX you can use `Homebrew` to install `lhasa`, copy and past this command into your Terminal: `brew install lhasa`
 
 ## Project setup
 
@@ -230,7 +236,7 @@ gcc cel2pnm.c -o cel2pnm
 ### Install `stack`
 
 You'll need `stack` to build Smooch. [`stack`](https://github.com/commercialhaskell/stack) is a Haskell dependency management
-tool (kinda like `npm` for JavaScript). 
+tool (kinda like `npm` for JavaScript).
 
 * Following the `stack` [install guide here](https://docs.haskellstack.org/en/stable/README/#how-to-install)
 * Copy and paste this command into your Terminal:
@@ -241,7 +247,7 @@ curl -sSL https://get.haskellstack.org/ | sh
 
 ![alt text](https://preview.ibb.co/cYhc8w/install_stack.png "Install stack")
 
-* Once you have `stack` installed, change to the `app` directory and run `stack setup`. 
+* Once you have `stack` installed, change to the `app` directory and run `stack setup`.
 This will install the correct Haskell version (this will take a while if you don't already have it).
 
 ![alt text](https://preview.ibb.co/dNNoFb/stack_setup.png "stack setup")
