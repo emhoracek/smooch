@@ -84,8 +84,8 @@ Here's JSON for a set with one object:
   // list of positions
     {
       "id": 0,
-      "cells": [
-      // a cell has a palette for the cel, the sets the cel
+      "cels": [
+      // a cel has a palette for the cel, the sets the cel
       // is visible in, a "fix" value indicating how many
       // time you need to click the cel before you can
       // drag it (usually 0 for clothes, a large number for

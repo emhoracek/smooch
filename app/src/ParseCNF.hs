@@ -28,10 +28,10 @@ getKissData file =
     Right ls -> right $ linesToScript ls
     Left  e  -> left  $ T.pack $ show e
 
-getKissCels :: String -> EitherT T.Text IO [CNFKissCell]
+getKissCels :: String -> EitherT T.Text IO [CNFKissCel]
 getKissCels file =
   case parse parseCNFLines "KiSS cel error: " (map toLower file) of
-    Right ls -> right $ linesToCells ls
+    Right ls -> right $ linesToCels ls
     Left  e  -> left  $ T.pack $ show e
 
 getKissPalettes :: CNFKissData -> EitherT T.Text IO Palettes
@@ -58,18 +58,18 @@ linesToScript xs =
           palettes = [ a | CNFPalette a <- xs ]
           -- window is (600, 480) by default
           windowSize = fromMaybe (600, 480) (listToMaybe [ a | CNFWindowSize a <- xs ])
-          -- turn object #, cell, set positions to objects
+          -- turn object #, cel, set positions to objects
           positions = [ a | CNFSetPos a <- xs ]
-          objects = linesToObjects [ a | CNFCell a <- xs ] positions
+          objects = linesToObjects [ a | CNFCel a <- xs ] positions
 
-cnfToKissCell :: (Int, Int) -> CNFKissCell ->  KissCell
-cnfToKissCell (xoff, yoff) CNFKissCell{..} =
-  KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
+cnfToKissCel :: (Int, Int) -> CNFKissCel ->  KissCel
+cnfToKissCel (xoff, yoff) CNFKissCel{..} =
+  KissCel cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
 
-linesToObjects :: [(Int, CNFKissCell)] -> [KissSetPos] -> [KissObject]
+linesToObjects :: [(Int, CNFKissCel)] -> [KissSetPos] -> [KissObject]
 linesToObjects xs ys =
     map (\(objNo,cels,pos) -> KissObject objNo (addDefaultPosition cels) pos) combinedCels
-    where addDefaultPosition = map (cnfToKissCell (0,0))
+    where addDefaultPosition = map (cnfToKissCel (0,0))
           combinedCels = combineCelsAndPositions xs objpos
           objpos = addObjNumberToPositions (groupPositionsByObj ys)
 
@@ -83,9 +83,9 @@ groupPositionsByObj xs = transpose $ map (\(KissSetPos _ pos) -> pos) xs
 addObjNumberToPositions :: [[SetPos]] -> [(Int, [SetPos])]
 addObjNumberToPositions xs = reverse $ foldl (\acc objPos -> (length acc, objPos):acc) [] xs
 
-combineCelsAndPositions :: [(Int, CNFKissCell)]
+combineCelsAndPositions :: [(Int, CNFKissCel)]
                         -> [(Int, [SetPos])]
-                        -> [(Int, [CNFKissCell], [SetPos])]
+                        -> [(Int, [CNFKissCel], [SetPos])]
 combineCelsAndPositions objs positions =
   reverse $ foldl combine [] positions
   where findCels objNum = map snd $ filter (\(n,_) -> n == objNum) objs
@@ -94,41 +94,41 @@ combineCelsAndPositions objs positions =
             [] -> acc
             cels ->  (objNumber, cels, pPositions) : acc
 
-linesToCells :: [CNFLine] -> [CNFKissCell]
-linesToCells xs = [ snd a | CNFCell a <- xs ]
+linesToCels :: [CNFLine] -> [CNFKissCel]
+linesToCels xs = [ snd a | CNFCel a <- xs ]
 
 -- KiSS Parser Combinators
 
--- Parses the lines describing cells and objects.
-parseCellLine :: Parser CNFLine
-parseCellLine = do
+-- Parses the lines describing cels and objects.
+parseCelLine :: Parser CNFLine
+parseCelLine = do
     char '#'
     num <- many digit
-    cell <- parseCell
+    cel <- parseCel
     optional parseComment
     skipMany digit
-    return $ CNFCell (read num, cell)
+    return $ CNFCel (read num, cel)
 
-parseCell :: Parser CNFKissCell
-parseCell = do
+parseCel :: Parser CNFKissCel
+parseCel = do
     fix <- option 0 parseFix
     skipMany1 space
     file <- many1 (noneOf ". ")
     string ".cel" <?> "cel file extenstion"
     skipMany1 space
-    palette <- option 0 (try parseCellPalette)
+    palette <- option 0 (try parseCelPalette)
     skipMany space
     sets <- option [0..9] parseSets
     skipMany space
     transp <- option 0 (try parseTransp)
-    return $ CNFKissCell fix file palette sets transp
+    return $ CNFKissCel fix file palette sets transp
 
 {--
 caseInsensitiveChar c = char (toLower c) <|> char (toUpper c)
 caseInsensitiveString s = try (mapM caseInsensitiveChar s) <?> "\"" ++ s ++ "\""--}
 
-parseCellPalette :: Parser Int
-parseCellPalette = do
+parseCelPalette :: Parser Int
+parseCelPalette = do
     char '*'
     num <- many1 digit
     return $ read num
@@ -139,7 +139,7 @@ parseFix = do
     num <- option "0" (try $ many1 digit)
     return $ read num
 
--- This parses all the list of sets the cell will be displayed in
+-- This parses all the list of sets the cel will be displayed in
 parseSets :: Parser [Int]
 parseSets = do
   char ':'
@@ -190,7 +190,7 @@ parseBorder = do
     num <- option "0" (many1 digit)
     return $ CNFBorder (read num)
 
--- The following four functions parse the cel positions for each set of cells.
+-- The following four functions parse the cel positions for each set of cels.
 parseSetPos :: Parser CNFLine
 parseSetPos = do
     char '$'
@@ -223,7 +223,7 @@ data CNFLine = CNFMemory Int
              | CNFBorder Int
              | CNFPalette String
              | CNFWindowSize (Int, Int)
-             | CNFCell (Int, CNFKissCell)
+             | CNFCel (Int, CNFKissCel)
              | CNFSetPos KissSetPos
              | CNFComment String
     deriving (Eq, Show)
@@ -238,7 +238,7 @@ parseCNFLines = do
 
 parseCNFLine :: Parser CNFLine
 parseCNFLine = do
-    line <- choice [parseCellLine,
+    line <- choice [parseCelLine,
                     parseSetPos,
                     parseMemory, parsePalette,
                     parseBorder, parseWindowSize,

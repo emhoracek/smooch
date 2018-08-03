@@ -40,7 +40,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
     if (strncmp ((const char *) header, "KiSS", 4)) {
         // if the header does NOT start with KiSS
         if (debug) {
-            fprintf(stderr, "Old style KiSS cell.\n");
+            fprintf(stderr, "Old style KiSS cel.\n");
         }
         bpp    = 4;
         width  = parse_uint16(header+0);
@@ -197,7 +197,7 @@ static int convert_cel(const char *celfile, const char *pnmfile) {
 
                 for (j = 0; j < width; j++) {
 
-                    // Cells are stored in Blue, Green, Red order
+                    // cels are stored in Blue, Green, Red order
                     int blue, green, red;
                     blue = line[j*4];
                     green = line[j*4+1];
