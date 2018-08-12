@@ -6,7 +6,7 @@ import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
 data KissSet = KissSet { kData    :: CNFKissData
-                       , kCels   :: [CNFKissCel]
+                       , kCnfCels :: [CNFKissCel]
                        , kPalette :: Array Int PaletteFilename
                        } deriving (Eq, Show)
 
