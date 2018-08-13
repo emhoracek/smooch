@@ -20,7 +20,7 @@ spec = fnTests $ do
                            ,("email", "new@test.com")
                            ,("password", "pass")
                            ,("password-confirmation", "pass")]
-        >>= should200
+        >>= should300To "/users/new"
       [user] <- eval (\ctxt -> getUsers ctxt)
       userEmail user `shouldEqual` "new@test.com"
 
