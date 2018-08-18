@@ -1,0 +1,6 @@
+deploy.env
+event.json
+.env
+.lambda
+node_modules
+lhasa.zip

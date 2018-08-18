@@ -1,0 +1,18 @@
+{
+    "name": "lhasa",
+    "version": "1.0.0",
+    "description": "LHA archive processor",
+    "main": "index.js",
+    "dependencies": {
+        "aws-sdk": "^2.145.0",
+        "child-process-promise": "^2.2.1",
+        "fs": "0.0.1-security",
+        "promisify-node": "^0.4.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}
