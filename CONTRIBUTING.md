@@ -19,9 +19,8 @@ You'll need to try and [get Smooch working on your own computer](https://github.
 now anyway), but one of the easiest ways you can contribute to Smooch is by
 trying to load a set and see if it works!
 
-Whether you were unable to compile `cel2pnm`, or dolls look weird in your
-browser, or you can''t get the Smooch Haskell app to work locally -- you can
-file an issue.
+Whether dolls look weird in your browser, or you can''t get the Smooch Haskell
+app to work locally -- you can file an issue.
 
 Even if you're pretty sure that the app *does* work and you just can't figure it out --
 still file an issue! If installation directions aren't clear or don't work,
@@ -29,8 +28,8 @@ that's a bug in the documentation.
 
 When filing a issues:
  * Please mention how you encountered the problem.
-   * Were you looking at the demos on Github.io, at cel2pnm, at the JavaScript by itself, or
-     at the Haskell app?
+   * Were you looking at the demos on Github.io, at the JavaScript by itself,
+     or at the Haskell app?
    * Are you using Windows, Linux, Mac, or some other OS?
    * If applicable, what browser were you using?
  * What are the steps I can take to make the problem happen again?
@@ -144,26 +143,18 @@ Please make sure you have the following general software installed
 | ------------- | ------------- | ---| --- |
 | ✔ | [GCC compiler](https://gcc.gnu.org/)  | >= 7.2 | GCC is the compiler for [GNU operating system](http://www.gnu.org/gnu/thegnuproject.html), which includes C, C++, Objective-C, Fortran, Ada, and Go |
 | ✔ | [stack](https://docs.haskellstack.org/en/stable/README/#the-haskell-tool-stack)  | >= 1.5.1 | `stack` is a Haskell dependency management tool |
-| ✔ | [Netpbm](http://brewformulas.org/Netpbm)  | >= 10.73.14 | Netpbm is a toolkit for manipulation of graphic images, including conversion of images between a variety of different formats |
 |  | [Homebrew](https://brew.sh/)  | >= 1.3.4 | Homebrew is the missing package manager for macOS |
 |  | [lhasa](https://fragglet.github.io/lhasa/) |  | Lhasa decompresses .lzh (LHA / LHarc) and .lzs (LArc) archives |
 
 
 ### Install `GCC`
 
-You'll need a C compiler to compile the `cel2pnm` program for smooch, let's install the GCC compiler.
+You'll need a C compiler when running `stack setup`, let's install the GCC compiler.
 
 * On Mac OSX you can use `Homebrew` to install `gcc`, copy and past this command into your Terminal: `brew install gcc`
 * On Windows / Linux or other OS, follow the [GCC installation guide](https://gcc.gnu.org/install/).
 
 ![alt text](https://preview.ibb.co/fmhcrG/brew_install.png "Brew install screenshot")
-
-### Install `Netpbm`
-
-This is how the images are converted from the *.pnm format that `cel2pnm` creates into a PNG image that a browser can display.
-* On Mac OSX you can use `Homebrew` to install `netpbm`, copy and past this command into your Terminal: `brew install netpbm`
-* On Windows / Linux or other OS, follow the [Netpbm installation guide](http://netpbm.sourceforge.net/getting_netpbm.php).
-
 
 ### Install `Homebrew`
 
@@ -219,19 +210,6 @@ Following the [Homebrew install guide here](https://brew.sh/).
 
 6. [Open a Pull Request](https://help.github.com/articles/about-pull-requests/) with a clear title and description.
 
-
-### Install `cel2pnm`
-Now change to the `cel2pnm` directory.
-
-* Now that you are in the top-level folder of this project, change into the `cel2pnm` directory: `cd cel2pnm`
-* Compile Smooch's `cel2pnm` program by running this command:
-
-```
-gcc cel2pnm.c -o cel2pnm
-```
-![alt text](https://preview.ibb.co/npWqdw/compile_smooch.png "Compile cel2pnm program")
-
-* Put `cel2pnm` in your [$PATH](https://askubuntu.com/questions/551990/what-does-path-mean).
 
 ### Install `stack`
 

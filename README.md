@@ -15,10 +15,6 @@ A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/
 
 Check out Smooch's [GitHub wiki](https://github.com/emhoracek/smooch/wiki) if you want to learn more about KiSS.
 
-`cel2pnm` is a tool for converting KiSS cels (the individual graphics) to pnm
-format (which is then simple to convert to lots of other formats). It should
-work with all cel formats.
-
 Now, we're making a KiSS doll viewer for the browser -- and you can help! Check
 out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
@@ -71,9 +67,6 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
 ## Feedback
 
 I would very much appreciate input on how to make this program better.
-
-Please let me know if cel2pnm doesn't convert a cel correctly and I will
-attempt to fix it.
 
 Smooch should display any plain KiSS/GS doll correctly. FKiSS and Cherry KiSS
 aren't supported yet. If you find a plain KiSS doll that Smooch doesn't display
