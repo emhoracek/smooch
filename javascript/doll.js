@@ -241,7 +241,7 @@ KiSSCell.prototype = {
         var data = ghostImageData.data;
 
         // Fill image data with obj color
-        color = this.obj.color;
+        var color = this.obj.color;
 
         for (var k = 0; k < data.length; k=k+4) {
             data[k]   = color.red;
@@ -303,8 +303,7 @@ var Mouser = function(that) {
     // This is from eLouai, believe it or not!!
     // http://www.elouai.com/javascript-drag-and-drop.php
     var isdrag = false;
-    var x, y;
-    var dojb;
+    var x, y, dobj;
 
     var mousemove = function(e) {
         if (isdrag) {
@@ -352,7 +351,7 @@ var Mouser = function(that) {
             if (kobj && kobj.cells[0].fix < 1) {
                 isdrag = true;
                 dobj = kobj;
-                curSet = that.set.currentSet;
+                var curSet = that.set.currentSet;
                 tx = dobj.positions[curSet].x;
                 ty = dobj.positions[curSet].y;
                 x = e.layerX;
