@@ -71,7 +71,7 @@ KissSet.prototype = {
         var green = 0;
 
         for (var i = 0; i < objs.length; i++) {
-            var objid = objs[i].id;
+            // var objid = objs[i].id;
 
             // create a unique color for each obj based on the obj id
             // and register it in the global colorids array
@@ -253,7 +253,7 @@ KiSSCel.prototype = {
         var data = ghostImageData.data;
 
         // Fill image data with obj color
-        color = this.obj.color;
+        var color = this.obj.color;
 
         for (var k = 0; k < data.length; k=k+4) {
             data[k]   = color.red;
@@ -315,8 +315,7 @@ var Mouser = function(that) {
     // This is from eLouai, believe it or not!!
     // http://www.elouai.com/javascript-drag-and-drop.php
     var isdrag = false;
-    var x, y;
-    var dojb;
+    var x, y, dobj;
 
     var mousemove = function(e) {
         if (isdrag) {
@@ -350,8 +349,8 @@ var Mouser = function(that) {
         var pixel = ctxt.getImageData(pos.x, pos.y, 1, 1);
 
         var data = pixel.data;
-        var rgba = 'rgba(' + data[0] + ',' + data[1] +
-            ',' + data[2] + ',' + data[3] + ')';
+        // var rgba = 'rgba(' + data[0] + ',' + data[1] +
+        //     ',' + data[2] + ',' + data[3] + ')';
 
         var colorid = data[0] + data[1] + data[2] + 255;
 
@@ -364,7 +363,7 @@ var Mouser = function(that) {
             if (kobj && kobj.cels[0].fix < 1) {
                 isdrag = true;
                 dobj = kobj;
-                curSet = that.set.currentSet;
+                var curSet = that.set.currentSet;
                 tx = dobj.positions[curSet].x;
                 ty = dobj.positions[curSet].y;
                 x = e.layerX;
