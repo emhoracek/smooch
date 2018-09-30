@@ -69,7 +69,7 @@ KissSet.prototype = {
         /* Go through each KiSS object, add information from the object to the
            cells within the object, then add those cells to the list. */
         for (var i = 0; i < objs.length; i++) {
-            var objid = objs[i].id;
+            // var objid = objs[i].id;
 
             // create a unique color for each obj based on the obj id
             // and register it in the global colorids array
@@ -337,8 +337,8 @@ var Mouser = function(that) {
         var pixel = ctxt.getImageData(pos.x, pos.y, 1, 1);
 
         var data = pixel.data;
-        var rgba = 'rgba(' + data[0] + ',' + data[1] +
-            ',' + data[2] + ',' + data[3] + ')';
+        // var rgba = 'rgba(' + data[0] + ',' + data[1] +
+        //     ',' + data[2] + ',' + data[3] + ')';
 
         var colorid = data[0] + data[1] + data[2] + 255;
 
