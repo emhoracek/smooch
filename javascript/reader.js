@@ -9,7 +9,7 @@ function readPaletteBlob() {
 
     var reader = new FileReader();
 
-	var cmarker;
+	  var cmarker;
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function(evt) {
         console.log("fire");

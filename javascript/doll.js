@@ -71,8 +71,6 @@ KissSet.prototype = {
         var green = 0;
 
         for (var i = 0; i < objs.length; i++) {
-            // var objid = objs[i].id;
-
             // create a unique color for each obj based on the obj id
             // and register it in the global colorids array
             // supports up to 255*3 objects
@@ -87,11 +85,11 @@ KissSet.prototype = {
                 green = 0;
                 blue = i;
             }
-            
+
             var colorid = red + green + blue + 255;
             colorids[colorid] = i;
             objs[i].color = { red: red, green: green, blue: blue, alpha: 255 };
-            
+
 
             // now lets go through the cels
             var obj_cels = objs[i].cels;
@@ -349,8 +347,6 @@ var Mouser = function(that) {
         var pixel = ctxt.getImageData(pos.x, pos.y, 1, 1);
 
         var data = pixel.data;
-        // var rgba = 'rgba(' + data[0] + ',' + data[1] +
-        //     ',' + data[2] + ',' + data[3] + ')';
 
         var colorid = data[0] + data[1] + data[2] + 255;
 
