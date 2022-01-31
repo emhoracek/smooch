@@ -8,16 +8,21 @@ import           Data.Monoid                ((<>))
 import           Data.Pool
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
+import qualified Data.Vault.Lazy            as V
 import qualified Database.PostgreSQL.Simple as PG
 import           Network.Wai                (Response)
+import           Network.Wai.Session        (Session)
 import           Web.Fn
 import           Web.Larceny                hiding (renderWith)
 import qualified Web.Larceny                as L
 
-data Ctxt = Ctxt { _req           :: FnRequest,
-                   _library       :: Library Ctxt,
-                   _substitutions :: Substitutions Ctxt,
-                   _pool          :: Pool PG.Connection }
+type SmoochSession = Session IO Text (Maybe Text)
+
+data Ctxt = Ctxt { _req           :: FnRequest
+                 , _sessionKey    :: V.Key SmoochSession
+                 , _library       :: Library Ctxt
+                 , _substitutions :: Substitutions Ctxt
+                 , _pool          :: Pool PG.Connection }
 makeLenses ''Ctxt
 
 instance RequestContext Ctxt where

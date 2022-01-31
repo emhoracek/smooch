@@ -4,9 +4,9 @@
 
 module Upload where
 
-import           Data.List                  (nub)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Lazy       as LBS
+import           Data.List                  (nub, sort)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
@@ -19,33 +19,49 @@ import           Control.Exception
 import           Control.Logging            (log')
 import           Control.Monad              (when)
 import           Control.Monad.IO.Class     (liftIO)
-import           Control.Monad.Trans.Either
+import           Control.Monad.Trans.Except
 import           Data.Monoid                ((<>))
-import           Data.Either.Combinators    (mapLeft)
 
 import           Data.Aeson                 (encode)
 
+import           CelToPng
 import           Kiss
+import qualified ParseCel                   as PC
 import           ParseCNF
-import           Shell
+import qualified ParseKCF                   as PK
+import           Shell                      (unzipFile)
 
-processSet :: (FilePath, FilePath) -> EitherT Text IO [KissCell]
-processSet (fName, filePath) = do
-  tryIO $ copyFile filePath ("static/sets" </> fName)
-  staticDir <- createSetDir (takeBaseName fName)
+processSet :: Text
+           -> (FilePath, FilePath)
+           -> ExceptT Text IO (FilePath, [KissCel])
+processSet username (fName, filePath) = do
+  liftIO $ copyFile filePath ("static/sets" </> fName)
+  userDir <- createUserDir username
+  staticDir <- createSetDir userDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
-  createCels staticDir
+  cels <- createCels staticDir
+  return (staticDir, cels)
 
-staticDirFromSetName :: String -> FilePath
-staticDirFromSetName setName = "static/sets/" <> setName
+staticUserDir :: Text -> FilePath
+staticUserDir username = "static/sets/" <> T.unpack username
 
-createSetDir :: String -> EitherT Text IO FilePath
-createSetDir setName = do
-  let staticDir = "static/sets/" <> setName
+createUserDir :: Text -> ExceptT Text IO FilePath
+createUserDir username = do
+  let staticDir = staticUserDir username
+  liftIO $ createDirectoryIfMissing True staticDir
+  log' $ "Created static user sets directory if missing: " <> T.pack staticDir
+  return staticDir
+
+staticSetDir :: FilePath -> String -> FilePath
+staticSetDir userDir setName =  userDir <> "/" <> setName
+
+createSetDir :: FilePath -> String -> ExceptT Text IO FilePath
+createSetDir userDir setName = do
+  let staticDir = userDir <> "/" <> setName
   exists <- liftIO $ doesDirectoryExist staticDir
-  when exists $ tryIO $ removeDirectoryRecursive staticDir
-  tryIO $ createDirectory staticDir
+  when exists $ liftIO $ removeDirectoryRecursive staticDir
+  liftIO $ createDirectory staticDir
   log' $ "Created static directory: " <> T.pack staticDir
   return staticDir
 
@@ -55,7 +71,7 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
-createCels :: FilePath -> EitherT Text IO [KissCell]
+createCels :: FilePath -> ExceptT Text IO [KissCel]
 createCels staticDir = do
   log' "About to get CNF"
   cnf <- getCNF staticDir
@@ -68,40 +84,54 @@ createCels staticDir = do
   log' "Added offsets"
   defPalette <- defaultPalette kissPalettes
   log' "Got default palette"
-  bgColor <- colorByIndex 0 (staticDir </> defPalette)
+  palData <- liftIO $ BS.readFile (staticDir </> defPalette)
+  log' "Got default palette data"
+  palEntries <- PK.parseKCF palData
+  log' "Got default palette entries"
+  let bgColor = PK.colorByIndex 0 palEntries
   log' "Got bg color"
-  borderColor <- colorByIndex (cnfkBorder cnfKissData) (staticDir </> defPalette)
+  let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
   log' "Got border color"
   let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
   let json = "var kissJson = " <> encode kissData <> ";\n"
-  tryIO $ LBS.writeFile (staticDir <> "/setdata.js") json
+  liftIO $ LBS.writeFile (staticDir <> "/setdata.js") json
   log' "Wrote JSON"
   return realCelData
+  where convertCels pals cels base = do
+          mapM (\(CNFKissCel _ name pal _ _) -> convertCel pals pal name base) cels
+        convertCel palettes palNum cel base = do
+          pal <- lookupPalette palNum palettes
+          paletteEntries <- liftIO $ BS.readFile (base <> "/" <> pal)
+          palData <- PK.parseKCF paletteEntries
+          let celFile = base <> "/" <> cel <> ".cel"
+          celData <- liftIO $ BS.readFile celFile
+          (celHeader, celPixels) <- PC.parseCel celData
+          let pngFile = base <> "/" <> cel <> ".png"
+          liftIO $ celToPng pngFile palData celHeader celPixels
+          let xOffset = fromIntegral $ PC.celXoffset celHeader
+          let yOffset = fromIntegral $ PC.celYoffset celHeader
+          let offsets = (xOffset, yOffset)
+          return (cel, offsets)
 
-addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCell] ->
-                       [KissCell]
-addOffsetsToCelData offsets cells =
-  [ KissCell cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
-     | CNFKissCell{..} <- cells, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCel] ->
+                       [KissCel]
+addOffsetsToCelData offsets cels =
+  [ KissCel cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
+     | CNFKissCel{..} <- cels, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
-addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCell] -> KissData
+addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
 addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
   KissData m borderColor bgColor p ws o cels
 
-tryIO :: IO a -> EitherT Text IO a
-tryIO m = EitherT $ mapLeft showIOException <$> try m
-  where
-    showIOException = T.pack . show :: IOException -> Text
-
 -- for now, only looks at first cnf listed
-getCNF :: FilePath -> EitherT Text IO String
+getCNF :: FilePath -> ExceptT Text IO String
 getCNF dir = do
-  files <- tryIO $ getDirectoryContents dir
-  let cnfs = filter (\x -> takeExtension x == ".cnf") files
+  files <- liftIO $ getDirectoryContents dir
+  let cnfs = sort $ filter (\x -> takeExtension x == ".cnf") files
   case cnfs of
-    (f:_fs) -> tryIO $ readUtf8OrShiftJis (dir </> f)
-    _ -> left "No configuration file found."
+    (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
+    _ -> throwE "No configuration file found."
 
 readUtf8OrShiftJis :: String -> IO String
 readUtf8OrShiftJis fp = do

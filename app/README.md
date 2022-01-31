@@ -5,11 +5,16 @@ Here's how the Haskell code is organized:
   * exe/Main runs the Warp webserver.
   * src/
     * Web does routing and request handling 
+    * Ctxt defines the request context and provides helper functions
     * ParseCNF parses the configuration file
     * Kiss contains the KiSS data types (and Aeson instances)
     * Shell converts the files (hmmm... maybe it should be
       called "Convert" instead?)
     * Upload processes uploaded sets
+    * Users/  
+       * Model has the data type declaration and functions for querying users
+       * View has functions for displaying user data
+       * Controller has handlers and routes for users.
   * tests/ contains spec tests
   * templates/ contains the templates for the pages
   * static/ contains the CSS and JavaScript resources. These
@@ -20,97 +25,21 @@ Here's how the Haskell code is organized:
     modules that are used)
   * stack.yaml is the Stack file (helps manage dependencies)
 
-To work on this codebase, you need to install
-[Stack](https://github.com/commercialhaskell/stack/wiki/Downloads). You
-also need to compile `cel2pnm` and put it in your PATH.
+To work on this codebase, follow the directions in the [CONTRIBUTING](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md#run-smooch-on-your-computer) file.
 
-To compile: `gcc cel2pnm.c -o cel2pnm`.
-
-If you haven't installed Haskell before, run `stack setup` on your
-command line, in this directory.
-
-To test, run `stack test`.
-
-Build: `stack build`.
-
-Run: `stack exec smooch`. This serves the app on localhost:8000.
-
-If you have *any issues at all* with this process, it would be extremely 
-helpful to me if you emailed me at libby@daydrea.me with some information 
-about your system and what trouble you're having, or if you filed a 
-ticket in the "Issues" section on Github! I want to know about any 
-obstactles anyone is facing in using Smooch -- if you're having trouble, 
+If you have *any issues at all* getting started with Smooch, it would be 
+extremely helpful to me if you filed a ticket in the "Issues" section on 
+Github and tagged me (@emhoracek)! I want to know about any 
+obstacles anyone is facing in using Smooch -- if you're having trouble, 
 someone else probably will, too!
 
-## What it does
+## Current state of the app
 
-Right now, a user is greeted with an invitation to upload a file. The
-uploaded file unzipped, the configuration is parsed into JSON, and all
-the ".cel" images are converted to pngs. Then a response with all the
+Right now, a user is greeted with an invitation to create an account, 
+login, or upload a file. Only uploading a file does anything interesting. 
+The uploaded file is unzipped, the configuration is parsed into JSON, and 
+all the ".cel" images are converted to pngs. Then a response with all the
 images, the JSON, and the KiSS javascript is served to the user.
-
-It does not work very well.
-
-## TODO
-
-Roughly in order, except the last!!
-
-  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
-      * Display Japanese dolls (fix encoding issues)
-  * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
-      * Serve cels as binary blobs and let JavaScript display them?
-      * Inline the C code for cel2pnm?
-      * Write a Haskell library for decompressing LHAs? (O.O)
-  * Support multiple palettes (dependent on how the above situation
-    with cels as blobs vs pngs turns out)
-  * Figure out how users view dolls, whether dolls are stored on
-    server, etc.
-  * Release a usable vanilla KiSS viewer.
-  * Add FKiSS1, FKiSS2, FKiSS3, CherryKiSS, Enhanced Palettes, FKiSS4,
-    FKiSS5...
-  * Add creation and editing tools.
-  * Refactoring, better tests, and better documentation
-
-## How you can contribute
-
-If you would like to help with Smooch, I am SO EXCITED!! Let me tell you
-some specific things that would be super helpful.
-
-The first would be: tackle an issue! But right now I haven't written
-up many issues. :)
-
-Another fun possibility is to try out KiSS dolls from
-[Okatuworld](http://www.otakuworld.com/kiss) and see which ones work
-and which don't. I would look for dolls that are as simple as possible
--- a single palette, a small wardrobe, no animations or special
-effects (no "FKiSS").
-
-You can also use the samples included in the repo (see below)!
-
-Try the doll you've chosen in a KiSS doll viewer like [GnomeKiSS for
-Linux](http://devel.tlrmx.org/kiss/), [Direct KiSS or PlayKiSS for
-Windows](http://otakuworld.com/index.html?/kiss/viewers.htm) or
-[UltraKiSS for anything with
-Java](http://www.wmiles.com/projects/ultrakiss). Then, fire up Smooch
-and try the doll in Smooch. The doll probably won't look right -- it
-might cause an error in the Haskell or Javascript!
-
-If you can add an issue describing the problems with the doll and
-perhaps even start investigating what is causing the problem that
-would be super helpful <3 <3 <3
-
-If the doll is small and has lots of interesting problems, it
-may be a good candidate for being included in the repo as a
-sample doll.
-
-AND if you wanted to make a pull request to solve a problem or
-two that would be amazing!! Please do!
-
-It's also super helpful to have more and better documentation.
-If anything here is confusing, please create an issue. If
-you can improve any documentation, please create a pull request!
-
-I also appreciate any sort of  ideas and feedback!
 
 ## Sample dolls
 

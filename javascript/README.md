@@ -1,9 +1,40 @@
 # Contents
 
+  * [Running this website on a local server](#local-server)
   * [JavaScript front-end](#javascript-front-end)
     * [doll.js](#dolljs)
     * [setdata.js](#setdatajs)
   * [reader.html and reader.js](#readerhtml-and-readerjs)
+
+# Running this website on a local server
+
+Due to [cross-origin resource sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS), this website should be ran on a local server for proper testing in Chrome or Safari.  If index.html is opened directly, you may see an error like:
+```
+Uncaught DOMException: Failed to execute 'getImageData' on 'CanvasRenderingContext2D': The canvas has been tainted by cross-origin data.
+```
+Note that in Firefox this error may not occur.
+Two possible servers to implement are Python Simple Server and Node-Http Server
+
+## Python Simple Server (preferred for python or non-javascript users)
+Follow the instructions at [this link](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server) for set up.
+
+## Node-Http Server (preferred for javascript users)
+First, [install node.js](https://nodejs.org/en/) 
+
+Then, follow the instructions at [this link](https://www.npmjs.com/package/http-server) for set up.
+
+### Running the server
+Change your directory from the project root to the docs folder
+```
+cd docs
+```
+
+Start up your local server using your preferred choice (python or node - follow the instructions in the appropriate link above)
+
+Once server is running, navigate to the port in your browser (your port may be different depending on set up)
+```
+localhost:3000
+```
 
 # JavaScript front-end
 
@@ -53,8 +84,8 @@ Here's JSON for a set with one object:
   // list of positions
     {
       "id": 0,
-      "cells": [
-      // a cell has a palette for the cel, the sets the cel
+      "cels": [
+      // a cel has a palette for the cel, the sets the cel
       // is visible in, a "fix" value indicating how many
       // time you need to click the cel before you can
       // drag it (usually 0 for clothes, a large number for

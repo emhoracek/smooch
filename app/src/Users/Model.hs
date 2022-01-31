@@ -3,7 +3,6 @@
 module Users.Model where
 
 import           Control.Lens                       ((^.))
-import           Data.Int                           (Int64)
 import           Data.Maybe                         (listToMaybe)
 import           Data.Pool                          (withResource)
 import           Data.Text                          (Text)
@@ -14,6 +13,7 @@ import           Database.PostgreSQL.Simple.ToField
 import           Database.PostgreSQL.Simple.ToRow
 
 import           Ctxt
+import           Session
 
 data User = User { userId        :: Int
                  , userUsername  :: Text
@@ -81,3 +81,18 @@ getUserByEmail ctxt email = listToMaybe <$>
      \ WHERE email = ?"
      (PG.Only email)
        :: IO [ User ])
+
+getLoggedInUser :: Ctxt -> IO (Maybe User)
+getLoggedInUser ctxt = do
+  mUsername <- getFromSession ctxt "user"
+  case mUsername of
+    Just username -> getUserByUsername ctxt username
+    Nothing -> return Nothing
+
+setLoggedInUser :: Ctxt -> User -> IO ()
+setLoggedInUser ctxt =
+  setInSession ctxt "user" . Just . userUsername
+
+setLoggedOut :: Ctxt -> IO ()
+setLoggedOut ctxt =
+  setInSession ctxt "user" Nothing
