@@ -153,7 +153,7 @@ KissSet.prototype = {
             this.sets[i].addEventListener('click', function() {
                 that.currentSet = parseInt(this.innerHTML);
                 that.update();
-                that.draw(this.ctxt, this.ghost);
+                that.draw(that.ctxt, that.ghost);
             });
         }
     },
@@ -309,18 +309,19 @@ KiSSCel.prototype = {
 };
 
 var Mouser = function(that) {
-
-    // This is from eLouai, believe it or not!!
+    // This is partly from eLouai
     // http://www.elouai.com/javascript-drag-and-drop.php
     var isdrag = false;
-    var x, y, dobj;
+    var tx, ty, x, y, dobj, curSet;
+    var screen = document.getElementById('screen');
 
     var mousemove = function(e) {
         if (isdrag) {
-            dobj.positions[curSet].x = tx + e.layerX - x;
-            dobj.positions[curSet].y = ty + e.layerY - y;
-            that.set.update(that.set);
-            that.set.draw(that.set.ctxt, that.set.ghost);
+            var pos = getMousePos(screen, e);
+            dobj.positions[curSet].x = tx + pos.x - x;
+            dobj.positions[curSet].y = ty + pos.y - y;
+            that.set.update();
+            that.set.draw();
             return false;
         } else {
             return true;
@@ -337,8 +338,6 @@ var Mouser = function(that) {
     };
 
     var selectmouse = function(e) {
-
-        var screen = document.getElementById('screen');
         var canvas = document.getElementById('ghost');
         var ctxt = canvas.getContext('2d');
 
@@ -359,11 +358,11 @@ var Mouser = function(that) {
             if (kobj && kobj.cels[0].fix < 1) {
                 isdrag = true;
                 dobj = kobj;
-                var curSet = that.set.currentSet;
+                curSet = that.set.currentSet;
                 tx = dobj.positions[curSet].x;
                 ty = dobj.positions[curSet].y;
-                x = e.layerX;
-                y = e.layerY;
+                x = pos.x;
+                y = pos.y;
                 document.onmousemove = mousemove;
                 return false;
             } else {
