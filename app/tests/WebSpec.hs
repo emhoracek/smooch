@@ -17,7 +17,7 @@ spec = fnTests $ do
       void $ eval (\ctxt -> createUser ctxt newUser)
       post "/login" [("username", "new")
                     ,("password", "pass")]
-        >>= should300
+        >>= should300To "/users/new"
     it "shouldn't login the user if the password is wrong" $ do
       let newUser = NewUser "new" "new@new.com" "pass"
       void $ eval (\ctxt -> createUser ctxt newUser)

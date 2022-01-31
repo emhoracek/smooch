@@ -6,6 +6,8 @@ import           Data.Maybe         (catMaybes)
 import           Data.Monoid        ((<>))
 import           Data.Text          (Text)
 import qualified Data.Text          as T
+import           Data.Time.Calendar (fromGregorian)
+import           Data.Time.Clock    (UTCTime (..), secondsToDiffTime)
 import           Network.HTTP.Types (StdMethod (..))
 import           Network.Wai        (Response)
 import           Web.Fn
@@ -72,7 +74,12 @@ usersCreateHandler ctxt username email password passwordConfirmation = do
     Right newUser -> do
       success <- createUser ctxt newUser
       if success
-         then okHtml "created!"
+         then do let fakeTime = UTCTime (fromGregorian 2018 8 13) (secondsToDiffTime 0)
+                 -- 'setLoggedInUser' only requires the username, so we create a
+                 -- temporary 'User' to avoid making a potentially expensive
+                 -- call to the database.
+                 setLoggedInUser ctxt $ User 0 username email fakeTime fakeTime
+                 redirect ("/users/" <> username)
          else errHtml "couldn't create user"
  where errorSplices errors =
          newErrorSplices errors <> createUserErrorSplices
