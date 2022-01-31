@@ -5,7 +5,8 @@
 
 module ParseCNF where
 
-import           Control.Monad.Trans.Either
+import           Control.Monad.Trans.Except
+import           Data.Either
 import           Data.Array                    ((!))
 import qualified Data.Array                    as A
 import           Data.Char                     (toLower)
@@ -15,36 +16,36 @@ import qualified Data.Text                     as T
 import           Kiss
 import           Text.ParserCombinators.Parsec
 
-getKissSet :: String -> EitherT T.Text IO KissSet
+getKissSet :: String -> ExceptT T.Text IO KissSet
 getKissSet file = do
   kissData <- getKissData file
   kissCels <- getKissCels file
   kissPalettes <- getKissPalettes kissData
   return $ KissSet kissData kissCels kissPalettes
 
-getKissData :: String -> EitherT T.Text IO CNFKissData
+getKissData :: String -> ExceptT T.Text IO CNFKissData
 getKissData file =
   case parse parseCNFLines "KiSS CNF error: " (map toLower file) of
-    Right ls -> right $ linesToScript ls
-    Left  e  -> left  $ T.pack $ show e
+    Right ls -> return $ linesToScript ls
+    Left  e  -> throwE $ T.pack $ show e
 
-getKissCels :: String -> EitherT T.Text IO [CNFKissCel]
+getKissCels :: String -> ExceptT T.Text IO [CNFKissCel]
 getKissCels file =
   case parse parseCNFLines "KiSS cel error: " (map toLower file) of
-    Right ls -> right $ linesToCels ls
-    Left  e  -> left  $ T.pack $ show e
+    Right ls -> return $ linesToCels ls
+    Left  e  -> throwE $ T.pack $ show e
 
-getKissPalettes :: CNFKissData -> EitherT T.Text IO Palettes
-getKissPalettes file = right $ toArray (cnfkPalettes file)
+getKissPalettes :: CNFKissData -> ExceptT T.Text IO Palettes
+getKissPalettes file = return $ toArray (cnfkPalettes file)
   where toArray l = A.listArray (0, length l - 1) l
 
-lookupPalette :: Int -> Palettes -> EitherT T.Text IO PaletteFilename
+lookupPalette :: Int -> Palettes -> ExceptT T.Text IO PaletteFilename
 lookupPalette n palettes =
   if snd (A.bounds palettes) >= n
-    then right (palettes ! n)
-    else left "Palette not found"
+    then return (palettes ! n)
+    else throwE "Palette not found"
 
-defaultPalette :: Palettes -> EitherT T.Text IO PaletteFilename
+defaultPalette :: Palettes -> ExceptT T.Text IO PaletteFilename
 defaultPalette = lookupPalette 0
 
 -- Converting CNF lines to useable KiSS data

@@ -29,8 +29,8 @@ module ParseCel
 
 import           BinaryParser               (BinaryParser)
 import qualified BinaryParser               as BP
-import           Control.Monad.Trans.Either (EitherT)
-import qualified Control.Monad.Trans.Either as ET
+import           Control.Monad.Trans.Except (ExceptT)
+import qualified Control.Monad.Trans.Except as ET
 import           Data.Bits                  ((.&.))
 import qualified Data.Bits                  as Bits
 import           Data.ByteString            (ByteString)
@@ -52,15 +52,17 @@ newtype CelPixels = CelPixels BSL.ByteString deriving (Eq, Show)
 --
 -- For a new-style, 8bpp, 4x4 cel:
 --
--- >>> fmap fst <$> runEitherT (parseCel celData)
+-- >>> fmap fst <$> runExceptT (parseCel celData)
 -- Right (CelHeader {celBpp = 8, celWidth = 4, celHeight = 4, celXoffset = 0, celYoffset = 0})
 --
--- >>> fmap snd <$> runEitherT (parseCel celData)
+-- >>> fmap snd <$> runExceptT (parseCel celData)
 -- Right [128,255,17,23,0,0,40,56,103,11,0,0,0,90,159,238]
-parseCel :: ByteString -> EitherT Text IO (CelHeader, CelPixels)
-parseCel celData = do
-    let headerStyle = if isNewStyleCel (BS.take 4 celData) then New else Old
-    ET.hoistEither $ BP.run (parseCelData headerStyle) celData
+parseCel :: ByteString -> ExceptT Text IO (CelHeader, CelPixels)
+parseCel celData =
+    let headerStyle = if isNewStyleCel (BS.take 4 celData) then New else Old in
+    case BP.run (parseCelData headerStyle) celData of
+        Left err -> ET.throwE err
+        Right celData -> return celData
 
 -- | Return 'True' if the cel is new-style (starts with @KiSS@).
 isNewStyleCel :: ByteString -> Bool
@@ -68,7 +70,7 @@ isNewStyleCel kissId = kissId == BS.pack [0x4B, 0x69, 0x53, 0x53]
 
 -- | Return the indexed cel pixel, or @0@ if the index is out of range.
 --
--- >>> fmap (pixelByIndex 1960 . snd) <$> runEitherT (parseCel celData)
+-- >>> fmap (pixelByIndex 1960 . snd) <$> runExceptT (parseCel celData)
 -- Right 7
 pixelByIndex :: Int -- ^ Index of desired pixel.
              -> CelPixels
