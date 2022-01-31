@@ -6,7 +6,7 @@ import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
 data KissSet = KissSet { kData    :: CNFKissData
-                       , kCells   :: [CNFKissCell]
+                       , kCnfCels :: [CNFKissCel]
                        , kPalette :: Array Int PaletteFilename
                        } deriving (Eq, Show)
 
@@ -18,7 +18,7 @@ data KissData = KissData { kMemory     :: Int
                          , kPalettes   :: [PaletteFilename]
                          , kWindowSize :: (Int, Int)
                          , kObjects    :: [KissObject]
-                         , kCels       :: [KissCell] }
+                         , kCels       :: [KissCel] }
     deriving (Eq, Show)
 instance ToJSON KissData where
     toJSON (KissData _ border bg _ win objs cels) =
@@ -37,16 +37,16 @@ data CNFKissData = CNFKissData { cnfkMemory     :: Int,
 
 data KissObject = KissObject {
                     objNum   :: Int,
-                    objCells :: [KissCell],
+                    objCels :: [KissCel],
                     objPos   :: [SetPos] }
     deriving (Eq, Show)
 instance ToJSON KissObject where
-    toJSON (KissObject num cells pos) =
+    toJSON (KissObject num cels pos) =
         object["id" .= num,
-               "cells" .= toJSON cells,
+               "cels" .= toJSON cels,
                "positions" .= toJSON pos]
 
-data CNFKissCell = CNFKissCell {
+data CNFKissCel = CNFKissCel {
   cnfCelFix     :: Int,
   cnfCelName    :: String,
   cnfCelPalette :: Int,
@@ -54,7 +54,7 @@ data CNFKissCell = CNFKissCell {
   cnfCelAlpha   :: Int }
   deriving (Eq, Show)
 
-data KissCell = KissCell {
+data KissCel = KissCel {
                     celFix     :: Int,
                     celName    :: String,
                     celPalette :: Int,
@@ -62,8 +62,8 @@ data KissCell = KissCell {
                     celAlpha   :: Int,
                     celOffset  :: SetPos}
     deriving (Eq, Show)
-instance ToJSON KissCell where
-    toJSON (KissCell fix name pal sets alpha offset) =
+instance ToJSON KissCel where
+    toJSON (KissCel fix name pal sets alpha offset) =
         object["fix" .= fix,
                "name" .= name,
                "palette" .= pal,
