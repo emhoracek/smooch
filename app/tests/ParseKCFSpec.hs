@@ -14,7 +14,7 @@ This module provides Hspec tests for the 'ParseKCF' module.
 
 module ParseKCFSpec (spec) where
 
-import qualified Control.Monad.Trans.Either as ET
+import qualified Control.Monad.Trans.Except as ET
 import           Data.Bits                  ((.&.))
 import qualified Data.Bits                  as Bits
 import           Data.ByteString            (ByteString)
@@ -164,7 +164,7 @@ testParseKCF =
     it "returns an error message for old KCF with truncated palette data" $
       runParseKCF invalidOldPal1 `shouldReturn`
         Left "End of input"
-  where runParseKCF pal = ET.runEitherT (parseKCF pal)
+  where runParseKCF pal = ET.runExceptT (parseKCF pal)
         checkLength pal = fmap lengthPalEntries <$> runParseKCF pal
 
 -- | Test 'colorByIndex'.
@@ -181,7 +181,7 @@ testColorByIndex =
       runColorByIndex 10 validNewPal3 `shouldReturn`
         Right "#000000"
   where runColorByIndex index pal =
-          fmap (colorByIndex index) <$> ET.runEitherT (parseKCF pal)
+          fmap (colorByIndex index) <$> ET.runExceptT (parseKCF pal)
 
 -- | Test 'palEntryByIndex'.
 testPalEntryByIndex :: Spec
@@ -197,4 +197,4 @@ testPalEntryByIndex =
       runPalEntryByIndex 10 validNewPal3 `shouldReturn`
         Right PalEntry {palRed = 0, palGreen = 0, palBlue = 0}
   where runPalEntryByIndex index pal =
-          fmap (palEntryByIndex index) <$> ET.runEitherT (parseKCF pal)
+          fmap (palEntryByIndex index) <$> ET.runExceptT (parseKCF pal)

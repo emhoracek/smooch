@@ -23,10 +23,10 @@ spec = fnTests $ do
       void $ eval (\ctxt -> createUser ctxt newUser)
       post "/login" [("username", "new")
                     ,("password", "passbad")]
-        >>= shouldNot200
+        >>= shouldNot300
     it "shouldn't login the user if the username is wrong" $ do
       let newUser = NewUser "new" "new@new.com" "pass"
       void $ eval (\ctxt -> createUser ctxt newUser)
       post "/login" [("username", "newblah")
                     ,("password", "pass")]
-        >>= shouldNot200
+        >>= shouldNot300

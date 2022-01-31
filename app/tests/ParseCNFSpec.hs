@@ -1,6 +1,6 @@
 module ParseCNFSpec (spec) where
 
-import           Control.Monad.Trans.Either
+import           Control.Monad.Trans.Except
 import           Test.Hspec
 import           Text.ParserCombinators.Parsec
 
@@ -74,24 +74,24 @@ spec :: Spec
 spec = do
   describe "getKissData" $ do
     it "parses a CNF into KiSS data" $
-      runEitherT (getKissData sampleKiss) `shouldReturn`
+      runExceptT (getKissData sampleKiss) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCel 0 "shirt" 0 [0,1,2,3] 0] [Position 1 1],
             KissObject 2 [ fakeKissCel 0 "body"  0 [0,1,2,3] 0] [Position 2 2],
             KissObject 3 [ fakeKissCel 0 "shirtb" 0 [0,1,2,3] 0] [Position 3 3]])
     it "parses a CNF into KiSS data" $
-      runEitherT (getKissData sampleKiss2) `shouldReturn`
+      runExceptT (getKissData sampleKiss2) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCel 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCel 0 "shirtb" 0 [0,1,2,3] 0 ] [Position 0 0]])
     it "parses a CNF into KiSS data even with idiosyncratic caps" $
-      runEitherT (getKissData sampleKiss3) `shouldReturn`
+      runExceptT (getKissData sampleKiss3) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCel 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCel 0 "shirtb" 0 [0,1,2,3] 0 ] [Position 1 1],
             KissObject 2 [ fakeKissCel 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])
     it "parses a CNF into KiSS data even with odd formatting/encoding" $
-      runEitherT (getKissData sampleKiss4) `shouldReturn`
+      runExceptT (getKissData sampleKiss4) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ KissObject 1 [ fakeKissCel 0 "shirt" 0 [0,1,2,3] 0,
                            fakeKissCel 0 "shirtb" 0 [0..9] 0 ] [Position 1 1],
@@ -104,7 +104,7 @@ spec = do
    --}
   describe "getKissCels" $
     it "parses a CNF into a list of KiSS cels" $
-      runEitherT (getKissCels sampleKiss) `shouldReturn`
+      runExceptT (getKissCels sampleKiss) `shouldReturn`
          Right [ CNFKissCel 0 "shirt" 0 [0,1,2,3] 0,
             CNFKissCel 0 "body"  0 [0,1,2,3] 0,
             CNFKissCel 0 "shirtb" 0 [0,1,2,3] 0 ]

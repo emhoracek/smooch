@@ -14,7 +14,6 @@ import           System.Environment
 
 main :: IO ()
 main = do e <- doesFileExist ".env"
-          when e $ Configuration.Dotenv.loadFile False ".env"
           args <- getArgs
           let (env, mode) =
                case args of

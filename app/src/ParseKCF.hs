@@ -32,8 +32,8 @@ import           BinaryParser               (BinaryParser)
 import qualified BinaryParser               as BP
 import qualified Control.Applicative        as CA
 import           Control.Monad              as CM
-import           Control.Monad.Trans.Either (EitherT)
-import qualified Control.Monad.Trans.Either as ET
+import           Control.Monad.Trans.Except (ExceptT)
+import qualified Control.Monad.Trans.Except as ET
 import           Data.Bits                  ((.&.))
 import qualified Data.Bits                  as Bits
 import           Data.ByteString            (ByteString)
@@ -51,12 +51,14 @@ newtype PalEntries = PalEntries [PalEntry] deriving (Eq, Show)
 
 -- | Parse a KiSS palette.
 --
--- >>> runEitherT (parseKCF palette)
+-- >>> runExceptT (parseKCF palette)
 -- Right [PalEntry {palRed = 0, palGreen = 255, palBlue = 255}]
-parseKCF :: ByteString -> EitherT Text IO PalEntries
+parseKCF :: ByteString -> ExceptT Text IO PalEntries
 parseKCF palData = do
     let headerStyle = if isNewStylePalette (BS.take 4 palData) then New else Old
-    ET.hoistEither $ BP.run (parsePalette headerStyle) palData
+    case BP.run (parsePalette headerStyle) palData of
+        Left err -> ET.throwE err
+        Right palEntries -> return palEntries
 
 -- | Return 'True' if the palette is new-style (starts with @KiSS@).
 isNewStylePalette :: ByteString -> Bool
