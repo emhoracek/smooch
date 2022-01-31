@@ -24,9 +24,12 @@ import           Data.Monoid                ((<>))
 
 import           Data.Aeson                 (encode)
 
+import           CelToPng
 import           Kiss
+import qualified ParseCel                   as PC
 import           ParseCNF
-import           Shell
+import qualified ParseKCF                   as PK
+import           Shell                      (unzipFile)
 
 processSet :: Text
            -> (FilePath, FilePath)
@@ -81,9 +84,13 @@ createCels staticDir = do
   log' "Added offsets"
   defPalette <- defaultPalette kissPalettes
   log' "Got default palette"
-  bgColor <- colorByIndex 0 (staticDir </> defPalette)
+  palData <- liftIO $ BS.readFile (staticDir </> defPalette)
+  log' "Got default palette data"
+  palEntries <- PK.parseKCF palData
+  log' "Got default palette entries"
+  let bgColor = PK.colorByIndex 0 palEntries
   log' "Got bg color"
-  borderColor <- colorByIndex (cnfkBorder cnfKissData) (staticDir </> defPalette)
+  let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
   log' "Got border color"
   let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
@@ -91,6 +98,21 @@ createCels staticDir = do
   liftIO $ LBS.writeFile (staticDir <> "/setdata.js") json
   log' "Wrote JSON"
   return realCelData
+  where convertCels pals cels base = do
+          mapM (\(CNFKissCel _ name pal _ _) -> convertCel pals pal name base) cels
+        convertCel palettes palNum cel base = do
+          pal <- lookupPalette palNum palettes
+          paletteEntries <- liftIO $ BS.readFile (base <> "/" <> pal)
+          palData <- PK.parseKCF paletteEntries
+          let celFile = base <> "/" <> cel <> ".cel"
+          celData <- liftIO $ BS.readFile celFile
+          (celHeader, celPixels) <- PC.parseCel celData
+          let pngFile = base <> "/" <> cel <> ".png"
+          liftIO $ celToPng pngFile palData celHeader celPixels
+          let xOffset = fromIntegral $ PC.celXoffset celHeader
+          let yOffset = fromIntegral $ PC.celYoffset celHeader
+          let offsets = (xOffset, yOffset)
+          return (cel, offsets)
 
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCel] ->
                        [KissCel]
