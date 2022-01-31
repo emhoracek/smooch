@@ -14,7 +14,7 @@ This module provides Hspec tests for the 'ParseCel' module.
 
 module ParseCelSpec (spec) where
 
-import qualified Control.Monad.Trans.Either as ET
+import qualified Control.Monad.Trans.Except as ET
 import           Data.Bits                  ((.&.))
 import qualified Data.Bits                  as Bits
 import           Data.ByteString            (ByteString)
@@ -223,7 +223,7 @@ testParseCel =
     it "returns an error message for old cel with invalid height" $
       runParseCel invalidOldCel4 `shouldReturn`
         Left "Invalid width or height"
-  where runParseCel cel = ET.runEitherT (parseCel cel)
+  where runParseCel cel = ET.runExceptT (parseCel cel)
         checkLength cel = fmap (lengthCelPixels . snd) <$> runParseCel cel
 
 -- | Test 'pixelByIndex'.
@@ -240,4 +240,4 @@ testPixelByIndex =
       runPixelByIndex 10 validNewCel1 `shouldReturn`
         Right 0
   where runPixelByIndex index cel =
-          fmap (pixelByIndex index . snd) <$> ET.runEitherT (parseCel cel)
+          fmap (pixelByIndex index . snd) <$> ET.runExceptT (parseCel cel)
