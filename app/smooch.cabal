@@ -124,6 +124,7 @@ test-suite tests
                        fn,
                        hspec-fn,
                        http-types,
+                       JuicyPixels,
                        larceny,
                        lens,
                        logging,
