@@ -7,8 +7,8 @@ window.addEventListener('load', function () {
   let loaded = 0
   const totalCels = kissJson.cels.length
   const doll = new KiSSDoll(kissJson, () => { loaded += 1 })
-  const dragger = new DragAndDrop()
-  dragger.initialize(doll)
+  const dragger = new DragAndDrop(doll)
+  dragger.initialize()
 
   function checkLoaded () {
     if (loaded < totalCels) {
