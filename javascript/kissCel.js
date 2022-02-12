@@ -1,6 +1,6 @@
 
 class KiSSCel {
-  constructor (obj, cel, set) {
+  constructor (obj, cel, set, incLoaded) {
     this.obj = obj
     this.name = cel.name
     this.mark = obj.id
@@ -8,7 +8,7 @@ class KiSSCel {
     this.position = obj.positions[0]
     this.positions = obj.positions
     this.sets = cel.sets
-    this.image = undefined
+    this.image = document.getElementById(this.name)
     this.ghostImage = undefined
     this.visible = false
     this.alpha = cel.alpha
@@ -17,29 +17,27 @@ class KiSSCel {
 
     this.init(set)
 
+    // Let Smooch know when image is loaded
+    this.ghostImage.onload = function () {
+      incLoaded()
+    }
+
     return this
   }
 
-  init (set, incLoaded) {
-    this.incLoaded = incLoaded
+  init (set) {
     const drawctxt = set.ctxt
     const drawcanvas = set.canvas
-
-    const image = document.getElementById(this.name)
-    const width = image.width
-    const height = image.height
-
-    this.image = image
+    const image = this.image
 
     // Draw image to ctxt and get image data
-    drawctxt.drawImage(image, 0, 0, width, height)
+    drawctxt.drawImage(image, 0, 0, image.width, image.height)
 
-    const ghostImageData = drawctxt.getImageData(0, 0, width, height)
+    const ghostImageData = drawctxt.getImageData(0, 0, image.width, image.height)
     const data = ghostImageData.data
 
-    // Fill image data with obj color
+    // Fill ghost image data with obj color
     const color = this.obj.color
-
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
@@ -53,11 +51,6 @@ class KiSSCel {
     // Save altered image as cel's ghost image
     this.ghostImage = new Image()
     this.ghostImage.src = drawcanvas.toDataURL('image/png')
-
-    // Let Smooch know when image is loaded
-    this.ghostImage.onload = function () {
-      this.incLoaded()
-    }
 
     // Clear ctxt
     drawctxt.clearRect(0, 0, set.size.x, set.size.y)
