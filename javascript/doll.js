@@ -1,6 +1,7 @@
 /* SMOOCH */
 
 import { KiSSCel } from './kissCel'
+import { KiSSObject } from './kissObject'
 
 const colorids = []
 let loaded = 0
@@ -31,7 +32,7 @@ const KissDoll = function (kissData) {
   playarea.style.background = kissData.background
 
   // Set up canvases
-  this.initCanvases()
+  this.initCanvases(this.size)
 
   // Initalize click handler for set number listing
   this.initSetClicks()
@@ -64,12 +65,13 @@ KissDoll.prototype = {
     /* Go through each KiSS object, add information from the object to the
            cels within the object, then add those cels to the list. */
 
+    /* Set color id initial values */
     let red = 0
     let blue = 0
     let green = 0
 
     for (let i = 0; i < objs.length; i++) {
-      // create a unique color for each obj based on the obj id
+      // create a unique color for each object
       // and register it in the global colorids array
       // supports up to 255*3 objects
       if (i < 255) {
@@ -110,27 +112,27 @@ KissDoll.prototype = {
         }
       }
 
-      this.objs[i] = new KiSSObj(objs[i])
+      this.objs[i] = new KiSSObject(objs[i])
     }
 
     // cels have to be drawn in reverse order (drawing lowest items first)
     this.cels.reverse()
   },
 
-  initCanvases: function () {
+  initCanvases: function (size) {
     const drawcanvas = document.getElementById('screen')
     const drawctxt = drawcanvas.getContext('2d')
-    drawcanvas.style.width = this.size.x + 'px'
-    drawcanvas.style.height = this.size.y + 'px'
-    drawcanvas.width = this.size.x
-    drawcanvas.height = this.size.y
+    drawcanvas.style.width = size.x + 'px'
+    drawcanvas.style.height = size.y + 'px'
+    drawcanvas.width = size.x
+    drawcanvas.height = size.y
 
     const ghostcanvas = document.getElementById('ghost')
     const ghostctxt = ghostcanvas.getContext('2d')
-    ghostcanvas.style.width = this.size.x + 'px'
-    ghostcanvas.style.height = this.size.y + 'px'
-    ghostcanvas.width = this.size.x
-    ghostcanvas.height = this.size.y
+    ghostcanvas.style.width = size.x + 'px'
+    ghostcanvas.style.height = size.y + 'px'
+    ghostcanvas.width = size.x
+    ghostcanvas.height = size.y
     ghostcanvas.style.background = 'blue'
     ghostcanvas.style.display = 'none'
 
@@ -176,25 +178,6 @@ KissDoll.prototype = {
       if (this.cels[i]) {
         this.cels[i].draw(this.ctxt, this.ghost)
       }
-    }
-  }
-}
-
-const KiSSObj = function (obj) {
-  this.currentSet = 0
-  this.positions = obj.positions
-  this.position = obj.positions[this.currentSet]
-  this.cels = obj.cels
-
-  return this
-}
-
-KiSSObj.prototype = {
-  update: function (currentSet) {
-    for (let i = 0; i < this.cels.length; i++) {
-      this.cels[i].currentSet = currentSet
-      this.cels[i].position = this.positions[currentSet]
-      this.cels[i].update(currentSet)
     }
   }
 }
