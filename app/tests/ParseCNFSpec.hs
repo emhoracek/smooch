@@ -1,6 +1,8 @@
+{-# LANGUAGE OverloadedStrings #-}
 module ParseCNFSpec (spec) where
 
 import           Control.Monad.Trans.Except
+import           Data.Text (Text)
 import           Test.Hspec
 import           Text.ParserCombinators.Parsec
 
@@ -65,8 +67,10 @@ sampleKiss4 =
   "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
   "#2   body.Cel   *0 : 0 1 2 3 \n" ++
   "; let's just throw some random numbers in the next line \n" ++
-  "#1   shirtb.CEL  3234 \n" ++
+  "#1   SHIRTB.CEL  3234 \n" ++
   "$0 * 1,1 2,2 \n" ++
+  "; what if I throw a sub in here!\n" ++
+  ['\SUB', '\n'] ++
   "; better end this with file separator character \n" ++
   ['\FS']
 
@@ -98,10 +102,9 @@ spec = do
             KissObject 2 [ fakeKissCel 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])
 
     it "returns an error message for a bad cnf" $
-      pendingWith "oops"
-{--
-      getKissData "I'm not a CNF." `shouldBe`
-   --}
+      runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
+        Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected 'i'\n\
+             \expecting \"#\", \"$\", \"=\", \"%\", \"[\", \"(\", \";\", \"\\SUB\", \"\\FS\" or end of input"
   describe "getKissCels" $
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`

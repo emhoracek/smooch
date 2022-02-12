@@ -9,7 +9,7 @@ import           Control.Monad.Trans.Except
 import           Data.Either
 import           Data.Array                    ((!))
 import qualified Data.Array                    as A
-import           Data.Char                     (toLower)
+import           Data.Char                     (toLower, isSpace)
 import           Data.List                     hiding (lines)
 import           Data.Maybe
 import qualified Data.Text                     as T
@@ -227,9 +227,10 @@ data CNFLine = CNFMemory Int
              | CNFCel (Int, CNFKissCel)
              | CNFSetPos KissSetPos
              | CNFComment String
+             | CNFJunkLine
     deriving (Eq, Show)
 
--- Parse the CNF one "line" (including mult-line set descriptions) at a time
+-- Parse the CNF one "line" (including multi-line set descriptions) at a time
 parseCNFLines :: Parser [CNFLine]
 parseCNFLines = do
     ls <- many parseCNFLine
@@ -243,9 +244,15 @@ parseCNFLine = do
                     parseSetPos,
                     parseMemory, parsePalette,
                     parseBorder, parseWindowSize,
-                    parseCNFComment]
+                    parseCNFComment,
+                    parseCNFJunk]
     spaces
     return line
+
+parseCNFJunk :: Parser CNFLine
+parseCNFJunk = do
+    char '\SUB'
+    return CNFJunkLine
 
 parseCNFComment :: Parser CNFLine
 parseCNFComment = do
