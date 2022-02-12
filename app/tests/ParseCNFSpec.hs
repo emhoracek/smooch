@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module ParseCNFSpec (spec) where
 
 import           Control.Monad.Trans.Except
@@ -73,9 +74,6 @@ sampleKiss4 =
   "; better end this with file separator character \n" ++
   ['\FS']
 
-kissError :: Text
-kissError = "\"KiSS CNF error: \" (line 1, column 1):\nunexpected 'i'\nexpecting \"#\", \"$\", \"=\", \"%\", \"[\", \"(\", \";\", \"\\SUB\", \"\\FS\" or end of input"
-
 spec :: Spec
 spec = do
   describe "getKissData" $ do
@@ -104,7 +102,9 @@ spec = do
             KissObject 2 [ fakeKissCel 0 "body"  0 [0,1,2,3] 0] [Position 2 2] ])
 
     it "returns an error message for a bad cnf" $
-      runExceptT (getKissData "I'm not a CNF.") `shouldReturn` Left kissError
+      runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
+        Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected 'i'\n\
+             \expecting \"#\", \"$\", \"=\", \"%\", \"[\", \"(\", \";\", \"\\SUB\", \"\\FS\" or end of input"
   describe "getKissCels" $
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`
