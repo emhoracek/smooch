@@ -4,9 +4,9 @@ const colorids = []
 let loaded = 0
 
 const Smooch = function (kissData) {
-  this.set = new KissSet(kissData)
-  this.set.update()
-  this.set.draw()
+  this.doll = new KissDoll(kissData)
+  this.doll.update()
+  this.doll.draw()
 
   // This controls dragging and dropping.
   this.mouse = Mouser(this)
@@ -14,7 +14,7 @@ const Smooch = function (kissData) {
   return this
 }
 
-const KissSet = function (kissData) {
+const KissDoll = function (kissData) {
   // Size of the play area.
   this.size = { x: kissData.window_size[0], y: kissData.window_size[1] }
 
@@ -43,7 +43,7 @@ const KissSet = function (kissData) {
   return this
 }
 
-KissSet.prototype = {
+KissDoll.prototype = {
   init: function (objs, cels) {
     /* Cels have to be kept in a separate list from the objects.
            This is because objects are the things that have click handlers,
@@ -306,8 +306,8 @@ const Mouser = function (that) {
       const pos = getMousePos(screen, e)
       dobj.positions[curSet].x = tx + pos.x - x
       dobj.positions[curSet].y = ty + pos.y - y
-      that.set.update()
-      that.set.draw()
+      that.doll.update()
+      that.doll.draw()
       return false
     } else {
       return true
@@ -339,11 +339,11 @@ const Mouser = function (that) {
       console.log('not draggable')
       return true
     } else {
-      const kobj = that.set.objs[colorids[colorid]]
+      const kobj = that.doll.objs[colorids[colorid]]
       if (kobj && kobj.cels[0].fix < 1) {
         isdrag = true
         dobj = kobj
-        curSet = that.set.currentSet
+        curSet = that.doll.currentSet
         tx = dobj.positions[curSet].x
         ty = dobj.positions[curSet].y
         x = pos.x
@@ -374,7 +374,7 @@ window.addEventListener('load', function () {
       console.log('loading...')
       window.setTimeout(checkLoaded, 500)
     } else {
-      this.smooch.set.draw()
+      this.smooch.doll.draw()
     }
   }
 
