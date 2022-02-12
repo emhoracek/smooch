@@ -147,6 +147,20 @@ class KiSSDoll {
     }
   }
 
+  getObjectPosition (obj) {
+    return {
+      x: obj.positions[this.currentSet].x,
+      y: obj.positions[this.currentSet].y
+    }
+  }
+
+  moveObject (obj, x, y) {
+    obj.setPosition(this.currentSet, x, y)
+
+    this.update()
+    this.draw()
+  }
+
   update (newSet) {
     // Update current set if new set is given
     if (newSet) { this.currentSet = newSet }

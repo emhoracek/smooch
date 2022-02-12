@@ -21,7 +21,7 @@ class DragAndDrop {
     const pos = getMousePos(this.screen, e)
     const obj = doll.getSelectedObject(pos)
     if (obj) {
-      const dragStart = toDragStart(pos, obj, doll)
+      const dragStart = toDragStart(doll, obj, pos)
       this.dragHandler = (e) => onMouseMove(e, this.screen, obj, dragStart, doll)
       document.addEventListener('mousemove', this.dragHandler)
       e.preventDefault()
@@ -29,12 +29,12 @@ class DragAndDrop {
   }
 }
 
-function toDragStart (pos, obj, doll) {
-  const curSet = doll.currentSet
-  const position = { }
-  position.x = obj.positions[curSet].x - pos.x
-  position.y = obj.positions[curSet].y - pos.y
-  return position
+function toDragStart (doll, obj, pos) {
+  const objectPosition = doll.getObjectPosition(obj)
+  return {
+    x: objectPosition.x - pos.x,
+    y: objectPosition.y - pos.y
+  }
 }
 
 function onMouseMove (e, canvas, obj, dragStart, doll) {
@@ -42,10 +42,7 @@ function onMouseMove (e, canvas, obj, dragStart, doll) {
   const x = dragStart.x + currentMousePosition.x
   const y = dragStart.y + currentMousePosition.y
 
-  obj.setPosition(doll.currentSet, x, y)
-
-  doll.update()
-  doll.draw()
+  doll.moveObject(obj, x, y)
 
   e.preventDefault()
 }
