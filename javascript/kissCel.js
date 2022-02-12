@@ -1,26 +1,26 @@
 
-const KiSSCel = function (obj, cel, set) {
-  this.obj = obj
-  this.name = cel.name
-  this.mark = obj.id
-  this.fix = cel.fix
-  this.position = obj.positions[0]
-  this.positions = obj.positions
-  this.sets = cel.sets
-  this.image = undefined
-  this.ghostImage = undefined
-  this.visible = false
-  this.alpha = cel.alpha
+class KiSSCel {
+  constructor (obj, cel, set) {
+    this.obj = obj
+    this.name = cel.name
+    this.mark = obj.id
+    this.fix = cel.fix
+    this.position = obj.positions[0]
+    this.positions = obj.positions
+    this.sets = cel.sets
+    this.image = undefined
+    this.ghostImage = undefined
+    this.visible = false
+    this.alpha = cel.alpha
 
-  this.offset = cel.offset
+    this.offset = cel.offset
 
-  this.init(set)
+    this.init(set)
 
-  return this
-}
+    return this
+  }
 
-KiSSCel.prototype = {
-  init: function (set, incLoaded) {
+  init (set, incLoaded) {
     this.incLoaded = incLoaded
     const drawctxt = set.ctxt
     const drawcanvas = set.canvas
@@ -61,9 +61,9 @@ KiSSCel.prototype = {
 
     // Clear ctxt
     drawctxt.clearRect(0, 0, set.size.x, set.size.y)
-  },
+  }
 
-  update: function (that) {
+  update (that) {
     if (this.sets.indexOf(that.currentSet) === -1) {
       this.visible = false
     } else {
@@ -72,9 +72,9 @@ KiSSCel.prototype = {
     if (this.name === 'blink') {
       this.visible = false
     }
-  },
+  }
 
-  draw: function (screen, ghost) {
+  draw (screen, ghost) {
     if (this.visible === true) {
       if (this.alpha) {
         screen.globalAlpha = (255 - this.alpha) / 255
