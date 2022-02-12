@@ -130,6 +130,23 @@ class KiSSDoll {
     this.ghost = ghostctxt
   }
 
+  getSelectedObject (pos) {
+    const pixel = this.ghost.getImageData(pos.x, pos.y, 1, 1)
+    const data = pixel.data
+    const colorid = data[0] + data[1] + data[2] + 255
+    const alpha = data[3]
+
+    if (alpha === 0) {
+      console.log('not draggable')
+    } else {
+      const objIndex = this.colorids[colorid]
+      const obj = this.objs[objIndex]
+      if (obj && obj.cels[0].fix < 1) {
+        return obj
+      }
+    }
+  }
+
   update (newSet) {
     // Update current set if new set is given
     if (newSet) { this.currentSet = newSet }

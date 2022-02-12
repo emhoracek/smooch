@@ -19,29 +19,12 @@ class DragAndDrop {
 
   onMouseDown (e, doll) {
     const pos = getMousePos(this.screen, e)
-    const obj = getSelectedObject(this.ctxt, doll, pos)
+    const obj = doll.getSelectedObject(pos)
     if (obj) {
       const dragStart = toDragStart(pos, obj, doll)
       this.dragHandler = (e) => onMouseMove(e, this.screen, obj, dragStart, doll)
       document.addEventListener('mousemove', this.dragHandler)
       e.preventDefault()
-    }
-  }
-}
-
-function getSelectedObject (ctxt, doll, pos) {
-  const pixel = ctxt.getImageData(pos.x, pos.y, 1, 1)
-  const data = pixel.data
-  const colorid = data[0] + data[1] + data[2] + 255
-  const alpha = data[3]
-
-  if (alpha === 0) {
-    console.log('not draggable')
-  } else {
-    const objIndex = doll.colorids[colorid]
-    const obj = doll.objs[objIndex]
-    if (obj && obj.cels[0].fix < 1) {
-      return obj
     }
   }
 }
