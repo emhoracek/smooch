@@ -1,34 +1,21 @@
 /* SMOOCH */
-
 import { KiSSDoll } from './kissDoll'
 
-const Smooch = function (kissData, incLoaded) {
-  this.doll = new KiSSDoll(kissData, incLoaded)
-  this.doll.update()
-  this.doll.draw()
-
-  this.colorids = []
-
-  // This controls dragging and dropping.
-  this.mouse = Mouser(this, this.doll.colorids)
-
-  return this
-}
-
-const Mouser = function (that, colorids) {
+const Mouser = function (doll) {
   // This is partly from eLouai
   // http://www.elouai.com/javascript-drag-and-drop.php
   let isdrag = false
   let tx, ty, x, y, dobj, curSet
   const screen = document.getElementById('screen')
+  const colorids = doll.colorids
 
   const mousemove = function (e) {
     if (isdrag) {
       const pos = getMousePos(screen, e)
       dobj.positions[curSet].x = tx + pos.x - x
       dobj.positions[curSet].y = ty + pos.y - y
-      that.doll.update()
-      that.doll.draw()
+      doll.update()
+      doll.draw()
       return false
     } else {
       return true
@@ -60,11 +47,11 @@ const Mouser = function (that, colorids) {
       console.log('not draggable')
       return true
     } else {
-      const kobj = that.doll.objs[colorids[colorid]]
+      const kobj = doll.objs[colorids[colorid]]
       if (kobj && kobj.cels[0].fix < 1) {
         isdrag = true
         dobj = kobj
-        curSet = that.doll.currentSet
+        curSet = doll.currentSet
         tx = dobj.positions[curSet].x
         ty = dobj.positions[curSet].y
         x = pos.x
@@ -90,13 +77,16 @@ const Mouser = function (that, colorids) {
 window.addEventListener('load', function () {
   /* globals kissJson */
   let loaded = 0
-  this.smooch = new Smooch(kissJson, () => { loaded += 1 })
-  const checkLoaded = function () {
-    if (loaded < kissJson.cels.length) {
-      console.log('loading...')
+  const totalCels = kissJson.cels.length
+  const doll = new KiSSDoll(kissJson, () => { loaded += 1 })
+  Mouser(doll)
+
+  function checkLoaded () {
+    if (loaded < totalCels) {
+      console.log(`loading ${loaded} of ${totalCels}`)
       window.setTimeout(checkLoaded, 500)
     } else {
-      this.smooch.doll.draw()
+      doll.draw()
     }
   }
 

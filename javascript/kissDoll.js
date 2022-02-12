@@ -19,8 +19,7 @@ class KiSSDoll {
     // Set up canvases
     this.initCanvases(this.size)
 
-    // Initalize click handler for set number listing
-    this.initSetClicks()
+    // Initialize current set
     this.currentSet = 0
 
     // Initialize objs and cels
@@ -28,6 +27,11 @@ class KiSSDoll {
     this.cels = []
     this.colorids = []
     this.init(kissData.objs, kissData.cels, incLoaded)
+    initSetClicks(this)
+
+    // Update and draw
+    this.update()
+    this.draw()
 
     return this
   }
@@ -126,33 +130,13 @@ class KiSSDoll {
     this.ghost = ghostctxt
   }
 
-  initSetClicks () {
-    // Add click events to set numbers
-    this.sets = document.getElementsByTagName('a')
-    for (let i = 0; i < this.sets.length; i++) {
-      const that = this
-      // when a number is clicked, set current set to that number, update
-      this.sets[i].addEventListener('click', function () {
-        that.currentSet = parseInt(this.innerHTML)
-        that.update()
-        that.draw(that.ctxt, that.ghost)
-      })
-    }
-  }
+  update (newSet) {
+    // Update current set if new set is given
+    if (newSet) { this.currentSet = newSet }
 
-  update () {
     // Update cels
     for (let i = 0; i < this.objs.length; i++) {
       this.objs[i].update(this.currentSet)
-    }
-
-    // Update set listing
-    for (let i = 0; i < this.sets.length; i++) {
-      if (this.currentSet === parseInt(this.sets[i].innerHTML)) {
-        this.sets[i].style.color = 'black'
-      } else {
-        this.sets[i].style.color = 'grey'
-      }
     }
   }
 
@@ -163,6 +147,32 @@ class KiSSDoll {
       if (this.cels[i]) {
         this.cels[i].draw(this.ctxt, this.ghost)
       }
+    }
+  }
+}
+
+function initSetClicks (doll) {
+  // Add click events to set numbers
+  const sets = document.getElementsByTagName('a')
+  for (let i = 0; i < sets.length; i++) {
+    // when a number is clicked, update doll to new set
+    sets[i].addEventListener('click', function () {
+      const newSet = parseInt(this.innerHTML)
+      doll.update(newSet)
+      doll.draw()
+      updateSets(doll.currentSet)
+    })
+  }
+}
+
+function updateSets (currentSet) {
+  // Update set listing to highlight current set
+  const sets = document.getElementsByTagName('a')
+  for (let i = 0; i < sets.length; i++) {
+    if (currentSet === parseInt(sets[i].innerHTML)) {
+      sets[i].style.color = 'black'
+    } else {
+      sets[i].style.color = 'grey'
     }
   }
 }
