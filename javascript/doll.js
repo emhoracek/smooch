@@ -156,7 +156,7 @@ KissDoll.prototype = {
   update: function () {
     // Update cels
     for (let i = 0; i < this.objs.length; i++) {
-      this.objs[i].update(this)
+      this.objs[i].update(this.currentSet)
     }
 
     // Update set listing
@@ -190,11 +190,11 @@ const KiSSObj = function (obj) {
 }
 
 KiSSObj.prototype = {
-  update: function (that) {
+  update: function (currentSet) {
     for (let i = 0; i < this.cels.length; i++) {
-      this.cels[i].currentSet = that.currentSet
-      this.cels[i].position = this.positions[that.currentSet]
-      this.cels[i].update(that)
+      this.cels[i].currentSet = currentSet
+      this.cels[i].position = this.positions[currentSet]
+      this.cels[i].update(currentSet)
     }
   }
 }

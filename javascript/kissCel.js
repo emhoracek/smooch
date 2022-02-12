@@ -63,8 +63,8 @@ class KiSSCel {
     drawctxt.clearRect(0, 0, set.size.x, set.size.y)
   }
 
-  update (that) {
-    if (this.sets.indexOf(that.currentSet) === -1) {
+  update (currentSet) {
+    if (this.sets.indexOf(currentSet) === -1) {
       this.visible = false
     } else {
       this.visible = true
