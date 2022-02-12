@@ -19,31 +19,39 @@ class DragAndDrop {
 
   onMouseDown (e, doll) {
     const pos = getMousePos(this.screen, e)
-    const pixel = this.ctxt.getImageData(pos.x, pos.y, 1, 1)
-    const data = pixel.data
-    const colorid = data[0] + data[1] + data[2] + 255
-
-    if (data[3] === 0) {
-      console.log('not draggable')
-    } else {
-      const objIndex = doll.colorids[colorid]
-      const obj = doll.objs[objIndex]
-      if (obj && obj.cels[0].fix < 1) {
-        const curSet = doll.currentSet
-        const dragStart = toPositions(pos, obj, curSet)
-        this.dragHandler = (e) => onMouseMove(e, this.screen, obj, dragStart, doll)
-        document.addEventListener('mousemove', this.dragHandler)
-        e.preventDefault()
-      }
+    const obj = getSelectedObject(this.ctxt, doll, pos)
+    if (obj) {
+      const dragStart = toDragStart(pos, obj, doll)
+      this.dragHandler = (e) => onMouseMove(e, this.screen, obj, dragStart, doll)
+      document.addEventListener('mousemove', this.dragHandler)
+      e.preventDefault()
     }
   }
 }
 
-function toPositions (pos, obj, curSet) {
-  const positions = { }
-  positions.x = obj.positions[curSet].x - pos.x
-  positions.y = obj.positions[curSet].y - pos.y
-  return positions
+function getSelectedObject (ctxt, doll, pos) {
+  const pixel = ctxt.getImageData(pos.x, pos.y, 1, 1)
+  const data = pixel.data
+  const colorid = data[0] + data[1] + data[2] + 255
+  const alpha = data[3]
+
+  if (alpha === 0) {
+    console.log('not draggable')
+  } else {
+    const objIndex = doll.colorids[colorid]
+    const obj = doll.objs[objIndex]
+    if (obj && obj.cels[0].fix < 1) {
+      return obj
+    }
+  }
+}
+
+function toDragStart (pos, obj, doll) {
+  const curSet = doll.currentSet
+  const position = { }
+  position.x = obj.positions[curSet].x - pos.x
+  position.y = obj.positions[curSet].y - pos.y
+  return position
 }
 
 function onMouseMove (e, canvas, obj, dragStart, doll) {
