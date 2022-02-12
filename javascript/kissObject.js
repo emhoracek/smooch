@@ -15,6 +15,11 @@ class KiSSObject {
       this.cels[i].update(currentSet)
     }
   }
+
+  setPosition (set, x, y) {
+    this.positions[set].x = x
+    this.positions[set].y = y
+  }
 }
 
 export { KiSSObject }
