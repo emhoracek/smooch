@@ -4,6 +4,8 @@
   "description": "Dress-up doll viewer",
   "targets": {
     "default": {
+      "context": "browser",
+      "publicUrl": "/smooch",
       "distDir": "docs/"
     }
   },
