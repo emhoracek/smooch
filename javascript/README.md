@@ -4,7 +4,6 @@
   * [JavaScript front-end](#javascript-front-end)
     * [doll.js](#dolljs)
     * [setdata.js](#setdatajs)
-  * [reader.html and reader.js](#readerhtml-and-readerjs)
 
 # Running this website on a local server
 
@@ -19,7 +18,7 @@ Two possible servers to implement are Python Simple Server and Node-Http Server
 Follow the instructions at [this link](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server) for set up.
 
 ## Node-Http Server (preferred for javascript users)
-First, [install node.js](https://nodejs.org/en/) 
+First, [install node.js](https://nodejs.org/en/)
 
 Then, follow the instructions at [this link](https://www.npmjs.com/package/http-server) for set up.
 
@@ -183,8 +182,3 @@ This is only the cel parts of the JSON.
  }
 
 ```
-
-# reader.html and reader.js
-
-These two files are an experiment with reading cels directly in JavaScript. They
-aren't currently used by the app at all.
