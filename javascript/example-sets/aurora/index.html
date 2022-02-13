@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="intro" src="intro.png"/>
+
+               <img id="aurora" src="aurora.png"/>
+
+               <img id="blink" src="blink.png"/>
+
+               <img id="underwea" src="underwea.png"/>
+
+               <img id="blacktig" src="blacktig.png"/>
+
+               <img id="pinktigh" src="pinktigh.png"/>
+
+               <img id="buttert" src="buttert.png"/>
+
+               <img id="fishnet" src="fishnet.png"/>
+
+               <img id="cutup" src="cutup.png"/>
+
+               <img id="pstripe" src="pstripe.png"/>
+
+               <img id="bstripe" src="bstripe.png"/>
+
+               <img id="rstripe" src="rstripe.png"/>
+
+               <img id="socks" src="socks.png"/>
+
+               <img id="boot" src="boot.png"/>
+
+               <img id="pboot" src="pboot.png"/>
+
+               <img id="redboot" src="redboot.png"/>
+
+               <img id="punkbts" src="punkbts.png"/>
+
+               <img id="starbt" src="starbt.png"/>
+
+               <img id="mary" src="mary.png"/>
+
+               <img id="sandals" src="sandals.png"/>
+
+               <img id="tennie1" src="tennie1.png"/>
+
+               <img id="tennie2" src="tennie2.png"/>
+
+               <img id="dickies" src="dickies.png"/>
+
+               <img id="raver" src="raver.png"/>
+
+               <img id="lpants" src="lpants.png"/>
+
+               <img id="pants" src="pants.png"/>
+
+               <img id="patchies" src="patchies.png"/>
+
+               <img id="plaidp" src="plaidp.png"/>
+
+               <img id="short2" src="short2.png"/>
+
+               <img id="short1" src="short1.png"/>
+
+               <img id="wskirt" src="wskirt.png"/>
+
+               <img id="jean" src="jean.png"/>
+
+               <img id="wrap" src="wrap.png"/>
+
+               <img id="sparkle" src="sparkle.png"/>
+
+               <img id="mini" src="mini.png"/>
+
+               <img id="fuzzskir" src="fuzzskir.png"/>
+
+               <img id="multi" src="multi.png"/>
+
+               <img id="japan" src="japan.png"/>
+
+               <img id="butterfl" src="butterfl.png"/>
+
+               <img id="patchg" src="patchg.png"/>
+
+               <img id="army" src="army.png"/>
+
+               <img id="plaid2" src="plaid2.png"/>
+
+               <img id="plaid1" src="plaid1.png"/>
+
+               <img id="polka" src="polka.png"/>
+
+               <img id="patch" src="patch.png"/>
+
+               <img id="design" src="design.png"/>
+
+               <img id="hoochie" src="hoochie.png"/>
+
+               <img id="short" src="short.png"/>
+
+               <img id="black" src="black.png"/>
+
+               <img id="slice" src="slice.png"/>
+
+               <img id="plaid" src="plaid.png"/>
+
+               <img id="chain" src="chain.png"/>
+
+               <img id="belt2" src="belt2.png"/>
+
+               <img id="belt1" src="belt1.png"/>
+
+               <img id="hi" src="hi.png"/>
+
+               <img id="ham" src="ham.png"/>
+
+               <img id="fruit" src="fruit.png"/>
+
+               <img id="army2" src="army2.png"/>
+
+               <img id="emo" src="emo.png"/>
+
+               <img id="starshir" src="starshir.png"/>
+
+               <img id="star" src="star.png"/>
+
+               <img id="yanyan" src="yanyan.png"/>
+
+               <img id="green" src="green.png"/>
+
+               <img id="fuxxshir" src="fuxxshir.png"/>
+
+               <img id="bltank" src="bltank.png"/>
+
+               <img id="rtank" src="rtank.png"/>
+
+               <img id="btank" src="btank.png"/>
+
+               <img id="lbtank" src="lbtank.png"/>
+
+               <img id="wtank" src="wtank.png"/>
+
+               <img id="lovers" src="lovers.png"/>
+
+               <img id="stripe" src="stripe.png"/>
+
+               <img id="ordress" src="ordress.png"/>
+
+               <img id="fuzzyswe" src="fuzzyswe.png"/>
+
+               <img id="halfred" src="halfred.png"/>
+
+               <img id="corset" src="corset.png"/>
+
+               <img id="ccs" src="ccs.png"/>
+
+               <img id="orange" src="orange.png"/>
+
+               <img id="spiker" src="spiker.png"/>
+
+               <img id="spikel" src="spikel.png"/>
+
+               <img id="cute" src="cute.png"/>
+
+               <img id="jacket" src="jacket.png"/>
+
+               <img id="neck" src="neck.png"/>
+
+               <img id="glow" src="glow.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

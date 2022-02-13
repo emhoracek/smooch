@@ -1,4 +1,3 @@
-/* SMOOCH */
 import { KiSSDoll } from './kissDoll'
 import { DragAndDrop } from './dragAndDrop'
 

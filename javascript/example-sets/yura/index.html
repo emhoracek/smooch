@@ -1,0 +1,302 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="yura" src="yura.png"/>
+
+               <img id="logo" src="logo.png"/>
+
+               <img id="guild" src="guild.png"/>
+
+               <img id="neck9b" src="neck9b.png"/>
+
+               <img id="neck6b" src="neck6b.png"/>
+
+               <img id="top20b" src="top20b.png"/>
+
+               <img id="vest1b" src="vest1b.png"/>
+
+               <img id="top15b" src="top15b.png"/>
+
+               <img id="swordb" src="swordb.png"/>
+
+               <img id="purse4b" src="purse4b.png"/>
+
+               <img id="purse3b" src="purse3b.png"/>
+
+               <img id="dress1b" src="dress1b.png"/>
+
+               <img id="top14b" src="top14b.png"/>
+
+               <img id="top13b" src="top13b.png"/>
+
+               <img id="top12b" src="top12b.png"/>
+
+               <img id="top11b" src="top11b.png"/>
+
+               <img id="skirt7b" src="skirt7b.png"/>
+
+               <img id="top9b" src="top9b.png"/>
+
+               <img id="top8b" src="top8b.png"/>
+
+               <img id="purse2b" src="purse2b.png"/>
+
+               <img id="top7b" src="top7b.png"/>
+
+               <img id="belt1b" src="belt1b.png"/>
+
+               <img id="top6b" src="top6b.png"/>
+
+               <img id="shoes5b" src="shoes5b.png"/>
+
+               <img id="purse1b" src="purse1b.png"/>
+
+               <img id="top5b" src="top5b.png"/>
+
+               <img id="top3b" src="top3b.png"/>
+
+               <img id="top1b" src="top1b.png"/>
+
+               <img id="top2b" src="top2b.png"/>
+
+               <img id="jean1b" src="jean1b.png"/>
+
+               <img id="myo" src="myo.png"/>
+
+               <img id="myo2" src="myo2.png"/>
+
+               <img id="und1" src="und1.png"/>
+
+               <img id="socks1" src="socks1.png"/>
+
+               <img id="socks4" src="socks4.png"/>
+
+               <img id="socks3" src="socks3.png"/>
+
+               <img id="socks2" src="socks2.png"/>
+
+               <img id="socks6" src="socks6.png"/>
+
+               <img id="socks5" src="socks5.png"/>
+
+               <img id="shoes4" src="shoes4.png"/>
+
+               <img id="shoes3" src="shoes3.png"/>
+
+               <img id="shoes2" src="shoes2.png"/>
+
+               <img id="shoes14" src="shoes14.png"/>
+
+               <img id="shoes13" src="shoes13.png"/>
+
+               <img id="shoes12" src="shoes12.png"/>
+
+               <img id="shoes11" src="shoes11.png"/>
+
+               <img id="shoes10" src="shoes10.png"/>
+
+               <img id="shoes8" src="shoes8.png"/>
+
+               <img id="shoes6" src="shoes6.png"/>
+
+               <img id="shoes5f" src="shoes5f.png"/>
+
+               <img id="shoes9" src="shoes9.png"/>
+
+               <img id="shoes15" src="shoes15.png"/>
+
+               <img id="shoes7" src="shoes7.png"/>
+
+               <img id="jean1f" src="jean1f.png"/>
+
+               <img id="shoes1" src="shoes1.png"/>
+
+               <img id="jean2" src="jean2.png"/>
+
+               <img id="dress2" src="dress2.png"/>
+
+               <img id="dress1f" src="dress1f.png"/>
+
+               <img id="skirt11" src="skirt11.png"/>
+
+               <img id="skirt10" src="skirt10.png"/>
+
+               <img id="skirt9" src="skirt9.png"/>
+
+               <img id="skirt8" src="skirt8.png"/>
+
+               <img id="skirt7f" src="skirt7f.png"/>
+
+               <img id="skirt1" src="skirt1.png"/>
+
+               <img id="skirt14" src="skirt14.png"/>
+
+               <img id="skirt18" src="skirt18.png"/>
+
+               <img id="skirt17" src="skirt17.png"/>
+
+               <img id="skirt16" src="skirt16.png"/>
+
+               <img id="skirt15" src="skirt15.png"/>
+
+               <img id="skirt12" src="skirt12.png"/>
+
+               <img id="skirt13" src="skirt13.png"/>
+
+               <img id="skirt5" src="skirt5.png"/>
+
+               <img id="skirt4" src="skirt4.png"/>
+
+               <img id="skirt2" src="skirt2.png"/>
+
+               <img id="skirt3" src="skirt3.png"/>
+
+               <img id="skirt6" src="skirt6.png"/>
+
+               <img id="arm1" src="arm1.png"/>
+
+               <img id="top2f" src="top2f.png"/>
+
+               <img id="top1f" src="top1f.png"/>
+
+               <img id="top8f" src="top8f.png"/>
+
+               <img id="top13f" src="top13f.png"/>
+
+               <img id="top15f" src="top15f.png"/>
+
+               <img id="top12f" src="top12f.png"/>
+
+               <img id="top10" src="top10.png"/>
+
+               <img id="top3f" src="top3f.png"/>
+
+               <img id="top14f" src="top14f.png"/>
+
+               <img id="top5f" src="top5f.png"/>
+
+               <img id="top19" src="top19.png"/>
+
+               <img id="top18" src="top18.png"/>
+
+               <img id="top17" src="top17.png"/>
+
+               <img id="top16" src="top16.png"/>
+
+               <img id="top7f" src="top7f.png"/>
+
+               <img id="vest1f" src="vest1f.png"/>
+
+               <img id="top20f" src="top20f.png"/>
+
+               <img id="top11f" src="top11f.png"/>
+
+               <img id="top4" src="top4.png"/>
+
+               <img id="top9f" src="top9f.png"/>
+
+               <img id="top6f" src="top6f.png"/>
+
+               <img id="neck1" src="neck1.png"/>
+
+               <img id="belt1f" src="belt1f.png"/>
+
+               <img id="belt2" src="belt2.png"/>
+
+               <img id="purse2f" src="purse2f.png"/>
+
+               <img id="purse4f" src="purse4f.png"/>
+
+               <img id="purse3f" src="purse3f.png"/>
+
+               <img id="purse1f" src="purse1f.png"/>
+
+               <img id="swordf" src="swordf.png"/>
+
+               <img id="neck2" src="neck2.png"/>
+
+               <img id="neck3" src="neck3.png"/>
+
+               <img id="neck7" src="neck7.png"/>
+
+               <img id="neck9f" src="neck9f.png"/>
+
+               <img id="neck6f" src="neck6f.png"/>
+
+               <img id="neck5" src="neck5.png"/>
+
+               <img id="neck4" src="neck4.png"/>
+
+               <img id="scarf2" src="scarf2.png"/>
+
+               <img id="scarf4" src="scarf4.png"/>
+
+               <img id="scarf3" src="scarf3.png"/>
+
+               <img id="scarf1" src="scarf1.png"/>
+
+               <img id="hair1" src="hair1.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

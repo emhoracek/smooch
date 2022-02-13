@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="basedoll" src="basedoll.png"/>
+
+               <img id="lavthong" src="lavthong.png"/>
+
+               <img id="blkthong" src="blkthong.png"/>
+
+               <img id="redthong" src="redthong.png"/>
+
+               <img id="purthong" src="purthong.png"/>
+
+               <img id="bluthong" src="bluthong.png"/>
+
+               <img id="bra" src="bra.png"/>
+
+               <img id="grytiits" src="grytiits.png"/>
+
+               <img id="blktiits" src="blktiits.png"/>
+
+               <img id="lavnylon" src="lavnylon.png"/>
+
+               <img id="blknylon" src="blknylon.png"/>
+
+               <img id="lavnet" src="lavnet.png"/>
+
+               <img id="blknet" src="blknet.png"/>
+
+               <img id="potholes" src="potholes.png"/>
+
+               <img id="whip" src="whip.png"/>
+
+               <img id="thihi4" src="thihi4.png"/>
+
+               <img id="thihi3" src="thihi3.png"/>
+
+               <img id="thihi2" src="thihi2.png"/>
+
+               <img id="thihi1" src="thihi1.png"/>
+
+               <img id="heelsr" src="heelsr.png"/>
+
+               <img id="heelsl" src="heelsl.png"/>
+
+               <img id="pnkshur" src="pnkshur.png"/>
+
+               <img id="pnkshul" src="pnkshul.png"/>
+
+               <img id="blkshur" src="blkshur.png"/>
+
+               <img id="blkshul" src="blkshul.png"/>
+
+               <img id="pltfrmr" src="pltfrmr.png"/>
+
+               <img id="pltfrml" src="pltfrml.png"/>
+
+               <img id="lavdocr" src="lavdocr.png"/>
+
+               <img id="lavdocl" src="lavdocl.png"/>
+
+               <img id="whtshur" src="whtshur.png"/>
+
+               <img id="whtshul" src="whtshul.png"/>
+
+               <img id="20ir" src="20ir.png"/>
+
+               <img id="20il" src="20il.png"/>
+
+               <img id="blkpants" src="blkpants.png"/>
+
+               <img id="gldpants" src="gldpants.png"/>
+
+               <img id="spdrskrt" src="spdrskrt.png"/>
+
+               <img id="pnkskirt" src="pnkskirt.png"/>
+
+               <img id="lavskirt" src="lavskirt.png"/>
+
+               <img id="purskirt" src="purskirt.png"/>
+
+               <img id="blkskirt" src="blkskirt.png"/>
+
+               <img id="plaid" src="plaid.png"/>
+
+               <img id="cclskirt" src="cclskirt.png"/>
+
+               <img id="ccsskirt" src="ccsskirt.png"/>
+
+               <img id="rideskrt" src="rideskrt.png"/>
+
+               <img id="blakrose" src="blakrose.png"/>
+
+               <img id="sweater2" src="sweater2.png"/>
+
+               <img id="sweater1" src="sweater1.png"/>
+
+               <img id="netshirt" src="netshirt.png"/>
+
+               <img id="bishop" src="bishop.png"/>
+
+               <img id="mutton" src="mutton.png"/>
+
+               <img id="cctop" src="cctop.png"/>
+
+               <img id="purrose" src="purrose.png"/>
+
+               <img id="regtop" src="regtop.png"/>
+
+               <img id="blouse2b" src="blouse2b.png"/>
+
+               <img id="blouse1b" src="blouse1b.png"/>
+
+               <img id="whttop" src="whttop.png"/>
+
+               <img id="lavtop" src="lavtop.png"/>
+
+               <img id="blutop" src="blutop.png"/>
+
+               <img id="purtop" src="purtop.png"/>
+
+               <img id="redtop" src="redtop.png"/>
+
+               <img id="mistress" src="mistress.png"/>
+
+               <img id="princess" src="princess.png"/>
+
+               <img id="flirt" src="flirt.png"/>
+
+               <img id="bitch" src="bitch.png"/>
+
+               <img id="melphina" src="melphina.png"/>
+
+               <img id="ridetop" src="ridetop.png"/>
+
+               <img id="dress3" src="dress3.png"/>
+
+               <img id="dress2b" src="dress2b.png"/>
+
+               <img id="dress2a" src="dress2a.png"/>
+
+               <img id="dress1b" src="dress1b.png"/>
+
+               <img id="dress1a" src="dress1a.png"/>
+
+               <img id="vest" src="vest.png"/>
+
+               <img id="perldrs2" src="perldrs2.png"/>
+
+               <img id="perldrs1" src="perldrs1.png"/>
+
+               <img id="lavvinyl" src="lavvinyl.png"/>
+
+               <img id="corset2" src="corset2.png"/>
+
+               <img id="corset" src="corset.png"/>
+
+               <img id="bglv2" src="bglv2.png"/>
+
+               <img id="bglv1" src="bglv1.png"/>
+
+               <img id="kidglv2" src="kidglv2.png"/>
+
+               <img id="kidglv1" src="kidglv1.png"/>
+
+               <img id="boa2" src="boa2.png"/>
+
+               <img id="boa1" src="boa1.png"/>
+
+               <img id="necklace" src="necklace.png"/>
+
+               <img id="choker2" src="choker2.png"/>
+
+               <img id="choker1" src="choker1.png"/>
+
+               <img id="choker" src="choker.png"/>
+
+               <img id="necktie" src="necktie.png"/>
+
+               <img id="pearls" src="pearls.png"/>
+
+               <img id="ridehat" src="ridehat.png"/>
+
+               <img id="tiara4" src="tiara4.png"/>
+
+               <img id="tiara3" src="tiara3.png"/>
+
+               <img id="tiara2" src="tiara2.png"/>
+
+               <img id="tiara1" src="tiara1.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

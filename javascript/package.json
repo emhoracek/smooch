@@ -2,9 +2,14 @@
   "name": "smooch",
   "version": "1.0.0",
   "description": "Dress-up doll viewer",
-  "main": "doll.js",
+  "targets": {
+    "default": {
+      "distDir": "../docs/"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel ./index.html",
+    "build": "parcel build ./index.html"
   },
   "author": "",
   "license": "ISC",
@@ -13,9 +18,7 @@
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0"
-  },
-  "dependencies": {
+    "eslint-plugin-promise": "^5.2.0",
     "parcel": "^2.3.1"
   }
 }
