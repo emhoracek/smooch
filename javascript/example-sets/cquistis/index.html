@@ -1,0 +1,522 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="edc" src="edc.png"/>
+
+               <img id="eleb" src="eleb.png"/>
+
+               <img id="edrb" src="edrb.png"/>
+
+               <img id="jurb" src="jurb.png"/>
+
+               <img id="ricsb" src="ricsb.png"/>
+
+               <img id="rajtb" src="rajtb.png"/>
+
+               <img id="watb" src="watb.png"/>
+
+               <img id="septb" src="septb.png"/>
+
+               <img id="rinrb" src="rinrb.png"/>
+
+               <img id="lagtb" src="lagtb.png"/>
+
+               <img id="aerrb" src="aerrb.png"/>
+
+               <img id="sqtb" src="sqtb.png"/>
+
+               <img id="sqtlb" src="sqtlb.png"/>
+
+               <img id="eltb" src="eltb.png"/>
+
+               <img id="irtb" src="irtb.png"/>
+
+               <img id="seitb" src="seitb.png"/>
+
+               <img id="irtlb" src="irtlb.png"/>
+
+               <img id="seitlb" src="seitlb.png"/>
+
+               <img id="ztb" src="ztb.png"/>
+
+               <img id="elpb" src="elpb.png"/>
+
+               <img id="tinrb" src="tinrb.png"/>
+
+               <img id="selrb" src="selrb.png"/>
+
+               <img id="qjb" src="qjb.png"/>
+
+               <img id="sqjlb" src="sqjlb.png"/>
+
+               <img id="seijlb" src="seijlb.png"/>
+
+               <img id="irjlb" src="irjlb.png"/>
+
+               <img id="sepjb" src="sepjb.png"/>
+
+               <img id="irjb" src="irjb.png"/>
+
+               <img id="sqjb" src="sqjb.png"/>
+
+               <img id="zjb" src="zjb.png"/>
+
+               <img id="qtb" src="qtb.png"/>
+
+               <img id="fuvb" src="fuvb.png"/>
+
+               <img id="rigb" src="rigb.png"/>
+
+               <img id="rajgb" src="rajgb.png"/>
+
+               <img id="wsvfb" src="wsvfb.png"/>
+
+               <img id="svfb" src="svfb.png"/>
+
+               <img id="wsvmb" src="wsvmb.png"/>
+
+               <img id="svmb" src="svmb.png"/>
+
+               <img id="qsvb" src="qsvb.png"/>
+
+               <img id="aervb" src="aervb.png"/>
+
+               <img id="zvb" src="zvb.png"/>
+
+               <img id="sqvb" src="sqvb.png"/>
+
+               <img id="lagvb" src="lagvb.png"/>
+
+               <img id="sepvb" src="sepvb.png"/>
+
+               <img id="seivb" src="seivb.png"/>
+
+               <img id="irvb" src="irvb.png"/>
+
+               <img id="aern" src="aern.png"/>
+
+               <img id="vicc" src="vicc.png"/>
+
+               <img id="corps" src="corps.png"/>
+
+               <img id="vicb" src="vicb.png"/>
+
+               <img id="culotte" src="culotte.png"/>
+
+               <img id="soutieng" src="soutieng.png"/>
+
+               <img id="qsch" src="qsch.png"/>
+
+               <img id="wsch" src="wsch.png"/>
+
+               <img id="sch" src="sch.png"/>
+
+               <img id="ranch" src="ranch.png"/>
+
+               <img id="fuch" src="fuch.png"/>
+
+               <img id="zch" src="zch.png"/>
+
+               <img id="tifch" src="tifch.png"/>
+
+               <img id="qbr" src="qbr.png"/>
+
+               <img id="tifbd" src="tifbd.png"/>
+
+               <img id="edg" src="edg.png"/>
+
+               <img id="sepg" src="sepg.png"/>
+
+               <img id="kirg" src="kirg.png"/>
+
+               <img id="clog" src="clog.png"/>
+
+               <img id="sqg" src="sqg.png"/>
+
+               <img id="seig" src="seig.png"/>
+
+               <img id="irg" src="irg.png"/>
+
+               <img id="wabr" src="wabr.png"/>
+
+               <img id="qg" src="qg.png"/>
+
+               <img id="tifg" src="tifg.png"/>
+
+               <img id="lagg" src="lagg.png"/>
+
+               <img id="zg" src="zg.png"/>
+
+               <img id="ribd" src="ribd.png"/>
+
+               <img id="rajbr" src="rajbr.png"/>
+
+               <img id="clobr" src="clobr.png"/>
+
+               <img id="tifbr" src="tifbr.png"/>
+
+               <img id="selbr" src="selbr.png"/>
+
+               <img id="ribr" src="ribr.png"/>
+
+               <img id="ranb" src="ranb.png"/>
+
+               <img id="fubd" src="fubd.png"/>
+
+               <img id="jub" src="jub.png"/>
+
+               <img id="aerbr" src="aerbr.png"/>
+
+               <img id="kirc" src="kirc.png"/>
+
+               <img id="rics" src="rics.png"/>
+
+               <img id="rajt" src="rajt.png"/>
+
+               <img id="wat" src="wat.png"/>
+
+               <img id="sept" src="sept.png"/>
+
+               <img id="tift" src="tift.png"/>
+
+               <img id="rinr" src="rinr.png"/>
+
+               <img id="lagt" src="lagt.png"/>
+
+               <img id="elp" src="elp.png"/>
+
+               <img id="clot" src="clot.png"/>
+
+               <img id="sqt" src="sqt.png"/>
+
+               <img id="sqtl" src="sqtl.png"/>
+
+               <img id="elt" src="elt.png"/>
+
+               <img id="zt" src="zt.png"/>
+
+               <img id="was" src="was.png"/>
+
+               <img id="edch" src="edch.png"/>
+
+               <img id="rinc" src="rinc.png"/>
+
+               <img id="juc" src="juc.png"/>
+
+               <img id="tinc" src="tinc.png"/>
+
+               <img id="elc" src="elc.png"/>
+
+               <img id="fuc" src="fuc.png"/>
+
+               <img id="ranc" src="ranc.png"/>
+
+               <img id="qsc" src="qsc.png"/>
+
+               <img id="wscf" src="wscf.png"/>
+
+               <img id="scf" src="scf.png"/>
+
+               <img id="wscm" src="wscm.png"/>
+
+               <img id="scm" src="scm.png"/>
+
+               <img id="zb" src="zb.png"/>
+
+               <img id="qbt" src="qbt.png"/>
+
+               <img id="seibt" src="seibt.png"/>
+
+               <img id="irbt" src="irbt.png"/>
+
+               <img id="lagb" src="lagb.png"/>
+
+               <img id="sqb" src="sqb.png"/>
+
+               <img id="seib" src="seib.png"/>
+
+               <img id="qb" src="qb.png"/>
+
+               <img id="irb" src="irb.png"/>
+
+               <img id="kirb" src="kirb.png"/>
+
+               <img id="rajb" src="rajb.png"/>
+
+               <img id="rib" src="rib.png"/>
+
+               <img id="sepb" src="sepb.png"/>
+
+               <img id="vib" src="vib.png"/>
+
+               <img id="wab" src="wab.png"/>
+
+               <img id="clob" src="clob.png"/>
+
+               <img id="tifb" src="tifb.png"/>
+
+               <img id="aerb" src="aerb.png"/>
+
+               <img id="selb" src="selb.png"/>
+
+               <img id="qch" src="qch.png"/>
+
+               <img id="edr" src="edr.png"/>
+
+               <img id="jur" src="jur.png"/>
+
+               <img id="aerr" src="aerr.png"/>
+
+               <img id="ranj" src="ranj.png"/>
+
+               <img id="fup" src="fup.png"/>
+
+               <img id="wsp" src="wsp.png"/>
+
+               <img id="sp" src="sp.png"/>
+
+               <img id="kircr" src="kircr.png"/>
+
+               <img id="tinr" src="tinr.png"/>
+
+               <img id="vicr" src="vicr.png"/>
+
+               <img id="selr" src="selr.png"/>
+
+               <img id="qj" src="qj.png"/>
+
+               <img id="qsj" src="qsj.png"/>
+
+               <img id="lagjl" src="lagjl.png"/>
+
+               <img id="sqjl" src="sqjl.png"/>
+
+               <img id="seijl" src="seijl.png"/>
+
+               <img id="irjl" src="irjl.png"/>
+
+               <img id="sepj" src="sepj.png"/>
+
+               <img id="cloj" src="cloj.png"/>
+
+               <img id="tifj" src="tifj.png"/>
+
+               <img id="lagj" src="lagj.png"/>
+
+               <img id="irj" src="irj.png"/>
+
+               <img id="seij2" src="seij2.png"/>
+
+               <img id="seij1" src="seij1.png"/>
+
+               <img id="rij" src="rij.png"/>
+
+               <img id="sqj" src="sqj.png"/>
+
+               <img id="wsj" src="wsj.png"/>
+
+               <img id="sj" src="sj.png"/>
+
+               <img id="irt" src="irt.png"/>
+
+               <img id="seit" src="seit.png"/>
+
+               <img id="irtl" src="irtl.png"/>
+
+               <img id="seitl" src="seitl.png"/>
+
+               <img id="war" src="war.png"/>
+
+               <img id="rajj" src="rajj.png"/>
+
+               <img id="zj" src="zj.png"/>
+
+               <img id="vicn" src="vicn.png"/>
+
+               <img id="qce2" src="qce2.png"/>
+
+               <img id="qce1" src="qce1.png"/>
+
+               <img id="tifc" src="tifc.png"/>
+
+               <img id="sqc" src="sqc.png"/>
+
+               <img id="kirce" src="kirce.png"/>
+
+               <img id="qcn" src="qcn.png"/>
+
+               <img id="qt" src="qt.png"/>
+
+               <img id="ranp" src="ranp.png"/>
+
+               <img id="fuv" src="fuv.png"/>
+
+               <img id="rig" src="rig.png"/>
+
+               <img id="rajg" src="rajg.png"/>
+
+               <img id="wsvf" src="wsvf.png"/>
+
+               <img id="svf" src="svf.png"/>
+
+               <img id="wsvm" src="wsvm.png"/>
+
+               <img id="svm" src="svm.png"/>
+
+               <img id="sn" src="sn.png"/>
+
+               <img id="qsv" src="qsv.png"/>
+
+               <img id="aerv" src="aerv.png"/>
+
+               <img id="zv" src="zv.png"/>
+
+               <img id="sqv" src="sqv.png"/>
+
+               <img id="lagv" src="lagv.png"/>
+
+               <img id="sepv" src="sepv.png"/>
+
+               <img id="seiv" src="seiv.png"/>
+
+               <img id="irv" src="irv.png"/>
+
+               <img id="ele" src="ele.png"/>
+
+               <img id="cloe" src="cloe.png"/>
+
+               <img id="vibd" src="vibd.png"/>
+
+               <img id="vica" src="vica.png"/>
+
+               <img id="meches" src="meches.png"/>
+
+               <img id="irc" src="irc.png"/>
+
+               <img id="wabd" src="wabd.png"/>
+
+               <img id="p35" src="p35.png"/>
+
+               <img id="p34" src="p34.png"/>
+
+               <img id="p33" src="p33.png"/>
+
+               <img id="p32" src="p32.png"/>
+
+               <img id="p31" src="p31.png"/>
+
+               <img id="p30" src="p30.png"/>
+
+               <img id="p22" src="p22.png"/>
+
+               <img id="p21" src="p21.png"/>
+
+               <img id="p20" src="p20.png"/>
+
+               <img id="p18" src="p18.png"/>
+
+               <img id="p17" src="p17.png"/>
+
+               <img id="p16" src="p16.png"/>
+
+               <img id="p15" src="p15.png"/>
+
+               <img id="p14" src="p14.png"/>
+
+               <img id="p13" src="p13.png"/>
+
+               <img id="p12" src="p12.png"/>
+
+               <img id="p11" src="p11.png"/>
+
+               <img id="p10" src="p10.png"/>
+
+               <img id="p08" src="p08.png"/>
+
+               <img id="p07" src="p07.png"/>
+
+               <img id="p06" src="p06.png"/>
+
+               <img id="p05" src="p05.png"/>
+
+               <img id="p04" src="p04.png"/>
+
+               <img id="p03" src="p03.png"/>
+
+               <img id="p02" src="p02.png"/>
+
+               <img id="p01" src="p01.png"/>
+
+               <img id="ff8b" src="ff8b.png"/>
+
+               <img id="ff8g" src="ff8g.png"/>
+
+               <img id="ff7" src="ff7.png"/>
+
+               <img id="ff8" src="ff8.png"/>
+
+               <img id="ff" src="ff.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

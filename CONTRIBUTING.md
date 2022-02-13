@@ -95,14 +95,10 @@ pull request in.
 
 Don't see an interesting issue, or all the issues are claimed? Below are some more ideas. If any looks interesting, please create an issue for it so we can discuss different approaches and so other people can know that you're working on it.
 
-#### Frontend (JavaScript/HTML/CSS)
-
-You can work on the [JavaScript frontend](https://github.com/emhoracek/smooch/tree/master/javascript) of
-Smooch.
+### Ideas
 
  * Refactor and document the code so it's easier to understand
  * Improve performance
- * Move cel and palette parsing into JavaScript from cel2pnm`*`
  * Add editing capabilities `*`
    * Artists can change the layering of cels (raising or lowering in relation to other items)
    * Artists can change the offset of a cel in relation its object
@@ -119,7 +115,12 @@ Smooch.
 
 The ones marked with a `*` will need some work on the backend as well.
 
-#### Backend (Haskell)
+### Frontend (JavaScript)
+
+You can work on the [JavaScript frontend](https://github.com/emhoracek/smooch/tree/master/javascript) of
+Smooch separately from the backend.
+
+### Backend (Haskell)
 
 You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/app) of Smooch.
 

@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="bg" src="bg.png"/>
+
+               <img id="sh2a" src="sh2a.png"/>
+
+               <img id="s1a" src="s1a.png"/>
+
+               <img id="washu" src="washu.png"/>
+
+               <img id="undi" src="undi.png"/>
+
+               <img id="st1" src="st1.png"/>
+
+               <img id="st2" src="st2.png"/>
+
+               <img id="s1" src="s1.png"/>
+
+               <img id="s2" src="s2.png"/>
+
+               <img id="bath1" src="bath1.png"/>
+
+               <img id="bath2" src="bath2.png"/>
+
+               <img id="p1" src="p1.png"/>
+
+               <img id="sh1" src="sh1.png"/>
+
+               <img id="p2" src="p2.png"/>
+
+               <img id="sh3" src="sh3.png"/>
+
+               <img id="vest" src="vest.png"/>
+
+               <img id="sh2" src="sh2.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

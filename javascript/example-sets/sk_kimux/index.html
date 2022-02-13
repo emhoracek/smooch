@@ -1,0 +1,302 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="hair_b" src="hair_b.png"/>
+
+               <img id="suit5_b" src="suit5_b.png"/>
+
+               <img id="suit4_b" src="suit4_b.png"/>
+
+               <img id="suit2_b" src="suit2_b.png"/>
+
+               <img id="suit3_b" src="suit3_b.png"/>
+
+               <img id="suit6_b" src="suit6_b.png"/>
+
+               <img id="skrt3_b" src="skrt3_b.png"/>
+
+               <img id="suit_b" src="suit_b.png"/>
+
+               <img id="torena_b" src="torena_b.png"/>
+
+               <img id="sebr2_b" src="sebr2_b.png"/>
+
+               <img id="sebrzr_b" src="sebrzr_b.png"/>
+
+               <img id="suit2u_b" src="suit2u_b.png"/>
+
+               <img id="best_b" src="best_b.png"/>
+
+               <img id="sesk2_b" src="sesk2_b.png"/>
+
+               <img id="sesk3_b" src="sesk3_b.png"/>
+
+               <img id="seskrt_b" src="seskrt_b.png"/>
+
+               <img id="buraus_b" src="buraus_b.png"/>
+
+               <img id="skrt5_b" src="skrt5_b.png"/>
+
+               <img id="skrt4_b" src="skrt4_b.png"/>
+
+               <img id="skrt6_b" src="skrt6_b.png"/>
+
+               <img id="skrt_b" src="skrt_b.png"/>
+
+               <img id="skrt2_b" src="skrt2_b.png"/>
+
+               <img id="taisou_b" src="taisou_b.png"/>
+
+               <img id="noslev_b" src="noslev_b.png"/>
+
+               <img id="srip_b" src="srip_b.png"/>
+
+               <img id="blma_b" src="blma_b.png"/>
+
+               <img id="kutu5_b" src="kutu5_b.png"/>
+
+               <img id="kutu_b" src="kutu_b.png"/>
+
+               <img id="kutu2_b" src="kutu2_b.png"/>
+
+               <img id="kutu3_b" src="kutu3_b.png"/>
+
+               <img id="kutu4_b" src="kutu4_b.png"/>
+
+               <img id="sox2_b" src="sox2_b.png"/>
+
+               <img id="sox1_b" src="sox1_b.png"/>
+
+               <img id="rabit_b" src="rabit_b.png"/>
+
+               <img id="mizugi_b" src="mizugi_b.png"/>
+
+               <img id="school_b" src="school_b.png"/>
+
+               <img id="amitai_b" src="amitai_b.png"/>
+
+               <img id="stoki1_b" src="stoki1_b.png"/>
+
+               <img id="stoki2_b" src="stoki2_b.png"/>
+
+               <img id="sbura_b" src="sbura_b.png"/>
+
+               <img id="bura_b" src="bura_b.png"/>
+
+               <img id="pantu_b" src="pantu_b.png"/>
+
+               <img id="panty_b" src="panty_b.png"/>
+
+               <img id="body1" src="body1.png"/>
+
+               <img id="body2" src="body2.png"/>
+
+               <img id="kao_2" src="kao_2.png"/>
+
+               <img id="kao_1" src="kao_1.png"/>
+
+               <img id="namida" src="namida.png"/>
+
+               <img id="namida2" src="namida2.png"/>
+
+               <img id="hair_m" src="hair_m.png"/>
+
+               <img id="panty_f" src="panty_f.png"/>
+
+               <img id="pantu_f" src="pantu_f.png"/>
+
+               <img id="bura_f" src="bura_f.png"/>
+
+               <img id="sbura_f" src="sbura_f.png"/>
+
+               <img id="stoki2_f" src="stoki2_f.png"/>
+
+               <img id="stoki1_f" src="stoki1_f.png"/>
+
+               <img id="amitai_f" src="amitai_f.png"/>
+
+               <img id="school_f" src="school_f.png"/>
+
+               <img id="mizugi_f" src="mizugi_f.png"/>
+
+               <img id="rabit_f" src="rabit_f.png"/>
+
+               <img id="sox1_f" src="sox1_f.png"/>
+
+               <img id="sox2_f" src="sox2_f.png"/>
+
+               <img id="kutu4_f" src="kutu4_f.png"/>
+
+               <img id="kutu3_f" src="kutu3_f.png"/>
+
+               <img id="kutu2_f" src="kutu2_f.png"/>
+
+               <img id="kutu_f" src="kutu_f.png"/>
+
+               <img id="kutu5_f" src="kutu5_f.png"/>
+
+               <img id="blma_f" src="blma_f.png"/>
+
+               <img id="srip_f" src="srip_f.png"/>
+
+               <img id="noslev_f" src="noslev_f.png"/>
+
+               <img id="taisou_f" src="taisou_f.png"/>
+
+               <img id="skrt4_f" src="skrt4_f.png"/>
+
+               <img id="skrt5_f" src="skrt5_f.png"/>
+
+               <img id="skrt2_f" src="skrt2_f.png"/>
+
+               <img id="skrt_f" src="skrt_f.png"/>
+
+               <img id="skrt6_f" src="skrt6_f.png"/>
+
+               <img id="buraus_f" src="buraus_f.png"/>
+
+               <img id="seskrt_f" src="seskrt_f.png"/>
+
+               <img id="sesk3_f" src="sesk3_f.png"/>
+
+               <img id="ribon" src="ribon.png"/>
+
+               <img id="nekutai" src="nekutai.png"/>
+
+               <img id="sesk2_f" src="sesk2_f.png"/>
+
+               <img id="best_f" src="best_f.png"/>
+
+               <img id="suit2u_f" src="suit2u_f.png"/>
+
+               <img id="sebrzr_f" src="sebrzr_f.png"/>
+
+               <img id="sebr2_f" src="sebr2_f.png"/>
+
+               <img id="torena_f" src="torena_f.png"/>
+
+               <img id="suit_f" src="suit_f.png"/>
+
+               <img id="skrt3_f" src="skrt3_f.png"/>
+
+               <img id="suit6_f" src="suit6_f.png"/>
+
+               <img id="torena_e" src="torena_e.png"/>
+
+               <img id="suit3_f" src="suit3_f.png"/>
+
+               <img id="suit2_f" src="suit2_f.png"/>
+
+               <img id="suit4_f" src="suit4_f.png"/>
+
+               <img id="suit5_f" src="suit5_f.png"/>
+
+               <img id="remoco_b" src="remoco_b.png"/>
+
+               <img id="hand_rb" src="hand_rb.png"/>
+
+               <img id="grb_rb" src="grb_rb.png"/>
+
+               <img id="romin" src="romin.png"/>
+
+               <img id="b_hanmer" src="b_hanmer.png"/>
+
+               <img id="s_hanmer" src="s_hanmer.png"/>
+
+               <img id="isyoku" src="isyoku.png"/>
+
+               <img id="driver" src="driver.png"/>
+
+               <img id="remoco_f" src="remoco_f.png"/>
+
+               <img id="hand_l" src="hand_l.png"/>
+
+               <img id="grb_l" src="grb_l.png"/>
+
+               <img id="hand_rf" src="hand_rf.png"/>
+
+               <img id="grb_rf" src="grb_rf.png"/>
+
+               <img id="sk_bom2" src="sk_bom2.png"/>
+
+               <img id="sk_bom5" src="sk_bom5.png"/>
+
+               <img id="usamimi" src="usamimi.png"/>
+
+               <img id="hair_f" src="hair_f.png"/>
+
+               <img id="sk_bom" src="sk_bom.png"/>
+
+               <img id="sk_bom3" src="sk_bom3.png"/>
+
+               <img id="sk_bom4" src="sk_bom4.png"/>
+
+               <img id="bug" src="bug.png"/>
+
+               <img id="megane" src="megane.png"/>
+
+               <img id="fukidasi" src="fukidasi.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>
