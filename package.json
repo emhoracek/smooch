@@ -2,11 +2,16 @@
   "name": "smooch",
   "version": "1.0.0",
   "description": "Dress-up doll viewer",
+  "backend": "app/static/doll.js",
   "targets": {
     "default": {
       "context": "browser",
       "publicUrl": "/smooch",
       "distDir": "docs/"
+    },
+    "backend": {
+      "source": "javascript/doll.js",
+      "context": "browser"
     }
   },
   "source": "javascript/index.html",
