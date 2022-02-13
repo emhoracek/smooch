@@ -4,12 +4,13 @@
   "description": "Dress-up doll viewer",
   "targets": {
     "default": {
-      "distDir": "../docs/"
+      "distDir": "docs/"
     }
   },
+  "source": "javascript/index.html",
   "scripts": {
-    "start": "parcel ./index.html",
-    "build": "parcel build ./index.html"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "author": "",
   "license": "ISC",

@@ -10,22 +10,23 @@
 
 First, [install node.js](https://nodejs.org/en/)
 
-Then navigate to this directory (`javascript`) and run `npm install` to install the dev dependencies: Parcel and ESlint. There
+Then navigate to Smooch's root directory and run `npm install` to install the dev dependencies: Parcel and ESlint. There
 are no non-dev dependencies currently - Smooch is just vanilla JS. Parcel is used to bundle and minify the JS. ESLint is to
 make sure all contributors use the same code style.
 
 # Run
 
-Run `npm start` to run the development server. It will hot-reload
-with any changes you make.
+Run `npm start` in the root directory to run the development server.
+It will hot-reload with any changes you make.
 
 # Build
 
-Run `npm run build` to put the finished JavaScript on the [Smooch demo page](https://emhoracek.github.io/smooch/)
+Run `npm run build` to put the finished JavaScript on the [Smooch demo page](https://emhoracek.github.io/smooch/).
+Those files go in the `docs` directory and GitHub Pages automatically serves them.
 
 # A tour of the directory
 
-The smooch demo contains some HTML, a CSS file, and a few JavaScript files.
+The `javascript` directory contains some HTML, a CSS file, and a few JavaScript files.
 
 ## `index.html`
 
