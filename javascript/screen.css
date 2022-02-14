@@ -152,6 +152,11 @@ a.set:hover {
   margin: auto;
 }
 
+#ghost {
+    background: blue;
+    display: none;
+}
+
 #footer {
   text-align: center;
   margin: 1em;

@@ -88,7 +88,8 @@ class KiSSDoll {
           // matched. This is hacky as hell.
           // TODO: This is going to cause trouble if we have multiple cels with
           // the same name, but they have different palettes applied.
-          // Could make sure that the palette of the object and the cel match
+          // Could make sure that both the palette of the object and the
+          // cel match
           if (matches(objCels[j], cels[k], this.cels[k])) {
             if (this.cels[k] && this.cels[k].obj) {
               console.log('already matched')
@@ -110,24 +111,14 @@ class KiSSDoll {
 
   initCanvases (size) {
     const drawcanvas = document.getElementById('screen')
-    const drawctxt = drawcanvas.getContext('2d')
-    drawcanvas.style.width = size.x + 'px'
-    drawcanvas.style.height = size.y + 'px'
-    drawcanvas.width = size.x
-    drawcanvas.height = size.y
+    setCanvasSize(drawcanvas, size)
 
     const ghostcanvas = document.getElementById('ghost')
-    const ghostctxt = ghostcanvas.getContext('2d')
-    ghostcanvas.style.width = size.x + 'px'
-    ghostcanvas.style.height = size.y + 'px'
-    ghostcanvas.width = size.x
-    ghostcanvas.height = size.y
-    ghostcanvas.style.background = 'blue'
-    ghostcanvas.style.display = 'none'
+    setCanvasSize(ghostcanvas, size)
 
-    this.ctxt = drawctxt
     this.canvas = drawcanvas
-    this.ghost = ghostctxt
+    this.ctxt = drawcanvas.getContext('2d')
+    this.ghost = ghostcanvas.getContext('2d')
   }
 
   getSelectedObject (pos) {
@@ -148,10 +139,7 @@ class KiSSDoll {
   }
 
   getObjectPosition (obj) {
-    return {
-      x: obj.positions[this.currentSet].x,
-      y: obj.positions[this.currentSet].y
-    }
+    return obj.positions[this.currentSet]
   }
 
   moveObject (obj, x, y) {
@@ -163,7 +151,7 @@ class KiSSDoll {
 
   update (newSet) {
     // Update current set if new set is given
-    if (newSet) { this.currentSet = newSet }
+    if (typeof newSet !== 'undefined') { this.currentSet = newSet }
 
     // Update cels
     for (let i = 0; i < this.objs.length; i++) {
@@ -206,6 +194,13 @@ function updateSets (currentSet) {
       sets[i].style.color = 'grey'
     }
   }
+}
+
+function setCanvasSize (canvas, size) {
+  canvas.style.width = size.x + 'px'
+  canvas.style.height = size.y + 'px'
+  canvas.width = size.x
+  canvas.height = size.y
 }
 
 export { KiSSDoll }
