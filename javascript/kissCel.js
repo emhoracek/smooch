@@ -1,4 +1,7 @@
-
+// A KiSS Cel represents each instance of an image appearing in the
+// doll. It doesn't represent the image file itself. So a single
+// image can appear multiple times in multiple objects as different
+// KiSSCels
 class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
     this.obj = obj
@@ -57,11 +60,13 @@ class KiSSCel {
   }
 
   update (currentSet) {
+    this.currentSet = currentSet
     if (this.sets.indexOf(currentSet) === -1) {
       this.visible = false
     } else {
       this.visible = true
     }
+    this.position = this.positions[currentSet]
     if (this.name === 'blink') {
       this.visible = false
     }

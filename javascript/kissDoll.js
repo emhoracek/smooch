@@ -77,7 +77,6 @@ class KiSSDoll {
       this.colorids[colorid] = i
       objs[i].color = { red: red, green: green, blue: blue, alpha: 255 }
 
-      // now lets go through the cels
       const objCels = objs[i].cels
       // for each cel in the obj, find that cel in the celData list
       for (let j = 0; j < objCels.length; j++) {

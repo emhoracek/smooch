@@ -10,8 +10,6 @@ class KiSSObject {
 
   update (currentSet) {
     for (let i = 0; i < this.cels.length; i++) {
-      this.cels[i].currentSet = currentSet
-      this.cels[i].position = this.positions[currentSet]
       this.cels[i].update(currentSet)
     }
   }
