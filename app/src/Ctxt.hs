@@ -22,6 +22,7 @@ data Ctxt = Ctxt { _req           :: FnRequest
                  , _sessionKey    :: V.Key SmoochSession
                  , _library       :: Library Ctxt
                  , _substitutions :: Substitutions Ctxt
+                 , _skipLogin     :: Maybe Text
                  , _pool          :: Pool PG.Connection }
 makeLenses ''Ctxt
 

@@ -38,10 +38,11 @@ initializer = do
                                                    dbPass
                                                    dbName))
             PG.close 1 60 20
+  skipLoginUser <- C.lookup conf "skip-login-user"
   lib <- loadTemplates "templates" defaultOverrides
   vaultKey <- V.newKey
   let globalSubs = subs [("if", ifFill)]
-  return (Ctxt defaultFnRequest vaultKey lib globalSubs dbPool)
+  return (Ctxt defaultFnRequest vaultKey lib globalSubs skipLoginUser dbPool)
 
 app :: IO Application
 app = do
