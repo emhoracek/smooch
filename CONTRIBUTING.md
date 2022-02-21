@@ -238,9 +238,26 @@ This will install the correct Haskell version (this will take a while if you don
 
 ### Setting up your database
 
-Smooch uses a PostgreSQL database. You can find detailed installation guides on
-the [PostgreSQL wiki](https://wiki.postgresql.org/wiki/Detailed_installation_guides).
+Smooch uses a PostgreSQL database. You can set up your databases automatically
+with Docker Compose or manually.
 
+#### Docker Compose
+
+If you use Docker, you can use Docker Compose to set up your database. Just run
+`docker-compose up` to start up a PostgreSQL container with all the needed users and
+databases.
+
+Then, to add the tables, run:
+
+```
+stack exec migrate devel up
+stack exec migrate test up
+```
+
+#### Manual setup
+
+You can find detailed installation guides on
+the [PostgreSQL wiki](https://wiki.postgresql.org/wiki/Detailed_installation_guides).
 Once Postgres is installed, create a user:
 
 ```
