@@ -17,36 +17,28 @@ data KissData = KissData { kMemory     :: Int
                          , kBackground :: Color
                          , kPalettes   :: [PaletteFilename]
                          , kWindowSize :: (Int, Int)
-                         , kObjects    :: [KissObject]
-                         , kCels       :: [KissCel] }
+                         , kCels       :: [KissCel]
+                         , kPositions  :: [KissSetPos] }
     deriving (Eq, Show)
 instance ToJSON KissData where
-    toJSON (KissData _ border bg _ win objs cels) =
+    toJSON (KissData _ border bg _ win cels pos) =
         object["window_size" .= win,
-               "objs" .= objs,
                "border" .= border,
                "background" .= bg,
-               "cels" .= cels]
+               "cels" .= cels,
+               "positions" .= pos]
 
 data CNFKissData = CNFKissData { cnfkMemory     :: Int,
                                  cnfkBorder     :: Int,
                                  cnfkPalettes   :: [PaletteFilename],
                                  cnfkWindowSize :: (Int, Int),
-                                 cnfkObjects    :: [KissObject] }
+                                 cnfkCels       :: [KissCel],
+                                 cnfSetPos      :: [KissSetPos]}
     deriving (Eq, Show)
 
-data KissObject = KissObject {
-                    objNum   :: Int,
-                    objCels :: [KissCel],
-                    objPos   :: [SetPos] }
-    deriving (Eq, Show)
-instance ToJSON KissObject where
-    toJSON (KissObject num cels pos) =
-        object["id" .= num,
-               "cels" .= toJSON cels,
-               "positions" .= toJSON pos]
-
+-- The CNF file doesn't have the cel offset (that is stored in the cel file)
 data CNFKissCel = CNFKissCel {
+  cnfCelMark    :: Int,
   cnfCelFix     :: Int,
   cnfCelName    :: String,
   cnfCelPalette :: Int,
@@ -55,6 +47,7 @@ data CNFKissCel = CNFKissCel {
   deriving (Eq, Show)
 
 data KissCel = KissCel {
+                    celMark    :: Int,
                     celFix     :: Int,
                     celName    :: String,
                     celPalette :: Int,
@@ -63,8 +56,9 @@ data KissCel = KissCel {
                     celOffset  :: SetPos}
     deriving (Eq, Show)
 instance ToJSON KissCel where
-    toJSON (KissCel fix name pal sets alpha offset) =
-        object["fix" .= fix,
+    toJSON (KissCel mark fix name pal sets alpha offset) =
+        object["mark" .= mark,
+               "fix" .= fix,
                "name" .= name,
                "palette" .= pal,
                "sets" .= toJSON sets,
@@ -87,7 +81,7 @@ data SetPos = Position {
     deriving (Eq, Show)
 instance ToJSON SetPos where
     toJSON (Position x y) = object ["x" .= x, "y" .= y]
-    toJSON NoPosition     = object ["x" .= (0 :: Int), "y" .= (0 :: Int) ]
+    toJSON NoPosition     = "no object"
 
 type PaletteFilename = String
 type CelFilename = String

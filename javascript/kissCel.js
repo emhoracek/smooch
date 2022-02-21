@@ -1,9 +1,12 @@
-
+// A KiSS Cel represents each instance of an image appearing in the
+// doll. It doesn't represent the image file itself. So a single
+// image can appear multiple times in multiple objects as different
+// KiSSCels
 class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
-    this.obj = obj
+    this.color = obj.color
     this.name = cel.name
-    this.mark = obj.id
+    this.mark = cel.mark
     this.fix = cel.fix
     this.position = obj.positions[0]
     this.positions = obj.positions
@@ -37,7 +40,7 @@ class KiSSCel {
     const data = ghostImageData.data
 
     // Fill ghost image data with obj color
-    const color = this.obj.color
+    const color = this.color
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
@@ -57,11 +60,13 @@ class KiSSCel {
   }
 
   update (currentSet) {
+    this.currentSet = currentSet
     if (this.sets.indexOf(currentSet) === -1) {
       this.visible = false
     } else {
       this.visible = true
     }
+    this.position = this.positions[currentSet]
     if (this.name === 'blink') {
       this.visible = false
     }

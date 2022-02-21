@@ -51,7 +51,7 @@ defaultPalette = lookupPalette 0
 -- Converting CNF lines to useable KiSS data
 linesToScript :: [CNFLine] -> CNFKissData
 linesToScript xs =
-    CNFKissData memory border palettes windowSize objects
+    CNFKissData memory border palettes windowSize cels positions
     where -- memory and border are optional
           memory   = fromMaybe 0 (listToMaybe [ a | CNFMemory a <- xs ])
           border   = fromMaybe 0 (listToMaybe [ a | CNFBorder a <- xs ])
@@ -61,42 +61,14 @@ linesToScript xs =
           windowSize = fromMaybe (600, 480) (listToMaybe [ a | CNFWindowSize a <- xs ])
           -- turn object #, cel, set positions to objects
           positions = [ a | CNFSetPos a <- xs ]
-          objects = linesToObjects [ a | CNFCel a <- xs ] positions
+          cels = [ cnfToKissCel (0,0) a | CNFCel a <- xs ]
 
 cnfToKissCel :: (Int, Int) -> CNFKissCel ->  KissCel
 cnfToKissCel (xoff, yoff) CNFKissCel{..} =
-  KissCel cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
-
-linesToObjects :: [(Int, CNFKissCel)] -> [KissSetPos] -> [KissObject]
-linesToObjects xs ys =
-    map (\(objNo,cels,pos) -> KissObject objNo (addDefaultPosition cels) pos) combinedCels
-    where addDefaultPosition = map (cnfToKissCel (0,0))
-          combinedCels = combineCelsAndPositions xs objpos
-          objpos = addObjNumberToPositions (groupPositionsByObj ys)
-
--- A CNF's [KissSetPos] is 10 lists each containing one SetPos for each integer
--- between 0 and the highest number given to an Object.
--- This turns them into many lists of 10 SetPos. Later the lists will
--- be zipped up with cels, and any SetPos without cels will be discarded.
-groupPositionsByObj :: [KissSetPos] -> [[SetPos]]
-groupPositionsByObj xs = transpose $ map (\(KissSetPos _ pos) -> pos) xs
-
-addObjNumberToPositions :: [[SetPos]] -> [(Int, [SetPos])]
-addObjNumberToPositions xs = reverse $ foldl (\acc objPos -> (length acc, objPos):acc) [] xs
-
-combineCelsAndPositions :: [(Int, CNFKissCel)]
-                        -> [(Int, [SetPos])]
-                        -> [(Int, [CNFKissCel], [SetPos])]
-combineCelsAndPositions objs positions =
-  reverse $ foldl combine [] positions
-  where findCels objNum = map snd $ filter (\(n,_) -> n == objNum) objs
-        combine acc (objNumber, pPositions) =
-          case findCels objNumber of
-            [] -> acc
-            cels ->  (objNumber, cels, pPositions) : acc
+  KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
 
 linesToCels :: [CNFLine] -> [CNFKissCel]
-linesToCels xs = [ snd a | CNFCel a <- xs ]
+linesToCels xs = [ a | CNFCel a <- xs ]
 
 -- KiSS Parser Combinators
 
@@ -104,14 +76,14 @@ linesToCels xs = [ snd a | CNFCel a <- xs ]
 parseCelLine :: Parser CNFLine
 parseCelLine = do
     char '#'
-    num <- many digit
     cel <- parseCel
     optional parseComment
     skipMany digit
-    return $ CNFCel (read num, cel)
+    return $ CNFCel cel
 
 parseCel :: Parser CNFKissCel
 parseCel = do
+    mark <- many1 digit
     fix <- option 0 parseFix
     skipMany1 space
     file <- many1 (noneOf ". ")
@@ -122,7 +94,7 @@ parseCel = do
     sets <- option [0..9] parseSets
     skipMany space
     transp <- option 0 (try parseTransp)
-    return $ CNFKissCel fix file palette sets transp
+    return $ CNFKissCel (read mark) fix file palette sets transp
 
 {--
 caseInsensitiveChar c = char (toLower c) <|> char (toUpper c)
@@ -224,7 +196,7 @@ data CNFLine = CNFMemory Int
              | CNFBorder Int
              | CNFPalette String
              | CNFWindowSize (Int, Int)
-             | CNFCel (Int, CNFKissCel)
+             | CNFCel CNFKissCel
              | CNFSetPos KissSetPos
              | CNFComment String
              | CNFJunkLine

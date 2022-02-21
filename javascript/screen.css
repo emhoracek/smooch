@@ -1,146 +1,172 @@
 html {
-    box-sizing: border-box;
-    font-size: 18px;
-  }
+  box-sizing: border-box;
+  font-size: 18px;
+}
 
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
-  body {
-    font-family: helvetica, arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  h2 {
-    font-size: 1.5em;
-  }
+body {
+  font-family: helvetica, arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+h2 {
+  font-size: 1.5em;
+}
 
-  p {
-    font-weight: lighter;
-    margin: .5em 0;
-  }
+p {
+  font-weight: lighter;
+  margin: 0.5em 0;
+}
 
-  main {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-  }
+main {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
 
-  section {
-    display: flex;
-    flex-direction: column;
-    padding: 0 1em;
-  }
+section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+}
 
-  /*Header*/
-  header {
-    padding: 1em;
-  }
+/*Header*/
+header {
+  padding: 1em;
+}
 
-  .logo {
-    font-size: 2em;
-    padding: .25em .5em;
-    border-bottom: 1px solid black;
-  }
+.logo {
+  font-size: 2em;
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid black;
+}
 
-  /*Authentication*/
-  .authenticate {
-    align-items: center;
-    justify-content: flex-start;
-    width: 30%;
-  }
+/*Authentication*/
+.authenticate {
+  align-items: center;
+  justify-content: flex-start;
+  width: 30%;
+}
 
-  .authenticate > * {
-    border: 3px solid black;
-    margin-bottom: 3em;
-    padding: 1em;
-    width: 100%;
-  }
+.authenticate > * {
+  border: 3px solid black;
+  margin-bottom: 3em;
+  padding: 1em;
+  width: 100%;
+}
 
-  form {
-    margin: .5em 0;
-  }
+form {
+  margin: 0.5em 0;
+}
 
-  .field {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+.field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .field label {
-    flex: 1 0 120px;
-    max-width: 220px;
-  }
+.field label {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
 
-  .field > label + * {
-    flex: 1 0 220px;
-  }
+.field > label + * {
+  flex: 1 0 220px;
+}
 
-  .submit {
-    background: lightpink;
-    border: none;
-    font-weight: bolder;
-    letter-spacing: .09em;
-    margin: .5em 0;
-    padding: 8px 16px;
-    text-transform: uppercase;
-  }
+.submit {
+  background: lightpink;
+  border: none;
+  font-weight: bolder;
+  letter-spacing: 0.09em;
+  margin: 0.5em 0;
+  padding: 8px 16px;
+  text-transform: uppercase;
+}
 
-  /*Demo doll*/
-  .demo {
-    width: 60%;
-  }
+/*Demo doll*/
+.demo {
+  width: 60%;
+}
 
-  #loading {
-    background: white;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    text-align: center
-  }
+#loading {
+  background: white;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  text-align: center;
+}
 
-  #wrapper {
-    display: flex;
-    flex-direction: column;
-    /*justify-content: center;*/
-    /*height: 100vh;*/
-  }
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  /*height: 100vh;*/
+}
 
-  #sets {
-    display: flex;
-  }
+#sets {
+  display: flex;
+}
 
-  #sets ul { padding-left: 0;  }
+#sets ul {
+  padding-left: 0;
+}
 
-  li { display: inline;
-       margin: 0.25em; }
-  a.set { cursor: pointer;
-          color: grey;
-          padding: 0.5em;
-          background-color: lightpink }
+li {
+  display: inline;
+  margin: 0.25em;
+}
+a.set {
+  cursor: pointer;
+  color: grey;
+  padding: 0.5em;
+  background-color: lightpink;
+}
 
-  a.set:hover { color: grey;
-                background-color: pink }
+a.set:hover {
+  color: grey;
+  background-color: pink;
+}
 
-  #borderarea{ padding: 1em;
-               margin: 0;
-               flex-grow: 1;
-               display: flex;
-               /*overflow: auto; */
-             }
+#borderarea {
+  padding: 1em;
+  margin: 0;
+  flex-grow: 1;
+  display: flex;
+  /*overflow: auto; */
+}
 
-  #playarea { background: white;
-              border: 1px solid black;
-              margin: auto }
+#playarea {
+  background: white;
+  border: 1px solid black;
+  margin: auto;
+}
 
-  #footer { text-align: center; margin: 1em; }
+#ghost {
+    background: blue;
+    display: none;
+}
 
-  img { position: absolute; display: none }
+#footer {
+  text-align: center;
+  margin: 1em;
+}
 
-  a { color: grey }
+img {
+  position: absolute;
+  display: none;
+}
+
+a {
+  color: grey;
+}

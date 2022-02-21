@@ -99,7 +99,7 @@ createCels staticDir = do
   log' "Wrote JSON"
   return realCelData
   where convertCels pals cels base = do
-          mapM (\(CNFKissCel _ name pal _ _) -> convertCel pals pal name base) cels
+          mapM (\(CNFKissCel _ _ name pal _ _) -> convertCel pals pal name base) cels
         convertCel palettes palNum cel base = do
           pal <- lookupPalette palNum palettes
           paletteEntries <- liftIO $ BS.readFile (base <> "/" <> pal)
@@ -117,12 +117,12 @@ createCels staticDir = do
 addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCel] ->
                        [KissCel]
 addOffsetsToCelData offsets cels =
-  [ KissCel cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
+  [ KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | CNFKissCel{..} <- cels, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
 
 addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
-addCelsAndColorsToKissData (CNFKissData m _ p ws o) bgColor borderColor cels =
-  KissData m borderColor bgColor p ws o cels
+addCelsAndColorsToKissData (CNFKissData m _ p ws o sp) bgColor borderColor cels =
+  KissData m borderColor bgColor p ws o sp
 
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> ExceptT Text IO String

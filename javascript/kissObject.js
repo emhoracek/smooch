@@ -1,24 +1,27 @@
 class KiSSObject {
-  constructor (obj) {
+  constructor (mark, color, positions) {
     this.currentSet = 0
-    this.positions = obj.positions
-    this.position = obj.positions[this.currentSet]
-    this.cels = obj.cels
+    this.color = color
+    this.positions = positions
+    this.cels = []
 
     return this
   }
 
   update (currentSet) {
+    this.currentSet = currentSet
     for (let i = 0; i < this.cels.length; i++) {
-      this.cels[i].currentSet = currentSet
-      this.cels[i].position = this.positions[currentSet]
       this.cels[i].update(currentSet)
     }
   }
 
-  setPosition (set, x, y) {
-    this.positions[set].x = x
-    this.positions[set].y = y
+  get position () {
+    return this.positions[this.currentSet]
+  }
+
+  setPosition (x, y) {
+    this.positions[this.currentSet].x = x
+    this.positions[this.currentSet].y = y
   }
 }
 
