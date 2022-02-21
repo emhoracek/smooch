@@ -84,10 +84,13 @@ getUserByEmail ctxt email = listToMaybe <$>
 
 getLoggedInUser :: Ctxt -> IO (Maybe User)
 getLoggedInUser ctxt = do
-  mUsername <- getFromSession ctxt "user"
-  case mUsername of
+  case ctxt ^. skipLogin of
     Just username -> getUserByUsername ctxt username
-    Nothing -> return Nothing
+    Nothing -> do
+      mUsername <- getFromSession ctxt "user"
+      case mUsername of
+        Just username -> getUserByUsername ctxt username
+        Nothing -> return Nothing
 
 setLoggedInUser :: Ctxt -> User -> IO ()
 setLoggedInUser ctxt =
