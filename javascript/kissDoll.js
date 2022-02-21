@@ -43,17 +43,16 @@ class KiSSDoll {
         to be drawn in a certain order to get the right layering effect. */
 
     cnfCels.reverse()
-    const cnfObjs = []
 
     cnfCels.forEach(cnfCel => {
       // Objects are indexed by their "mark". This is what groups cels together.
       // First check if there's already an object with that mark.
-      const existingObj = cnfObjs[cnfCel.mark]
+      const existingObj = this.objs[cnfCel.mark]
       if (existingObj) {
         // If object already exists, create a cel that points to that object.
         const newCel = new KiSSCel(existingObj, cnfCel, this, incLoaded)
         // Add the new cel to the object's list of cels.
-        existingObj.cels.push()
+        existingObj.cels.push(newCel)
         // Add the new cel to the doll's list of cels.
         this.cels.push(newCel)
       } else {
