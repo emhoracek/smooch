@@ -26,7 +26,7 @@ class KiSSDoll {
     this.objs = []
     this.cels = []
     this.colorids = []
-    this.init(kissData.objs, kissData.cels, incLoaded)
+    this.init(kissData.cels, kissData.positions, incLoaded)
     initSetClicks(this)
 
     // Update and draw
@@ -36,76 +36,45 @@ class KiSSDoll {
     return this
   }
 
-  init (objs, cels, incLoaded) {
+  init (cnfCels, cnfPositions, incLoaded) {
     /* Cels have to be kept in a separate list from the objects.
-            This is because objects are the things that have click handlers,
-            get dragged, change position, etc. But cels are the things that
-            are drawn, and they have to be drawn in a certain order to preserve
-            the layering effect. */
+        This is because objects are the things that get dragged, change
+        position, etc. But cels are the things that are drawn, and they have
+        to be drawn in a certain order to get the right layering effect. */
 
-    // Helper function for matching objects and cels
-    const matches = function (objCel, cel) {
-      const unmatched = !objCel.matched
-      const nameMatches = objCel.name === cel.name
-      const palMatches = objCel.palette === cel.palette
-      return unmatched && nameMatches && palMatches
-    }
+    cnfCels.reverse()
+    const cnfObjs = []
 
-    /* Go through each KiSS object, add information from the object to the
-            cels within the object, then add those cels to the list. */
+    cnfCels.forEach(cnfCel => {
+      // Objects are indexed by their "mark". This is what groups cels together.
+      // First check if there's already an object with that mark.
+      const existingObj = cnfObjs[cnfCel.mark]
+      if (existingObj) {
+        // If object already exists, create a cel that points to that object.
+        const newCel = new KiSSCel(existingObj, cnfCel, this, incLoaded)
+        // Add the new cel to the object's list of cels.
+        existingObj.cels.push()
+        // Add the new cel to the doll's list of cels.
+        this.cels.push(newCel)
+      } else {
+        // If the object doesn't already exist, we need to create it.
 
-    /* Set color id initial values */
-    let red = 0
-    let blue = 0
-    let green = 0
+        // Create a color to identify the object.
+        const color = numberToColor(cnfCel.mark)
+        const colorid = color.red + color.green + color.blue + 255
+        this.colorids[colorid] = cnfCel.mark
 
-    for (let i = 0; i < objs.length; i++) {
-      // create a unique color for each object
-      // and register it in the colorids array
-      // supports up to 255*3 objects
-      if (i < 255) {
-        red = i
-      } else if (i > 255 && i < 255 * 2) {
-        red = 0
-        green = i
-      } else if (i > 255 * 2 && i < 255 * 3) {
-        green = 0
-        blue = i
+        // Create the new object and new cel
+        const newObj = new KiSSObject(cnfCel.mark, color, cnfPositions.map(sp => sp.positions[cnfCel.mark]))
+        const newCel = new KiSSCel(newObj, cnfCel, this, incLoaded)
+        // Add the new cel to the object's list of cels.
+        newObj.cels.push(newCel)
+        // Add the object to the doll's list of objects.
+        this.objs[cnfCel.mark] = newObj
+        // Add the cel to the doll's list of cels.
+        this.cels.push(newCel)
       }
-
-      const colorid = red + green + blue + 255
-      this.colorids[colorid] = i
-      objs[i].color = { red: red, green: green, blue: blue, alpha: 255 }
-
-      const objCels = objs[i].cels
-      // for each cel in the obj, find that cel in the celData list
-      for (let j = 0; j < objCels.length; j++) {
-        for (let k = 0; k < cels.length; k++) {
-          // The only way we can match cels is by name.
-          // If multiple objects share the same cel, the cel list has
-          // multiple copies of the cel, and we skip cels that are already
-          // matched. This is hacky as hell.
-          // TODO: This is going to cause trouble if we have multiple cels with
-          // the same name, but they have different palettes applied.
-          // Could make sure that both the palette of the object and the
-          // cel match
-          if (matches(objCels[j], cels[k], this.cels[k])) {
-            if (this.cels[k] && this.cels[k].obj) {
-              console.log('already matched')
-            } else {
-              objCels[j] = new KiSSCel(objs[i], cels[k], this, incLoaded)
-              this.cels[k] = objCels[j]
-              objCels[j].matched = true
-            }
-          }
-        }
-      }
-
-      this.objs[i] = new KiSSObject(objs[i])
-    }
-
-    // cels have to be drawn in reverse order (drawing lowest items first)
-    this.cels.reverse()
+    })
   }
 
   initCanvases (size) {
@@ -142,7 +111,7 @@ class KiSSDoll {
   }
 
   moveObject (obj, x, y) {
-    obj.setPosition(this.currentSet, x, y)
+    obj.setPosition(x, y)
 
     this.update()
     this.draw()
@@ -154,7 +123,12 @@ class KiSSDoll {
 
     // Update cels
     for (let i = 0; i < this.objs.length; i++) {
-      this.objs[i].update(this.currentSet)
+      // have to check if object exists first, because we are using
+      // the object id ("mark") as the index for the array, so
+      // many indexes are skipped.
+      if (this.objs[i]) {
+        this.objs[i].update(this.currentSet)
+      }
     }
   }
 
@@ -200,6 +174,28 @@ function setCanvasSize (canvas, size) {
   canvas.style.height = size.y + 'px'
   canvas.width = size.x
   canvas.height = size.y
+}
+
+function numberToColor (i) {
+  /* Set color id initial values */
+  let red = 0
+  let blue = 0
+  let green = 0
+
+  // create a unique color for each object
+  // and register it in the colorids array
+  // supports up to 255*3 objects
+  if (i < 255) {
+    red = i
+  } else if (i > 255 && i < 255 * 2) {
+    red = 0
+    green = i
+  } else if (i > 255 * 2 && i < 255 * 3) {
+    green = 0
+    blue = i
+  }
+
+  return { red: red, green: green, blue: blue, alpha: 255 }
 }
 
 export { KiSSDoll }

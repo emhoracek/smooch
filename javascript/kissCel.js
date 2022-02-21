@@ -4,9 +4,9 @@
 // KiSSCels
 class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
-    this.obj = obj
+    this.color = obj.color
     this.name = cel.name
-    this.mark = obj.id
+    this.mark = cel.mark
     this.fix = cel.fix
     this.position = obj.positions[0]
     this.positions = obj.positions
@@ -40,7 +40,7 @@ class KiSSCel {
     const data = ghostImageData.data
 
     // Fill ghost image data with obj color
-    const color = this.obj.color
+    const color = this.color
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
