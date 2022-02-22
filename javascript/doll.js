@@ -2,10 +2,10 @@ import { KiSSDoll } from './kissDoll'
 import { DragAndDrop } from './dragAndDrop'
 
 window.addEventListener('load', function () {
-  /* globals kissJson */
+  /* globals kissJson, doll */
   let loaded = 0
   const totalCels = kissJson.cels.length
-  const doll = new KiSSDoll(kissJson, () => { loaded += 1 })
+  doll = new KiSSDoll(kissJson, () => { loaded += 1 })
   const dragger = new DragAndDrop(doll)
   dragger.initialize()
 
