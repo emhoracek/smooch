@@ -1,4 +1,3 @@
-
 class DragAndDrop {
   constructor (doll) {
     this.dragHandler = false

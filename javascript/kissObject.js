@@ -19,6 +19,10 @@ class KiSSObject {
     return this.positions[this.currentSet]
   }
 
+  get fixed () {
+    return this.cels.some(c => c.fix > 0)
+  }
+
   setPosition (x, y) {
     this.positions[this.currentSet].x = x
     this.positions[this.currentSet].y = y
