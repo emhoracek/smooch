@@ -25,20 +25,34 @@ Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
 
 ## Roadmap
 
-  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly.
-      * Lots of dolls are not quite working still, especially multi-palette
-      dolls.
-  * Figure out how NOT to use shell commands to unzip LHAs or convert cels.
-      * We now have an LHA unzipper on AWS Lambda, but need to make the app put the archives on S3 and retrieve the unzipped sets from another S3 bucket.
-      * We also have a cel parser, but the set processing is set up to call it yet.
-      * We could also trying serving cels as binary blobs and letting JavaScript display them.
-  * Support multiple palettes (dependent on how the above situation
-    with cels as blobs vs pngs turns out)
-  * Figure out how users view dolls, whether dolls are stored on
-    server, etc.
-  * Release a usable vanilla KiSS viewer.
-  * Allow users to edit sets.
-  * Allow users to create sets from scratch.
+  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly
+      * This is mostly done! Single
+  * Figure out how NOT to use shell commands to unzip LHAs.
+      * We now have an LHA unzipper on AWS Lambda, but need to make the app
+        put the archives on S3 and retrieve the unzipped sets from another
+        S3 bucket
+  * Support "fix" feature (cels can be "fixed" at first, but clicking on the
+    cel reduces the fix value)
+  * Support multiple palettes
+  * Support expansion dolls
+      * Users can open one doll, then add a second doll to "expand" the
+        original doll
+  * Figure out how users access dolls
+      * Dolls are uploaded to the server, but are all dolls public? Are all
+        dolls private to specific users?
+  * Release a usable vanilla KiSS viewer
+  * Allow users to create sets from scratch
+      * Users can upload a PSD file.
+          * PSDs must be indexed to a single palette.
+          * The PSD palette becomes a KCF file.
+          * Each layer becomes a separate cel with the name of the layer
+          * All the cels are listed in a CNF that is editable in the browser
+      * A user can download their own sets as LZH archives viewable in any
+        KiSS viewer
+  * Allow users to edit their own dolls
+      * Users can click a button to enter "edit" mode
+      * Users can modify the position and layering of cels in sets
+      * Users can change fix values for cels
   * Add FKiSS1, FKiSS2, FKiSS3, CherryKiSS, Enhanced Palettes, FKiSS4,
     FKiSS5...
 
@@ -48,7 +62,7 @@ I (Libby/emhoracek/horrorcheck) started and maintain this project but it wouldn'
 
  * the international KiSS community
    * the Japanese KiSS community that developed KiSS as an open standard in the first place
-   * Dov Sherman, who maintained the Big KiSS Page (an incredible resource) for many years
+   * Dov Sherman, who maintained Otakuworld's [Big KiSS Page](https://www.otakuworld.com/kiss) (an incredible resource) for many years
    * Stephan Lepisto, who has kept the Big KiSS Page going even after the community died out
    * Nick Lamb, who wrote GnomeKiSS, which I learned and copied a lot from for cel2pnm
    * William Miles, who wrote UltraKiSS, the Java app that I use as a benchmark for compatibility
