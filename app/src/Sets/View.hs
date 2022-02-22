@@ -27,4 +27,5 @@ celsSplice dir cels =
 celImageSplice :: FilePath -> KissCel -> Substitutions Ctxt
 celImageSplice dir cel =
   subs [("cel-name", textFill $ T.pack $ celName cel)
-       ,("dir", textFill $ T.pack dir)]
+       ,("pal-num", textFill $ T.pack $ show $ celPalette cel)
+       ,("dir", textFill $ T.pack dir <> "/palette" <> T.pack (show $ celPalette cel))]

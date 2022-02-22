@@ -107,7 +107,9 @@ createCels staticDir = do
           let celFile = base <> "/" <> cel <> ".cel"
           celData <- liftIO $ BS.readFile celFile
           (celHeader, celPixels) <- PC.parseCel celData
-          let pngFile = base <> "/" <> cel <> ".png"
+          let palDir = base <> "/palette" <> show palNum
+          liftIO $ createDirectoryIfMissing True palDir
+          let pngFile = palDir <> "/" <> cel <> ".png"
           liftIO $ celToPng pngFile palData celHeader celPixels
           let xOffset = fromIntegral $ PC.celXoffset celHeader
           let yOffset = fromIntegral $ PC.celYoffset celHeader

@@ -31,7 +31,7 @@
            <canvas id="ghost"></canvas>
            <div id ="celImages">
              <celImages>
-               <img src="/${dir}/${cel-name}.png" id="${cel-name}" />
+               <img src="/${dir}/${cel-name}.png" id="${cel-name}-${pal-num}" />
              </celImages>
            </div>
       </div>
