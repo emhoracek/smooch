@@ -1,0 +1,288 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="luccabg-9" src="palette9/luccabg.png"/>
+
+               <img id="roboshrn-8" src="palette8/roboshrn.png"/>
+
+               <img id="magus-7" src="palette7/magus.png"/>
+
+               <img id="boxbg-6" src="palette6/boxbg.png"/>
+
+               <img id="fight-5" src="palette5/fight.png"/>
+
+               <img id="name-0" src="palette0/name.png"/>
+
+               <img id="logo-0" src="palette0/logo.png"/>
+
+               <img id="lsmall-0" src="palette0/lsmall.png"/>
+
+               <img id="logogoth-4" src="palette4/logogoth.png"/>
+
+               <img id="sailor-2" src="palette2/sailor.png"/>
+
+               <img id="info-0" src="palette0/info.png"/>
+
+               <img id="text1-0" src="palette0/text1.png"/>
+
+               <img id="shadow-0" src="palette0/shadow.png"/>
+
+               <img id="hat1b-1" src="palette1/hat1b.png"/>
+
+               <img id="tiarab-10" src="palette10/tiarab.png"/>
+
+               <img id="lbkhair2-0" src="palette0/lbkhair2.png"/>
+
+               <img id="lbkhair2-11" src="palette11/lbkhair2.png"/>
+
+               <img id="boot1b-1" src="palette1/boot1b.png"/>
+
+               <img id="boot1b-4" src="palette4/boot1b.png"/>
+
+               <img id="sbootsb-10" src="palette10/sbootsb.png"/>
+
+               <img id="sock1b-0" src="palette0/sock1b.png"/>
+
+               <img id="sock2b-1" src="palette1/sock2b.png"/>
+
+               <img id="coat1b-4" src="palette4/coat1b.png"/>
+
+               <img id="larms-0" src="palette0/larms.png"/>
+
+               <img id="larms-2" src="palette2/larms.png"/>
+
+               <img id="larms-3" src="palette3/larms.png"/>
+
+               <img id="lglove-10" src="palette10/lglove.png"/>
+
+               <img id="shortb-0" src="palette0/shortb.png"/>
+
+               <img id="shortb-3" src="palette3/shortb.png"/>
+
+               <img id="tight2b-2" src="palette2/tight2b.png"/>
+
+               <img id="tight2b-3" src="palette3/tight2b.png"/>
+
+               <img id="tight2b-2" src="palette2/tight2b.png"/>
+
+               <img id="tight4b-4" src="palette4/tight4b.png"/>
+
+               <img id="fuku1b-10" src="palette10/fuku1b.png"/>
+
+               <img id="panty1b-0" src="palette0/panty1b.png"/>
+
+               <img id="bragb-4" src="palette4/bragb.png"/>
+
+               <img id="bra1b-0" src="palette0/bra1b.png"/>
+
+               <img id="choke1b-4" src="palette4/choke1b.png"/>
+
+               <img id="bag1b-1" src="palette1/bag1b.png"/>
+
+               <img id="bag1b-4" src="palette4/bag1b.png"/>
+
+               <img id="band1b-1" src="palette1/band1b.png"/>
+
+               <img id="shirt2b-1" src="palette1/shirt2b.png"/>
+
+               <img id="tunic1b-1" src="palette1/tunic1b.png"/>
+
+               <img id="skirt1b-1" src="palette1/skirt1b.png"/>
+
+               <img id="skirt2b-10" src="palette10/skirt2b.png"/>
+
+               <img id="skirt3b-3" src="palette3/skirt3b.png"/>
+
+               <img id="jean1b-1" src="palette1/jean1b.png"/>
+
+               <img id="jean1b-4" src="palette4/jean1b.png"/>
+
+               <img id="shirt1b-0" src="palette0/shirt1b.png"/>
+
+               <img id="shirt1b-3" src="palette3/shirt1b.png"/>
+
+               <img id="lbkhair-0" src="palette0/lbkhair.png"/>
+
+               <img id="lbkhair-2" src="palette2/lbkhair.png"/>
+
+               <img id="lbod1-0" src="palette0/lbod1.png"/>
+
+               <img id="lbod1-2" src="palette2/lbod1.png"/>
+
+               <img id="lbod1-3" src="palette3/lbod1.png"/>
+
+               <img id="pantyg-4" src="palette4/pantyg.png"/>
+
+               <img id="panty1-0" src="palette0/panty1.png"/>
+
+               <img id="brag-4" src="palette4/brag.png"/>
+
+               <img id="bra1-0" src="palette0/bra1.png"/>
+
+               <img id="choke1-4" src="palette4/choke1.png"/>
+
+               <img id="tight5-2" src="palette2/tight5.png"/>
+
+               <img id="tight4-2" src="palette2/tight4.png"/>
+
+               <img id="tight3-2" src="palette2/tight3.png"/>
+
+               <img id="tight2-2" src="palette2/tight2.png"/>
+
+               <img id="tight2-3" src="palette3/tight2.png"/>
+
+               <img id="tight1-0" src="palette0/tight1.png"/>
+
+               <img id="bodysuit-3" src="palette3/bodysuit.png"/>
+
+               <img id="shorts-0" src="palette0/shorts.png"/>
+
+               <img id="shorts-3" src="palette3/shorts.png"/>
+
+               <img id="shirt3-2" src="palette2/shirt3.png"/>
+
+               <img id="shirt3-3" src="palette3/shirt3.png"/>
+
+               <img id="swim1-0" src="palette0/swim1.png"/>
+
+               <img id="swim1-2" src="palette2/swim1.png"/>
+
+               <img id="fuku1-10" src="palette10/fuku1.png"/>
+
+               <img id="sock2-1" src="palette1/sock2.png"/>
+
+               <img id="sock1-0" src="palette0/sock1.png"/>
+
+               <img id="shirt1-0" src="palette0/shirt1.png"/>
+
+               <img id="shirt1-3" src="palette3/shirt1.png"/>
+
+               <img id="jean1-1" src="palette1/jean1.png"/>
+
+               <img id="jean1-4" src="palette4/jean1.png"/>
+
+               <img id="boot1-1" src="palette1/boot1.png"/>
+
+               <img id="boot1-4" src="palette4/boot1.png"/>
+
+               <img id="sboots-10" src="palette10/sboots.png"/>
+
+               <img id="skirt3-3" src="palette3/skirt3.png"/>
+
+               <img id="skirt2-10" src="palette10/skirt2.png"/>
+
+               <img id="skirt1-1" src="palette1/skirt1.png"/>
+
+               <img id="tunic1-1" src="palette1/tunic1.png"/>
+
+               <img id="shirt2-1" src="palette1/shirt2.png"/>
+
+               <img id="coat1-4" src="palette4/coat1.png"/>
+
+               <img id="fukubow-10" src="palette10/fukubow.png"/>
+
+               <img id="bag1-1" src="palette1/bag1.png"/>
+
+               <img id="bag1-4" src="palette4/bag1.png"/>
+
+               <img id="band1-1" src="palette1/band1.png"/>
+
+               <img id="lhand-0" src="palette0/lhand.png"/>
+
+               <img id="lhand-2" src="palette2/lhand.png"/>
+
+               <img id="lhand-3" src="palette3/lhand.png"/>
+
+               <img id="rglove-10" src="palette10/rglove.png"/>
+
+               <img id="lface-0" src="palette0/lface.png"/>
+
+               <img id="lface-2" src="palette2/lface.png"/>
+
+               <img id="lfaceg-3" src="palette3/lfaceg.png"/>
+
+               <img id="lface2-0" src="palette0/lface2.png"/>
+
+               <img id="lface3-0" src="palette0/lface3.png"/>
+
+               <img id="glass-0" src="palette0/glass.png"/>
+
+               <img id="ear1-3" src="palette3/ear1.png"/>
+
+               <img id="ear2-3" src="palette3/ear2.png"/>
+
+               <img id="tiara-10" src="palette10/tiara.png"/>
+
+               <img id="lfrhair-0" src="palette0/lfrhair.png"/>
+
+               <img id="lfrhair-2" src="palette2/lfrhair.png"/>
+
+               <img id="lfrhair-3" src="palette3/lfrhair.png"/>
+
+               <img id="lfrhair-11" src="palette11/lfrhair.png"/>
+
+               <img id="hat1-1" src="palette1/hat1.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,271 @@
+;LuccaKISS (RELEASE 1.0)
+;-----------------------------
+;A Brief History of LuccaKISS
+
+;v0.1r -- 1-15-96 ...first release.
+
+; 1-14-96... psp died on me! might as well release.
+; 1-13-96... took out quake. too gratuitous.
+; 1-12-96... added transparent shadow, fishnets, facial exp.
+
+;v0.3b -- 1-11-96 ...new beta, includes backgrounds/themes
+
+; 1-11-96... added bg's, Quake, Senshi - compile new beta
+; 1-10-96... adding backgrounds
+
+;v0.2b -- 12-17-96 ...more outfits ...no theme rooms yet.
+;v0.1b -- 12-14-96 ...first prelim beta.
+
+
+
+;-------------------
+;LUCCA
+;-------------------
+;...from CHRONO TRIGGER
+;(a video RPG by SquareSoft, for Super Famicom / Super NES)
+;-------------------
+;KISS set by Bryan O'Malley
+;original character design by Toriyama Akira
+;(or, as my sister calls him, "Akira Tori Amos" :)
+;all art in the set by B. O'Malley
+;-------------------
+;project commenced December 12, 1996
+;project finished <not yet>
+;-------------------
+;Background images:
+; 0,4 - Lucca art by Toriyama
+; 1,2 - Chrono Trigger poster by Toriyama (motion-blurred)
+; 3,5 - 'Robo Shrine' scene, screenshot from Chrono Trigger
+; 8 - 'Tower of Magus' scene, screenshot from Chrono Trigger
+; 9 - Chrono Trigger box art (Japanese) by Toriyama, with logos
+;-------------------
+;  * * * * * * * * * * * * * * * * * * * * * *
+;  * Feel free to distribute this set.  Just *
+;  * don't change it, and don't charge money *
+;  *  for it. E-mail suggestions, comments,  *
+;  *  criticism, etc, to: BOMalley@Lonet.ca  *
+;  * * * * * * * * * * * * * * * * * * * * * *
+
+
+
+;-------------------
+;KISS data begins
+;-------------------
+
+(600,400)
+
+;PALETTES
+;filename.ext ;desc
+
+%lucca1.kcf   ;0
+%l2.kcf       ;1
+%l3.kcf       ;2
+%lgoth.kcf    ;3
+%lgoth2.kcf   ;4
+%bg.kcf       ;5
+%bg2.kcf      ;6
+%bg3.kcf      ;7
+%bg4.kcf      ;8
+%bg5.kcf      ;9
+%sailor.kcf   ;10
+%l4.kcf       ;11
+
+;ITEM CELS (WAY too many, and I'm not even DONE)
+;xx.xxxxx filename.ext *p :0 1 2 3 4 5 6 7 8 9 ;description
+
+;#44 beta.cel *10 :0 1 2 3 4 5 8 9
+#15 hat1.cel *1 :0 3 9                          ;coolhat-front
+
+#00.9999 lfrhair.cel *11:          5              ;front of hair/blonde
+#00.9999 lfrhair.cel *3 :                8        ;front of hair/goth
+#00.9999 lfrhair.cel *2 :        4                ;front of hair/blue
+#00.9999 lfrhair.cel    :0 1 2 3           9      ;front of hair
+
+#09 tiara.cel *10  :        4         9        ;SAILOR tiara
+#26 ear2.cel *3    :                8 9        ;earrings
+#02 ear1.cel *3    :                8 9        ;earrings
+#11 glass.cel      :0     3   5       9        ;glasses
+
+#00 lface3.cel     :                          ;face-stupid
+#00 lface2.cel     :    2     5                  ;face-happy
+#00 lfaceg.cel *3  :                8            ;face/goth
+#00 lface.cel *2   :        4                    ;face/sailorblue
+#00 lface.cel      :0 1   3           9          ;face
+
+#37 rglove.cel *10 :        4         9          ;SAILOR glove-right
+
+;#00 armfront.cel *3 :8                            ;hand-front/goth
+;#00 armfront.cel *2 :4                            ;hand-front/blue
+;#00 armfront.cel    :0 1 2 3   5       9          ;hand-front
+
+#00 lhand.cel *3 :8                            ;hand-front/goth
+#00 lhand.cel *2 :4                            ;hand-front/blue
+#00 lhand.cel    :0 1 2 3   5       9          ;hand-front
+
+#12 band1.cel *1    :0 1 2 3           9        ;bandana-orange-front
+#13 bag1.cel *4     :        4       8          ;satchel-front
+#13 bag1.cel *1     :0 1 2 3         8 9        ;satchel-front
+#35 fukubow.cel *10 :        4         9        ;SAILOR bow 
+
+#55 coat1.cel *4   :                8 9        ;longcoat-front
+
+#16 shirt2.cel *1  :  1 2   4 5       9        ;blueshirt-front
+#10 tunic1.cel *1  :0 1 2 3           9        ;tunic-orange-front
+
+#17 skirt1.cel *1  :  1 2     5       9        ;brownskirt-front
+#33 skirt2.cel *10 :        4         9        ;SAILOR skirt-front
+#54 skirt3.cel *3  :          5     8 9        ;black skirt-front
+
+#39 sboots.cel *10 :        4 5       9        ;SAILOR boots-front
+#58 boot1.cel *4   :                8 9        ;boots/front(GOTH)
+#04 boot1.cel *1   :0 1 2 3   5       9        ;boots/front
+
+#50 jean1.cel *4   :                8 9        ;bluejean1-front(GOTH)
+#22 jean1.cel *1   :      3 4 5       9        ;bluejean1-front
+#05 shirt1.cel *3  :                8          ;green shirt/front
+#05 shirt1.cel     :0 1 2 3   5     8 9        ;green shirt/front
+
+#03 sock1.cel      :0 1 2 3 4         9        ;green socks/front
+#19 sock2.cel *1   :  1 2 3 4      9        ;blue socks/front
+
+#34.70 fuku1.cel *10  :        4         9        ;SAILOR fuku-front
+
+#57.38 swim1.cel *2:          5       9        ;swimsuit1
+#20.38 swim1.cel   :                  9        ;swimsuit1
+#56 shirt3.cel *3  :          5     8 9        ;tightshirt/goth
+#23 shirt3.cel *2  :        4         9        ;tightshirt/grey
+#01 shorts.cel *3  :          5     8          ;shorts/front
+#01 shorts.cel     :0 1 2 3 4         9        ;shorts/front
+#49.67 bodysuit.cel *3 :                8 9    ;black bodysuit
+#18 tight1.cel     :  1   3   5       9        ;whitetights-front
+#21 tight2.cel *3  :                8          ;blacktights-front/goth
+#21 tight2.cel *2  :      3        9           ;blacktights-front
+#47 tight3.cel *2  :    2   4       8 9        ;fishnet-front
+#48 tight4.cel *2  :  1   3   5    9           ;fishnet/white-front
+#53 tight5.cel *2  :        4 5       9        ;fishnet/nude
+
+#27 choke1.cel *4     :        4       8 9     ;choker-front
+#25 bra1.cel          :0 1 2 3           9     ;bra-white-front
+#51 brag.cel *4       :                8 9     ;bra-GOTH
+#08 panty1.cel        :0 1 2 3           9     ;panty-white-front
+#52.51 pantyg.cel *4  :                8 9     ;panty-GOTH
+
+#00 lbod1.cel *3   :8                          ;main body/goth
+#00 lbod1.cel *2   :4                          ;main body/blue
+#00 lbod1.cel      :0 1 2 3   5       9        ;main body
+
+;#00 lbkhair.cel *11:          5                ;back of hair/blonde
+#00 lbkhair.cel *2 :        4                  ;back of hair/blue
+#00 lbkhair.cel    :0 1 2             9        ;back of hair
+
+#05 shirt1b.cel *3 :                8          ;green shirt/back(GOTH)
+#05 shirt1b.cel    :0 1 2 3   5     8 9        ;green shirt/back
+#50 jean1b.cel *4  :                8 9        ;bluejean1-back(GOTH)
+#22 jean1b.cel *1  :      3 4 5       9        ;bluejean1-back
+
+#54 skirt3b.cel *3  :         5     8 9        ;black skirt-back
+#33 skirt2b.cel *10 :      4          9        ;SAILOR skirt-back
+#17 skirt1b.cel *1  : 1 2     5       9        ;brownskirt-back
+
+#10 tunic1b.cel *1 :0 1 2 3           9        ;tunic-orange-back
+#16 shirt2b.cel *1 :  1 2   4 5       9        ;blueshirt-back
+
+#12 band1b.cel *1  :0 1 2 3           9        ;bandana-orange-back
+#13 bag1b.cel *4   :        4       8          ;satchel-back
+#13 bag1b.cel *1   :0 1 2 3         8 9        ;satchel-back
+
+#27 choke1b.cel *4    :        4       8 9     ;choker-back
+#25.50 bra1b.cel      :0 1 2 3           9     ;bra-white-back
+#51.50 bragb.cel *4   :                8 9     ;bra-GOTH-back
+#08.50 panty1b.cel    :0 1 2 3           9     ;panty-white-back
+
+#34 fuku1b.cel *10    :        4         9     ;SAILOR fuku-back
+
+#48 tight4b.cel *4 :  1   3   5    9           ;fishnet/white-back
+#47 tight2b.cel *2 :    2           8 9        ;fishnet-back
+#21 tight2b.cel *3 :                8          ;blacktights-back/goth
+#21 tight2b.cel *2 :      3        9           ;blacktights-back
+#01 shortb.cel *3  :          5     8          ;shorts/back(GOTH)
+#01 shortb.cel     :0 1 2 3 4       8 9        ;shorts/back
+
+#36 lglove.cel *10 :        4         9        ;SAILOR glove-left
+
+#00 larms.cel *3 :8                            ;arms (in back)/goth
+#00 larms.cel *2 :4                            ;arms (in back)/blue
+#00 larms.cel    :0 1 2 3   5       9          ;arms (in back)
+
+#55 coat1b.cel *4  :                8 9        ;longcoat-back
+
+#19 sock2b.cel *1   :  1 2 3 4      9           ;blue socks/back
+#03 sock1b.cel      :0 1 2 3 4         9        ;green socks/back
+#39 sbootsb.cel *10 :        4 5       9        ;SAILOR boots-back
+#58 boot1b.cel *4   :                8 9        ;boots/back(GOTH)
+#04 boot1b.cel *1   :0 1 2 3   5       9        ;boots/back
+
+#00 lbkhair2.cel *11:         5                ;back of hair-LONG/blonde
+#00 lbkhair2.cel   :      3                    ;back of hair-LONG
+#09 tiarab.cel *10 :        4          9       ;SAILOR tiara (back)
+#15 hat1b.cel *1   :0     3            9       ;coolhat-back
+
+#45.9999 shadow.cel :0 1 2 3 4 5     8 9         ;transparent SHADOW
+
+;TITLES 
+
+;#42.9999 uake.cel *10 :                         ;'UAKE'
+;#41.9999 q.cel *11    :                         ;'Q' (ripped from QUAKE)
+#38.9999 text1.cel    :0                        ;intro blurb
+#46.9999 info.cel     :0                 9      ;additional info
+#06 sailor.cel *2     :        4                ;Sailor Lucca(LOGO)
+#06 logogoth.cel *4   :                8        ;Lucca-Gothic(LOGO)
+#43.9999 lsmall.cel   :                  9      ;Lucca name - smaller(LOGO)
+#06.9999 logo.cel     :0 1 2 3   5              ;Lucca-Chrono Trigger(LOGO)
+;#14.9999 kiss.cel *1 :0 1 2 3 4 5     8        ;WORLD KISS PROJECT
+#07.9999 name.cel     :0                 9      ;signature
+
+;BACKGROUNDS
+
+#28.9999 fight.cel *5 :  1 2                    ;battle bg
+#29 boxbg.cel *6      :                  9      ;chrono box front bg
+#30 magus.cel *7      :                8        ;magus tower bg
+#31 roboshrn.cel *8   :      3   5              ;shrine to robo bg
+#32 luccabg.cel *9    :0       4                ;lucca big bg
+;#40 qhall.cel *12     :                         ;Quake bg (ripped)
+
+$0 76,52 99,176 * 79,264 80,265 88,122 353,290 207,327 100,177 * 92,122
+ 106,90 107,112 101,119 * 83,39 * * * * * * * * * 105,122 * * * * * * *
+ * * * * * 194,62 * * * * * * 32,303 10,378
+$0 76,52 211,150 * 201,236 273,250 196,99 353,290 * 100,177 * 286,61 *
+ 273,13 349,29 * * 90,119 91,169 79,212 284,181 * * * * * 105,122 * * *
+ * * * * * * * * * * * * * * * * 31,303 * * 367,146
+$0 76,52 99,177 * 79,264 80,265 88,122 353,290 * 100,177 * 292,67 * 301,25
+ 107,119 * * 220,104 91,169 * 216,196 * * * * * 105,122 * * * * * * * *
+ * * * * * * * * * * * 31,306 * 80,178
+$0 76,52 210,159 * 193,233 80,265 196,99 353,290 * 100,177 * 92,122 215,74
+ 290,102 102,120 * 83,39 * * 79,212 279,164 * 349,22 438,76 * * 105,122
+ * * * * * * * * * * * * * * * * * * * 29,303 * * 502,25
+$0 76,52 331,43 * 324,118 * * 353,306 * * 102,71 * * * 105,118 * * 496,219
+ * * 259,224 * * 502,15 260,181 * * * 121,114 * * * * * 88,164 94,118 111,135
+ 87,166 142,155 * 78,275 * * * * * 32,304 * 418,12 * * * * * 81,180
+$0 76,52 283,168 * * 80,265 494,27 353,290 * * * * 428,91 * * * * 343,55
+ 297,242 508,110 * * * 264,30 * * * * * * * * * * * * * * * * 347,156 *
+ * * * * 30,303 * * 80,178 * * * * 432,125 93,169 * 99,125 104,121
+$0 *
+$0 *
+$0 76,52 411,33 104,102 * * 475,20 353,313 * * * * * * 104,117 * * * *
+ * * * 463,118 * * * * 146,97 121,113 * * * * * * * * * * * * * * * * *
+ 34,305 * 319,13 * 106,122 88,169 103,123 106,183 * 346,177 87,113 409,114
+ * 81,264
+$0 76,52 322,50 166,27 240,126 445,172 308,0 * 441,372 393,276 204,51 247,18
+ 117,4 261,1 526,0 * 172,0 388,0 386,67 376,80 449,107 104,121 514,28 458,10
+ 188,80 * 396,229 165,12 145,22 * * * * * 522,241 529,193 546,209 488,254
+ 502,301 * 308,163 * * * 489,348 * 32,305 2,386 303,50 325,35 195,76 422,12
+ 344,226 348,279 474,16 527,15 254,186 536,139 191,158 393,295
+
+;pirouettes we will make in game
+;on the cieling movies of our lives will play
+;and the reason we can do these things
+;is that our minds are clouded
+;and we can't see
+;straight
+
+
