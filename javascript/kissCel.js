@@ -11,7 +11,7 @@ class KiSSCel {
     this.position = obj.positions[0]
     this.positions = obj.positions
     this.sets = cel.sets
-    this.image = document.getElementById(this.name)
+    this.image = document.getElementById(cel.name + '-' + cel.palette)
     this.ghostImage = undefined
     this.visible = false
     this.alpha = cel.alpha

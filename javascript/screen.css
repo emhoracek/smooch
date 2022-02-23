@@ -14,6 +14,7 @@ canvas {
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  border: 2px inset lightgray
 }
 
 body {
@@ -155,7 +156,6 @@ a.set:hover {
 
 #playarea {
   background: white;
-  border: 1px solid black;
   margin: auto;
 }
 

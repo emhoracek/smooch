@@ -99,7 +99,7 @@ class KiSSDoll {
     } else {
       const objIndex = this.colorids[colorid]
       const obj = this.objs[objIndex]
-      if (obj && obj.cels[0].fix < 1) {
+      if (obj && !obj.fixed) {
         return obj
       }
     }
