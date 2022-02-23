@@ -80,7 +80,7 @@ createCels staticDir = do
   log' "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes (nub celData) staticDir
   log' "Converted cels"
-  let realCelData = addOffsetsToCelData celsWithOffsets celData
+  let realCelData = addOffsetsToCelData celsWithOffsets
   log' "Added offsets"
   defPalette <- defaultPalette kissPalettes
   log' "Got default palette"
@@ -98,29 +98,37 @@ createCels staticDir = do
   liftIO $ LBS.writeFile (staticDir <> "/setdata.js") json
   log' "Wrote JSON"
   return realCelData
-  where convertCels pals cels base = do
-          mapM (\(CNFKissCel _ _ name pal _ _) -> convertCel pals pal name base) cels
-        convertCel palettes palNum cel base = do
-          pal <- lookupPalette palNum palettes
-          paletteEntries <- liftIO $ BS.readFile (base <> "/" <> pal)
-          palData <- PK.parseKCF paletteEntries
-          let celFile = base <> "/" <> cel <> ".cel"
-          celData <- liftIO $ BS.readFile celFile
-          (celHeader, celPixels) <- PC.parseCel celData
-          let palDir = base <> "/palette" <> show palNum
-          liftIO $ createDirectoryIfMissing True palDir
-          let pngFile = palDir <> "/" <> cel <> ".png"
-          liftIO $ celToPng pngFile palData celHeader celPixels
-          let xOffset = fromIntegral $ PC.celXoffset celHeader
-          let yOffset = fromIntegral $ PC.celYoffset celHeader
-          let offsets = (xOffset, yOffset)
-          return (cel, offsets)
 
-addOffsetsToCelData :: [(String, (Int, Int))] -> [CNFKissCel] ->
-                       [KissCel]
-addOffsetsToCelData offsets cels =
+convertCels :: Palettes -> [CNFKissCel] -> String -> ExceptT Text IO [(CNFKissCel, (Int, Int))]
+convertCels pals cels base = do
+          mapM (convertCel pals base) cels
+
+convertCel :: Palettes -> String -> CNFKissCel -> ExceptT Text IO (CNFKissCel, (Int, Int))
+convertCel palettes base cnfCel= do
+  let cel = cnfCelName cnfCel
+      palNum = cnfCelPalette cnfCel
+      celFile = base <> "/" <> cel <> ".cel"
+      palDir = base <> "/palette" <> show palNum
+      pngFile = palDir <> "/" <> cel <> ".png"
+  pal <- lookupPalette palNum palettes
+  paletteEntries <- liftIO $ BS.readFile (base <> "/" <> pal)
+  palData <- PK.parseKCF paletteEntries
+  celData <- liftIO $ BS.readFile celFile
+  (celHeader, celPixels) <- PC.parseCel celData
+  liftIO $ createDirectoryIfMissing True palDir
+  liftIO $ celToPng pngFile palData celHeader celPixels
+  return (cnfCel, getOffset celHeader)
+
+getOffset :: PC.CelHeader -> (Int, Int)
+getOffset celHeader =
+  let xOffset = fromIntegral $ PC.celXoffset celHeader
+      yOffset = fromIntegral $ PC.celYoffset celHeader in
+    (xOffset, yOffset)
+
+addOffsetsToCelData :: [(CNFKissCel, (Int, Int))] -> [KissCel]
+addOffsetsToCelData offsets =
   [ KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
-     | CNFKissCel{..} <- cels, offset@(_, (xoff, yoff)) <- offsets, cnfCelName == fst offset]
+     | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
 addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
 addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp) bgColor borderColor cels =
