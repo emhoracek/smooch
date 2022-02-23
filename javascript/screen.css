@@ -14,7 +14,7 @@ canvas {
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  border: 2px inset lightgray
+  border: 1px solid black;
 }
 
 body {
@@ -130,6 +130,11 @@ form {
   padding-left: 0;
 }
 
+#sets p {
+  align-self: center;
+  margin-left: 1em;
+}
+
 li {
   display: inline;
   margin: 0.25em;
@@ -151,7 +156,7 @@ a.set:hover {
   margin: 0;
   flex-grow: 1;
   display: flex;
-  /*overflow: auto; */
+  overflow: auto;
 }
 
 #playarea {
