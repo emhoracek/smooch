@@ -1,0 +1,282 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="rsdm_-0" src="palette0/rsdm_.png"/>
+
+               <img id="rsu_-0" src="palette0/rsu_.png"/>
+
+               <img id="rssu-0" src="palette0/rssu.png"/>
+
+               <img id="rsdm-0" src="palette0/rsdm.png"/>
+
+               <img id="ruad_-0" src="palette0/ruad_.png"/>
+
+               <img id="cr_bd_-0" src="palette0/cr_bd_.png"/>
+
+               <img id="rgun_-0" src="palette0/rgun_.png"/>
+
+               <img id="rsra_-0" src="palette0/rsra_.png"/>
+
+               <img id="raad_-0" src="palette0/raad_.png"/>
+
+               <img id="raj_-0" src="palette0/raj_.png"/>
+
+               <img id="ruad-0" src="palette0/ruad.png"/>
+
+               <img id="rh_-0" src="palette0/rh_.png"/>
+
+               <img id="rad-0" src="palette0/rad.png"/>
+
+               <img id="raj-0" src="palette0/raj.png"/>
+
+               <img id="rh-0" src="palette0/rh.png"/>
+
+               <img id="raad-0" src="palette0/raad.png"/>
+
+               <img id="rsu-0" src="palette0/rsu.png"/>
+
+               <img id="rsra-0" src="palette0/rsra.png"/>
+
+               <img id="rgun-0" src="palette0/rgun.png"/>
+
+               <img id="crsp-0" src="palette0/crsp.png"/>
+
+               <img id="rsta-0" src="palette0/rsta.png"/>
+
+               <img id="mtu-0" src="palette0/mtu.png"/>
+
+               <img id="rsun_-0" src="palette0/rsun_.png"/>
+
+               <img id="lsun_-0" src="palette0/lsun_.png"/>
+
+               <img id="bpu_-0" src="palette0/bpu_.png"/>
+
+               <img id="lsta-0" src="palette0/lsta.png"/>
+
+               <img id="bpu-0" src="palette0/bpu.png"/>
+
+               <img id="rwia_-0" src="palette0/rwia_.png"/>
+
+               <img id="rrega_-0" src="palette0/rrega_.png"/>
+
+               <img id="rf_-0" src="palette0/rf_.png"/>
+
+               <img id="rreg_-0" src="palette0/rreg_.png"/>
+
+               <img id="cmb-0" src="palette0/cmb.png"/>
+
+               <img id="rsun-0" src="palette0/rsun.png"/>
+
+               <img id="cr_bd-0" src="palette0/cr_bd.png"/>
+
+               <img id="rreg-0" src="palette0/rreg.png"/>
+
+               <img id="rfad_-0" src="palette0/rfad_.png"/>
+
+               <img id="rff3-0" src="palette0/rff3.png"/>
+
+               <img id="rffs_-0" src="palette0/rffs_.png"/>
+
+               <img id="rff2-0" src="palette0/rff2.png"/>
+
+               <img id="rkca-0" src="palette0/rkca.png"/>
+
+               <img id="rf-0" src="palette0/rf.png"/>
+
+               <img id="rff1-0" src="palette0/rff1.png"/>
+
+               <img id="rffs-0" src="palette0/rffs.png"/>
+
+               <img id="rfajc_-0" src="palette0/rfajc_.png"/>
+
+               <img id="rfad-0" src="palette0/rfad.png"/>
+
+               <img id="rfajc-0" src="palette0/rfajc.png"/>
+
+               <img id="rfjc-0" src="palette0/rfjc.png"/>
+
+               <img id="rrega-0" src="palette0/rrega.png"/>
+
+               <img id="rwia-0" src="palette0/rwia.png"/>
+
+               <img id="warm-0" src="palette0/warm.png"/>
+
+               <img id="lwia_-0" src="palette0/lwia_.png"/>
+
+               <img id="cr_lf-0" src="palette0/cr_lf.png"/>
+
+               <img id="lsun-0" src="palette0/lsun.png"/>
+
+               <img id="lrega_-0" src="palette0/lrega_.png"/>
+
+               <img id="lfad_-0" src="palette0/lfad_.png"/>
+
+               <img id="lf_-0" src="palette0/lf_.png"/>
+
+               <img id="lff3-0" src="palette0/lff3.png"/>
+
+               <img id="lff1-0" src="palette0/lff1.png"/>
+
+               <img id="lreg-0" src="palette0/lreg.png"/>
+
+               <img id="lkca-0" src="palette0/lkca.png"/>
+
+               <img id="lfjc_-0" src="palette0/lfjc_.png"/>
+
+               <img id="lffs_-0" src="palette0/lffs_.png"/>
+
+               <img id="lf-0" src="palette0/lf.png"/>
+
+               <img id="lff2-0" src="palette0/lff2.png"/>
+
+               <img id="lffs-0" src="palette0/lffs.png"/>
+
+               <img id="lfjc-0" src="palette0/lfjc.png"/>
+
+               <img id="lfajc_-0" src="palette0/lfajc_.png"/>
+
+               <img id="lfad-0" src="palette0/lfad.png"/>
+
+               <img id="lfajc-0" src="palette0/lfajc.png"/>
+
+               <img id="lrega-0" src="palette0/lrega.png"/>
+
+               <img id="lwijc_-0" src="palette0/lwijc_.png"/>
+
+               <img id="lwia-0" src="palette0/lwia.png"/>
+
+               <img id="lwijc-0" src="palette0/lwijc.png"/>
+
+               <img id="mctu_-0" src="palette0/mctu_.png"/>
+
+               <img id="hdarmd_-0" src="palette0/hdarmd_.png"/>
+
+               <img id="barm-0" src="palette0/barm.png"/>
+
+               <img id="hdarm_-0" src="palette0/hdarm_.png"/>
+
+               <img id="mctu-0" src="palette0/mctu.png"/>
+
+               <img id="hdarmd-0" src="palette0/hdarmd.png"/>
+
+               <img id="sensu-0" src="palette0/sensu.png"/>
+
+               <img id="hdarm-0" src="palette0/hdarm.png"/>
+
+               <img id="clsp-0" src="palette0/clsp.png"/>
+
+               <img id="lsra_-0" src="palette0/lsra_.png"/>
+
+               <img id="lsu_-0" src="palette0/lsu_.png"/>
+
+               <img id="lsra-0" src="palette0/lsra.png"/>
+
+               <img id="lshu-0" src="palette0/lshu.png"/>
+
+               <img id="luad_-0" src="palette0/luad_.png"/>
+
+               <img id="laj_-0" src="palette0/laj_.png"/>
+
+               <img id="lad_-0" src="palette0/lad_.png"/>
+
+               <img id="cr_la-0" src="palette0/cr_la.png"/>
+
+               <img id="lh_-0" src="palette0/lh_.png"/>
+
+               <img id="lhj-0" src="palette0/lhj.png"/>
+
+               <img id="lh-0" src="palette0/lh.png"/>
+
+               <img id="lad-0" src="palette0/lad.png"/>
+
+               <img id="laj-0" src="palette0/laj.png"/>
+
+               <img id="luad-0" src="palette0/luad.png"/>
+
+               <img id="laajc_-0" src="palette0/laajc_.png"/>
+
+               <img id="laad-0" src="palette0/laad.png"/>
+
+               <img id="laajc-0" src="palette0/laajc.png"/>
+
+               <img id="lsdm_-0" src="palette0/lsdm_.png"/>
+
+               <img id="lsu-0" src="palette0/lsu.png"/>
+
+               <img id="lssu-0" src="palette0/lssu.png"/>
+
+               <img id="mull-0" src="palette0/mull.png"/>
+
+               <img id="lsra_c-0" src="palette0/lsra_c.png"/>
+
+               <img id="lsu_c-0" src="palette0/lsu_c.png"/>
+
+               <img id="lsdm-0" src="palette0/lsdm.png"/>
+
+               <img id="m_name-0" src="palette0/m_name.png"/>
+
+               <img id="f_mark-0" src="palette0/f_mark.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

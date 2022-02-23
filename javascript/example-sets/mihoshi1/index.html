@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><a class="set">0</a></li>
+
+          <li><a class="set">1</a></li>
+
+          <li><a class="set">2</a></li>
+
+          <li><a class="set">3</a></li>
+
+          <li><a class="set">4</a></li>
+
+          <li><a class="set">5</a></li>
+
+          <li><a class="set">6</a></li>
+
+          <li><a class="set">7</a></li>
+
+          <li><a class="set">8</a></li>
+
+          <li><a class="set">9</a></li>
+
+      </ul>
+      <p>Click through the set by choosing a number.</p>
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+               <img id="kage-0" src="palette0/kage.png"/>
+
+               <img id="ball-0" src="palette0/ball.png"/>
+
+               <img id="sutu_-0" src="palette0/sutu_.png"/>
+
+               <img id="seifku2_-0" src="palette0/seifku2_.png"/>
+
+               <img id="seifku1_-0" src="palette0/seifku1_.png"/>
+
+               <img id="rappa_-0" src="palette0/rappa_.png"/>
+
+               <img id="zubon_-0" src="palette0/zubon_.png"/>
+
+               <img id="butur_-0" src="palette0/butur_.png"/>
+
+               <img id="body_-0" src="palette0/body_.png"/>
+
+               <img id="under__-0" src="palette0/under__.png"/>
+
+               <img id="nagaso_-0" src="palette0/nagaso_.png"/>
+
+               <img id="tanku_-0" src="palette0/tanku_.png"/>
+
+               <img id="sox_l_-0" src="palette0/sox_l_.png"/>
+
+               <img id="sox_r_-0" src="palette0/sox_r_.png"/>
+
+               <img id="under_-0" src="palette0/under_.png"/>
+
+               <img id="bunny_-0" src="palette0/bunny_.png"/>
+
+               <img id="panty_-0" src="palette0/panty_.png"/>
+
+               <img id="bura_-0" src="palette0/bura_.png"/>
+
+               <img id="titsu_-0" src="palette0/titsu_.png"/>
+
+               <img id="kubiwa_-0" src="palette0/kubiwa_.png"/>
+
+               <img id="backhair-0" src="palette0/backhair.png"/>
+
+               <img id="ribbon-0" src="palette0/ribbon.png"/>
+
+               <img id="hair2_-0" src="palette0/hair2_.png"/>
+
+               <img id="hat-0" src="palette0/hat.png"/>
+
+               <img id="body-0" src="palette0/body.png"/>
+
+               <img id="mouthd-0" src="palette0/mouthd.png"/>
+
+               <img id="mouthc-0" src="palette0/mouthc.png"/>
+
+               <img id="mouthb-0" src="palette0/mouthb.png"/>
+
+               <img id="moutha-0" src="palette0/moutha.png"/>
+
+               <img id="eye2-0" src="palette0/eye2.png"/>
+
+               <img id="eye1-0" src="palette0/eye1.png"/>
+
+               <img id="iya-0" src="palette0/iya.png"/>
+
+               <img id="kami3-0" src="palette0/kami3.png"/>
+
+               <img id="maegami-0" src="palette0/maegami.png"/>
+
+               <img id="kami2-0" src="palette0/kami2.png"/>
+
+               <img id="kubiwa-0" src="palette0/kubiwa.png"/>
+
+               <img id="titsu-0" src="palette0/titsu.png"/>
+
+               <img id="bura-0" src="palette0/bura.png"/>
+
+               <img id="panty-0" src="palette0/panty.png"/>
+
+               <img id="bunny-0" src="palette0/bunny.png"/>
+
+               <img id="under-0" src="palette0/under.png"/>
+
+               <img id="sox_r-0" src="palette0/sox_r.png"/>
+
+               <img id="sox_l-0" src="palette0/sox_l.png"/>
+
+               <img id="butu_r-0" src="palette0/butu_r.png"/>
+
+               <img id="butu_l-0" src="palette0/butu_l.png"/>
+
+               <img id="rappa-0" src="palette0/rappa.png"/>
+
+               <img id="zubon-0" src="palette0/zubon.png"/>
+
+               <img id="tanku-0" src="palette0/tanku.png"/>
+
+               <img id="nagasode-0" src="palette0/nagasode.png"/>
+
+               <img id="seifuku2-0" src="palette0/seifuku2.png"/>
+
+               <img id="seifuku1-0" src="palette0/seifuku1.png"/>
+
+               <img id="sutu-0" src="palette0/sutu.png"/>
+
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>
