@@ -25,36 +25,49 @@ Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
 
 ## Roadmap
 
-  * Get a whole bunch of non-FKiSS, single-palette dolls to work correctly
-      * This is mostly done! Single
-  * Figure out how NOT to use shell commands to unzip LHAs.
-      * We now have an LHA unzipper on AWS Lambda, but need to make the app
-        put the archives on S3 and retrieve the unzipped sets from another
-        S3 bucket
-  * Support "fix" feature (cels can be "fixed" at first, but clicking on the
-    cel reduces the fix value)
-  * Support multiple palettes
-  * Support expansion dolls
-      * Users can open one doll, then add a second doll to "expand" the
-        original doll
-  * Figure out how users access dolls
-      * Dolls are uploaded to the server, but are all dolls public? Are all
-        dolls private to specific users?
+  * ~~Get a whole bunch of non-FKiSS, single-palette dolls to work correctly~~
+  * ~~Support multiple palettes~~
+  * Users can view dolls
+      * ~~Users can create accounts and log in~~
+      * ~~Users can upload an LZH file to the server~~
+      * LZH archive is decompressed and files are put in S3 bucket
+      * ~~Smooch converts directory contents to PNGs and JSON~~
+      * JSON and S3 location are stored in database
+      * User can access previously-uploaded dolls from profile
+  * Set up server deployment (probably Docker)
   * Release a usable vanilla KiSS viewer
+
+### Future plans
+  * Support multiple CNFs
+      * A single doll can have multiple configuration files - this was
+        often used to have one version with FKiSS effects and another
+        without
   * Allow users to create sets from scratch
       * Users can upload a PSD file.
           * PSDs must be indexed to a single palette.
           * The PSD palette becomes a KCF file.
           * Each layer becomes a separate cel with the name of the layer
           * All the cels are listed in a CNF that is editable in the browser
-      * A user can download their own sets as LZH archives viewable in any
+      * A user can download their own sets as LHA archives viewable in any
         KiSS viewer
   * Allow users to edit their own dolls
       * Users can click a button to enter "edit" mode
       * Users can modify the position and layering of cels in sets
-      * Users can change fix values for cels
-  * Add FKiSS1, FKiSS2, FKiSS3, CherryKiSS, Enhanced Palettes, FKiSS4,
-    FKiSS5...
+      * Users can make cels fixed or unfixed
+  * Add CherryKiSS support
+  * Add FKiSS, FKiSS2, FKiSS3, FKiSS4
+
+### Someday, maybes
+
+These are features I don't plan to support. If someone else is excited about one of these
+features and wants to add it, then we can talk about it, but these are on the back-burner
+for my own efforts.
+
+  * Enhanced Palettes
+  * Palette groups
+  * FKiSS5 (neither the UltraKiSS or DirectKiSS versions)
+  * "Fix" (an object can be "fixed" at first, but clicking on the object reduces the fix value)
+  * Expansion dolls (Users can open one doll, then add a second doll to "expand" the original doll)
 
 ## Thanks
 
