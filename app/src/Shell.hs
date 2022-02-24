@@ -5,8 +5,10 @@ module Shell where
 import           Control.Monad              (void)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Except
+import           Data.Char                  (toLower)
 import           Data.Monoid                ((<>))
 import qualified Data.Text                  as T
+import           System.Directory           (listDirectory, renameFile)
 import           System.Exit                (ExitCode (..))
 import           System.IO                  (hGetContents)
 import           System.Process
@@ -21,3 +23,8 @@ unzipFile name dir = do
   case result of
     ExitSuccess   -> return $ T.pack ""
     ExitFailure n -> throwE $ T.pack ("Error while decompressing archive " <> name <> ". Exit code: " <> show n <> ". Error: " <> errMsg)
+
+lowercaseFiles :: String ->IO ()
+lowercaseFiles dir = do
+  files <- listDirectory dir
+  mapM_ (\f -> renameFile (dir <> "/" <> f) (dir <> "/" <> (map toLower f))) files

@@ -29,7 +29,7 @@ import           Kiss
 import qualified ParseCel                   as PC
 import           ParseCNF
 import qualified ParseKCF                   as PK
-import           Shell                      (unzipFile)
+import           Shell                      (unzipFile, lowercaseFiles)
 
 processSet :: Text
            -> (FilePath, FilePath)
@@ -40,6 +40,8 @@ processSet username (fName, filePath) = do
   staticDir <- createSetDir userDir (takeBaseName fName)
   unzipFile fName staticDir
   log' "Unzipped file!"
+  liftIO $ lowercaseFiles staticDir
+  log' "Lowercased file names"
   cels <- createCels staticDir
   return (staticDir, cels)
 
