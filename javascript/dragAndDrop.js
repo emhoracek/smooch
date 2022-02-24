@@ -8,10 +8,10 @@ class DragAndDrop {
   }
 
   initialize () {
-    document.addEventListener('mousedown', (e) => this.onMouseDown(e))
-    document.addEventListener('mouseup', () => {
+    document.addEventListener('pointerdown', (e) => this.onMouseDown(e))
+    document.addEventListener('pointerup', () => {
       if (this.dragHandler) {
-        document.removeEventListener('mousemove', this.dragHandler)
+        document.removeEventListener('pointermove', this.dragHandler)
         this.dragHandler = false
       }
     })
@@ -23,7 +23,7 @@ class DragAndDrop {
     if (obj) {
       const dragStart = this.getDragStart(obj, pos)
       this.dragHandler = (e) => this.onMouseMove(e, obj, dragStart)
-      document.addEventListener('mousemove', this.dragHandler)
+      document.addEventListener('pointermove', this.dragHandler)
       e.preventDefault()
     }
   }

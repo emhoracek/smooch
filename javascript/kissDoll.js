@@ -86,6 +86,11 @@ class KiSSDoll {
     this.canvas = drawcanvas
     this.ctxt = drawcanvas.getContext('2d')
     this.ghost = ghostcanvas.getContext('2d')
+
+    drawcanvas.addEventListener('touchstart', function (event) { event.preventDefault() })
+    drawcanvas.addEventListener('touchmove', function (event) { event.preventDefault() })
+    drawcanvas.addEventListener('touchend', function (event) { event.preventDefault() })
+    drawcanvas.addEventListener('touchcancel', function (event) { event.preventDefault() })
   }
 
   getSelectedObject (pos) {
@@ -144,7 +149,7 @@ class KiSSDoll {
 
 function initSetClicks (doll) {
   // Add click events to set numbers
-  const sets = document.getElementsByTagName('a')
+  const sets = document.getElementsByClassName('set')
   for (let i = 0; i < sets.length; i++) {
     // when a number is clicked, update doll to new set
     sets[i].addEventListener('click', function () {
@@ -154,11 +159,21 @@ function initSetClicks (doll) {
       updateSets(doll.currentSet)
     })
   }
+
+  const tip = document.getElementsByClassName('tip')[0]
+  const openTip = document.getElementById('open-tip')
+  openTip.addEventListener('click', e => {
+    tip.style.display = 'block'
+  })
+  const closeTip = document.getElementById('close-tip')
+  closeTip.addEventListener('click', e => {
+    tip.style.display = 'none'
+  })
 }
 
 function updateSets (currentSet) {
   // Update set listing to highlight current set
-  const sets = document.getElementsByTagName('a')
+  const sets = document.getElementsByClassName('set')
   for (let i = 0; i < sets.length; i++) {
     if (currentSet === parseInt(sets[i].innerHTML)) {
       sets[i].style.color = 'black'

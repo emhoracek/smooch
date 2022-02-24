@@ -3,6 +3,8 @@
     <meta charset="utf-8"/>
     <title>Smooch</title>
     <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <script type="text/javascript">
      window.onload = function () {
        document.getElementById('loading').style.display = 'none';
@@ -19,28 +21,30 @@
     <div id="sets">
       <ul>
 
-          <li><a class="set">0</a></li>
+          <li><button class="set">0</a></li>
 
-          <li><a class="set">1</a></li>
+          <li><button class="set">1</a></li>
 
-          <li><a class="set">2</a></li>
+          <li><button class="set">2</a></li>
 
-          <li><a class="set">3</a></li>
+          <li><button class="set">3</a></li>
 
-          <li><a class="set">4</a></li>
+          <li><button class="set">4</a></li>
 
-          <li><a class="set">5</a></li>
+          <li><button class="set">5</a></li>
 
-          <li><a class="set">6</a></li>
+          <li><button class="set">6</a></li>
 
-          <li><a class="set">7</a></li>
+          <li><button class="set">7</a></li>
 
-          <li><a class="set">8</a></li>
+          <li><button class="set">8</a></li>
 
-          <li><a class="set">9</a></li>
+          <li><button class="set">9</a></li>
+
+          <li><button id="open-tip">?</a></li>
 
       </ul>
-      <p>Click through the set by choosing a number.</p>
+      <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
     </div>
 
     <div id="borderarea">

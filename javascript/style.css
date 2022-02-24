@@ -4,7 +4,7 @@ body { font-family: georgia;
        padding: 1em }
 
 main { margin: auto;
-       width: 60em }
+       max-width: 50em }
 
 h1 {font-family: sans;
     text-align: center;
