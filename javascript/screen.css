@@ -122,33 +122,41 @@ form {
   /*height: 100vh;*/
 }
 
-#sets {
-  display: flex;
-}
-
 #sets ul {
   padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  margin: 0.25em;
 }
 
 #sets p {
-  align-self: center;
   margin-left: 1em;
+  font-size: 0.75em;
+}
+
+#sets .tip {
+  display: none;
 }
 
 li {
-  display: inline;
-  margin: 0.25em;
+  list-style: none;
 }
-a.set {
+button {
   cursor: pointer;
   color: grey;
   padding: 0.5em;
+}
+button.set {
+  color: grey;
   background-color: lightpink;
 }
-
-a.set:hover {
+button.set:hover {
   color: grey;
   background-color: pink;
+}
+button.question {
+  background-color: lightblue;
 }
 
 #borderarea {
