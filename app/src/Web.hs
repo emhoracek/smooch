@@ -5,7 +5,6 @@ module Web where
 import           Control.Lens               ((^.))
 import qualified Data.Configurator          as C
 import           Data.Maybe                 (fromMaybe)
-import           Data.Monoid                ((<>))
 import           Data.Pool                  (createPool)
 import           Data.Text                  (Text)
 import qualified Data.Vault.Lazy            as V

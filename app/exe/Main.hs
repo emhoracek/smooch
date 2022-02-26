@@ -5,7 +5,6 @@ module Main where
 
 import           Control.Exception        (SomeException (..), catch)
 import           Control.Logging
-import           Data.Monoid              ((<>))
 import qualified Data.Text                as T
 import           Network.Wai.Handler.Warp
 import           System.Environment

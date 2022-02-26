@@ -89,10 +89,10 @@ parseCel :: Parser CNFKissCel
 parseCel = do
     mark <- many1 digit
     fix <- option 0 parseFix
-    skipMany1 space
+    skipMany1 spaceOrTab
     file <- many1 (noneOf ". ")
     string ".cel" <?> "cel file extension"
-    skipMany1 space
+    skipMany1 spaceOrTab
     palette <- option 0 (try parseCelPalette)
     spacesOrTabs
     sets <- option [0..9] parseSets
