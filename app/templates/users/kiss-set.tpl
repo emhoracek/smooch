@@ -19,10 +19,11 @@
     <div id="sets">
       <ul>
         <set-listing>
-          <li><a class="set"><set-number /></a></li>
+          <li><button class="set"><set-number /></a></li>
         </set-listing>
+        <li><button id="open-tip">?</a></li>
       </ul>
-      <p>Click through the set by choosing a number.</p>
+      <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
     </div>
 
     <div id="borderarea">
@@ -30,9 +31,7 @@
            <canvas id="screen"></canvas>
            <canvas id="ghost"></canvas>
            <div id ="celImages">
-             <celImages>
-               <img src="/${dir}/${cel-name}.png" id="${cel-name}-${pal-num}" />
-             </celImages>
+             <celImages><img src="/${dir}/${cel-name}.png" id="${cel-name}-${pal-num}" /></celImages>
            </div>
       </div>
     </div>
@@ -45,6 +44,6 @@
 
     <script type="text/javascript" src="/${base}/setdata.js"></script>
 
-    <script type="text/javascript" src="/static/doll.js"></script>
+    <script type="module" src="/static/doll.js"></script>
   </body>
 </html>
