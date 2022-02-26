@@ -2,7 +2,6 @@
 module ParseCNFSpec (spec) where
 
 import           Control.Monad.Trans.Except
-import           Data.Text (Text)
 import           Test.Hspec
 import           Text.ParserCombinators.Parsec
 
@@ -13,11 +12,11 @@ fakeKissCel :: Int -> Int -> String -> Int -> [Int] -> Int -> KissCel
 fakeKissCel e a s b cs d = KissCel e a s b cs d (Position 0 0)
 
 sampleCel1 :: String
-sampleCel1 = "#19       markr6.cel      *0 : 0 1 2 3 4 5 6 7 8 9"
+sampleCel1 = "#19       markr6.cel      *0 : 0 1 2 3 4 5 6 7 8 9 \n"
 sampleCel2 :: String
-sampleCel2 = "#25       tights1.cel     *0 : 0 1 2 3 4 5 6 7 8 9     ;%t75 &"
+sampleCel2 = "#25       tights1.cel     *0 : 0 1 2 3 4 5 6 7 8 9     ;%t75 & \n"
 sampleCel3 :: String
-sampleCel3 = "#180.99   handl.cel       *0 :   1     4     7 &"
+sampleCel3 = "#180.99   handl.cel       *0 :   1     4     7 & \n"
 
 sampleSet1 :: String
 sampleSet1 = "$2 192,11 * 56,176 55,21"
@@ -35,7 +34,7 @@ sampleKiss =
   "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
   "#2   body.cel   *0 : 0 1 2 3 \n" ++
   "#3.   shirtb.cel *0 : 0 1 2 3 \n" ++
-  "$0 * 1,1 2,2 3,3"
+  "$0 * 1,1 2,2 3,3 "
 
 sampleKiss2 :: String
 sampleKiss2 =
@@ -45,7 +44,7 @@ sampleKiss2 =
   "[0 \n" ++
   "#1   shirt.cel  *0 : 0 1 2 3 \n" ++
   "#1   shirtb.cel *0 : 0 1 2 3 \n" ++
-  "$0 * 0,0"
+  "$0 * 0,0 "
 
 sampleKiss3 :: String
 sampleKiss3 =
@@ -74,6 +73,40 @@ sampleKiss4 =
   "; better end this with file separator character \n" ++
   ['\FS']
 
+sampleKiss5 :: String
+sampleKiss5 = "\
+  \#31 collar2.cel :    2 3 4 5 6 7 8 9 ;���r�o�@�����s�[�X��\n\
+  \#33 fuku4b.cel :    2 3 4 5 6 7 8 9 ;���r�o�@�㒅\n\
+  \#6 fuku1c.cel :0 1 2   4 5 6 7 8 9 :���P�@�@�H�D\n\
+  \#32 belt4.cel :    2 3 4 5 6 7 8 9 ;���r�o�@��\n\
+  \$0 * 110,31 \n\
+  \ * * \n\
+  \$0 * 110,31 \n\
+  \ 275,147 223,109"
+
+sampleKiss5Cels :: CNFKissData
+sampleKiss5Cels =
+  CNFKissData 0 0 [] (600, 480)
+    [ KissCel 31 0 "collar2" 0 [2,3,4,5,6,7,8,9] 0 (Position 0 0)
+    , KissCel 33 0 "fuku4b" 0 [2,3,4,5,6,7,8,9] 0 (Position 0 0)
+    , KissCel 6 0 "fuku1c" 0 [0,1,2,4,5,6,7,8,9] 0 (Position 0 0)
+    , KissCel 32 0 "belt4" 0 [2,3,4,5,6,7,8,9] 0 (Position 0 0) ]
+    [ KissSetPos 0 [NoPosition, Position 110 31, NoPosition, NoPosition]
+    , KissSetPos 0 [NoPosition, Position 110 31, Position 275 147, Position 223 109] ]
+
+sampleKiss6 :: String
+sampleKiss6 = "\
+  \%zero.kcf     - Mirror and Titles\n\
+  \%male.kcf     - Male Body\n\
+  \%female.kcf   - Female Body\n"
+
+sampleKiss6Output :: [CNFLine]
+sampleKiss6Output = [
+  CNFPalette "zero.kcf",
+  CNFPalette "male.kcf",
+  CNFPalette "female.kcf"
+  ]
+
 spec :: Spec
 spec = do
   describe "getKissData" $ do
@@ -101,12 +134,14 @@ spec = do
           [ fakeKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
             fakeKissCel 2 0 "body"  0 [0,1,2,3] 0,
             fakeKissCel 1 0 "shirtb" 0 [0..9] 0] [KissSetPos 0 [NoPosition, Position 1 1, Position 2 2]])
-
+    it "parces even worse broken syntax" $
+      runExceptT (getKissData sampleKiss5) `shouldReturn`
+         Right sampleKiss5Cels
     it "returns an error message for a bad cnf" $
       runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
-        Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected 'i'\n\
-             \expecting \"#\", \"$\", \"=\", \"%\", \"[\", \"(\", \";\", \"\\SUB\", \"\\FS\" or end of input"
-  describe "getKissCels" $
+        Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected \"i\"\nexpecting \
+             \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \"=\" or whitespace"
+  describe "getKissCels" $ do
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`
          Right [ CNFKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
@@ -122,6 +157,9 @@ spec = do
     it "parses a single KiSS cel (different sets and fix val)" $
       parse parseCelLine "blah" sampleCel3 `shouldBe`
         Right (CNFCel (CNFKissCel 180 99 "handl" 0 [1,4,7] 0))
+    it "parses the palettes even with junk at end of line" $
+      parse parseCNFLines "blah" sampleKiss6 `shouldBe`
+        Right sampleKiss6Output
     it "parses a the positions and palette for a single set in a set" $
       parse parseCNFLine "blah" sampleSet1 `shouldBe`
         Right (CNFSetPos (KissSetPos 2

@@ -5,7 +5,6 @@ module UploadSpec where
 import           Control.Monad.Trans.Except
 import           Test.Hspec
 
-import           Kiss
 import           Upload
 
 spec :: Spec

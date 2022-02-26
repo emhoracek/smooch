@@ -19,4 +19,4 @@ extra-deps:
   - fn
 - git: https://github.com/positiondev/hspec-fn.git
   commit: 46751a6c06ad6eb6fa073880ec5b6bd06f7d4e70
-resolver: lts-17.15
+resolver: lts-18.26

@@ -5,16 +5,15 @@
 
 module ParseCNF where
 
-import           Control.Monad.Trans.Except
-import           Data.Either
+import           Control.Monad.Trans.Except ( ExceptT, throwE )
 import           Data.Array                    ((!))
 import qualified Data.Array                    as A
-import           Data.Char                     (toLower, isSpace)
-import           Data.List                     hiding (lines)
-import           Data.Maybe
+import           Data.Char                     (toLower)
+import           Data.Maybe ( fromMaybe, listToMaybe )
 import qualified Data.Text                     as T
-import           Kiss
 import           Text.ParserCombinators.Parsec
+
+import           Kiss
 
 getKissSet :: String -> ExceptT T.Text IO KissSet
 getKissSet file = do
@@ -72,13 +71,18 @@ linesToCels xs = [ a | CNFCel a <- xs ]
 
 -- KiSS Parser Combinators
 
+spaceOrTab :: Parser Char
+spaceOrTab = oneOf " \t\r"
+
+spacesOrTabs :: Parser ()
+spacesOrTabs = skipMany spaceOrTab
+
 -- Parses the lines describing cels and objects.
 parseCelLine :: Parser CNFLine
 parseCelLine = do
     char '#'
     cel <- parseCel
-    optional parseComment
-    skipMany digit
+    skipMany (noneOf "\n")
     return $ CNFCel cel
 
 parseCel :: Parser CNFKissCel
@@ -87,18 +91,14 @@ parseCel = do
     fix <- option 0 parseFix
     skipMany1 space
     file <- many1 (noneOf ". ")
-    string ".cel" <?> "cel file extenstion"
+    string ".cel" <?> "cel file extension"
     skipMany1 space
     palette <- option 0 (try parseCelPalette)
-    skipMany space
+    spacesOrTabs
     sets <- option [0..9] parseSets
-    skipMany space
+    spacesOrTabs
     transp <- option 0 (try parseTransp)
     return $ CNFKissCel (read mark) fix file palette sets transp
-
-{--
-caseInsensitiveChar c = char (toLower c) <|> char (toUpper c)
-caseInsensitiveString s = try (mapM caseInsensitiveChar s) <?> "\"" ++ s ++ "\""--}
 
 parseCelPalette :: Parser Int
 parseCelPalette = do
@@ -116,19 +116,14 @@ parseFix = do
 parseSets :: Parser [Int]
 parseSets = do
   char ':'
-  skipMany space
+  spacesOrTabs
   many parseSet
 
 parseSet :: Parser Int
 parseSet = do
     num <- digit
-    skipMany space
+    spacesOrTabs
     return $ read [num]
-
-parseComment :: Parser String
-parseComment = do
-    char ';'
-    many (noneOf "\r\n")
 
 parseTransp :: Parser Int
 parseTransp = do
@@ -149,18 +144,21 @@ parseWindowSize = do
     char ','
     height <- many digit
     char ')'
+    skipMany (noneOf "\n")
     return $ CNFWindowSize (read width, read height)
 
 parsePalette :: Parser CNFLine
 parsePalette = do
     char '%'
     filename <- many (choice [letter, digit, char '_', char '-', char '.'])
+    skipMany (noneOf "\n")
     return $ CNFPalette filename
 
 parseBorder :: Parser CNFLine
 parseBorder = do
     char '['
     num <- option "0" (many1 digit)
+    skipMany (noneOf "\n")
     return $ CNFBorder (read num)
 
 -- The following four functions parse the cel positions for each set of cels.
@@ -173,7 +171,7 @@ parseSetPos = do
 
 parsePosition :: Parser SetPos
 parsePosition = do
-    spaces
+    spacesOrTabs
     position <- parsePos <|> parseNoPos <?> "position"
     spaces
     return position
@@ -205,29 +203,25 @@ data CNFLine = CNFMemory Int
 -- Parse the CNF one "line" (including multi-line set descriptions) at a time
 parseCNFLines :: Parser [CNFLine]
 parseCNFLines = do
-    ls <- many parseCNFLine
-    optional (char '\FS')
+    ls <- many1 parseCNFLine
     eof
     return ls
 
 parseCNFLine :: Parser CNFLine
 parseCNFLine = do
-    line <- choice [parseCelLine,
-                    parseSetPos,
-                    parseMemory, parsePalette,
-                    parseBorder, parseWindowSize,
-                    parseCNFComment,
-                    parseCNFJunk]
+    line <- choice [ parseCelLine, parseSetPos, parseCNFComment,
+                     parsePalette, parseBorder, parseWindowSize,
+                     parseMemory, parseCNFJunk ]
     spaces
     return line
 
 parseCNFJunk :: Parser CNFLine
 parseCNFJunk = do
-    char '\SUB'
+    oneOf "\SUB\FS \t\r" <?> "whitespace"
     return CNFJunkLine
 
 parseCNFComment :: Parser CNFLine
 parseCNFComment = do
     char ';'
-    comment <- many (noneOf "\r\n")
+    comment <- many (noneOf "\n")
     return $ CNFComment comment
