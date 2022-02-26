@@ -37,7 +37,6 @@ import           Data.ByteString            (ByteString)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Builder    as BS
 import qualified Data.ByteString.Lazy       as BSL
-import           Data.Monoid                ((<>))
 import           Data.Text                  (Text)
 import           Data.Word                  (Word16, Word8)
 import           Formatting                 ((%))
@@ -62,7 +61,7 @@ parseCel celData =
     let headerStyle = if isNewStyleCel (BS.take 4 celData) then New else Old in
     case BP.run (parseCelData headerStyle) celData of
         Left err -> ET.throwE err
-        Right celData -> return celData
+        Right cData -> return cData
 
 -- | Return 'True' if the cel is new-style (starts with @KiSS@).
 isNewStyleCel :: ByteString -> Bool

@@ -4,7 +4,6 @@
 module Ctxt where
 
 import           Control.Lens
-import           Data.Monoid                ((<>))
 import           Data.Pool
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T

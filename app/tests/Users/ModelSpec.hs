@@ -1,17 +1,14 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE GADTs                  #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TupleSections          #-}
 
 module Users.ModelSpec where
 
 import           Control.Monad       (void)
 import           Control.Monad.Trans (liftIO)
-import           Data.Monoid         ((<>))
 import           System.Random
 import           Test.Hspec
 import           Test.Hspec.Fn
@@ -23,7 +20,7 @@ import           Users.Model
 type HspecFn = FnHspecM Ctxt
 
 instance Factory Ctxt User (HspecFn NewUser) where
-  fields = do rand <- liftIO $ randomIO
+  fields = do rand <- liftIO randomIO
               let username = "user" <> tshow rand
               let email = username <> "@test.com"
               let pass = "pass" <> tshow rand
@@ -40,25 +37,25 @@ spec = fnTests $ do
   describe "getUsers" $ do
     it "should get all the users" $ do
       newUser <- create id
-      users <- eval (\ctxt -> getUsers ctxt)
+      users <- eval getUsers
       (newUser `elem` users) `shouldEqual` True
   describe "createUser" $ do
     it "should create a new user" $ do
       void $ eval (\ctxt -> createUser ctxt
                             (NewUser "new" "new@new.com" "pass"))
-      [user] <- eval (\ctxt -> getUsers ctxt)
+      [user] <- eval getUsers
       userEmail user `shouldEqual` "new@new.com"
   describe "getUserByUsername" $ do
     it "should get the user with that username" $ do
       newUser <- create id
       let username = userUsername newUser
-      Just user <- eval (\ctxt -> getUserByUsername ctxt username)
+      Just user <- eval (`getUserByUsername` username)
       userEmail user `shouldEqual` userEmail newUser
   describe "getUserByEmail" $ do
     it "should get the user with that email" $ do
       newUser <- create id
       let email = userEmail newUser
-      Just user <- eval (\ctxt -> getUserByEmail ctxt email)
+      Just user <- eval (`getUserByEmail` email)
       userUsername user `shouldEqual` userUsername newUser
   describe "authenticateUser" $ do
     it "should get Just the user with that email and password" $ do

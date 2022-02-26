@@ -17,10 +17,9 @@ import           System.FilePath            (takeBaseName, takeExtension, (</>))
 
 import           Control.Exception
 import           Control.Logging            (log')
-import           Control.Monad              (when)
+import           Control.Monad              (when, void)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Except
-import           Data.Monoid                ((<>))
 
 import           Data.Aeson                 (encode)
 
@@ -38,7 +37,7 @@ processSet username (fName, filePath) = do
   liftIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
   staticDir <- createSetDir userDir (takeBaseName fName)
-  unzipFile fName staticDir
+  void $ unzipFile fName staticDir
   log' "Unzipped file!"
   liftIO $ lowercaseFiles staticDir
   log' "Lowercased file names"
