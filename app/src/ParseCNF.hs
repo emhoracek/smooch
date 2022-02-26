@@ -83,7 +83,6 @@ parseCelLine = do
     char '#'
     cel <- parseCel
     skipMany (noneOf "\n")
-    newline
     return $ CNFCel cel
 
 parseCel :: Parser CNFKissCel
@@ -136,8 +135,6 @@ parseMemory :: Parser CNFLine
 parseMemory = do
     char '='
     num <- many digit
-    skipMany (noneOf "\n")
-    optional newline
     return $ CNFMemory (read num)
 
 parseWindowSize :: Parser CNFLine
@@ -148,7 +145,6 @@ parseWindowSize = do
     height <- many digit
     char ')'
     skipMany (noneOf "\n")
-    optional newline
     return $ CNFWindowSize (read width, read height)
 
 parsePalette :: Parser CNFLine
@@ -156,7 +152,6 @@ parsePalette = do
     char '%'
     filename <- many (choice [letter, digit, char '_', char '-', char '.'])
     skipMany (noneOf "\n")
-    optional newline
     return $ CNFPalette filename
 
 parseBorder :: Parser CNFLine
@@ -164,7 +159,6 @@ parseBorder = do
     char '['
     num <- option "0" (many1 digit)
     skipMany (noneOf "\n")
-    optional newline
     return $ CNFBorder (read num)
 
 -- The following four functions parse the cel positions for each set of cels.
