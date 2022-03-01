@@ -128,4 +128,4 @@ createUserErrorSplices :: Substitutions Ctxt
 createUserErrorSplices =
           subs [ ("usernameErrors", textFill "")
                , ("emailErrors", textFill "")
-               , ("passwordErrors", textFill "")]
+               , ("passwordErrors", textFill "") ]

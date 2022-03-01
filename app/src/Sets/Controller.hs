@@ -1,15 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 
 module Sets.Controller where
 
+import           Control.Lens               ((^.))
 import           Control.Monad.Trans.Except (runExceptT)
-import qualified Data.Text.ICU.Regex        as Regex
+import qualified Data.ByteString.Lazy       as BS
 import qualified Data.Text                  as T
 import           Data.Text                  (Text)
 import qualified Network.Wreq               as Wreq
 import           Network.Wai                (Response)
 import           Text.ParserCombinators.Parsec
 import           Web.Fn
+import           Web.Larceny                (subs, textFill)
 
 import           Ctxt
 import           Kiss
@@ -21,11 +24,15 @@ linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
 linkUploadHandler ctxt link = do
   let mOtakuWorldUrl = otakuWorldUrl link
   case mOtakuWorldUrl of
-    Right (mDir, filename) -> do
+    Right (mDir, dollname) -> do
+      let filename = dollname ++ ".lzh"
       let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
-      -- resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
-      okText "good url!"
-    Left err -> return Nothing
+      resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
+      BS.writeFile ("static/" ++ filename)  (resp ^. Wreq.responseBody)
+      output <- runExceptT $ processSet "unknown"
+                                        (filename, "static/" ++ filename)
+      renderKissSet ctxt output
+    Left _ -> renderWith ctxt ["index"] (subs [("linkErrors", textFill "Invalid OtakuWorld URL")])
 
 otakuWorldUrl :: Text -> Either ParseError (Maybe String, String)
 otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
@@ -40,7 +47,7 @@ otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
             return $ Just [dir]
           filename <- many alphaNum
           string ".lzh"
-          return (mDir, filename ++ ".lzh")
+          return (mDir, filename)
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
