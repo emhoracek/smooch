@@ -3,8 +3,12 @@
 module Sets.Controller where
 
 import           Control.Monad.Trans.Except (runExceptT)
+import qualified Data.Text.ICU.Regex        as Regex
 import qualified Data.Text                  as T
+import           Data.Text                  (Text)
+import qualified Network.Wreq               as Wreq
 import           Network.Wai                (Response)
+import           Text.ParserCombinators.Parsec
 import           Web.Fn
 
 import           Ctxt
@@ -12,6 +16,31 @@ import           Kiss
 import           Sets.View
 import           Upload
 import           Users.Model
+
+linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
+linkUploadHandler ctxt link = do
+  let mOtakuWorldUrl = otakuWorldUrl link
+  case mOtakuWorldUrl of
+    Right (mDir, filename) -> do
+      let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
+      -- resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
+      okText "good url!"
+    Left err -> return Nothing
+
+otakuWorldUrl :: Text -> Either ParseError (Maybe String, String)
+otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
+  where parseUrl :: Parser (Maybe String, String)
+        parseUrl = do
+          string "http"
+          optional (char 's')
+          string "://otakuworld.com/data/kiss/data/"
+          mDir <- option Nothing $ do
+            dir <- alphaNum
+            char '/'
+            return $ Just [dir]
+          filename <- many alphaNum
+          string ".lzh"
+          return (mDir, filename ++ ".lzh")
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do

@@ -39,15 +39,14 @@
             <h2>View a doll</h2>
 
             <h3>
-              Be kind to <a href="http://otakuworld.com/kiss/">OtakuWorld</a> and
-              <a href="http://kisscafe.ephralon.de/">KiSS Cafe</a>!
+              Be kind to <a href="http://otakuworld.com/kiss/">OtakuWorld</a>!
             </h3>
 
-            <p>Bandwidth costs money and we want these archives to stay around
+            <p>Bandwidth costs money and we want OtakuWorld to stay around
               for a long time.
             </p>
 
-            <p>Instead of downloading dolls from these sites directly, right
+            <p>Instead of downloading dolls from OW directly, right
               click on the download link and select
               "Copy link". Paste the link below and Smooch will download it
               for you.
@@ -55,7 +54,10 @@
 
             <div class="wide-field">
               <label for="link">Link:</label>
-              <input name="link" class="link-input" placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
+              <input name="link"
+                     class="link-input"
+                     pattern="https?:\/\/otakuworld.com\/data\/kiss\/data\/.*\.lzh"
+                     placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
               <input type="submit" value="Upload!" class="field submit">
               <p><linkErrors /></p>
             </div>

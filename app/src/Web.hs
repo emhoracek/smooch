@@ -18,6 +18,7 @@ import           Web.Larceny                hiding (renderWith)
 import           Ctxt
 import           Session
 import           Users.Controller
+import           Sets.Controller
 import           Users.Model
 import           Users.View
 
@@ -63,6 +64,7 @@ site ctxt =
                            // param "password" !=> loginHandler
              , method POST // path "logout" !=> logoutHandler
              , path "users" ==> usersRoutes
+             , path "dolls" // path "upload" // param "link" !=> linkUploadHandler
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
