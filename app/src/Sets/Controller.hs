@@ -24,7 +24,7 @@ import           Users.View
 
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
-  output <- runExceptT $ processSet "unknown"
+  output <- runExceptT $ processSet Nothing
                                     (T.unpack name, filePath')
   renderKissSet ctxt output
 
@@ -37,7 +37,7 @@ linkUploadHandler ctxt link = do
       let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
       resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
       BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
-      output <- runExceptT $ processSet "unknown"
+      output <- runExceptT $ processSet Nothing
                                         (dollname, "static/sets/" ++ filename)
       renderKissSet ctxt output
     Left _ -> renderWith ctxt ["index"] errorSplices
@@ -63,7 +63,7 @@ otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  output <- runExceptT $ processSet (userUsername user)
+  output <- runExceptT $ processSet (Just (userUsername user))
                                     (T.unpack name, filePath')
   renderKissSet ctxt output
 

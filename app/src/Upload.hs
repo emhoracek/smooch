@@ -28,7 +28,7 @@ import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
 
-processSet :: Text
+processSet :: Maybe Text
            -> (FilePath, FilePath)
            -> ExceptT Text IO (FilePath, [KissCel])
 processSet username (fName, filePath) = do
@@ -45,9 +45,9 @@ processSet username (fName, filePath) = do
 staticUserDir :: Text -> FilePath
 staticUserDir username = "static/sets/" <> T.unpack username
 
-createUserDir :: Text -> ExceptT Text IO FilePath
+createUserDir :: Maybe Text -> ExceptT Text IO FilePath
 createUserDir username = do
-  let staticDir = staticUserDir username
+  let staticDir = maybe "static/sets/" staticUserDir username
   liftIO $ createDirectoryIfMissing True staticDir
   log' $ "Created static user sets directory if missing: " <> T.pack staticDir
   return staticDir
@@ -57,7 +57,7 @@ staticSetDir userDir setName =  userDir <> "/" <> setName
 
 createSetDir :: FilePath -> String -> ExceptT Text IO FilePath
 createSetDir userDir setName = do
-  let staticDir = userDir <> "/" <> setName
+  let staticDir = staticSetDir userDir setName
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ liftIO $ removeDirectoryRecursive staticDir
   liftIO $ createDirectory staticDir
