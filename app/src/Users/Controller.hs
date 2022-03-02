@@ -17,6 +17,7 @@ import           Ctxt
 import           Sets.Controller
 import           Users.Model
 import           Users.View
+import           Sets.View
 
 usersRoutes :: Ctxt -> IO (Maybe Response)
 usersRoutes ctxt =
@@ -82,7 +83,7 @@ usersCreateHandler ctxt username email password passwordConfirmation = do
                  redirect ("/users/" <> username)
          else errHtml "couldn't create user"
  where errorSplices errors =
-         newErrorSplices errors <> createUserErrorSplices
+         newErrorSplices errors <> createUserErrorSplices <> linkUploadSplices
        newErrorSplices errors =
          (subs $ map (\(k,v) -> (k <> "Errors", textFill v)) errors)
 
@@ -123,9 +124,3 @@ validateNewUser ctxt username email password passwordConfirmation = do
           (fmap . fmap)
           (const (field, msg))
           maybeAction
-
-createUserErrorSplices :: Substitutions Ctxt
-createUserErrorSplices =
-          subs [ ("usernameErrors", textFill "")
-               , ("emailErrors", textFill "")
-               , ("passwordErrors", textFill "") ]

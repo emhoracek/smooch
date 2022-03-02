@@ -19,6 +19,14 @@ import           Kiss
 import           Sets.View
 import           Upload
 import           Users.Model
+import           Users.View
+
+
+fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
+fileUploadHandler ctxt (File name _ filePath') = do
+  output <- runExceptT $ processSet "unknown"
+                                    (T.unpack name, filePath')
+  renderKissSet ctxt output
 
 linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
 linkUploadHandler ctxt link = do
@@ -28,11 +36,15 @@ linkUploadHandler ctxt link = do
       let filename = dollname ++ ".lzh"
       let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
       resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
-      BS.writeFile ("static/" ++ filename)  (resp ^. Wreq.responseBody)
+      BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
       output <- runExceptT $ processSet "unknown"
-                                        (filename, "static/" ++ filename)
+                                        (dollname, "static/sets/" ++ filename)
       renderKissSet ctxt output
-    Left _ -> renderWith ctxt ["index"] (subs [("linkErrors", textFill "Invalid OtakuWorld URL")])
+    Left _ -> renderWith ctxt ["index"] errorSplices
+  where
+    errorSplices =
+         (subs [("linkErrors", textFill "Invalid OtakuWorld URL")])
+           <> createUserErrorSplices
 
 otakuWorldUrl :: Text -> Either ParseError (Maybe String, String)
 otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)

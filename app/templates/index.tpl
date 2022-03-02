@@ -35,7 +35,7 @@
         <apply template="_example_set"></apply>
 
         <section class="upload">
-          <form action="/dolls/upload" method="post">
+          <div>
             <h2>View a doll</h2>
 
             <h3>
@@ -52,15 +52,17 @@
               for you.
             </p>
 
-            <div class="wide-field">
-              <label for="link">Link:</label>
-              <input name="link"
-                     class="link-input"
-                     pattern="https?:\/\/otakuworld.com\/data\/kiss\/data\/.*\.lzh"
-                     placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
-              <input type="submit" value="Upload!" class="field submit">
-              <p><linkErrors /></p>
-            </div>
+            <form action="/dolls/upload" method="post">
+              <div class="wide-field">
+                <label for="link">Link:</label>
+                <input name="link"
+                      class="link-input"
+                      pattern="https?:\/\/otakuworld.com\/data\/kiss\/data\/.*\.lzh"
+                      placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
+                <input type="submit" value="Upload!" class="field submit">
+                <p><linkErrors /></p>
+              </div>
+            </form>
 
             <p>Already downloaded a doll? Upload the file below.</p>
 
@@ -68,6 +70,7 @@
               <input type="file" accept=".lzh" name="kissfile">
               <input type="submit" value="Upload!" class="field submit" />
             </form>
+          </div>
         </section>
       </main>
 
