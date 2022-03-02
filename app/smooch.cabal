@@ -94,6 +94,7 @@ library
                        wai-middleware-static,
                        wai-session,
                        warp,
+                       wreq,
                        xmlhtml
   default-language:    Haskell2010
 
@@ -147,4 +148,5 @@ test-suite tests
                        wai-middleware-static,
                        wai-session,
                        warp,
+                       wreq,
                        xmlhtml

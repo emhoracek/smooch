@@ -1,0 +1,168 @@
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+}
+h2 {
+  font-size: 1.5em;
+  margin: 0 0 0.75em 0;
+}
+
+h3 {
+  margin: 1em 0;
+}
+
+p {
+  font-weight: lighter;
+  margin: 1em 0;
+}
+
+.wrapper {
+}
+
+main {
+}
+
+section {
+}
+
+/*Header*/
+header {
+  padding: 1em;
+}
+
+.logo {
+  font-size: 2em;
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid black;
+}
+
+/*Authentication*/
+.authenticate {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.authenticate > * {
+  border: 1px solid black;
+  padding: 1em;
+  width: 100%;
+}
+
+
+/*Authentication*/
+.upload {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.upload > * {
+  border: 1px solid black;
+  padding: 1em;
+  width: 100%;
+}
+
+form {
+  margin: 0.5em 0;
+}
+
+.wide-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 1em;
+}
+.wide-field label {
+}
+.wide-field .link-input {
+  flex-grow: 1;
+}
+
+
+.field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.field label {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.field > label + * {
+}
+
+input:invalid {
+  border: 1px solid red;
+  color: darkred;
+}
+
+.submit {
+  background: lightpink;
+  border: none;
+  font-weight: bolder;
+  letter-spacing: 0.09em;
+  margin: 0.5em 0;
+  padding: 8px 16px;
+  text-transform: uppercase;
+}
+
+a {
+  color: grey;
+}
+
+@media only screen and (min-width: 1024px){
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    margin: 1em;
+    margin-top: 0;
+  }
+
+  main {
+    max-width: 50em;
+  }
+
+  #demo {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 1023px){
+  .wrapper {
+    max-width: 45em;
+    margin: auto;
+    margin-top: 0;
+  }
+
+  main {
+    max-width: 50em;
+  }
+
+  #demo {
+    width: 75%;
+  }
+
+  .authenticate > * {
+    border: none;
+  }
+
+  .upload > * {
+    border: none;
+  }
+}

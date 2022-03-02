@@ -29,3 +29,7 @@ celImageSplice dir cel =
   subs [("cel-name", textFill $ T.pack $ celName cel)
        ,("pal-num", textFill $ T.pack $ show $ celPalette cel)
        ,("dir", textFill $ T.pack dir <> "/palette" <> T.pack (show $ celPalette cel))]
+
+linkUploadSplices :: Substitutions Ctxt
+linkUploadSplices =
+  subs [("linkErrors", textFill "")]

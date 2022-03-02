@@ -37,3 +37,9 @@ dateSplice = textFill . formatTimestamp
 formatTimestamp :: UTCTime -> T.Text
 formatTimestamp time =
   T.pack $ formatTime defaultTimeLocale "%B %e, %_Y" time
+
+createUserErrorSplices :: Substitutions Ctxt
+createUserErrorSplices =
+          subs [ ("usernameErrors", textFill "")
+               , ("emailErrors", textFill "")
+               , ("passwordErrors", textFill "") ]

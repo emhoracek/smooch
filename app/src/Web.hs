@@ -18,8 +18,10 @@ import           Web.Larceny                hiding (renderWith)
 import           Ctxt
 import           Session
 import           Users.Controller
+import           Sets.Controller
 import           Users.Model
 import           Users.View
+import           Sets.View
 
 initializer :: IO Ctxt
 initializer = do
@@ -62,12 +64,17 @@ site ctxt =
                            // param "username"
                            // param "password" !=> loginHandler
              , method POST // path "logout" !=> logoutHandler
+             , method POST // path "dolls"
+                           // path "upload"
+                           // file "kissfile"
+                           !=> fileUploadHandler
              , path "users" ==> usersRoutes
+             , path "dolls" // path "upload" // param "link" !=> linkUploadHandler
              , path "static" // anything ==> staticServe "static" ]
     `fallthrough` notFoundText "Page not found."
 
 indexHandler :: Ctxt -> IO (Maybe Response)
-indexHandler ctxt = renderWith ctxt ["index"] (createUserErrorSplices <> loggedInUserSplices)
+indexHandler ctxt = renderWith ctxt ["index"] (createUserErrorSplices <> loggedInUserSplices <> linkUploadSplices)
 
 loginHandler :: Ctxt -> Text -> Text -> IO (Maybe Response)
 loginHandler ctxt username password = do
