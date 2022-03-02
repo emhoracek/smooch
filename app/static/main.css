@@ -105,6 +105,11 @@ form {
 .field > label + * {
 }
 
+input:invalid {
+  border: 1px solid red;
+  color: darkred;
+}
+
 .submit {
   background: lightpink;
   border: none;

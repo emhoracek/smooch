@@ -56,9 +56,10 @@
               <div class="wide-field">
                 <label for="link">Link:</label>
                 <input name="link"
-                      class="link-input"
-                      pattern="https?:\/\/otakuworld.com\/data\/kiss\/data\/.*\.lzh"
-                      placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
+                       class="link-input"
+                       pattern="https?:\/\/otakuworld.com\/data\/kiss\/data\/.*\.lzh"
+                       title="Enter a valid OtakuWorld download URL"
+                       placeholder="http://otakuworld.com/data/kiss/data/y/yura.lzh" />
                 <input type="submit" value="Upload!" class="field submit">
                 <p><linkErrors /></p>
               </div>
