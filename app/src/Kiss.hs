@@ -5,10 +5,10 @@ module Kiss where
 import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
-data KissSet = KissSet { kData    :: CNFKissData
-                       , kCnfCels :: [CNFKissCel]
-                       , kPalette :: Array Int PaletteFilename
-                       } deriving (Eq, Show)
+data KissDoll = KissDoll { kData    :: CNFKissData
+                         , kCnfCels :: [CNFKissCel]
+                         , kPalette :: Array Int PaletteFilename
+                         } deriving (Eq, Show)
 
 type Palettes = Array Int PaletteFilename
 

@@ -28,13 +28,13 @@ import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
 
-processSet :: Maybe Text
+processDoll :: Maybe Text
            -> (FilePath, FilePath)
            -> ExceptT Text IO (FilePath, [KissCel])
-processSet username (fName, filePath) = do
+processDoll username (fName, filePath) = do
   liftIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
-  staticDir <- createSetDir userDir (takeBaseName fName)
+  staticDir <- createDollDir userDir (takeBaseName fName)
   void $ unzipFile fName staticDir
   log' "Unzipped file!"
   liftIO $ lowercaseFiles staticDir
@@ -52,12 +52,12 @@ createUserDir username = do
   log' $ "Created static user sets directory if missing: " <> T.pack staticDir
   return staticDir
 
-staticSetDir :: FilePath -> String -> FilePath
-staticSetDir userDir setName =  userDir <> "/" <> setName
+staticDollDir :: FilePath -> String -> FilePath
+staticDollDir userDir setName =  userDir <> "/" <> setName
 
-createSetDir :: FilePath -> String -> ExceptT Text IO FilePath
-createSetDir userDir setName = do
-  let staticDir = staticSetDir userDir setName
+createDollDir :: FilePath -> String -> ExceptT Text IO FilePath
+createDollDir userDir setName = do
+  let staticDir = staticDollDir userDir setName
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ liftIO $ removeDirectoryRecursive staticDir
   liftIO $ createDirectory staticDir
@@ -75,7 +75,7 @@ createCels staticDir = do
   log' "About to get CNF"
   cnf <- getCNF staticDir
   log' "Got CNF"
-  KissSet cnfKissData celData kissPalettes <- getKissSet cnf
+  KissDoll cnfKissData celData kissPalettes <- getKissDoll cnf
   log' "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes (nub celData) staticDir
   log' "Converted cels"

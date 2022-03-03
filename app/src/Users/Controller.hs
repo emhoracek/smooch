@@ -58,7 +58,7 @@ loggedInUserRoutes ctxt loggedInUser username = do
                                     !=> userUploadHandler loggedInUser
                     , path "sets" // segment
                                   // end
-                                  ==> userSetHandler loggedInUser ]
+                                  ==> userDollHandler loggedInUser ]
     else return Nothing
 
 userHandler ::  User -> Ctxt -> IO (Maybe Response)

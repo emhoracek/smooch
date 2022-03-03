@@ -25,9 +25,9 @@ import           Users.View
 
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
-  output <- runExceptT $ processSet Nothing
-                                    (T.unpack name, filePath')
-  renderKissSet ctxt output
+  output <- runExceptT $ processDoll Nothing
+                                     (T.unpack name, filePath')
+  renderKissDoll ctxt output
 
 linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
 linkUploadHandler ctxt link = do
@@ -38,9 +38,9 @@ linkUploadHandler ctxt link = do
       let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
       resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
       BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
-      output <- runExceptT $ processSet Nothing
-                                        (dollname, "static/sets/" ++ filename)
-      renderKissSet ctxt output
+      output <- runExceptT $ processDoll Nothing
+                                         (dollname, "static/sets/" ++ filename)
+      renderKissDoll ctxt output
     Left _ -> renderWith ctxt ["index"] errorSplices
   where
     errorSplices =
@@ -64,27 +64,27 @@ otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  output <- runExceptT $ processSet (Just (userUsername user))
-                                    (T.unpack name, filePath')
-  renderKissSet ctxt output
+  output <- runExceptT $ processDoll (Just (userUsername user))
+                                     (T.unpack name, filePath')
+  renderKissDoll ctxt output
 
-userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
-userSetHandler user ctxt setName = do
+userDollHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
+userDollHandler user ctxt setName = do
   let userDir = staticUserDir (userUsername user)
-  let staticDir = staticSetDir userDir (T.unpack setName)
+  let staticDir = staticDollDir userDir (T.unpack setName)
   output <- (fmap . fmap) (staticDir,) (runExceptT $ createCels staticDir)
   -- The previous line is a bit weird.
   -- the result of runEitherT is an `IO (Either Text [KissCel])`.
-  -- `renderKissSet` wants an `Either Text (FilePath, [KissCel])`
+  -- `renderKissDoll` wants an `Either Text (FilePath, [KissCel])`
   -- The `(staticDir,)` part uses Tuple Sections to turn the directory and a
   -- cel into a tuple.
   -- `(fmap . fmap)` let's us map into two layers of functions -- first the
   -- IO functor, then then Either functor. This makes the Right side of
   -- the Either a tuple! Whew.
-  renderKissSet ctxt output
+  renderKissDoll ctxt output
 
-renderKissSet :: Ctxt -> Either T.Text (FilePath, [KissCel]) -> IO (Maybe Response)
-renderKissSet ctxt eOutputError =
+renderKissDoll :: Ctxt -> Either T.Text (FilePath, [KissCel]) -> IO (Maybe Response)
+renderKissDoll ctxt eOutputError =
   case eOutputError of
     Right (staticDir, cels) ->
       renderWith ctxt ["users", "kiss-set"] $ setSplices staticDir cels

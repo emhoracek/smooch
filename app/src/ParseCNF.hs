@@ -15,12 +15,12 @@ import           Text.ParserCombinators.Parsec
 
 import           Kiss
 
-getKissSet :: String -> ExceptT T.Text IO KissSet
-getKissSet file = do
+getKissDoll :: String -> ExceptT T.Text IO KissDoll
+getKissDoll file = do
   kissData <- getKissData file
   kissCels <- getKissCels file
   kissPalettes <- getKissPalettes kissData
-  return $ KissSet kissData kissCels kissPalettes
+  return $ KissDoll kissData kissCels kissPalettes
 
 getKissData :: String -> ExceptT T.Text IO CNFKissData
 getKissData file =
