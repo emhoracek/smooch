@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Sets.View where
+module Dolls.View where
 
 import qualified Data.Text   as T
 import           Web.Larceny

@@ -18,10 +18,10 @@ import           Web.Larceny                hiding (renderWith)
 import           Ctxt
 import           Session
 import           Users.Controller
-import           Sets.Controller
+import           Dolls.Controller
 import           Users.Model
 import           Users.View
-import           Sets.View
+import           Dolls.View
 
 initializer :: IO Ctxt
 initializer = do

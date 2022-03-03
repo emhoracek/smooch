@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 
-module Sets.Controller where
+module Dolls.Controller where
 
 import           Control.Lens               ((^.))
 import           Control.Monad.Trans.Except (runExceptT)
@@ -16,7 +17,7 @@ import           Web.Larceny                (subs, textFill)
 
 import           Ctxt
 import           Kiss
-import           Sets.View
+import           Dolls.View
 import           Upload
 import           Users.Model
 import           Users.View
@@ -43,7 +44,7 @@ linkUploadHandler ctxt link = do
     Left _ -> renderWith ctxt ["index"] errorSplices
   where
     errorSplices =
-         (subs [("linkErrors", textFill "Invalid OtakuWorld URL")])
+         subs [("linkErrors", textFill "Invalid OtakuWorld URL")]
            <> createUserErrorSplices
 
 otakuWorldUrl :: Text -> Either ParseError (Maybe String, String)
@@ -71,11 +72,12 @@ userSetHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userSetHandler user ctxt setName = do
   let userDir = staticUserDir (userUsername user)
   let staticDir = staticSetDir userDir (T.unpack setName)
-  output <- (fmap . fmap) ((,) staticDir) (runExceptT $ createCels staticDir)
+  output <- (fmap . fmap) (staticDir,) (runExceptT $ createCels staticDir)
   -- The previous line is a bit weird.
   -- the result of runEitherT is an `IO (Either Text [KissCel])`.
   -- `renderKissSet` wants an `Either Text (FilePath, [KissCel])`
-  -- The `(,)` lets us turn two things into a tuple.
+  -- The `(staticDir,)` part uses Tuple Sections to turn the directory and a
+  -- cel into a tuple.
   -- `(fmap . fmap)` let's us map into two layers of functions -- first the
   -- IO functor, then then Either functor. This makes the Right side of
   -- the Either a tuple! Whew.

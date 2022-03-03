@@ -14,10 +14,10 @@ import           Web.Fn
 import           Web.Larceny        hiding (renderWith)
 
 import           Ctxt
-import           Sets.Controller
+import           Dolls.Controller
 import           Users.Model
 import           Users.View
-import           Sets.View
+import           Dolls.View
 
 usersRoutes :: Ctxt -> IO (Maybe Response)
 usersRoutes ctxt =

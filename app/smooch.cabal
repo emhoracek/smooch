@@ -53,8 +53,8 @@ library
                        Web,
                        Ctxt,
                        Session,
-                       Sets.Controller,
-                       Sets.View,
+                       Dolls.Controller,
+                       Dolls.View,
                        Users.Model,
                        Users.View,
                        Users.Controller
@@ -108,7 +108,7 @@ test-suite tests
                        Users.ControllerSpec,
                        Users.ModelSpec,
                        WebSpec,
-                        Common
+                       Common
   type:                exitcode-stdio-1.0
   build-depends:       base,
                        binary-parser,
