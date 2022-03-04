@@ -42,7 +42,7 @@ mkDoll name otakuworldUrl hash eLoc = do
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
   fileContent <- LBS.readFile filePath'
-  output <- createOrLoadDoll ctxt (takeBaseName (T.unpack name)) Nothing fileContent
+  output <- createOrLoadDoll ctxt Nothing (takeBaseName (T.unpack name)) Nothing fileContent
   renderKissDoll ctxt output
 
 linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
@@ -57,7 +57,7 @@ linkUploadHandler ctxt link = do
             resp <- Wreq.get (T.unpack link)
             let body = resp ^. Wreq.responseBody
             LBS.writeFile ("static/sets/" ++ dollname ++ ".lzh") body
-            createOrLoadDoll ctxt dollname (Just link) body
+            createOrLoadDoll ctxt Nothing dollname (Just link) body
           Just doll -> getDollFiles doll
       renderKissDoll ctxt result
     Left _ -> renderWith ctxt ["index"] errorSplices
@@ -82,17 +82,18 @@ linkUploadHandler ctxt link = do
 -- are stored plus a list of the cels. If no doll with that hash
 -- already exists, then it creates a new doll and processes it.
 createOrLoadDoll :: Ctxt
+                 -> Maybe Text
                  -> [Char]
                  -> Maybe Text
                  -> LBS.ByteString
                  -> IO (Either Text (FilePath, [KissCel]))
-createOrLoadDoll ctxt dollname mLink body = do
+createOrLoadDoll ctxt mUser dollname mLink body = do
   let hash = BS16.encode $ hashlazy body
   mExistingHashDoll <- getDollByHash ctxt hash
   case mExistingHashDoll of
     Nothing -> do
       let filename = dollname ++ ".lzh"
-      output <- runExceptT $ processDoll Nothing
+      output <- runExceptT $ processDoll mUser
                                          (filename, "static/sets/" ++ filename)
       let newDoll = mkDoll dollname mLink hash (fst <$> output)
       created <- createDoll ctxt newDoll
@@ -108,8 +109,10 @@ getDollFiles doll =
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  output <- runExceptT $ processDoll (Just (userUsername user))
-                                     (T.unpack name, filePath')
+  fileContent <- LBS.readFile filePath'
+  let mUsername = Just (userUsername user)
+  let dollname = takeBaseName (T.unpack name)
+  output <- createOrLoadDoll ctxt mUsername dollname Nothing fileContent
   renderKissDoll ctxt output
 
 userDollHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
