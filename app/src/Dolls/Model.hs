@@ -3,6 +3,7 @@
 module Dolls.Model where
 
 import           Control.Lens                       ((^.))
+import qualified Data.ByteString                    as BS
 import           Data.Maybe                         (listToMaybe)
 import           Data.Pool                          (withResource)
 import           Data.Text (Text)
@@ -20,7 +21,7 @@ data Doll = Doll {
     dollId :: Int
   , dollName :: Text
   , dollOtakuWorldUrl :: Maybe Text
-  , dollHash :: Text
+  , dollHash :: BS.ByteString 
   , dollLocation :: Maybe Text
   , dollError :: Maybe Text
   , dollCreatedAt :: UTCTime
@@ -34,7 +35,7 @@ instance FromRow Doll where
 data NewDoll = NewDoll {
     newDollName :: Text
   , newDollOtakuWorldUrl :: Maybe Text
-  , newDollHash :: Text
+  , newDollHash :: BS.ByteString
   , newDollLocation :: Maybe Text
   , newDollError :: Maybe Text
 } deriving (Eq, Show)

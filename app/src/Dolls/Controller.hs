@@ -6,7 +6,10 @@ module Dolls.Controller where
 
 import           Control.Lens               ((^.))
 import           Control.Monad.Trans.Except (runExceptT)
-import qualified Data.ByteString.Lazy       as BS
+import           Crypto.Hash.MD5            (hashlazy)
+import qualified Data.ByteString            as BS
+import qualified Data.ByteString.Lazy       as LBS
+import qualified Data.ByteString.Base16     as BS16
 import qualified Data.Text                  as T
 import           Data.Text                  (Text)
 import qualified Network.Wreq               as Wreq
@@ -25,14 +28,15 @@ import           Users.View
 
 mkDoll :: String
        -> Maybe Text
+       -> BS.ByteString
        -> Either Text FilePath
        -> NewDoll
-mkDoll name otakuworldUrl eLoc = do
+mkDoll name otakuworldUrl hash eLoc = do
   case eLoc of
     Left err ->
-      NewDoll (T.pack name) otakuworldUrl "TEMP" Nothing (Just err)
+      NewDoll (T.pack name) otakuworldUrl hash Nothing (Just err)
     Right loc ->
-      NewDoll (T.pack name) otakuworldUrl "TEMP" (Just (T.pack loc)) Nothing
+      NewDoll (T.pack name) otakuworldUrl hash (Just (T.pack loc)) Nothing
 
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
@@ -51,10 +55,12 @@ linkUploadHandler ctxt link = do
           let filename = dollname ++ ".lzh"
           let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
           resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
-          BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
+          let body = resp ^. Wreq.responseBody
+          let filehash = BS16.encode $ hashlazy body
+          LBS.writeFile ("static/sets/" ++ filename) body
           output <- runExceptT $ processDoll Nothing
                                             (filename, "static/sets/" ++ filename)
-          let newDoll = mkDoll dollname (Just link) (fst <$> output)
+          let newDoll = mkDoll dollname (Just link) filehash (fst <$> output)
           createDoll ctxt newDoll
           renderKissDoll ctxt output
         Just doll ->
