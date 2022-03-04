@@ -27,10 +27,11 @@ import qualified ParseCel                   as PC
 import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
+import           Dolls.Model
 
 processDoll :: Maybe Text
-           -> (FilePath, FilePath)
-           -> ExceptT Text IO (FilePath, [KissCel])
+            -> (FilePath, FilePath)
+            -> ExceptT Text IO (FilePath, [KissCel])
 processDoll username (fName, filePath) = do
   liftIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
@@ -47,7 +48,7 @@ staticUserDir username = "static/sets/" <> T.unpack username
 
 createUserDir :: Maybe Text -> ExceptT Text IO FilePath
 createUserDir username = do
-  let staticDir = maybe "static/sets/" staticUserDir username
+  let staticDir = maybe "static/sets" staticUserDir username
   liftIO $ createDirectoryIfMissing True staticDir
   log' $ "Created static user sets directory if missing: " <> T.pack staticDir
   return staticDir

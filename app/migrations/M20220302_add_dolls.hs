@@ -20,7 +20,7 @@ CREATE TABLE dolls (
   name text not null,
   otakuworld_url text unique,
   hash text not null unique,
-  location text not null unique,
+  location text unique,
   error text,
   created_at timestamptz default now(),
   updated_at timestamptz default now()

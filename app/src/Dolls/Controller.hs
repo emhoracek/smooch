@@ -17,11 +17,22 @@ import           Web.Larceny                (subs, textFill)
 
 import           Ctxt
 import           Kiss
+import           Dolls.Model
 import           Dolls.View
 import           Upload
 import           Users.Model
 import           Users.View
 
+mkDoll :: String
+       -> Maybe Text
+       -> Either Text FilePath
+       -> NewDoll
+mkDoll name otakuworldUrl eLoc = do
+  case eLoc of
+    Left err ->
+      NewDoll (T.pack name) otakuworldUrl "TEMP" Nothing (Just err)
+    Right loc ->
+      NewDoll (T.pack name) otakuworldUrl "TEMP" (Just (T.pack loc)) Nothing
 
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
@@ -39,7 +50,9 @@ linkUploadHandler ctxt link = do
       resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
       BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
       output <- runExceptT $ processDoll Nothing
-                                         (dollname, "static/sets/" ++ filename)
+                                         (filename, "static/sets/" ++ filename)
+      let newDoll = mkDoll dollname (Just link) (fst <$> output)
+      createDoll ctxt newDoll
       renderKissDoll ctxt output
     Left _ -> renderWith ctxt ["index"] errorSplices
   where

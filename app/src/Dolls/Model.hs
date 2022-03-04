@@ -19,9 +19,9 @@ import           Session
 data Doll = Doll {
     dollId :: Int
   , dollName :: Text
-  , dollOtakuWorldUrl :: Text
+  , dollOtakuWorldUrl :: Maybe Text
   , dollHash :: Text
-  , dollLocation :: Text
+  , dollLocation :: Maybe Text
   , dollError :: Maybe Text
   , dollCreatedAt :: UTCTime
   , dollUpdatedAt :: UTCTime
@@ -33,9 +33,9 @@ instance FromRow Doll where
 
 data NewDoll = NewDoll {
     newDollName :: Text
-  , newDollOtakuWorldUrl :: Text
+  , newDollOtakuWorldUrl :: Maybe Text
   , newDollHash :: Text
-  , newDollLocation :: Text
+  , newDollLocation :: Maybe Text
   , newDollError :: Maybe Text
 } deriving (Eq, Show)
 
@@ -58,7 +58,7 @@ createDoll ctxt newDoll = (==) 1 <$>
   withResource (ctxt ^. pool) (\conn ->
     PG.execute
      conn
-     "INSERT INTO dolls (name, otakuworld_url, hash, loocation, error) VALUES (?, ?, ?, ?, ?)"
+     "INSERT INTO dolls (name, otakuworld_url, hash, location, error) VALUES (?, ?, ?, ?, ?)"
      newDoll)
 
 getDollByOWUrl :: Ctxt -> Text -> IO (Maybe Doll)
