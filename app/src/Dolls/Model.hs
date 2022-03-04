@@ -21,7 +21,7 @@ data Doll = Doll {
     dollId :: Int
   , dollName :: Text
   , dollOtakuWorldUrl :: Maybe Text
-  , dollHash :: BS.ByteString 
+  , dollHash :: BS.ByteString
   , dollLocation :: Maybe Text
   , dollError :: Maybe Text
   , dollCreatedAt :: UTCTime
