@@ -88,20 +88,17 @@ linkUploadHandler ctxt link = do
     errorSplices =
          subs [("linkErrors", textFill "Invalid OtakuWorld URL")]
            <> createUserErrorSplices
-    otakuWorldUrl :: Text -> Either ParseError (Maybe String, String)
     otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
-    parseUrl :: Parser (Maybe String, String)
     parseUrl = do
       string "http"
       optional (char 's')
       string "://otakuworld.com/data/kiss/data/"
-      mDir <- option Nothing $ do
-        dir <- alphaNum
+      optional $ do
+        alphaNum
         char '/'
-        return $ Just [dir]
-      filename <- many alphaNum
+      filename <- many (alphaNum <|> oneOf "_-")
       string ".lzh"
-      return (mDir, filename)
+      return filename
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
