@@ -27,7 +27,6 @@ import qualified ParseCel                   as PC
 import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
-import           Dolls.Model
 
 processDoll :: Maybe Text
             -> (FilePath, FilePath)
@@ -79,7 +78,7 @@ getCels staticDir = do
   KissDoll _ celData _ <- getKissDoll cnf
   log' "Parsed CNF"
   celsWithOffsets <- readCels (nub celData) staticDir
-  log' "loaded cels"
+  log' "Loaded cels"
   let realCelData = addOffsetsToCelData celsWithOffsets
   return (staticDir, realCelData)
 

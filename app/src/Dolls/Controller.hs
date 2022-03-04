@@ -48,41 +48,18 @@ linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
 linkUploadHandler ctxt link = do
   let mOtakuWorldUrl = otakuWorldUrl link
   case mOtakuWorldUrl of
-    Right (mDir, dollname) -> do
-      mExistingUrlDoll <- getDollByOWUrl ctxt link
-      case mExistingUrlDoll of
-        Nothing -> do
-          let filename = dollname ++ ".lzh"
-          let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
-          resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
-          let body = resp ^. Wreq.responseBody
-          let filehash = BS16.encode $ hashlazy body
-          mExistingHashDoll <- getDollByHash ctxt filehash
-          case mExistingHashDoll of
-            Nothing -> do
-              LBS.writeFile ("static/sets/" ++ filename) body
-              output <- runExceptT $ processDoll Nothing
-                                                (filename, "static/sets/" ++ filename)
-              let newDoll = mkDoll dollname (Just link) filehash (fst <$> output)
-              createDoll ctxt newDoll
-              renderKissDoll ctxt output
-            Just doll -> do
-              case (dollLocation doll, dollError doll) of
-                (Just loc, Nothing) -> do
-                  output <- runExceptT $ getCels (T.unpack loc)
-                  renderKissDoll ctxt output
-                (_, Just err) -> do
-                  renderKissDoll ctxt (Left err)
-                _ -> renderKissDoll ctxt (Left "Something went wrong")
-        Just doll ->
-          case (dollLocation doll, dollError doll) of
-            (Just loc, Nothing) -> do
-              output <- runExceptT $ getCels (T.unpack loc)
-              renderKissDoll ctxt output
-            (_, Just err) -> do
-              renderKissDoll ctxt (Left err)
-            _ -> renderKissDoll ctxt (Left "Something went wrong")
-
+    Right dollname -> do
+      result <- do
+        mExistingUrlDoll <- getDollByOWUrl ctxt link
+        case mExistingUrlDoll of
+          Nothing -> do
+            resp <- Wreq.get (T.unpack link)
+            let body = resp ^. Wreq.responseBody
+            let filehash = BS16.encode $ hashlazy body
+            LBS.writeFile ("static/sets/" ++ dollname ++ ".lzh") body
+            createOrLoadDoll ctxt dollname (Just link) filehash
+          Just doll -> getDollFiles doll
+      renderKissDoll ctxt result
     Left _ -> renderWith ctxt ["index"] errorSplices
   where
     errorSplices =
@@ -99,6 +76,34 @@ linkUploadHandler ctxt link = do
       filename <- many (alphaNum <|> oneOf "_-")
       string ".lzh"
       return filename
+
+-- Looks up the doll by the filehash. If doll with that hash already
+-- exists, it reads the CNF and returns a directory where the cels
+-- are stored plus a list of the cels. If no doll with that hash
+-- already exists, then it creates a new doll and processes it.
+createOrLoadDoll :: Ctxt
+                -> [Char]
+                -> Maybe Text
+                -> BS.ByteString
+                -> IO (Either Text (FilePath, [KissCel]))
+createOrLoadDoll ctxt dollname mLink hash = do
+  mExistingHashDoll <- getDollByHash ctxt hash
+  case mExistingHashDoll of
+    Nothing -> do
+      let filename = dollname ++ ".lzh"
+      output <- runExceptT $ processDoll Nothing
+                                        (filename, "static/sets/" ++ filename)
+      let newDoll = mkDoll dollname mLink hash (fst <$> output)
+      created <- createDoll ctxt newDoll
+      if created then return output else return (Left "Something went wrong")
+    Just doll -> getDollFiles doll
+
+getDollFiles :: Doll -> IO (Either Text (FilePath, [KissCel]))
+getDollFiles doll =
+  case (dollLocation doll, dollError doll) of
+    (Just loc, Nothing) -> runExceptT $ getCels (T.unpack loc)
+    (_, Just err) -> return (Left err)
+    _ -> return (Left "Something went wrong")
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
