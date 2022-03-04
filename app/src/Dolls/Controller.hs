@@ -45,15 +45,27 @@ linkUploadHandler ctxt link = do
   let mOtakuWorldUrl = otakuWorldUrl link
   case mOtakuWorldUrl of
     Right (mDir, dollname) -> do
-      let filename = dollname ++ ".lzh"
-      let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
-      resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
-      BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
-      output <- runExceptT $ processDoll Nothing
-                                         (filename, "static/sets/" ++ filename)
-      let newDoll = mkDoll dollname (Just link) (fst <$> output)
-      createDoll ctxt newDoll
-      renderKissDoll ctxt output
+      mExistingDoll <- getDollByOWUrl ctxt link
+      case mExistingDoll of
+        Nothing -> do
+          let filename = dollname ++ ".lzh"
+          let filepath = maybe filename (\d -> d ++ "/" ++ filename) mDir
+          resp <- Wreq.get ("http://otakuworld.com/data/kiss/data/" ++ filepath)
+          BS.writeFile ("static/sets/" ++ filename)  (resp ^. Wreq.responseBody)
+          output <- runExceptT $ processDoll Nothing
+                                            (filename, "static/sets/" ++ filename)
+          let newDoll = mkDoll dollname (Just link) (fst <$> output)
+          createDoll ctxt newDoll
+          renderKissDoll ctxt output
+        Just doll ->
+          case (dollLocation doll, dollError doll) of
+            (Just loc, Nothing) -> do
+              output <- runExceptT $ getCels (T.unpack loc)
+              renderKissDoll ctxt output
+            (_, Just err) -> do
+              renderKissDoll ctxt (Left err)
+            _ -> renderKissDoll ctxt (Left "Something went wrong")
+
     Left _ -> renderWith ctxt ["index"] errorSplices
   where
     errorSplices =

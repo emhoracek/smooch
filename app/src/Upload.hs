@@ -71,6 +71,18 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
+getCels :: FilePath -> ExceptT Text IO (FilePath, [KissCel])
+getCels staticDir = do
+  log' "About to get CNF"
+  cnf <- getCNF staticDir
+  log' "Got CNF"
+  KissDoll _ celData _ <- getKissDoll cnf
+  log' "Parsed CNF"
+  celsWithOffsets <- readCels (nub celData) staticDir
+  log' "loaded cels"
+  let realCelData = addOffsetsToCelData celsWithOffsets
+  return (staticDir, realCelData)
+
 createCels :: FilePath -> ExceptT Text IO [KissCel]
 createCels staticDir = do
   log' "About to get CNF"
@@ -124,6 +136,18 @@ getOffset celHeader =
   let xOffset = fromIntegral $ PC.celXoffset celHeader
       yOffset = fromIntegral $ PC.celYoffset celHeader in
     (xOffset, yOffset)
+
+readCels :: [CNFKissCel] -> String -> ExceptT Text IO [(CNFKissCel, (Int, Int))]
+readCels cels base = do
+          mapM (readCel base) cels
+
+readCel :: String -> CNFKissCel -> ExceptT Text IO (CNFKissCel, (Int, Int))
+readCel base cnfCel= do
+  let cel = cnfCelName cnfCel
+      celFile = base <> "/" <> cel <> ".cel"
+  celData <- liftIO $ BS.readFile celFile
+  (celHeader, _) <- PC.parseCel celData
+  return (cnfCel, getOffset celHeader)
 
 addOffsetsToCelData :: [(CNFKissCel, (Int, Int))] -> [KissCel]
 addOffsetsToCelData offsets =
