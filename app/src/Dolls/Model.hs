@@ -71,7 +71,7 @@ getDollByOWUrl ctxt owUrl = listToMaybe <$>
      (PG.Only owUrl)
        :: IO [ Doll ])
 
-getDollByHash :: Ctxt -> Text -> IO (Maybe Doll)
+getDollByHash :: Ctxt -> BS.ByteString  -> IO (Maybe Doll)
 getDollByHash ctxt hash = listToMaybe <$>
   withResource (ctxt ^. pool) (\conn ->
     PG.query
