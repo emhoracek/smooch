@@ -2,19 +2,14 @@
 {-# OPTIONS_GHC -F -pgmF rivet-autoimporter #-}
 module Main where
 
-import qualified Configuration.Dotenv
-import           Control.Monad                     (when)
 import qualified Data.Configurator                 as C
-import           Data.Monoid
 import           Database.Rivet.Adaptor.PostgreSQL
 import qualified Database.Rivet.Main               as Rivet
-import           System.Directory                  (doesFileExist)
 import           System.Environment
 
 
 main :: IO ()
-main = do e <- doesFileExist ".env"
-          args <- getArgs
+main = do args <- getArgs
           let (env, mode) =
                case args of
                  [env', "up"] -> (env', Rivet.MigrateUp)

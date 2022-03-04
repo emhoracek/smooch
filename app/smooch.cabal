@@ -53,6 +53,8 @@ library
                        Web,
                        Ctxt,
                        Session,
+                       Artists.Model,
+                       Dolls.Model,
                        Dolls.Controller,
                        Dolls.View,
                        Users.Model,
