@@ -1,5 +1,6 @@
 class KiSSObject {
   constructor (mark, color, positions) {
+    this.mark = mark
     this.currentSet = 0
     this.color = color
     this.positions = positions
