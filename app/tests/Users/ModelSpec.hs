@@ -17,8 +17,6 @@ import           Common
 import           Ctxt
 import           Users.Model
 
-type HspecFn = FnHspecM Ctxt
-
 instance Factory Ctxt User (HspecFn NewUser) where
   fields = do rand <- liftIO randomIO
               let username = "user" <> tshow rand

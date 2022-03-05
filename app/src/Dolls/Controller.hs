@@ -65,7 +65,7 @@ linkUploadHandler ctxt link = do
     errorSplices =
          subs [("linkErrors", textFill "Invalid OtakuWorld URL")]
            <> createUserErrorSplices
-    otakuWorldUrl url = parse parseUrl "Invalid OtakuWorld url: " (T.unpack url)
+    otakuWorldUrl url = parse parseUrl "" (T.unpack url)
     parseUrl = do
       string "http"
       optional (char 's')

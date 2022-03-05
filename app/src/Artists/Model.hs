@@ -13,8 +13,6 @@ import           Database.PostgreSQL.Simple.ToField
 import           Database.PostgreSQL.Simple.ToRow
 
 import           Ctxt
-import           Session
-import Users.Model (User(userId))
 
 
 data Artist = Artist {
