@@ -98,7 +98,13 @@ createOrLoadDoll ctxt mUser dollname mLink body = do
       let newDoll = mkDoll dollname mLink hash (fst <$> output)
       created <- createDoll ctxt newDoll
       if created then return output else return (Left "Something went wrong")
-    Just doll -> getDollFiles doll
+    Just doll -> do
+      mUpdatedDoll <- maybe (return (Just doll))
+                            (updateDollWithUrl ctxt doll dollname)
+                            mLink
+      case mUpdatedDoll of
+        Just updatedDoll -> getDollFiles updatedDoll
+        Nothing -> getDollFiles doll
 
 getDollFiles :: Doll -> IO (Either Text (FilePath, [KissCel]))
 getDollFiles doll =

@@ -6,6 +6,7 @@ import           Control.Lens                       ((^.))
 import qualified Data.ByteString                    as BS
 import           Data.Maybe                         (listToMaybe)
 import           Data.Pool                          (withResource)
+import qualified Data.Text                          as T
 import           Data.Text (Text)
 import           Data.Time (UTCTime)
 import qualified Database.PostgreSQL.Simple         as PG
@@ -14,8 +15,6 @@ import           Database.PostgreSQL.Simple.ToField
 import           Database.PostgreSQL.Simple.ToRow
 
 import           Ctxt
-import           Session
-
 
 data Doll = Doll {
     dollId :: Int
@@ -26,7 +25,7 @@ data Doll = Doll {
   , dollError :: Maybe Text
   , dollCreatedAt :: UTCTime
   , dollUpdatedAt :: UTCTime
-}
+} deriving (Eq, Show)
 
 instance FromRow Doll where
   fromRow = Doll <$> field <*> field <*> field <*> field <*> field
@@ -88,3 +87,20 @@ getDollsForArtist ctxt aId =
       (dollQuery <> " JOIN doll_artists AS da ON da.doll_id = dolls.id WHERE da.artist_id = ?")
       (PG.Only aId)
       :: IO [ Doll ])
+
+-- We're going to treat OtakuWorld filenames as canonical for now, so when we
+-- update a file that has already been uploaded with a different name, we also
+-- make sure that the name is the same as the one in the OW URL.
+updateDollWithUrl:: Ctxt -> Doll -> String -> Text -> IO (Maybe Doll)
+updateDollWithUrl ctxt doll name owUrl =
+  let updatedDoll = doll { dollName = T.pack name
+                         , dollOtakuWorldUrl = Just owUrl } in
+  if updatedDoll == doll
+    then return (Just updatedDoll)
+    else
+      listToMaybe <$> withResource (ctxt ^. pool) (\conn ->
+        PG.query
+        conn
+        "UPDATE dolls SET name = ?, otakuworld_url = ? WHERE id = ? \
+        \ RETURNING id, name, otakuworld_url, hash, location, error, created_at, updated_at"
+        (dollName updatedDoll, dollOtakuWorldUrl updatedDoll, dollId doll))
