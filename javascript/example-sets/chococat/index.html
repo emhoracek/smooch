@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Smooch</title>
+    <link href="../../screen.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript">
+     window.onload = function () {
+       document.getElementById('loading').style.display = 'none';
+     };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="loading">
+      <p>Loading...</p>
+      <progress></progress>
+    </div>
+
+    <div id="sets">
+      <ul>
+
+          <li><button class="set">0</a></li>
+
+          <li><button class="set">1</a></li>
+
+          <li><button class="set">2</a></li>
+
+          <li><button class="set">3</a></li>
+
+          <li><button class="set">4</a></li>
+
+          <li><button class="set">5</a></li>
+
+          <li><button class="set">6</a></li>
+
+          <li><button class="set">7</a></li>
+
+          <li><button class="set">8</a></li>
+
+          <li><button class="set">9</a></li>
+
+          <li><button id="open-tip">?</a></li>
+
+      </ul>
+      <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
+
+    </div>
+
+    <div id="borderarea">
+      <div id="playarea">
+           <canvas id="screen"></canvas>
+           <canvas id="ghost"></canvas>
+           <div id="celImages">
+
+              <img id="accessory1-0" src="palette0/accessory1.png"/>
+              <img id="accessory2-back-0" src="palette0/accessory2-back.png"/>
+              <img id="accessory2-front-0" src="palette0/accessory2-front.png"/>
+              <img id="accessory3-0" src="palette0/accessory3.png"/>
+              <img id="hair-accessory1-0" src="palette0/hair-accessory1.png"/>
+              <img id="hair-accessory2-0" src="palette0/hair-accessory2.png"/>
+              <img id="hair-accessory3-0" src="palette0/hair-accessory3.png"/>
+              <img id="basedoll-0" src="palette0/basedoll.png"/>
+              <img id="bottom1-0" src="palette0/bottom1.png"/>
+              <img id="bottom2-0" src="palette0/bottom2.png"/>
+              <img id="hair1-front-0" src="palette0/hair1-front.png"/>
+              <img id="hair1-0" src="palette0/hair1.png"/>
+              <img id="hair2-0" src="palette0/hair2.png"/>
+              <img id="shoes1-0" src="palette0/shoes1.png"/>
+              <img id="shoes2-0" src="palette0/shoes2.png"/>
+              <img id="top1-0" src="palette0/top1.png"/>
+              <img id="top2-0" src="palette0/top2.png"/>
+              <img id="top2-back-0" src="palette0/top2-back.png"/>
+           </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
+    </div>
+
+    </div>
+
+    <script>
+      var globalKiss = true
+    </script>
+
+    <script src="setdata.js" type="text/javascript"></script>
+
+    <script src="../../doll.js" type="module"></script>
+  </body>
+</html>

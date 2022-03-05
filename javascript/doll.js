@@ -2,7 +2,7 @@ import { KiSSDoll } from './kissDoll'
 import { DragAndDrop } from './dragAndDrop'
 
 window.addEventListener('load', function () {
-  /* globals kissJson */
+  /* globals kissJson, globalKiss */
   let loaded = 0
   const totalCels = kissJson.cels.length
   const doll = new KiSSDoll(kissJson, () => { loaded += 1 })
@@ -16,6 +16,13 @@ window.addEventListener('load', function () {
     } else {
       doll.draw()
     }
+  }
+
+  // in testing and development, it's convenient to have access to
+  // to the kiss set object
+  if (globalKiss) {
+    // eslint-disable-next-line no-global-assign
+    globalKiss = doll
   }
 
   window.setTimeout(checkLoaded, 500)
