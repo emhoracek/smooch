@@ -5,7 +5,8 @@
 module Dolls.Controller where
 
 import           Control.Lens               ((^.))
-import           Control.Monad.Trans.Except (runExceptT)
+import           Control.Monad.IO.Class     (liftIO)
+import           Control.Monad.Trans.Except (ExceptT, runExceptT, throwE)
 import           Crypto.Hash.MD5            (hashlazy)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Lazy       as LBS
@@ -30,19 +31,18 @@ import           Users.View
 mkDoll :: String
        -> Maybe Text
        -> BS.ByteString
-       -> Either Text FilePath
+       -> FilePath
        -> NewDoll
-mkDoll name otakuworldUrl hash eLoc = do
-  case eLoc of
-    Left err ->
-      NewDoll (T.pack name) otakuworldUrl hash Nothing (Just err)
-    Right loc ->
-      NewDoll (T.pack name) otakuworldUrl hash (Just (T.pack loc)) Nothing
+mkDoll name otakuworldUrl hash loc = do
+  NewDoll (T.pack name) otakuworldUrl hash (Just (T.pack loc)) Nothing
+
+hashFile :: LBS.ByteString -> BS.ByteString
+hashFile = BS16.encode . hashlazy
 
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
-  fileContent <- LBS.readFile filePath'
-  output <- createOrLoadDoll ctxt Nothing (takeBaseName (T.unpack name)) Nothing fileContent
+  hash <- hashFile <$> LBS.readFile filePath'
+  output <- runExceptT $ createOrLoadDoll ctxt Nothing (takeBaseName (T.unpack name)) Nothing hash
   renderKissDoll ctxt output
 
 linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
@@ -50,15 +50,16 @@ linkUploadHandler ctxt link = do
   let mOtakuWorldUrl = otakuWorldUrl link
   case mOtakuWorldUrl of
     Right dollname -> do
-      result <- do
-        mExistingUrlDoll <- getDollByOWUrl ctxt link
+      result <- runExceptT $ do
+        mExistingUrlDoll <- liftIO $ getDollByOWUrl ctxt link
         case mExistingUrlDoll of
           Nothing -> do
-            resp <- Wreq.get (T.unpack link)
+            resp <- liftIO $ Wreq.get (T.unpack link)
             let body = resp ^. Wreq.responseBody
-            LBS.writeFile ("static/sets/" ++ dollname ++ ".lzh") body
-            createOrLoadDoll ctxt Nothing dollname (Just link) body
-          Just doll -> getDollFiles doll
+            liftIO $ LBS.writeFile ("static/sets/" ++ dollname ++ ".lzh") body
+            let hash = hashFile body
+            createOrLoadDoll ctxt Nothing dollname (Just link) hash
+          Just doll -> getCels doll
       renderKissDoll ctxt result
     Left _ -> renderWith ctxt ["index"] errorSplices
   where
@@ -67,12 +68,8 @@ linkUploadHandler ctxt link = do
            <> createUserErrorSplices
     otakuWorldUrl url = parse parseUrl "" (T.unpack url)
     parseUrl = do
-      string "http"
-      optional (char 's')
-      string "://otakuworld.com/data/kiss/data/"
-      optional $ do
-        alphaNum
-        char '/'
+      string "http://otakuworld.com/data/kiss/data/"
+      optional $ alphaNum >> char '/'
       filename <- many (alphaNum <|> oneOf "_-")
       string ".lzh"
       return filename
@@ -85,42 +82,50 @@ createOrLoadDoll :: Ctxt
                  -> Maybe Text
                  -> [Char]
                  -> Maybe Text
-                 -> LBS.ByteString
-                 -> IO (Either Text (FilePath, [KissCel]))
-createOrLoadDoll ctxt mUser dollname mLink body = do
-  let hash = BS16.encode $ hashlazy body
-  mExistingHashDoll <- getDollByHash ctxt hash
+                 -> BS.ByteString
+                 -> ExceptT Text IO (FilePath, [KissCel])
+createOrLoadDoll ctxt mUser dollname mLink hash = do
+  mExistingHashDoll <- liftIO $ getDollByHash ctxt hash
   case mExistingHashDoll of
-    Nothing -> do
-      let filename = dollname ++ ".lzh"
-      output <- runExceptT $ processDoll mUser
-                                         (filename, "static/sets/" ++ filename)
-      let newDoll = mkDoll dollname mLink hash (fst <$> output)
-      created <- createDoll ctxt newDoll
-      if created then return output else return (Left "Something went wrong")
-    Just doll -> do
-      mUpdatedDoll <- maybe (return (Just doll))
-                            (updateDollWithUrl ctxt doll dollname)
-                            mLink
-      case mUpdatedDoll of
-        Just updatedDoll -> getDollFiles updatedDoll
-        Nothing -> getDollFiles doll
+    Nothing ->
+      let newDoll = mkDoll dollname mLink hash  ("static/sets/" ++ dollname) in
+        processNewDoll ctxt mUser newDoll
+    Just doll -> loadExistingDoll ctxt doll dollname mLink
 
-getDollFiles :: Doll -> IO (Either Text (FilePath, [KissCel]))
-getDollFiles doll =
-  case (dollLocation doll, dollError doll) of
-    (Just loc, Nothing) -> runExceptT $ getCels (T.unpack loc)
-    (_, Just err) -> return (Left err)
-    _ -> return (Left "Something went wrong")
+processNewDoll :: Ctxt
+               -> Maybe Text
+               -> NewDoll
+               -> ExceptT Text IO (FilePath, [KissCel])
+processNewDoll ctxt mUser newDoll = do
+  let filename = T.unpack (newDollName newDoll <> ".lzh")
+  output <-  processDoll mUser
+                (filename, "static/sets/" ++ filename)
+  created <- liftIO $ createDoll ctxt newDoll
+  if created then return output else throwE "Something went wrong"
+
+loadExistingDoll :: Ctxt
+                 -> Doll
+                 -> String
+                 -> Maybe Text
+                 -> ExceptT Text IO (FilePath, [KissCel])
+loadExistingDoll ctxt existingDoll dollname mLink = do
+  mUpdatedDoll <-
+    case mLink of
+      Nothing -> return (Just existingDoll)
+      Just link -> liftIO (updateDollWithUrl ctxt existingDoll dollname link)
+  maybe (getCels existingDoll) getCels mUpdatedDoll
 
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
 userUploadHandler user ctxt (File name _ filePath') = do
-  fileContent <- LBS.readFile filePath'
   let mUsername = Just (userUsername user)
   let dollname = takeBaseName (T.unpack name)
-  output <- createOrLoadDoll ctxt mUsername dollname Nothing fileContent
+  hash <- hashFile <$> liftIO (LBS.readFile filePath')
+  output <- runExceptT $ createOrLoadDoll ctxt mUsername dollname Nothing hash
   renderKissDoll ctxt output
 
+-- TODO: This should use `getCels` instead of create cels, but
+-- we can implement that when we add a relation between Users and
+-- dolls in the database
 userDollHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userDollHandler user ctxt setName = do
   let userDir = staticUserDir (userUsername user)

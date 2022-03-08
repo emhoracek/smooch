@@ -27,6 +27,7 @@ import qualified ParseCel                   as PC
 import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
+import           Dolls.Model
 
 processDoll :: Maybe Text
             -> (FilePath, FilePath)
@@ -70,17 +71,20 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
-getCels :: FilePath -> ExceptT Text IO (FilePath, [KissCel])
-getCels staticDir = do
-  log' "About to get CNF"
-  cnf <- getCNF staticDir
-  log' "Got CNF"
-  KissDoll _ celData _ <- getKissDoll cnf
-  log' "Parsed CNF"
-  celsWithOffsets <- readCels (nub celData) staticDir
-  log' "Loaded cels"
-  let realCelData = addOffsetsToCelData celsWithOffsets
-  return (staticDir, realCelData)
+getCels :: Doll -> ExceptT Text IO (FilePath, [KissCel])
+getCels doll =
+  case dollLocationOrErr doll of
+    Right loc -> do
+      log' "About to get CNF"
+      cnf <- getCNF loc
+      log' "Got CNF"
+      KissDoll _ celData _ <- getKissDoll cnf
+      log' "Parsed CNF"
+      celsWithOffsets <- readCels (nub celData) loc
+      log' "Loaded cels"
+      let realCelData = addOffsetsToCelData celsWithOffsets
+      return (loc, realCelData)
+    Left err -> throwE err
 
 createCels :: FilePath -> ExceptT Text IO [KissCel]
 createCels staticDir = do

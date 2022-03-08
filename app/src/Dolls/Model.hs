@@ -44,6 +44,13 @@ instance ToRow NewDoll where
     [ toField name, toField owurl, toField hash, toField location
     , toField err ]
 
+dollLocationOrErr :: Doll -> Either Text FilePath
+dollLocationOrErr doll =
+  case (dollLocation doll, dollError doll) of
+    (Just loc, _)       -> Right (T.unpack loc)
+    (Nothing, Just err) -> Left err
+    (Nothing, Nothing)  -> Left "Doll not found"
+
 dollQuery :: PG.Query
 dollQuery = "SELECT dolls.id, dolls.name, dolls.otakuworld_url, dolls.hash, \
   \ dolls.location, dolls.error, dolls.created_at, dolls.updated_at FROM dolls"
