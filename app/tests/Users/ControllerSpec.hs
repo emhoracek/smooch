@@ -21,7 +21,7 @@ spec = fnTests $ do
                            ,("password", "pass")
                            ,("password-confirmation", "pass")]
         >>= should300To "/users/new"
-      [user] <- eval (\ctxt -> getUsers ctxt)
+      [user] <- eval getUsers
       userEmail user `shouldEqual` "new@test.com"
 
     it "should not create a new user if password doesn't match" $ do
@@ -30,8 +30,7 @@ spec = fnTests $ do
                            ,("password", "pass")
                            ,("password-confirmation", "random")]
         >>= should200
-      eval (\ctxt -> getUsers ctxt)
-        >>= shouldEqual []
+      eval getUsers >>= shouldEqual []
 
     it "should not create a new user if email is invalid" $ do
       post "/users/create" [("username", "new")
@@ -39,5 +38,4 @@ spec = fnTests $ do
                            ,("password", "pass")
                            ,("password-confirmation", "random")]
         >>= should200
-      eval (\ctxt -> getUsers ctxt)
-        >>= shouldEqual []
+      eval getUsers >>= shouldEqual []

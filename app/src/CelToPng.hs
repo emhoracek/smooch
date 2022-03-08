@@ -56,7 +56,7 @@ palToRGBA8 entries = Pic.generateImage generator width height
   where
     width = lengthPalEntries entries
     height = 1
-    generator x y =
+    generator x _y =
         let alpha = if x == 0 then 0x00 else 0xFF
             (PalEntry red green blue) =
                 palEntryByIndex (fromIntegral x) entries

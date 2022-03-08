@@ -3,7 +3,6 @@
 module Users.Controller where
 
 import           Data.Maybe         (catMaybes)
-import           Data.Monoid        ((<>))
 import           Data.Text          (Text)
 import qualified Data.Text          as T
 import           Data.Time.Calendar (fromGregorian)
@@ -14,20 +13,20 @@ import           Web.Fn
 import           Web.Larceny        hiding (renderWith)
 
 import           Ctxt
-import           Sets.Controller
+import           Dolls.Controller
 import           Users.Model
 import           Users.View
-import           Sets.View
+import           Dolls.View
 
 usersRoutes :: Ctxt -> IO (Maybe Response)
 usersRoutes ctxt =
-  route ctxt [ (end ==> usersHandler)
-             , (method POST // path "create"
-                            // param "username"
-                            // param "email"
-                            // param "password"
-                            // param "password-confirmation" !=> usersCreateHandler)
-             , (segment ==> requireAuthentication loggedInUserRoutes)]
+  route ctxt [ end ==> usersHandler
+             , method POST // path "create"
+                           // param "username"
+                           // param "email"
+                           // param "password"
+                           // param "password-confirmation" !=> usersCreateHandler
+             , segment ==> requireAuthentication loggedInUserRoutes ]
 
 usersHandler :: Ctxt -> IO (Maybe Response)
 usersHandler ctxt = do
@@ -43,7 +42,7 @@ requireAuthentication :: (Ctxt -> User -> k -> IO (Maybe Response))
 -- `(segment // path "id" ==> requireAuthentication otherHandler)`
 -- then `k` might be `Text -> Int`. Keeping `k` abstract lets us
 -- handle all sorts of different types of arguments to our handlers.
-requireAuthentication handler = \ctxt k -> do
+requireAuthentication handler ctxt k = do
   mUser <- getLoggedInUser ctxt
   case mUser of
     Just user -> handler ctxt user k
@@ -56,9 +55,9 @@ loggedInUserRoutes ctxt loggedInUser username = do
                     , path "upload" // method POST
                                     // file "kissfile"
                                     !=> userUploadHandler loggedInUser
-                    , path "sets" // segment
-                                  // end
-                                  ==> userSetHandler loggedInUser ]
+                    , path "dolls" // segment
+                                   // end
+                                   ==> userDollHandler loggedInUser ]
     else return Nothing
 
 userHandler ::  User -> Ctxt -> IO (Maybe Response)
@@ -85,7 +84,7 @@ usersCreateHandler ctxt username email password passwordConfirmation = do
  where errorSplices errors =
          newErrorSplices errors <> createUserErrorSplices <> linkUploadSplices
        newErrorSplices errors =
-         (subs $ map (\(k,v) -> (k <> "Errors", textFill v)) errors)
+         subs $ map (\(k,v) -> (k <> "Errors", textFill v)) errors
 
 type Errors = [(Text, Text)]
 

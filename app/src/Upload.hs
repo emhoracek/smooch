@@ -27,14 +27,15 @@ import qualified ParseCel                   as PC
 import           ParseCNF
 import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
+import           Dolls.Model
 
-processSet :: Maybe Text
-           -> (FilePath, FilePath)
-           -> ExceptT Text IO (FilePath, [KissCel])
-processSet username (fName, filePath) = do
+processDoll :: Maybe Text
+            -> (FilePath, FilePath)
+            -> ExceptT Text IO (FilePath, [KissCel])
+processDoll username (fName, filePath) = do
   liftIO $ copyFile filePath ("static/sets" </> fName)
   userDir <- createUserDir username
-  staticDir <- createSetDir userDir (takeBaseName fName)
+  staticDir <- createDollDir userDir (takeBaseName fName)
   void $ unzipFile fName staticDir
   log' "Unzipped file!"
   liftIO $ lowercaseFiles staticDir
@@ -47,17 +48,17 @@ staticUserDir username = "static/sets/" <> T.unpack username
 
 createUserDir :: Maybe Text -> ExceptT Text IO FilePath
 createUserDir username = do
-  let staticDir = maybe "static/sets/" staticUserDir username
+  let staticDir = maybe "static/sets" staticUserDir username
   liftIO $ createDirectoryIfMissing True staticDir
   log' $ "Created static user sets directory if missing: " <> T.pack staticDir
   return staticDir
 
-staticSetDir :: FilePath -> String -> FilePath
-staticSetDir userDir setName =  userDir <> "/" <> setName
+staticDollDir :: FilePath -> String -> FilePath
+staticDollDir userDir setName =  userDir <> "/" <> setName
 
-createSetDir :: FilePath -> String -> ExceptT Text IO FilePath
-createSetDir userDir setName = do
-  let staticDir = staticSetDir userDir setName
+createDollDir :: FilePath -> String -> ExceptT Text IO FilePath
+createDollDir userDir setName = do
+  let staticDir = staticDollDir userDir setName
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ liftIO $ removeDirectoryRecursive staticDir
   liftIO $ createDirectory staticDir
@@ -70,12 +71,27 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
+getCels :: Doll -> ExceptT Text IO (FilePath, [KissCel])
+getCels doll =
+  case dollLocationOrErr doll of
+    Right loc -> do
+      log' "About to get CNF"
+      cnf <- getCNF loc
+      log' "Got CNF"
+      KissDoll _ celData _ <- getKissDoll cnf
+      log' "Parsed CNF"
+      celsWithOffsets <- readCels (nub celData) loc
+      log' "Loaded cels"
+      let realCelData = addOffsetsToCelData celsWithOffsets
+      return (loc, realCelData)
+    Left err -> throwE err
+
 createCels :: FilePath -> ExceptT Text IO [KissCel]
 createCels staticDir = do
   log' "About to get CNF"
   cnf <- getCNF staticDir
   log' "Got CNF"
-  KissSet cnfKissData celData kissPalettes <- getKissSet cnf
+  KissDoll cnfKissData celData kissPalettes <- getKissDoll cnf
   log' "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes (nub celData) staticDir
   log' "Converted cels"
@@ -123,6 +139,17 @@ getOffset celHeader =
   let xOffset = fromIntegral $ PC.celXoffset celHeader
       yOffset = fromIntegral $ PC.celYoffset celHeader in
     (xOffset, yOffset)
+
+readCels :: [CNFKissCel] -> String -> ExceptT Text IO [(CNFKissCel, (Int, Int))]
+readCels cels base = mapM (readCel base) cels
+
+readCel :: String -> CNFKissCel -> ExceptT Text IO (CNFKissCel, (Int, Int))
+readCel base cnfCel= do
+  let cel = cnfCelName cnfCel
+      celFile = base <> "/" <> cel <> ".cel"
+  celData <- liftIO $ BS.readFile celFile
+  (celHeader, _) <- PC.parseCel celData
+  return (cnfCel, getOffset celHeader)
 
 addOffsetsToCelData :: [(CNFKissCel, (Int, Int))] -> [KissCel]
 addOffsetsToCelData offsets =
