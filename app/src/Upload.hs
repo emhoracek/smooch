@@ -141,8 +141,7 @@ getOffset celHeader =
     (xOffset, yOffset)
 
 readCels :: [CNFKissCel] -> String -> ExceptT Text IO [(CNFKissCel, (Int, Int))]
-readCels cels base = do
-          mapM (readCel base) cels
+readCels cels base = mapM (readCel base) cels
 
 readCel :: String -> CNFKissCel -> ExceptT Text IO (CNFKissCel, (Int, Int))
 readCel base cnfCel= do
