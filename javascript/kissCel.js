@@ -15,6 +15,7 @@ class KiSSCel {
     this.ghostImage = undefined
     this.visible = false
     this.alpha = cel.alpha
+    this.currentSet = 0
 
     this.offset = cel.offset
 

@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
 
   // in testing and development, it's convenient to have access to
   // to the kiss set object
-  if (globalKiss) {
+  if (typeof globalKiss !== 'undefined') {
     // eslint-disable-next-line no-global-assign
     globalKiss = doll
   }
