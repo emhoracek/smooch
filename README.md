@@ -21,7 +21,7 @@ out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRI
 Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
 
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
-
+![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://disboard.org/server/950519299364237312)
 
 ## Roadmap
 
