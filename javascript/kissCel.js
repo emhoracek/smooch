@@ -95,17 +95,12 @@ class KiSSCel {
   }
 }
 
-// from https://stackoverflow.com/a/5624139/5053374
+// thanks to DrBracewell#0252 on The Coding Den Discord
 function decimalToRgb (n) {
-  const paddedHex = '0'.repeat(5) + n.toString(16)
-  const shortened = paddedHex.slice(-6)
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(shortened)
-  if (result) {
-    return {
-      red: parseInt(result[1], 16),
-      green: parseInt(result[2], 16),
-      blue: parseInt(result[3], 16)
-    }
+  return {
+    red: (n & 0xff0000) >> 16,
+    green: (n & 0x00ff00) >> 8,
+    blue: (n & 0x0000ff)
   }
 }
 
