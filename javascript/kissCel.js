@@ -4,7 +4,6 @@
 // KiSSCels
 class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
-    this.color = obj.color
     this.name = cel.name
     this.mark = cel.mark
     this.fix = cel.fix
@@ -41,7 +40,7 @@ class KiSSCel {
     const data = ghostImageData.data
 
     // Fill ghost image data with obj color
-    const color = this.color
+    const color = decimalToRgb(this.mark)
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
@@ -93,6 +92,15 @@ class KiSSCel {
         this.position.y + this.offset.y
       )
     }
+  }
+}
+
+// thanks to DrBracewell#0252 on The Coding Den Discord
+function decimalToRgb (n) {
+  return {
+    red: (n & 0xff0000) >> 16,
+    green: (n & 0x00ff00) >> 8,
+    blue: (n & 0x0000ff)
   }
 }
 
