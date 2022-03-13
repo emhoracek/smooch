@@ -74,6 +74,62 @@
           </div>
         </section>
       </main>
+
+        <!-- Login/Signup Section-->
+      <section class="authenticate">
+        <!-- Signup form -->
+        <div class="signup">
+          <h2> Create an account</h2>
+          <p>Save your favorite dolls so you can play again and again.</p>
+          <form action="/users/create" method="post">
+            <!-- Username -->
+            <div class="field">
+              <label for="username">Username:</label>
+              <input name="username" />
+              <p><usernameErrors /></p>
+            </div>
+            <!-- Email -->
+            <div class="field">
+              <label for="email">Email:</label>
+              <input name="email" />
+              <p><emailErrors /></p>
+            </div>
+            <!-- Password -->
+            <div class="field">
+              <label for="password">Password:</label>
+              <input type="password" name="password" />
+              <p><passwordErrors /></p>
+            </div>
+            <!-- PW Confirmation -->
+            <div class="field">
+              <label for="password-confirmation">Password (again):
+              </label>
+              <input type="password" name="password-confirmation" />
+            </div>
+            <!-- Submit -->
+            <input type="submit" value="Sign up" class="field submit" />
+          </form>
+        </div>
+
+        <!-- Login form -->
+        <div class="login">
+          <h2>Login</h2>
+          <form action="/login" method="post">
+            <!-- Username -->
+            <div class="field">
+              <label for="username">Username:</label>
+              <input name="username" />
+            </div>
+            <!-- Password -->
+            <div class="field">
+              <label for="password">Password:</label>
+              <input type="password" name="password" />
+            </div>
+            <!-- Submit -->
+            <input type="submit" value="Log in" class="field submit" />
+          </form>
+        </div>
+      </section>
     </div>
   </body>
 </html>
