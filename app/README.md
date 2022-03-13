@@ -116,6 +116,10 @@ Following the [Homebrew install guide here](https://brew.sh/).
 
 * On Mac OSX you can use `Homebrew` to install `lhasa`, copy and past this command into your Terminal: `brew install lhasa`
 
+#### Other dependencies
+
+You'll also need libgmp3-dev, libpq-dev, libicu-dev, and zlib1g-dev.
+
 ### Project setup
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this project, clone your fork, and add the original repo as a remote:
