@@ -184,7 +184,7 @@ function setCanvasSize (canvas, size) {
 }
 
 function rgbToDecimal (r, g, b) {
-  return (r * 16) + (g * 8) + b
+  return (r << 16) + (g << 8) + b
 }
 
 export { KiSSDoll }
