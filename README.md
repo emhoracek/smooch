@@ -1,13 +1,7 @@
 # smooch
 
-Smooch is a set of tools for viewing, converting, and eventually creating KiSS
+Smooch is a web app for viewing and eventually creating KiSS
 dolls. KiSS stands for Kisekae (Japanese for "dress up") Set System.
-
-KiSS dolls have been around for a long time, but there's only one modern viewer
-(and it has some drawbacks) and no way to play with these dolls online. Many
-very talented artists spent countless hours making these fun digital toys. Some
-are wonderful examples of pixel artistry. It would be a shame for them to be
-lost just because technology has moved on.
 
 A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/ki_spark.htm)
 
@@ -15,29 +9,19 @@ A typical KiSS doll: [Spark by Kimiki](http://otakuworld.com/kiss/dolls/pages/k/
 
 Check out Smooch's [GitHub wiki](https://github.com/emhoracek/smooch/wiki) if you want to learn more about KiSS.
 
-Now, we're making a KiSS doll viewer for the browser -- and you can help! Check
+We're making a KiSS doll viewer for the browser -- and you can help! Check
 out the [CONTRIBUTING.md](https://github.com/emhoracek/smooch/blob/master/CONTRIBUTING.md) file for details.
 
-Checkout the static [Smooch demo](http://emhoracek.github.io/smooch/index.html)!
+The static [Smooch demo](http://emhoracek.github.io/smooch/index.html) has examples of working KiSS dolls.
+
+The [Smooch alpha test](http://67.205.172.104:8000/) is now live! Try out some dolls!
 
 ![first-timers-only-friendly](http://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)
 [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://disboard.org/server/950519299364237312)
 
 ## Roadmap
 
-  * ~~Get a whole bunch of non-FKiSS, single-palette dolls to work correctly~~
-  * ~~Support multiple palettes~~
-  * Users can view dolls
-      * ~~Users can create accounts and log in~~
-      * ~~Users can upload an LZH file to the server~~
-      * LZH archive is decompressed and files are put in S3 bucket
-      * ~~Smooch converts directory contents to PNGs and JSON~~
-      * JSON and S3 location are stored in database
-      * User can access previously-uploaded dolls from profile
-  * Set up server deployment (probably Docker)
-  * Release a usable vanilla KiSS viewer
-
-### Future plans
+  * Users can save the dolls they uploaded in a personal library
   * Support multiple CNFs
       * A single doll can have multiple configuration files - this was
         often used to have one version with FKiSS effects and another
