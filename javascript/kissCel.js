@@ -41,7 +41,7 @@ class KiSSCel {
     const data = ghostImageData.data
 
     // Fill ghost image data with obj color
-    const color = this.color
+    const color = hexToRgb(this.color)
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
@@ -92,6 +92,17 @@ class KiSSCel {
         this.position.x + this.offset.x,
         this.position.y + this.offset.y
       )
+    }
+  }
+}
+
+function hexToRgb (hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (result) {
+    return {
+      red: parseInt(result[1], 16),
+      green: parseInt(result[2], 16),
+      blue: parseInt(result[3], 16)
     }
   }
 }

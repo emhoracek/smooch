@@ -59,12 +59,11 @@ class KiSSDoll {
         // If the object doesn't already exist, we need to create it.
 
         // Create a color to identify the object.
-        const color = numberToColor(cnfCel.mark)
-        const colorid = color.red + color.green + color.blue + 255
-        this.colorids[colorid] = cnfCel.mark
+        const color = numberToHex(cnfCel.mark, 6)
+        this.colorids[color] = cnfCel.mark
 
         // Create the new object and new cel
-        const newObj = new KiSSObject(cnfCel.mark, color, cnfPositions.map(sp => sp.positions[cnfCel.mark]))
+        const newObj = new KiSSObject(cnfCel.mark, color, cnfPositions.map(sp => sp.positions[cnfCel.mark] || { x: 0, y: 0 }))
         const newCel = new KiSSCel(newObj, cnfCel, this, incLoaded)
         // Add the new cel to the object's list of cels.
         newObj.cels.push(newCel)
@@ -96,7 +95,7 @@ class KiSSDoll {
   getSelectedObject (pos) {
     const pixel = this.ghost.getImageData(pos.x, pos.y, 1, 1)
     const data = pixel.data
-    const colorid = data[0] + data[1] + data[2] + 255
+    const colorid = rgbToHex(data[0], data[1], data[2])
     const alpha = data[3]
 
     if (alpha === 0) {
@@ -190,26 +189,14 @@ function setCanvasSize (canvas, size) {
   canvas.height = size.y
 }
 
-function numberToColor (i) {
-  /* Set color id initial values */
-  let red = 0
-  let blue = 0
-  let green = 0
+function rgbToHex (r, g, b) {
+  return numberToHex(r, 2) + numberToHex(g, 2) + numberToHex(b, 2)
+}
 
-  // create a unique color for each object
-  // and register it in the colorids array
-  // supports up to 255*3 objects
-  if (i < 255) {
-    red = i
-  } else if (i > 255 && i < 255 * 2) {
-    red = 0
-    green = i
-  } else if (i > 255 * 2 && i < 255 * 3) {
-    green = 0
-    blue = i
-  }
-
-  return { red: red, green: green, blue: blue, alpha: 255 }
+function numberToHex (n, length) {
+  const paddedHex = '0'.repeat(length - 1) + n.toString(16)
+  const shortened = paddedHex.slice(0 - length)
+  return shortened
 }
 
 export { KiSSDoll }
