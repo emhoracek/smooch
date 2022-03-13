@@ -9,9 +9,8 @@ and all of them would mean so much to this project.
    * [KiSS set bugs](#kiss-set-bugs)
  * [Writing documentation](#writing-documentation)
  * [Contributing code](#contributing-code)
-   * [Frontend](#frontend-javascripthtmlcss)
-   * [Backend](#backend-haskell)
- * [Running Smooch on your computer](#run-smooch-on-your-computer)
+ * [Running the frontend](#frontend-javascripthtmlcss)
+ * [Running Smooch on your computer](#running-the-backend)
 
 ## Filing an issue
 
@@ -99,44 +98,22 @@ Don't see an interesting issue, or all the issues are claimed? Below are some mo
 
  * Refactor and document the code so it's easier to understand
  * Improve performance
- * Add editing capabilities `*`
-   * Artists can change the layering of cels (raising or lowering in relation to other items)
-   * Artists can change the offset of a cel in relation its object
-   * Artists can change which palette a cel uses
-   * Artists can edit a palette
-   * *MAYBE* Artists can edit a cel with pixel art tools!
- * Add set creation capabilities `*`
-   * Artists can upload a _cel sheet_ (an image with a solid or transparent background containing many cels)
-   * Artists can select cels from the cel sheet and name them
-   * Artists can insert cels into a set
-   * Artists can group cels into objects
-   * Artists can save a set
-   * Artists can publish sets to share with others
+ * Fix [issues](https://github.com/emhoracek/smooch/issues)
+ * Add features from the [roadmap](https://github.com/emhoracek/smooch/blob/master/README.md#roadmap)
 
-The ones marked with a `*` will need some work on the backend as well.
-
-### Frontend (JavaScript)
+## Running the frontend (JavaScript)
 
 You can work on the [JavaScript frontend](https://github.com/emhoracek/smooch/tree/master/javascript) of
-Smooch separately from the backend.
+Smooch separately from the backend. The README has instructions.
 
-### Backend (Haskell)
+## Running the backend
 
-You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/app) of Smooch.
+To work on the 
 
- * Add a database/storage layer
-   * Add users and limit uploading to users`*`
-   * Store set data somewhere other than local filesystem
- * Figure out how to make handling LZH archives safe and secure.
+If any of this is confusing or doesn't work -- don't hesitate to let me know by opening an issue and
+I (@emhoracek) will help you out.
 
-Items maked a `*` will need work on the frontend as well.
-
-## Run Smooch on your computer
-
-If any of this is confusing or doesn't work -- don't hesitate to let me know by opening an issue @emhoracek and
-I'll help you out.
-
-## General Packages
+### General Packages
 
 Please make sure you have the following general software installed
 
@@ -148,7 +125,7 @@ Please make sure you have the following general software installed
 |  | [lhasa](https://fragglet.github.io/lhasa/) |  | Lhasa decompresses .lzh (LHA / LHarc) and .lzs (LArc) archives |
 
 
-### Install `GCC`
+#### Install `GCC`
 
 You'll need a C compiler when running `stack setup`, let's install the GCC compiler.
 
@@ -157,17 +134,17 @@ You'll need a C compiler when running `stack setup`, let's install the GCC compi
 
 ![alt text](https://preview.ibb.co/fmhcrG/brew_install.png "Brew install screenshot")
 
-### Install `Homebrew`
+#### Install `Homebrew`
 
 Following the [Homebrew install guide here](https://brew.sh/).
 * Open your terminal, copy and paste this command into your Terminal:
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-### Install `lhasa`
+#### Install `lhasa`
 
 * On Mac OSX you can use `Homebrew` to install `lhasa`, copy and past this command into your Terminal: `brew install lhasa`
 
-## Project setup
+### Project setup
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this project, clone your fork, and add the original repo as a remote:
 
