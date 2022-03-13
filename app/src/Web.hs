@@ -70,7 +70,8 @@ site ctxt =
                            !=> fileUploadHandler
              , path "users" ==> usersRoutes
              , path "dolls" // path "upload" // param "link" !=> linkUploadHandler
-             , path "static" // anything ==> staticServe "static" ]
+             , path "static" // anything ==> staticServe "static"
+             , anything ==> larcenyServe ]
     `fallthrough` notFoundText "Page not found."
 
 indexHandler :: Ctxt -> IO (Maybe Response)
