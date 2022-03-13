@@ -21,19 +21,7 @@ The [Smooch alpha test](http://67.205.172.104:8000/) is now live! Try out some d
 
 ## Roadmap
 
-  * ~~Get a whole bunch of non-FKiSS, single-palette dolls to work correctly~~
-  * ~~Support multiple palettes~~
-  * Users can view dolls
-      * ~~Users can create accounts and log in~~
-      * ~~Users can upload an LZH file to the server~~
-      * LZH archive is decompressed and files are put in S3 bucket
-      * ~~Smooch converts directory contents to PNGs and JSON~~
-      * JSON and S3 location are stored in database
-      * User can access previously-uploaded dolls from profile
-  * Set up server deployment (probably Docker)
-  * Release a usable vanilla KiSS viewer
-
-### Future plans
+  * Users can save the dolls they uploaded in a personal library
   * Support multiple CNFs
       * A single doll can have multiple configuration files - this was
         often used to have one version with FKiSS effects and another
