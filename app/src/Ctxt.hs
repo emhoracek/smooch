@@ -9,7 +9,7 @@ import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Data.Vault.Lazy            as V
 import qualified Database.PostgreSQL.Simple as PG
-import           Network.Wai                (Response)
+import           Network.Wai                (Response, pathInfo)
 import           Network.Wai.Session        (Session)
 import           Web.Fn
 import           Web.Larceny                hiding (renderWith)
@@ -27,6 +27,11 @@ makeLenses ''Ctxt
 
 instance RequestContext Ctxt where
   requestLens = req
+
+larcenyServe :: Ctxt -> IO (Maybe Response)
+larcenyServe ctxt =
+  let reqPath      = pathInfo . fst . getRequest $ ctxt in
+    renderWith ctxt reqPath mempty
 
 renderWith :: Ctxt -> Path -> Substitutions Ctxt -> IO (Maybe Response)
 renderWith ctxt tplPath addSubs = do
