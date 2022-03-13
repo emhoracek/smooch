@@ -189,10 +189,12 @@ function setCanvasSize (canvas, size) {
   canvas.height = size.y
 }
 
+// from https://stackoverflow.com/a/5624139/5053374
 function rgbToHex (r, g, b) {
   return numberToHex(r, 2) + numberToHex(g, 2) + numberToHex(b, 2)
 }
 
+// from https://stackoverflow.com/a/5624139/5053374
 function numberToHex (n, length) {
   const paddedHex = '0'.repeat(length - 1) + n.toString(16)
   const shortened = paddedHex.slice(0 - length)

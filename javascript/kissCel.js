@@ -96,6 +96,7 @@ class KiSSCel {
   }
 }
 
+// from https://stackoverflow.com/a/5624139/5053374
 function hexToRgb (hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   if (result) {
