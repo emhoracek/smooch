@@ -4,7 +4,6 @@
 // KiSSCels
 class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
-    this.color = obj.color
     this.name = cel.name
     this.mark = cel.mark
     this.fix = cel.fix
@@ -41,7 +40,7 @@ class KiSSCel {
     const data = ghostImageData.data
 
     // Fill ghost image data with obj color
-    const color = hexToRgb(this.color)
+    const color = decimalToRgb(this.mark)
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green
@@ -97,8 +96,10 @@ class KiSSCel {
 }
 
 // from https://stackoverflow.com/a/5624139/5053374
-function hexToRgb (hex) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+function decimalToRgb (n) {
+  const paddedHex = '0'.repeat(5) + n.toString(16)
+  const shortened = paddedHex.slice(-6)
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(shortened)
   if (result) {
     return {
       red: parseInt(result[1], 16),
