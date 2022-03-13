@@ -13,6 +13,7 @@ import qualified Data.ByteString.Lazy       as LBS
 import qualified Data.ByteString.Base16     as BS16
 import qualified Data.Text                  as T
 import           Data.Text                  (Text)
+import qualified Data.Text.Encoding         as T
 import qualified Network.Wreq               as Wreq
 import           Network.Wai                (Response)
 import           System.FilePath            (takeBaseName)
@@ -31,10 +32,9 @@ import           Users.View
 mkDoll :: String
        -> Maybe Text
        -> BS.ByteString
-       -> FilePath
        -> NewDoll
-mkDoll name otakuworldUrl hash loc = do
-  NewDoll (T.pack name) otakuworldUrl hash (Just (T.pack loc)) Nothing
+mkDoll name otakuworldUrl hash = do
+  NewDoll (T.pack name) otakuworldUrl hash Nothing
 
 hashFile :: LBS.ByteString -> BS.ByteString
 hashFile = BS16.encode . hashlazy
@@ -42,7 +42,7 @@ hashFile = BS16.encode . hashlazy
 fileUploadHandler :: Ctxt -> File -> IO (Maybe Response)
 fileUploadHandler ctxt (File name _ filePath') = do
   hash <- hashFile <$> LBS.readFile filePath'
-  output <- runExceptT $ createOrLoadDoll ctxt Nothing (takeBaseName (T.unpack name)) Nothing hash
+  output <- runExceptT $ createOrLoadDoll ctxt (takeBaseName (T.unpack name)) Nothing hash filePath'
   renderKissDoll ctxt output
 
 linkUploadHandler :: Ctxt -> Text -> IO (Maybe Response)
@@ -56,9 +56,10 @@ linkUploadHandler ctxt link = do
           Nothing -> do
             resp <- liftIO $ Wreq.get (T.unpack link)
             let body = resp ^. Wreq.responseBody
-            liftIO $ LBS.writeFile ("static/sets/" ++ dollname ++ ".lzh") body
+            let lzhPath = "static/sets/" ++ dollname ++ ".lzh"
+            liftIO $ LBS.writeFile lzhPath body
             let hash = hashFile body
-            createOrLoadDoll ctxt Nothing dollname (Just link) hash
+            createOrLoadDoll ctxt dollname (Just link) hash lzhPath
           Just doll -> getCels doll
       renderKissDoll ctxt result
     Left _ -> renderWith ctxt ["index"] errorSplices
@@ -79,27 +80,26 @@ linkUploadHandler ctxt link = do
 -- are stored plus a list of the cels. If no doll with that hash
 -- already exists, then it creates a new doll and processes it.
 createOrLoadDoll :: Ctxt
-                 -> Maybe Text
                  -> [Char]
                  -> Maybe Text
                  -> BS.ByteString
+                 -> FilePath
                  -> ExceptT Text IO (FilePath, [KissCel])
-createOrLoadDoll ctxt mUser dollname mLink hash = do
+createOrLoadDoll ctxt dollname mLink hash lzhPath = do
   mExistingHashDoll <- liftIO $ getDollByHash ctxt hash
   case mExistingHashDoll of
     Nothing ->
-      let newDoll = mkDoll dollname mLink hash  ("static/sets/" ++ dollname) in
-        processNewDoll ctxt mUser newDoll
+      let newDoll = mkDoll dollname mLink hash in
+        processNewDoll ctxt newDoll lzhPath
     Just doll -> loadExistingDoll ctxt doll dollname mLink
 
 processNewDoll :: Ctxt
-               -> Maybe Text
                -> NewDoll
+               -> FilePath
                -> ExceptT Text IO (FilePath, [KissCel])
-processNewDoll ctxt mUser newDoll = do
-  let filename = T.unpack (newDollName newDoll <> ".lzh")
-  output <-  processDoll mUser
-                (filename, "static/sets/" ++ filename)
+processNewDoll ctxt newDoll lzhPath = do
+  let loc = T.unpack (T.decodeUtf8 (newDollHash newDoll))
+  output <-  processDoll loc lzhPath (loc <> ".lzh")
   created <- liftIO $ createDoll ctxt newDoll
   if created then return output else throwE "Something went wrong"
 
@@ -115,12 +115,12 @@ loadExistingDoll ctxt existingDoll dollname mLink = do
       Just link -> liftIO (updateDollWithUrl ctxt existingDoll dollname link)
   maybe (getCels existingDoll) getCels mUpdatedDoll
 
+-- TODO: Add join between users and dolls
 userUploadHandler :: User -> Ctxt -> File -> IO (Maybe Response)
-userUploadHandler user ctxt (File name _ filePath') = do
-  let mUsername = Just (userUsername user)
+userUploadHandler _user ctxt (File name _ filePath') = do
   let dollname = takeBaseName (T.unpack name)
   hash <- hashFile <$> liftIO (LBS.readFile filePath')
-  output <- runExceptT $ createOrLoadDoll ctxt mUsername dollname Nothing hash
+  output <- runExceptT $ createOrLoadDoll ctxt dollname Nothing hash filePath'
   renderKissDoll ctxt output
 
 -- TODO: This should use `getCels` instead of create cels, but
@@ -128,8 +128,7 @@ userUploadHandler user ctxt (File name _ filePath') = do
 -- dolls in the database
 userDollHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userDollHandler user ctxt setName = do
-  let userDir = staticUserDir (userUsername user)
-  let staticDir = staticDollDir userDir (T.unpack setName)
+  let staticDir = T.unpack $ "static/sets/" <> setName
   output <- (fmap . fmap) (staticDir,) (runExceptT $ createCels staticDir)
   -- The previous line is a bit weird.
   -- the result of runEitherT is an `IO (Either Text [KissCel])`.

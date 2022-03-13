@@ -23,9 +23,8 @@ import           Dolls.Model
 
 instance Factory Ctxt Doll NewDoll where
   fields = let hash =  BS16.encode $ hashlazy "foobar"
-               url = "http://otakuworld.com/data/kiss/data/f/foobar.lzh"
-               dir = "static/sets/foobar" in
-            NewDoll "foobar" (Just url) hash (Just dir) Nothing
+               url = "http://otakuworld.com/data/kiss/data/f/foobar.lzh" in
+            NewDoll "foobar" (Just url) hash Nothing
   save newDoll = do Just doll <-
                         eval (\ctxt -> do
                                 void $ createDoll ctxt newDoll
@@ -42,7 +41,7 @@ spec = fnTests $ do
   describe "createDoll" $ do
     it "should create a new doll" $ do
       void $ eval (\ctxt -> createDoll ctxt
-                              (NewDoll "new" Nothing "hash" (Just "newloc") Nothing))
+                              (NewDoll "new" Nothing "hash" Nothing))
       [doll] <- eval getDolls
       dollName doll `shouldEqual` "new"
   describe "getDollByHash" $ do

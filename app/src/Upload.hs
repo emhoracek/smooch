@@ -29,36 +29,25 @@ import qualified ParseKCF                   as PK
 import           Shell                      (unzipFile, lowercaseFiles)
 import           Dolls.Model
 
-processDoll :: Maybe Text
-            -> (FilePath, FilePath)
+processDoll :: String
+            -> FilePath
+            -> FilePath
             -> ExceptT Text IO (FilePath, [KissCel])
-processDoll username (fName, filePath) = do
-  liftIO $ copyFile filePath ("static/sets" </> fName)
-  userDir <- createUserDir username
-  staticDir <- createDollDir userDir (takeBaseName fName)
-  void $ unzipFile fName staticDir
+processDoll dollHash lzhPath newLzhPath = do
+  liftIO $ copyFile lzhPath ("static/sets" </> newLzhPath)
+  staticDir <- createDollDir ("static/sets" </> dollHash)
+  void $ unzipFile newLzhPath staticDir
   log' "Unzipped file!"
   liftIO $ lowercaseFiles staticDir
   log' "Lowercased file names"
   cels <- createCels staticDir
   return (staticDir, cels)
 
-staticUserDir :: Text -> FilePath
-staticUserDir username = "static/sets/" <> T.unpack username
-
-createUserDir :: Maybe Text -> ExceptT Text IO FilePath
-createUserDir username = do
-  let staticDir = maybe "static/sets" staticUserDir username
-  liftIO $ createDirectoryIfMissing True staticDir
-  log' $ "Created static user sets directory if missing: " <> T.pack staticDir
-  return staticDir
-
 staticDollDir :: FilePath -> String -> FilePath
 staticDollDir userDir setName =  userDir <> "/" <> setName
 
-createDollDir :: FilePath -> String -> ExceptT Text IO FilePath
-createDollDir userDir setName = do
-  let staticDir = staticDollDir userDir setName
+createDollDir :: FilePath -> ExceptT Text IO FilePath
+createDollDir staticDir = do
   exists <- liftIO $ doesDirectoryExist staticDir
   when exists $ liftIO $ removeDirectoryRecursive staticDir
   liftIO $ createDirectory staticDir
@@ -73,8 +62,9 @@ deleteCels staticDir = do
 
 getCels :: Doll -> ExceptT Text IO (FilePath, [KissCel])
 getCels doll =
-  case dollLocationOrErr doll of
-    Right loc -> do
+  case dollError doll of
+    Nothing -> do
+      let loc = "static/sets/" ++ T.unpack (T.decodeUtf8 (dollHash doll))
       log' "About to get CNF"
       cnf <- getCNF loc
       log' "Got CNF"
@@ -84,7 +74,7 @@ getCels doll =
       log' "Loaded cels"
       let realCelData = addOffsetsToCelData celsWithOffsets
       return (loc, realCelData)
-    Left err -> throwE err
+    Just err -> throwE err
 
 createCels :: FilePath -> ExceptT Text IO [KissCel]
 createCels staticDir = do

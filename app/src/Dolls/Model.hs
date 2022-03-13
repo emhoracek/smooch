@@ -21,7 +21,6 @@ data Doll = Doll {
   , dollName :: Text
   , dollOtakuWorldUrl :: Maybe Text
   , dollHash :: BS.ByteString
-  , dollLocation :: Maybe Text
   , dollError :: Maybe Text
   , dollCreatedAt :: UTCTime
   , dollUpdatedAt :: UTCTime
@@ -29,31 +28,22 @@ data Doll = Doll {
 
 instance FromRow Doll where
   fromRow = Doll <$> field <*> field <*> field <*> field <*> field
-                 <*> field <*> field <*> field
+                 <*> field <*> field
 
 data NewDoll = NewDoll {
     newDollName :: Text
   , newDollOtakuWorldUrl :: Maybe Text
   , newDollHash :: BS.ByteString
-  , newDollLocation :: Maybe Text
   , newDollError :: Maybe Text
 } deriving (Eq, Show)
 
 instance ToRow NewDoll where
-  toRow (NewDoll name owurl hash location err) =
-    [ toField name, toField owurl, toField hash, toField location
-    , toField err ]
-
-dollLocationOrErr :: Doll -> Either Text FilePath
-dollLocationOrErr doll =
-  case (dollLocation doll, dollError doll) of
-    (Just loc, _)       -> Right (T.unpack loc)
-    (Nothing, Just err) -> Left err
-    (Nothing, Nothing)  -> Left "Doll not found"
+  toRow (NewDoll name owurl hash err) =
+    [ toField name, toField owurl, toField hash, toField err ]
 
 dollQuery :: PG.Query
 dollQuery = "SELECT dolls.id, dolls.name, dolls.otakuworld_url, dolls.hash, \
-  \ dolls.location, dolls.error, dolls.created_at, dolls.updated_at FROM dolls"
+  \ dolls.error, dolls.created_at, dolls.updated_at FROM dolls"
 
 getDolls :: Ctxt -> IO [Doll]
 getDolls ctxt =
@@ -65,7 +55,7 @@ createDoll ctxt newDoll = (==) 1 <$>
   withResource (ctxt ^. pool) (\conn ->
     PG.execute
      conn
-     "INSERT INTO dolls (name, otakuworld_url, hash, location, error) VALUES (?, ?, ?, ?, ?)"
+     "INSERT INTO dolls (name, otakuworld_url, hash, error) VALUES (?, ?, ?, ?)"
      newDoll)
 
 getDollByOWUrl :: Ctxt -> Text -> IO (Maybe Doll)
@@ -109,5 +99,5 @@ updateDollWithUrl ctxt doll name owUrl =
         PG.query
         conn
         "UPDATE dolls SET name = ?, otakuworld_url = ? WHERE id = ? \
-        \ RETURNING id, name, otakuworld_url, hash, location, error, created_at, updated_at"
+        \ RETURNING id, name, otakuworld_url, hash, error, created_at, updated_at"
         (dollName updatedDoll, dollOtakuWorldUrl updatedDoll, dollId doll))
