@@ -183,16 +183,8 @@ function setCanvasSize (canvas, size) {
   canvas.height = size.y
 }
 
-// from https://stackoverflow.com/a/5624139/5053374
 function rgbToDecimal (r, g, b) {
-  const hex = '0x' + numberToHex(r) + numberToHex(g) + numberToHex(b)
-  return Number(hex)
-}
-
-function numberToHex (n) {
-  const paddedHex = '0' + n.toString(16)
-  const shortened = paddedHex.slice(-1)
-  return shortened
+  return (r * 16) + (g * 8) + b
 }
 
 export { KiSSDoll }
