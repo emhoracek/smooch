@@ -21,8 +21,8 @@ It will hot-reload with any changes you make.
 
 # Build
 
-Run `npm run build` to put the finished JavaScript on the [Smooch demo page](https://emhoracek.github.io/smooch/).
-Those files go in the `docs` directory and GitHub Pages automatically serves them.
+Run `npm run build` to put the finished JavaScript in the `docs` and in the Haskell app's static directory. 
+GitHub Pages automatically serves the files in the `docs` directory on the [Smooch demo page](https://emhoracek.github.io/smooch/).
 
 # A tour of the directory
 
@@ -80,80 +80,40 @@ Here's JSON for a set with one object:
     700,
     430
   ],
-  "objs": [
-  // an object has an id number, a list of cels, and a
-  // list of positions
+  // a cel has a palette for the cel, the sets the cel
+  // is visible in, a "fix" value indicating how many
+  // time you need to click the cel before you can
+  // drag it (usually 0 for clothes, a large number for
+  // the body), a name, a "mark" (object ID), and how 
+  // transparent the cel should be.
+  cels: [
     {
-      "id": 0,
-      "cels": [
-      // a cel has a palette for the cel, the sets the cel
-      // is visible in, a "fix" value indicating how many
-      // time you need to click the cel before you can
-      // drag it (usually 0 for clothes, a large number for
-      // the body), a name, and how transparent it should be.
-        {
-          "palette": 0,
-          "sets": [ 1,2,3,4,5,6,7,8,9 ]
-          ],
-          "fix": 4000,
-          "name": "aurora",
-          "alpha": 0
-        }
-      ],
-      "positions": [
-        {
-          "y": 0,
-          "x": 0
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        },
-        {
-          "y": 67,
-          "x": 283
-        }
-      ]
+      palette: 0,
+      mark: 1,
+      offset: { x: 10, y: 12 },
+      alpha: 0,
+      name: "doll",
+      fix: 4000,
+      sets: [0, 1, 2, 3, 4, 5, 6],
     }
   ],
-  // The cels are listed again in order of appearance in the CNF file. This
-  // allows us to display them in correct top-to-bottom order.
-  "cels": [
+  // These are the colors of the outside of the playarea and 
+  // the playarea itself.
+  "border": "#6570bd",
+  "background": "#6570bd",
+  // Finally we have a list of up to nine sets of clothing. 
+  // Each set has a palette and the positions of each object 
+  // in the doll from 0 to the highest object "mark" or ID. Since 
+  // the highest in this doll is "1", there are two positions 
+  // listed. If there's no object with a given index mark, the item 
+  // at that index is { x: 0, y: 0 }.
+  "positions": [
     {
       "palette": 0,
-      "sets": [ 1,2,3,4,5,6,7,8,9 ]
-      ],
-      "fix": 4000,
-      "name": "aurora",
-      "alpha": 0
+      "positions": [
+        { x: 0, y: 0 },
+        { x: 113, y: 157 }
+      ]
     }
   ]
 }
@@ -169,9 +129,9 @@ what images are being clicked on.
 If you load a doll and right click and inspect the DOM, you'll see there's a
 undisplayed second canvas besides the one that you can see and interact with.
 That's the ghost canvas. If you remove the `display: none` from the CSS, you'll
-be able to see it -- it's right below the actual canvas and has a bright blue
-background. Each item in the real canvas is also drawn on the ghost canvas, but
-in shades of black to red. Each item is a subtly different color.
+be able to see it -- it's right below the actual canvas. All the images on the 
+real canvas are also drawn on the ghost canvas, but
+instead of the original colors, each item is a subtly different color.
 
 When a player clicks on the real canvas, the JavaScript looks up the
 corresponding pixel on the ghost canvas. Each color on the ghost canvas maps to
