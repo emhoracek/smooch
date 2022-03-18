@@ -1,15 +1,16 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE OverloadedStrings         #-}
 {-# LANGUAGE RecordWildCards           #-}
+{-# LANGUAGE FlexibleContexts          #-}
 {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
 
 module ParseCNF where
 
-import           Control.Monad.Trans.Except ( ExceptT, throwE )
+import           Control.Monad.Trans.Except    (ExceptT, throwE)
 import           Data.Array                    ((!))
 import qualified Data.Array                    as A
 import           Data.Char                     (toLower)
-import           Data.Maybe ( fromMaybe, listToMaybe )
+import           Data.Maybe                    (fromMaybe, listToMaybe )
 import qualified Data.Text                     as T
 import           Text.ParserCombinators.Parsec
 
@@ -50,7 +51,7 @@ defaultPalette = lookupPalette 0
 -- Converting CNF lines to useable KiSS data
 linesToScript :: [CNFLine] -> CNFKissData
 linesToScript xs =
-    CNFKissData memory border palettes windowSize cels positions
+    CNFKissData memory border palettes windowSize cels positions fkiss
     where -- memory and border are optional
           memory   = fromMaybe 0 (listToMaybe [ a | CNFMemory a <- xs ])
           border   = fromMaybe 0 (listToMaybe [ a | CNFBorder a <- xs ])
@@ -61,6 +62,7 @@ linesToScript xs =
           -- turn object #, cel, set positions to objects
           positions = [ a | CNFSetPos a <- xs ]
           cels = [ cnfToKissCel (0,0) a | CNFCel a <- xs ]
+          fkiss = [ a | CNFFKiSSEvent a <- xs ]
 
 cnfToKissCel :: (Int, Int) -> CNFKissCel ->  KissCel
 cnfToKissCel (xoff, yoff) CNFKissCel{..} =
@@ -197,6 +199,7 @@ data CNFLine = CNFMemory Int
              | CNFCel CNFKissCel
              | CNFSetPos KissSetPos
              | CNFComment String
+             | CNFFKiSSEvent FKiSSEvent
              | CNFJunkLine
     deriving (Eq, Show)
 
@@ -211,9 +214,44 @@ parseCNFLine :: Parser CNFLine
 parseCNFLine = do
     line <- choice [ parseCelLine, parseSetPos, parseCNFComment,
                      parsePalette, parseBorder, parseWindowSize,
-                     parseMemory, parseCNFJunk ]
+                     parseFKiSSLine, parseMemory, parseCNFJunk ]
     spaces
     return line
+
+parseFKiSSLine :: Parser CNFLine
+parseFKiSSLine = do
+    string ";@"
+    eventName <- many1 alphaNum
+    char '('
+    args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
+    char ')'
+    spaces
+    commands <- many1 parseFKiSSAction
+    return $ CNFFKiSSEvent (FKiSSEvent eventName args commands)
+
+parseFKiSSAction :: Parser FKiSSAction
+parseFKiSSAction = try $ do
+    char ';'
+    char '@'
+    many1 space
+    actionName <- many1 alphaNum
+    char '('
+    args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
+    char ')'
+    spaces
+    return $ FKiSSAction actionName args
+
+parseFKiSSArg :: Parser FKiSSArg
+parseFKiSSArg = parseObj <|> parseString <|> parseNumber
+    where parseObj = do
+            char '#'
+            Object . read <$> many1 digit
+          parseString = do
+            char '"'
+            str <- many1 (noneOf "\"")
+            char '"'
+            return (Text str)
+          parseNumber = Number . read <$> many1 digit
 
 parseCNFJunk :: Parser CNFLine
 parseCNFJunk = do
@@ -221,7 +259,8 @@ parseCNFJunk = do
     return CNFJunkLine
 
 parseCNFComment :: Parser CNFLine
-parseCNFComment = do
+parseCNFComment = try $ do
     char ';'
+    notFollowedBy (char '@')
     comment <- many (noneOf "\n")
     return $ CNFComment comment

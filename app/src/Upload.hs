@@ -147,8 +147,8 @@ addOffsetsToCelData offsets =
      | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
 addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
-addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp) bgColor borderColor cels =
-  KissData m borderColor bgColor p ws cels sp
+addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
+  KissData m borderColor bgColor p ws cels sp fkiss
 
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> ExceptT Text IO String

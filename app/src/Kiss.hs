@@ -18,22 +18,25 @@ data KissData = KissData { kMemory     :: Int
                          , kPalettes   :: [PaletteFilename]
                          , kWindowSize :: (Int, Int)
                          , kCels       :: [KissCel]
-                         , kPositions  :: [KissSetPos] }
+                         , kPositions  :: [KissSetPos]
+                         , kFKiSS      :: [FKiSSEvent] }
     deriving (Eq, Show)
 instance ToJSON KissData where
-    toJSON (KissData _ border bg _ win cels pos) =
+    toJSON (KissData _ border bg _ win cels pos fkiss) =
         object["window_size" .= win,
                "border" .= border,
                "background" .= bg,
                "cels" .= cels,
-               "positions" .= pos]
+               "positions" .= pos,
+               "fkiss" .= fkiss]
 
 data CNFKissData = CNFKissData { cnfkMemory     :: Int,
                                  cnfkBorder     :: Int,
                                  cnfkPalettes   :: [PaletteFilename],
                                  cnfkWindowSize :: (Int, Int),
                                  cnfkCels       :: [KissCel],
-                                 cnfSetPos      :: [KissSetPos]}
+                                 cnfSetPos      :: [KissSetPos],
+                                 cnfFKiSS       :: [FKiSSEvent] }
     deriving (Eq, Show)
 
 -- The CNF file doesn't have the cel offset (that is stored in the cel file)
@@ -45,6 +48,35 @@ data CNFKissCel = CNFKissCel {
   cnfCelSets    :: [Int],
   cnfCelAlpha   :: Int }
   deriving (Eq, Show)
+
+data FKiSSEvent = FKiSSEvent {
+    fKiSSEvent     :: String,
+    fKiSSEventArgs :: [FKiSSArg],
+    fKiSSCommands  :: [FKiSSAction]
+} deriving (Eq, Show)
+instance ToJSON FKiSSEvent where
+    toJSON (FKiSSEvent name args commands) =
+        object["event" .= name,
+               "args" .= toJSON args,
+               "actions" .= toJSON commands ]
+
+data FKiSSArg = Object Int
+              | Number Int
+              | Text String
+    deriving (Eq, Show)
+instance ToJSON FKiSSArg where
+    toJSON (Kiss.Object mark) = toJSON mark
+    toJSON (Kiss.Number n) = toJSON n
+    toJSON (Kiss.Text s) = toJSON s
+
+data FKiSSAction = FKiSSAction {
+    fKiSSAction     :: String,
+    fKiSSActionArgs :: [FKiSSArg]
+} deriving (Eq, Show)
+instance ToJSON FKiSSAction where
+    toJSON (FKiSSAction name args) =
+        object["action" .= name,
+               "args" .= toJSON args ]
 
 data KissCel = KissCel {
                     celMark    :: Int,
