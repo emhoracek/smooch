@@ -53,10 +53,20 @@ function mkAlarm (n) {
 
 function objOrCelArg (arg, doll) {
   if (typeof arg === 'number') {
-    return doll.getObject(arg)
+    const obj = doll.getObject(arg)
+    if (obj) {
+      return obj
+    } else {
+      console.log('Unable to find object with mark', arg)
+    }
   }
   if (arg.endsWith('.cel')) {
-    return doll.getCel(arg)
+    const cel = doll.getCel(arg)
+    if (cel) {
+      return cel
+    } else {
+      console.log('Unable to find cel with filename', arg)
+    }
   }
   console.log('Expected a cel or object reference but got: ', arg)
 }
