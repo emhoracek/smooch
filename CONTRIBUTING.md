@@ -40,8 +40,11 @@ KiSS set bugs are a special category for Smooch.
 
 One really helpful contribution you can make is to try out KiSS dolls from
 [Okatuworld](http://www.otakuworld.com/kiss) and see which ones work
-and which don't. (Please be aware that many dolls on Otakuworld are
-not appropriate for children or even worksafe.)
+and which don't. Currently Smooch supports FKiSS, but not FKiSS2-5. Most
+FKiSS events and actions should work with the execptions of `shell`, `exit`,
+`end`, `viewport`, and `windowsize`. The expected behavior is that FKiSS2-5
+should still load, but the effects won't work. (Please be aware that many
+dolls on Otakuworld are not appropriate for children or even worksafe.)
 
 Try the doll you've chosen in a KiSS doll viewer like [GnomeKiSS for
 Linux](http://devel.tlrmx.org/kiss/), [Direct KiSS or PlayKiSS for
@@ -102,9 +105,9 @@ Don't see an interesting issue, or all the issues are claimed? Below are some mo
 ## Running the frontend (JavaScript)
 
 You can work on the [JavaScript frontend](https://github.com/emhoracek/smooch/tree/master/javascript) of
-Smooch separately from the backend. The README has instructions.
+Smooch separately from the backend. The README in that directory has instructions.
 
 ## Running the backend
 
 You can work on the [Haskell backend](https://github.com/emhoracek/smooch/tree/master/app) of
-Smooch separately from the fronted. The README has instructions.
+Smooch separately from the fronted. The README in that directory has instructions.
