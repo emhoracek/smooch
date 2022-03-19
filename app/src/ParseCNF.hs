@@ -233,20 +233,27 @@ parseFKiSSLine = do
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
     spacesOrTabs
-    newline
-    commands <- many parseFKiSSAction
+    optional newline
+    commands <- concat <$> many parseFKiSSActionLine
+    optional parseCNFComment
     return $ CNFFKiSSEvent (FKiSSEvent eventName args commands)
 
+parseFKiSSActionLine :: Parser [FKiSSAction]
+parseFKiSSActionLine = try $ do
+    optional $ do string ";@"
+                  many1 space
+    actions <- many parseFKiSSAction
+    optional newline
+    return actions
+
 parseFKiSSAction :: Parser FKiSSAction
-parseFKiSSAction = try $ do
-    string ";@"
-    many1 space
+parseFKiSSAction = do
     actionName <- many1 alphaNum <?> "action name"
     char '('
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
     spacesOrTabs
-    newline
+    optional parseCNFComment
     return $ FKiSSAction actionName args
 
 parseFKiSSArg :: Parser FKiSSArg
