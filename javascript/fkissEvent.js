@@ -49,7 +49,7 @@ function setBegin (args, actions, doll) {
 // The user clicks on the object or cel. Applies to all cels & objects except those with a maximal fix value.
 function setCatch (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`catch-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('catch', (e) => actions.forEach(f => f()))
 }
 
 // The user changes the palette to that specified
@@ -60,7 +60,7 @@ function setCol () {
 // The user releases the mouse on the object or cel. Applies to all cels & objects except those with a maximal fix value.
 function setDrop (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`drop-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('drop', (e) => actions.forEach(f => f()))
 }
 
 // The user quits the player or closes the doll
@@ -71,13 +71,13 @@ function setEnd () {
 // The user clicks on the object or cel. Applies only to fixed cels & objects
 function setFixcatch (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`fixcatch-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('fixcatch', (e) => actions.forEach(f => f()))
 }
 
 // The user releases the mouse on the object or cel. Applies only to fixed cels & objects
 function setFixdrop (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`fixdrop-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('fixdrop', (e) => actions.forEach(f => f()))
 }
 
 // Before the doll is displayed after loading
@@ -95,14 +95,16 @@ const press = new CustomEvent('press')
 function setPress (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
-    objOrCel.addEventListener('press', (e) => actions.forEach(f => f()))
+    objOrCel.addEventListener('press', (e) => actions.forEach(f => {
+      if (f) { f() }
+    }))
   }
 }
 
 // The user releases the object or cel.
 function setRelease (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`release-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('release', (e) => actions.forEach(f => f()))
 }
 
 // The user changes the specified set
