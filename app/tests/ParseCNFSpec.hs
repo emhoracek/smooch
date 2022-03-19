@@ -120,7 +120,7 @@ sampleFKiss = "\
 \;@ timer(3, 6500)\n\
 \;@alarm(3)\n\
 \;@ map(\"blink.cel\")\n\
-\;@ timer(2, 150)"
+\;@ timer(2, 150)\n"
 
 fKiSSLines =
   [ CNFFKiSSEvent $ FKiSSEvent "begin" [] [
@@ -177,7 +177,8 @@ spec = do
     it "returns an error message for a bad cnf" $
       runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
         Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected \"i\"\nexpecting \
-             \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \";@\", \"=\" or whitespace"
+             \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \";@EventHandler\", \";@\", \
+             \\"=\" or whitespace"
   describe "getKissCels" $ do
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`

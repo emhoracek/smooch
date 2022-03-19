@@ -214,31 +214,39 @@ parseCNFLine :: Parser CNFLine
 parseCNFLine = do
     line <- choice [ parseCelLine, parseSetPos, parseCNFComment,
                      parsePalette, parseBorder, parseWindowSize,
+                     parseEventHandler,
                      parseFKiSSLine, parseMemory, parseCNFJunk ]
     spaces
     return line
 
+parseEventHandler :: Parser CNFLine
+parseEventHandler = try $ do
+    string ";@eventhandler" <?> "\";@EventHandler\""
+    skipMany (noneOf ";")
+    return CNFJunkLine
+
 parseFKiSSLine :: Parser CNFLine
 parseFKiSSLine = do
     string ";@"
-    eventName <- many1 alphaNum
+    eventName <- many1 alphaNum <?> "event name"
     char '('
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
-    spaces
-    commands <- many1 parseFKiSSAction
+    spacesOrTabs
+    newline
+    commands <- many parseFKiSSAction
     return $ CNFFKiSSEvent (FKiSSEvent eventName args commands)
 
 parseFKiSSAction :: Parser FKiSSAction
 parseFKiSSAction = try $ do
-    char ';'
-    char '@'
+    string ";@"
     many1 space
-    actionName <- many1 alphaNum
+    actionName <- many1 alphaNum <?> "action name"
     char '('
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
-    spaces
+    spacesOrTabs
+    newline
     return $ FKiSSAction actionName args
 
 parseFKiSSArg :: Parser FKiSSArg
@@ -251,7 +259,10 @@ parseFKiSSArg = parseObj <|> parseString <|> parseNumber
             str <- many1 (noneOf "\"")
             char '"'
             return (Text str)
-          parseNumber = Number . read <$> many1 digit
+          parseNumber = do
+            minus <- optionMaybe (char '-')
+            n <- many1 digit
+            return $ Number $ read (maybe n (\_ -> '-': n) minus)
 
 parseCNFJunk :: Parser CNFLine
 parseCNFJunk = do

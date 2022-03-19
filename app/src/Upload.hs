@@ -12,7 +12,7 @@ import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
 import           Data.Text.ICU.Convert
 import           System.Directory
-import           System.FilePath            (takeBaseName, takeExtension, (</>))
+import           System.FilePath            (takeExtension, (</>))
 import           Control.Exception
 import           Control.Logging            (log')
 import           Control.Monad              (when, void)

@@ -40,9 +40,7 @@ KiSS set bugs are a special category for Smooch.
 
 One really helpful contribution you can make is to try out KiSS dolls from
 [Okatuworld](http://www.otakuworld.com/kiss) and see which ones work
-and which don't. I would look for dolls that are as simple as possible
--- a single palette, a small wardrobe, no animations or special
-effects (no "FKiSS"). (Please be aware that many dolls on Otakuworld are
+and which don't. (Please be aware that many dolls on Otakuworld are
 not appropriate for children or even worksafe.)
 
 Try the doll you've chosen in a KiSS doll viewer like [GnomeKiSS for
