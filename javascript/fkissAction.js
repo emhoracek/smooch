@@ -3,6 +3,19 @@ function makeAction (a, doll) {
     timer: mkTimer,
     map: mkMap,
     unmap: mkUnmap
+    /*
+    almap
+    changecol
+    changeset
+    move
+    nop
+    shell
+    sound
+    transparent
+    unmap
+    viewport
+    windowsize
+    */
   }
   const defaultAction = () => { console.log('Unknown action', a.action) }
 
@@ -17,20 +30,20 @@ function mkTimer (args, doll) {
 }
 
 function mkMap (args, doll) {
-  const cel = doll.getCel(args[0])
-  if (cel) {
-    return cel.map.bind(cel)
+  const objOrCel = objOrCelArg(args[0], doll)
+  if (objOrCel) {
+    return objOrCel.map.bind(objOrCel)
   } else {
     return () => console.log('Unable to find cel', args[0])
   }
 }
 
 function mkUnmap (args, doll) {
-  const cel = doll.getCel(args[0])
-  if (cel) {
-    return cel.unmap.bind(cel)
+  const objOrCel = objOrCelArg(args[0], doll)
+  if (objOrCel) {
+    return objOrCel.unmap.bind(objOrCel)
   } else {
-    return () => console.log('Unable to find cel', args[0])
+    return () => console.log('Unable to find object or cel', args[0])
   }
 }
 
@@ -38,4 +51,14 @@ function mkAlarm (n) {
   return new CustomEvent('alarm' + n)
 }
 
-export { makeAction }
+function objOrCelArg (arg, doll) {
+  if (typeof arg === 'number') {
+    return doll.getObject(arg)
+  }
+  if (arg.endsWith('.cel')) {
+    return doll.getCel(arg)
+  }
+  console.log('Expected a cel or object reference but got: ', arg)
+}
+
+export { makeAction, objOrCelArg }

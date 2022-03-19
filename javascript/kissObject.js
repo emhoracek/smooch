@@ -1,6 +1,7 @@
 class KiSSObject {
   constructor (mark, positions) {
     this.mark = mark
+    this.id = mark
     this.currentSet = 0
     this.positions = positions
     this.cels = []
@@ -26,6 +27,14 @@ class KiSSObject {
   setPosition (x, y) {
     this.positions[this.currentSet].x = x
     this.positions[this.currentSet].y = y
+  }
+
+  map (x, y) {
+    this.cels.forEach(cel => cel.map())
+  }
+
+  unmap (x, y) {
+    this.cels.forEach(cel => cel.unmap())
   }
 }
 

@@ -6,6 +6,7 @@ class KiSSCel {
   constructor (obj, cel, set, incLoaded) {
     this.name = cel.name
     this.mark = cel.mark
+    this.id = cel.name
     this.fix = cel.fix
     this.position = obj.positions[0]
     this.positions = obj.positions

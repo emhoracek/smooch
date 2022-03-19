@@ -119,6 +119,10 @@ class KiSSDoll extends EventTarget {
     return this.cels.find(c => (c.name + '.cel') === celName)
   }
 
+  getObject (objMark) {
+    return this.objs[objMark]
+  }
+
   moveObject (obj, x, y) {
     obj.setPosition(x, y)
 
