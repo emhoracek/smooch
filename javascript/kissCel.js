@@ -2,8 +2,10 @@
 // doll. It doesn't represent the image file itself. So a single
 // image can appear multiple times in multiple objects as different
 // KiSSCels
-class KiSSCel {
+class KiSSCel extends EventTarget {
   constructor (obj, cel, set, incLoaded) {
+    super()
+
     this.name = cel.name
     this.mark = cel.mark
     this.id = cel.name

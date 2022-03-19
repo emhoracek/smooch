@@ -105,9 +105,7 @@ class KiSSDoll extends EventTarget {
       console.log('not draggable')
     } else {
       const obj = this.objs[mark]
-      if (obj && !obj.fixed) {
-        return obj
-      }
+      return obj
     }
   }
 

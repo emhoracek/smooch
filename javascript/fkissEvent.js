@@ -91,9 +91,12 @@ function setNever () {
 }
 
 // The user clicks on the object or cel.
+const press = new CustomEvent('press')
 function setPress (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  doll.addEventListener(`press-${objOrCel.id}`, (e) => actions.forEach(f => f()))
+  if (objOrCel) {
+    objOrCel.addEventListener('press', (e) => actions.forEach(f => f()))
+  }
 }
 
 // The user releases the object or cel.
@@ -113,4 +116,4 @@ function setUnfix () {
   console.log("Not implemented: `unfix`. Smooch doesn't (currently) decrement fix.")
 }
 
-export { addEvent }
+export { addEvent, press }

@@ -1,5 +1,7 @@
-class KiSSObject {
+class KiSSObject extends EventTarget {
   constructor (mark, positions) {
+    super()
+
     this.mark = mark
     this.id = mark
     this.currentSet = 0
