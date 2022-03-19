@@ -1,8 +1,15 @@
 import { KiSSCel } from './kissCel'
 import { KiSSObject } from './kissObject'
 
-class KiSSDoll {
+// define custom events
+function mkAlarm (n) {
+  return new CustomEvent('alarm' + n)
+}
+
+class KiSSDoll extends EventTarget {
   constructor (kissData, incLoaded) {
+    super()
+
     // Size of the play area.
     this.size = { x: kissData.window_size[0], y: kissData.window_size[1] }
 
@@ -28,9 +35,14 @@ class KiSSDoll {
     this.init(kissData.cels, kissData.positions, incLoaded)
     initSetClicks(this)
 
+    this.initFKiSS(kissData.fkiss)
+
     // Update and draw
     this.update()
+    this.dispatchEvent(new CustomEvent('initialize'))
     this.draw()
+
+    this.dispatchEvent(new CustomEvent('begin'))
 
     return this
   }
@@ -112,6 +124,77 @@ class KiSSDoll {
 
     this.update()
     this.draw()
+  }
+
+  initFKiSS (events) {
+    const that = this
+    events.forEach(e => {
+      that.addEvent(e)
+    })
+  }
+
+  addEvent (event) {
+    const eventMap = {
+      begin: this.setBegin,
+      alarm: this.setAlarm
+    }
+    const defaultEvent = () => { console.log('Unknown event', event.event) }
+
+    const setEvent = eventMap[event.event] || defaultEvent
+    setEvent(event.args, event.actions, this)
+  }
+
+  setAlarm (args, actions, doll) {
+    const index = args[0]
+    const funcs = actions.map(a => doll.actionToFunction(a))
+    doll.addEventListener('alarm' + index, (e) => {
+      console.log('alarm', index, 'firing')
+      funcs.forEach(f => f())
+
+      doll.update()
+      doll.draw()
+    })
+  }
+
+  setBegin (args, actions, doll) {
+    const funcs = actions.map(a => { return doll.actionToFunction(a) })
+    doll.addEventListener('begin', (e) => funcs.forEach(f => f()))
+  }
+
+  actionToFunction (a) {
+    const actionMap = {
+      timer: this.mkTimer,
+      map: this.mkMap,
+      unmap: this.mkUnmap
+    }
+    const defaultAction = () => { console.log('Unknown action', a.action) }
+
+    const mkAction = actionMap[event.event] || defaultAction
+    return mkAction[a.action](a.args, this)
+  }
+
+  mkTimer (args, doll) {
+    const alarmId = args[0]
+    const duration = args[1]
+    return () => setTimeout(() => doll.dispatchEvent(mkAlarm(alarmId)), duration)
+  }
+
+  mkMap (args, doll) {
+    const cel = doll.cels.find(c => (c.name + '.cel') === args[0])
+    if (cel) {
+      return cel.map.bind(cel)
+    } else {
+      return () => console.log('Unable to find cel', args[0])
+    }
+  }
+
+  mkUnmap (args, doll) {
+    const cel = doll.cels.find(c => (c.name + '.cel') === args[0])
+    if (cel) {
+      return cel.unmap.bind(cel)
+    } else {
+      return () => console.log('Unable to find cel', args[0])
+    }
   }
 
   update (newSet) {

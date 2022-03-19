@@ -13,6 +13,7 @@ class KiSSCel {
     this.image = document.getElementById(cel.name + '-' + cel.palette)
     this.ghostImage = undefined
     this.visible = false
+    this.mapped = true
     this.alpha = cel.alpha
     this.currentSet = 0
 
@@ -61,15 +62,12 @@ class KiSSCel {
 
   update (currentSet) {
     this.currentSet = currentSet
-    if (this.sets.indexOf(currentSet) === -1) {
+    if (this.sets.indexOf(currentSet) === -1 || !this.mapped) {
       this.visible = false
     } else {
       this.visible = true
     }
     this.position = this.positions[currentSet]
-    if (this.name === 'blink') {
-      this.visible = false
-    }
   }
 
   draw (screen, ghost) {
@@ -92,6 +90,14 @@ class KiSSCel {
         this.position.y + this.offset.y
       )
     }
+  }
+
+  map () {
+    this.mapped = true
+  }
+
+  unmap () {
+    this.mapped = false
   }
 }
 
