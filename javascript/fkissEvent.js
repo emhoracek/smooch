@@ -4,7 +4,7 @@ function addEvent (eventJson, doll) {
   const setEvent = eventMap[eventJson.event]
 
   if (setEvent) {
-    const actions = eventJson.actions.map(a => makeAction(a, doll))
+    const actions = eventJson.actions.map(a => makeAction(a, doll)).filter(e => e !== undefined)
     setEvent(eventJson.args, actions, doll)
   } else {
     console.log('Unknown event', eventJson.event)

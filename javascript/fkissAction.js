@@ -17,10 +17,13 @@ function makeAction (a, doll) {
     windowsize
     */
   }
-  const defaultAction = () => { console.log('Unknown action', a.action) }
 
-  const mkAction = actionMap[a.action] || defaultAction
-  return mkAction(a.args, doll)
+  const mkAction = actionMap[a.action]
+
+  if (mkAction) {
+    return mkAction(a.args, doll)
+  }
+  console.log('Unknown action', a.action)
 }
 
 function mkTimer (args, doll) {
@@ -33,8 +36,6 @@ function mkMap (args, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
     return objOrCel.map.bind(objOrCel)
-  } else {
-    return () => console.log('Unable to find cel', args[0])
   }
 }
 
