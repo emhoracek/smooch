@@ -95,6 +95,10 @@ class KiSSCel extends EventTarget {
     }
   }
 
+  altmap () {
+    this.mapped = !this.mapped
+  }
+
   map () {
     this.mapped = true
   }

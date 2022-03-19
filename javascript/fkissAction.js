@@ -1,10 +1,10 @@
 function makeAction (a, doll) {
   const actionMap = {
     timer: mkTimer,
+    altmap: mkAltmap,
     map: mkMap,
     unmap: mkUnmap
     /*
-    almap
     changecol
     changeset
     move
@@ -42,8 +42,13 @@ function mkUnmap (args, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
     return objOrCel.unmap.bind(objOrCel)
-  } else {
-    return () => console.log('Unable to find object or cel', args[0])
+  }
+}
+
+function mkAltmap (args, doll) {
+  const objOrCel = objOrCelArg(args[0], doll)
+  if (objOrCel) {
+    return objOrCel.altmap.bind(objOrCel)
   }
 }
 
