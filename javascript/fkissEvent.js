@@ -33,11 +33,14 @@ const eventMap = {
 // A timer reaches zero.
 function setAlarm (args, actions, doll) {
   const index = args[0]
-  doll.timers[index] = () => {
-    actions.forEach(f => f())
+  doll.timers[index] = {
+    timeout: false,
+    callback: () => {
+      actions.forEach(f => f())
 
-    doll.update()
-    doll.draw()
+      doll.update()
+      doll.draw()
+    }
   }
 }
 

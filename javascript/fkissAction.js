@@ -29,7 +29,18 @@ function makeAction (a, doll) {
 function mkTimer (args, doll) {
   const alarmId = args[0]
   const duration = args[1]
-  return () => setTimeout(doll.timers[alarmId], duration)
+  return () => {
+    const currentTimeout = doll.timers[alarmId].timeout
+    if (currentTimeout) {
+      clearTimeout(currentTimeout)
+    }
+    const timeout = setTimeout(() => {
+      doll.timers[alarmId].timeout = false
+      doll.timers[alarmId].callback()
+    }, duration)
+
+    doll.timers[alarmId].timeout = timeout
+  }
 }
 
 function mkMap (args, doll) {
