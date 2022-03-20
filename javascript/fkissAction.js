@@ -29,7 +29,7 @@ function makeAction (a, doll) {
 function mkTimer (args, doll) {
   const alarmId = args[0]
   const duration = args[1]
-  return () => setTimeout(() => doll.dispatchEvent(mkAlarm(alarmId)), duration)
+  return () => setTimeout(doll.timers[alarmId], duration)
 }
 
 function mkMap (args, doll) {
@@ -51,10 +51,6 @@ function mkAltmap (args, doll) {
   if (objOrCel) {
     return objOrCel.altmap.bind(objOrCel)
   }
-}
-
-function mkAlarm (n) {
-  return new CustomEvent('alarm' + n)
 }
 
 function objOrCelArg (arg, doll) {

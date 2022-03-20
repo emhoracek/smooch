@@ -33,12 +33,12 @@ const eventMap = {
 // A timer reaches zero.
 function setAlarm (args, actions, doll) {
   const index = args[0]
-  doll.addEventListener('alarm' + index, (e) => {
+  doll.timers[index] = () => {
     actions.forEach(f => f())
 
     doll.update()
     doll.draw()
-  })
+  }
 }
 
 // This event is triggered after the initialize event and before the version event.

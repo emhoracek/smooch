@@ -28,6 +28,7 @@ class KiSSDoll extends EventTarget {
     // Initialize objs and cels
     this.objs = []
     this.cels = []
+    this.timers = []
     this.init(kissData.cels, kissData.positions, incLoaded)
     initSetClicks(this)
 

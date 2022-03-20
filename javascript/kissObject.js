@@ -31,15 +31,15 @@ class KiSSObject extends EventTarget {
     this.positions[this.currentSet].y = y
   }
 
-  altmap (x, y) {
-    this.cels.forEach(cel => cel.altmap())
+  altmap () {
+    this.cels.forEach(cel => { cel.altmap() })
   }
 
-  map (x, y) {
+  map () {
     this.cels.forEach(cel => cel.map())
   }
 
-  unmap (x, y) {
+  unmap () {
     this.cels.forEach(cel => cel.unmap())
   }
 }
