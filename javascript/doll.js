@@ -3,18 +3,24 @@ import { DragAndDrop } from './dragAndDrop'
 
 window.addEventListener('load', function () {
   /* globals kissJson, globalKiss */
+  let doll = false
   let loaded = 0
   const totalCels = kissJson.cels.length
-  const doll = new KiSSDoll(kissJson, () => { loaded += 1 })
-  const dragger = new DragAndDrop(doll)
-  dragger.initialize()
 
   function checkLoaded () {
+    console.log(`loading ${loaded} of ${totalCels}`)
     if (loaded < totalCels) {
-      console.log(`loading ${loaded} of ${totalCels}`)
-      window.setTimeout(checkLoaded, 500)
+      window.setTimeout(checkLoaded, 5)
+    } else {
+      doll.draw()
     }
   }
+
+  window.setTimeout(checkLoaded, 5)
+
+  doll = new KiSSDoll(kissJson, () => { loaded += 1 })
+  const dragger = new DragAndDrop(doll)
+  dragger.initialize()
 
   // in testing and development, it's convenient to have access to
   // to the kiss set object
@@ -22,6 +28,4 @@ window.addEventListener('load', function () {
     // eslint-disable-next-line no-global-assign
     globalKiss = doll
   }
-
-  window.setTimeout(checkLoaded, 500)
 })

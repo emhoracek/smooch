@@ -35,7 +35,9 @@ class KiSSDoll extends EventTarget {
     this.init(kissData.cels, kissData.positions, incLoaded)
     initSetClicks(this)
 
-    this.initFKiSS(kissData.fkiss)
+    if (kissData.fkiss) {
+      this.initFKiSS(kissData.fkiss)
+    }
     this.dispatchEvent(new CustomEvent('initialize'))
 
     // Update and draw
