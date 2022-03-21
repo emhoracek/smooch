@@ -1,0 +1,3584 @@
+; This .cnf file was written by PlayFKiSS.
+; Please edit this file and header before redistributing.
+;;
+; **Palette files**
+%mydoll.kcf
+%black.kcf
+%blue.kcf
+%menu.kcf
+%mydoll2.kcf
+%yellow.kcf
+%brown.kcf
+%green.kcf
+%orange.kcf
+%pink.kcf
+%purple.kcf
+%red.kcf
+%white.kcf
+%teal.kcf
+%title.kcf
+;
+(700,500)  ; Environment size
+[0  ; Border color
+;
+;
+; ** Cel entries **
+;
+#6.999	r_h1.cel	*3 :    2               
+#6.999	o_h1.cel	*3 :    2               
+#6.999	y_h1.cel	*3 :    2               
+#6.999	g_h1.cel	*3 :    2               
+#6.999	t_h1.cel	*3 :    2               
+#6.999	lb_h1.cel	*3 :    2               
+#6.999	db_h1.cel	*3 :    2               
+#6.999	pu_h1.cel	*3 :    2               
+#6.999	pi_h1.cel	*3 :    2               
+#6.999	w_h1.cel	*3 :    2               
+#6.999	lbr_h1.cel	*3 :    2               
+#6.999	dbr_h1.cel	*3 :    2               
+#6.999	bla_h1.cel	*3 :    2               
+#7.999	r_h2.cel	*3 :    2               
+#7.999	o_h2.cel	*3 :    2               
+#7.999	y_h2.cel	*3 :    2               
+#7.999	g_h2.cel	*3 :    2               
+#7.999	t_h2.cel	*3 :    2               
+#7.999	lb_h2.cel	*3 :    2               
+#7.999	db_h2.cel	*3 :    2               
+#7.999	pu_h2.cel	*3 :    2               
+#7.999	pi_h2.cel	*3 :    2               
+#7.999	w_h2.cel	*3 :    2               
+#7.999	lbr_h2.cel	*3 :    2               
+#7.999	dbr_h2.cel	*3 :    2               
+#7.999	bla_h2.cel	*3 :    2               
+#8.999	r_h3.cel	*3 :    2               
+#8.999	o_h3.cel	*3 :    2               
+#8.999	y_h3.cel	*3 :    2               
+#8.999	g_h3.cel	*3 :    2               
+#8.999	t_h3.cel	*3 :    2               
+#8.999	lb_h3.cel	*3 :    2               
+#8.999	db_h3.cel	*3 :    2               
+#8.999	pu_h3.cel	*3 :    2               
+#8.999	pi_h3.cel	*3 :    2               
+#8.999	w_h3.cel	*3 :    2               
+#8.999	lbr_h3.cel	*3 :    2               
+#8.999	dbr_h3.cel	*3 :    2               
+#8.999	bla_h3.cel	*3 :    2               
+#9.999	r_h4.cel	*3 :    2               
+#9.999	o_h4.cel	*3 :    2               
+#9.999	y_h4.cel	*3 :    2               
+#9.999	g_h4.cel	*3 :    2               
+#9.999	t_h4.cel	*3 :    2               
+#9.999	lb_h4.cel	*3 :    2               
+#9.999	db_h4.cel	*3 :    2               
+#9.999	pu_h4.cel	*3 :    2               
+#9.999	pi_h4.cel	*3 :    2               
+#9.999	w_h4.cel	*3 :    2               
+#9.999	lbr_h4.cel	*3 :    2               
+#9.999	dbr_h4.cel	*3 :    2               
+#9.999	bla_h4.cel	*3 :    2               
+#10.999	r_h5.cel	*3 :    2               
+#10.999	o_h5.cel	*3 :    2               
+#10.999	y_h5.cel	*3 :    2               
+#10.999	g_h5.cel	*3 :    2               
+#10.999	t_h5.cel	*3 :    2               
+#10.999	lb_h5.cel	*3 :    2               
+#10.999	db_h5.cel	*3 :    2               
+#10.999	pu_h5.cel	*3 :    2               
+#10.999	pi_h5.cel	*3 :    2               
+#10.999	w_h5.cel	*3 :    2               
+#10.999	lbr_h5.cel	*3 :    2               
+#10.999	dbr_h5.cel	*3 :    2               
+#10.999	bla_h5.cel	*3 :    2               
+#11.999	r_h6.cel	*3 :    2               
+#11.999	o_h6.cel	*3 :    2               
+#11.999	y_h6.cel	*3 :    2               
+#11.999	g_h6.cel	*3 :    2               
+#11.999	t_h6.cel	*3 :    2               
+#11.999	lb_h6.cel	*3 :    2               
+#11.999	db_h6.cel	*3 :    2               
+#11.999	pu_h6.cel	*3 :    2               
+#11.999	pi_h6.cel	*3 :    2               
+#11.999	w_h6.cel	*3 :    2               
+#11.999	lbr_h6.cel	*3 :    2               
+#11.999	dbr_h6.cel	*3 :    2               
+#11.999	bla_h6.cel	*3 :    2               
+#12.999	r_h7.cel	*3 :    2               
+#12.999	o_h7.cel	*3 :    2               
+#12.999	y_h7.cel	*3 :    2               
+#12.999	g_h7.cel	*3 :    2               
+#12.999	t_h7.cel	*3 :    2               
+#12.999	lb_h7.cel	*3 :    2               
+#12.999	db_h7.cel	*3 :    2               
+#12.999	pu_h7.cel	*3 :    2               
+#12.999	pi_h7.cel	*3 :    2               
+#12.999	w_h7.cel	*3 :    2               
+#12.999	lbr_h7.cel	*3 :    2               
+#12.999	dbr_h7.cel	*3 :    2               
+#12.999	bla_h7.cel	*3 :    2               
+#13.999	r_h8.cel	*3 :    2               
+#13.999	o_h8.cel	*3 :    2               
+#13.999	y_h8.cel	*3 :    2               
+#13.999	g_h8.cel	*3 :    2               
+#13.999	t_h8.cel	*3 :    2               
+#13.999	lb_h8.cel	*3 :    2               
+#13.999	db_h8.cel	*3 :    2               
+#13.999	pu_h8.cel	*3 :    2               
+#13.999	pi_h8.cel	*3 :    2               
+#13.999	w_h8.cel	*3 :    2               
+#13.999	lbr_h8.cel	*3 :    2               
+#13.999	dbr_h8.cel	*3 :    2               
+#13.999	bla_h8.cel	*3 :    2               
+#14.999	r_h9.cel	*3 :    2               
+#14.999	o_h9.cel	*3 :    2               
+#14.999	y_h9.cel	*3 :    2               
+#14.999	g_h9.cel	*3 :    2               
+#14.999	t_h9.cel	*3 :    2               
+#14.999	lb_h9.cel	*3 :    2               
+#14.999	db_h9.cel	*3 :    2               
+#14.999	pu_h9.cel	*3 :    2               
+#14.999	pi_h9.cel	*3 :    2               
+#14.999	w_h9.cel	*3 :    2               
+#14.999	lbr_h9.cel	*3 :    2               
+#14.999	dbr_h9.cel	*3 :    2               
+#14.999	bla_h9.cel	*3 :    2               
+#15.999	r_h10.cel	*3 :    2               
+#15.999	o_h10.cel	*3 :    2               
+#15.999	y_h10.cel	*3 :    2               
+#15.999	g_h10.cel	*3 :    2               
+#15.999	t_h10.cel	*3 :    2               
+#15.999	lb_h10.cel	*3 :    2               
+#15.999	db_h10.cel	*3 :    2               
+#15.999	pu_h10.cel	*3 :    2               
+#15.999	pi_h10.cel	*3 :    2               
+#15.999	w_h10.cel	*3 :    2               
+#15.999	lbr_h10.cel	*3 :    2               
+#15.999	dbr_h10.cel	*3 :    2               
+#15.999	bla_h10.cel	*3 :    2               
+#16.999	r_h11.cel	*3 :    2               
+#16.999	o_h11.cel	*3 :    2               
+#16.999	y_h11.cel	*3 :    2               
+#16.999	g_h11.cel	*3 :    2               
+#16.999	t_h11.cel	*3 :    2               
+#16.999	lb_h11.cel	*3 :    2               
+#16.999	db_h11.cel	*3 :    2               
+#16.999	pu_h11.cel	*3 :    2               
+#16.999	pi_h11.cel	*3 :    2               
+#16.999	w_h11.cel	*3 :    2               
+#16.999	lbr_h11.cel	*3 :    2               
+#16.999	dbr_h11.cel	*3 :    2               
+#16.999	bla_h11.cel	*3 :    2               
+#17.999	r_s1.cel	*3 :    2               
+#17.999	o_s1.cel	*3 :    2               
+#17.999	y_s1.cel	*3 :    2               
+#17.999	g_s1.cel	*3 :    2               
+#17.999	t_s1.cel	*3 :    2               
+#17.999	lb_s1.cel	*3 :    2               
+#17.999	db_s1.cel	*3 :    2               
+#17.999	pu_s1.cel	*3 :    2               
+#17.999	pi_s1.cel	*3 :    2               
+#17.999	w_s1.cel	*3 :    2               
+#17.999	lbr_s1.cel	*3 :    2               
+#17.999	dbr_s1.cel	*3 :    2               
+#17.999	bla_s1.cel	*3 :    2               
+#18.999	r_s2.cel	*3 :    2               
+#18.999	o_s2.cel	*3 :    2               
+#18.999	y_s2.cel	*3 :    2               
+#18.999	g_s2.cel	*3 :    2               
+#18.999	t_s2.cel	*3 :    2               
+#18.999	lb_s2.cel	*3 :    2               
+#18.999	db_s2.cel	*3 :    2               
+#18.999	pu_s2.cel	*3 :    2               
+#18.999	pi_s2.cel	*3 :    2               
+#18.999	w_s2.cel	*3 :    2               
+#18.999	lbr_s2.cel	*3 :    2               
+#18.999	dbr_s2.cel	*3 :    2               
+#18.999	bla_s2.cel	*3 :    2               
+#19.999	r_s3.cel	*3 :    2               
+#19.999	o_s3.cel	*3 :    2               
+#19.999	y_s3.cel	*3 :    2               
+#19.999	g_s3.cel	*3 :    2               
+#19.999	t_s3.cel	*3 :    2               
+#19.999	lb_s3.cel	*3 :    2               
+#19.999	db_s3.cel	*3 :    2               
+#19.999	pu_s3.cel	*3 :    2               
+#19.999	pi_s3.cel	*3 :    2               
+#19.999	w_s3.cel	*3 :    2               
+#19.999	lbr_s3.cel	*3 :    2               
+#19.999	dbr_s3.cel	*3 :    2               
+#19.999	bla_s3.cel	*3 :    2               
+#20.999	r_s4.cel	*3 :    2               
+#20.999	o_s4.cel	*3 :    2               
+#20.999	y_s4.cel	*3 :    2               
+#20.999	g_s4.cel	*3 :    2               
+#20.999	t_s4.cel	*3 :    2               
+#20.999	lb_s4.cel	*3 :    2               
+#20.999	db_s4.cel	*3 :    2               
+#20.999	pu_s4.cel	*3 :    2               
+#20.999	pi_s4.cel	*3 :    2               
+#20.999	w_s4.cel	*3 :    2               
+#20.999	lbr_s4.cel	*3 :    2               
+#20.999	dbr_s4.cel	*3 :    2               
+#20.999	bla_s4.cel	*3 :    2               
+#21.999	r_s5.cel	*3 :    2               
+#21.999	o_s5.cel	*3 :    2               
+#21.999	y_s5.cel	*3 :    2               
+#21.999	g_s5.cel	*3 :    2               
+#21.999	t_s5.cel	*3 :    2               
+#21.999	lb_s5.cel	*3 :    2               
+#21.999	db_s5.cel	*3 :    2               
+#21.999	pu_s5.cel	*3 :    2               
+#21.999	pi_s5.cel	*3 :    2               
+#21.999	w_s5.cel	*3 :    2               
+#21.999	lbr_s5.cel	*3 :    2               
+#21.999	dbr_s5.cel	*3 :    2               
+#21.999	bla_s5.cel	*3 :    2               
+#22.999	r_s6.cel	*3 :    2               
+#22.999	o_s6.cel	*3 :    2               
+#22.999	y_s6.cel	*3 :    2               
+#22.999	g_s6.cel	*3 :    2               
+#22.999	t_s6.cel	*3 :    2               
+#22.999	lb_s6.cel	*3 :    2               
+#22.999	db_s6.cel	*3 :    2               
+#22.999	pu_s6.cel	*3 :    2               
+#22.999	pi_s6.cel	*3 :    2               
+#22.999	w_s6.cel	*3 :    2               
+#22.999	lbr_s6.cel	*3 :    2               
+#22.999	dbr_s6.cel	*3 :    2               
+#22.999	bla_s6.cel	*3 :    2               
+#23.999	whskin.cel	*0 :    2               
+#23.999	blskin.cel	*4 :    2               
+#24.999	r_eye.cel	*3 :    2               
+#24.999	o_eye.cel	*3 :    2               
+#24.999	y_eye.cel	*3 :    2               
+#24.999	g_eye.cel	*3 :    2               
+#24.999	t_eye.cel	*3 :    2               
+#24.999	b_eye.cel	*3 :    2               
+#24.999	pu_eye.cel	*3 :    2               
+#24.999	pi_eye.cel	*3 :    2               
+#24.999	w_eye.cel	*3 :    2               
+#24.999	br_eye.cel	*3 :    2               
+#24.999	bl_eye.cel	*3 :    2               
+#25.999	r_sk.cel	*3 :    2               
+#25.999	o_sk.cel	*3 :    2               
+#25.999	y_sk.cel	*3 :    2               
+#25.999	g_sk.cel	*3 :    2               
+#25.999	t_sk.cel	*3 :    2               
+#25.999	lb_sk.cel	*3 :    2               
+#25.999	db_sk.cel	*3 :    2               
+#25.999	pu_sk.cel	*3 :    2               
+#25.999	pi_sk.cel	*3 :    2               
+#25.999	w_sk.cel	*3 :    2               
+#25.999	lbr_sk.cel	*3 :    2               
+#25.999	dbr_sk.cel	*3 :    2               
+#25.999	bla_sk.cel	*3 :    2               
+#26.999	r_co.cel	*3 :    2               
+#26.999	o_co.cel	*3 :    2               
+#26.999	y_co.cel	*3 :    2               
+#26.999	g_co.cel	*3 :    2               
+#26.999	t_co.cel	*3 :    2               
+#26.999	lb_co.cel	*3 :    2               
+#26.999	db_co.cel	*3 :    2               
+#26.999	pu_co.cel	*3 :    2               
+#26.999	pi_co.cel	*3 :    2               
+#26.999	w_co.cel	*3 :    2               
+#26.999	lbr_co.cel	*3 :    2               
+#26.999	dbr_co.cel	*3 :    2               
+#26.999	bla_co.cel	*3 :    2               
+#27.999	r_bo.cel	*3 :    2               
+#27.999	o_bo.cel	*3 :    2               
+#27.999	y_bo.cel	*3 :    2               
+#27.999	g_bo.cel	*3 :    2               
+#27.999	t_bo.cel	*3 :    2               
+#27.999	lb_bo.cel	*3 :    2               
+#27.999	db_bo.cel	*3 :    2               
+#27.999	pu_bo.cel	*3 :    2               
+#27.999	pi_bo.cel	*3 :    2               
+#27.999	w_bo.cel	*3 :    2               
+#27.999	lbr_bo.cel	*3 :    2               
+#27.999	dbr_bo.cel	*3 :    2               
+#27.999	bla_bo.cel	*3 :    2               
+#28.999	r_gb.cel	*3 :    2               
+#28.999	o_gb.cel	*3 :    2               
+#28.999	y_gb.cel	*3 :    2               
+#28.999	g_gb.cel	*3 :    2               
+#28.999	t_gb.cel	*3 :    2               
+#28.999	lb_gb.cel	*3 :    2               
+#28.999	db_gb.cel	*3 :    2               
+#28.999	pu_gb.cel	*3 :    2               
+#28.999	pi_gb.cel	*3 :    2               
+#28.999	w_gb.cel	*3 :    2               
+#28.999	lbr_gb.cel	*3 :    2               
+#28.999	dbr_gb.cel	*3 :    2               
+#28.999	bla_gb.cel	*3 :    2               
+#29.999	r_ch.cel	*3 :    2               
+#29.999	o_ch.cel	*3 :    2               
+#29.999	y_ch.cel	*3 :    2               
+#29.999	g_ch.cel	*3 :    2               
+#29.999	t_ch.cel	*3 :    2               
+#29.999	lb_ch.cel	*3 :    2               
+#29.999	db_ch.cel	*3 :    2               
+#29.999	pu_ch.cel	*3 :    2               
+#29.999	pi_ch.cel	*3 :    2               
+#29.999	w_ch.cel	*3 :    2               
+#29.999	lbr_ch.cel	*3 :    2               
+#29.999	dbr_ch.cel	*3 :    2               
+#29.999	bla_ch.cel	*3 :    2               
+#30.999	r_br.cel	*3 :    2               
+#30.999	o_br.cel	*3 :    2               
+#30.999	y_br.cel	*3 :    2               
+#30.999	g_br.cel	*3 :    2               
+#30.999	t_br.cel	*3 :    2               
+#30.999	lb_br.cel	*3 :    2               
+#30.999	db_br.cel	*3 :    2               
+#30.999	pu_br.cel	*3 :    2               
+#30.999	pi_br.cel	*3 :    2               
+#30.999	w_br.cel	*3 :    2               
+#30.999	lbr_br.cel	*3 :    2               
+#30.999	dbr_br.cel	*3 :    2               
+#30.999	bla_br.cel	*3 :    2               
+#31.999	mainmenu.cel	*3 :    2               
+#33.999	b_gem.cel	*2 :    2               
+#34.999	bl_gem.cel	*1 :    2               
+#35.999	y_gem.cel	*5 :    2               
+#36.999	br_gem.cel	*6 :    2               
+#37.999	g_gem.cel	*7 :    2               
+#38.999	o_gem.cel	*8 :    2               
+#39.999	pi_gem.cel	*9 :    2               
+#40.999	pu_gem.cel	*10 :    2               
+#41.999	r_gem.cel	*11 :    2               
+#42.999	w_gem.cel	*12 :    2               
+#43   	t_gem.cel	*13 :    2               
+#44.999	notiara.cel	*3 :    2               
+#45.999	gemmenu.cel	*3 :    2               
+#1.999	bla_jhai.cel	*1 :    2               
+#1.999	blu_jhai.cel	*2 :    2               
+#1.999	blu_jha2.cel	*2 :    2               
+#1.999	yel_jhai.cel	*5 :    2               
+#1.999	lbr_jhai.cel	*6 :    2               
+#1.999	dbr_jhai.cel	*6 :    2               
+#1.999	gre_jhai.cel	*7 :    2               
+#1.999	ora_jhai.cel	*8 :    2               
+#1.999	pin_jhai.cel	*9 :    2               
+#1.999	pur_jhai.cel	*10 :    2               
+#1.999	red_jhai.cel	*11 :    2               
+#1.999	whi_jhai.cel	*12 :    2               
+#1.999	tea_jhai.cel	*13 :    2               
+#2.999	bla_ohai.cel	*1 :    2               
+#2.999	blu_ohai.cel	*2 :    2               
+#2.999	blu_oha2.cel	*2 :    2               
+#2.999	yel_ohai.cel	*5 :    2               
+#2.999	lbr_ohai.cel	*6 :    2               
+#2.999	dbr_ohai.cel	*6 :    2               
+#2.999	gre_ohai.cel	*7 :    2               
+#2.999	ora_ohai.cel	*8 :    2               
+#2.999	pin_ohai.cel	*9 :    2               
+#2.999	pur_ohai.cel	*10 :    2               
+#2.999	red_ohai.cel	*11 :    2               
+#2.999	whi_ohai.cel	*12 :    2               
+#2.999	tea_ohai.cel	*13 :    2               
+#3.999	bla_uhai.cel	*1 :    2               
+#3.999	blu_uhai.cel	*2 :    2               
+#3.999	blu_uha2.cel	*2 :    2               
+#3.999	yel_uhai.cel	*5 :    2               
+#3.999	lbr_uhai.cel	*6 :    2               
+#3.999	dbr_uhai.cel	*6 :    2               
+#3.999	gre_uhai.cel	*7 :    2               
+#3.999	ora_uhai.cel	*8 :    2               
+#3.999	pin_uhai.cel	*9 :    2               
+#3.999	pur_uhai.cel	*10 :    2               
+#3.999	red_uhai.cel	*11 :    2               
+#3.999	whi_uhai.cel	*12 :    2               
+#3.999	tea_uhai.cel	*13 :    2               
+#4.999	bla_shai.cel	*1 :    2               
+#4.999	blu_shai.cel	*2 :    2               
+#4.999	blu_sha2.cel	*2 :    2               
+#4.999	yel_shai.cel	*5 :    2               
+#4.999	lbr_shai.cel	*6 :    2               
+#4.999	dbr_shai.cel	*6 :    2               
+#4.999	gre_shai.cel	*7 :    2               
+#4.999	ora_shai.cel	*8 :    2               
+#4.999	pin_shai.cel	*9 :    2               
+#4.999	pur_shai.cel	*10 :    2               
+#4.999	red_shai.cel	*11 :    2               
+#4.999	whi_shai.cel	*12 :    2               
+#4.999	tea_shai.cel	*13 :    2               
+#47.999	red_nhai.cel	*11 :    2               
+#47.999	ora_nhai.cel	*8 :    2               
+#47.999	yel_nhai.cel	*5 :    2               
+#47.999	gre_nhai.cel	*7 :    2               
+#47.999	tea_nhai.cel	*13 :    2               
+#47.999	blu_nha2.cel	*2 :    2               
+#47.999	blu_nhai.cel	*2 :    2               
+#47.999	pur_nhai.cel	*10 :    2               
+#47.999	pin_nhai.cel	*9 :    2               
+#47.999	whi_nhai.cel	*12 :    2               
+#47.999	lbr_nhai.cel	*6 :    2               
+#47.999	dbr_nhai.cel	*6 :    2               
+#47.999	bla_nhai.cel	*1 :    2               
+#48.999	red_chai.cel	*11 :    2               
+#48.999	ora_chai.cel	*8 :    2               
+#48.999	yel_chai.cel	*5 :    2               
+#48.999	gre_chai.cel	*7 :    2               
+#48.999	tea_chai.cel	*13 :    2               
+#48.999	blu_cha2.cel	*2 :    2               
+#48.999	blu_chai.cel	*2 :    2               
+#48.999	pur_chai.cel	*10 :    2               
+#48.999	pin_chai.cel	*9 :    2               
+#48.999	whi_chai.cel	*12 :    2               
+#48.999	lbr_chai.cel	*6 :    2               
+#48.999	dbr_chai.cel	*6 :    2               
+#48.999	bla_chai.cel	*1 :    2               
+#50.999	red_bhai.cel	*11 :    2               
+#50.999	ora_bhai.cel	*8 :    2               
+#50.999	yel_bhai.cel	*5 :    2               
+#50.999	gre_bhai.cel	*7 :    2               
+#50.999	tea_bhai.cel	*13 :    2               
+#50.999	blu_bha2.cel	*2 :    2               
+#50.999	blu_bhai.cel	*2 :    2               
+#50.999	pur_bhai.cel	*10 :    2               
+#50.999	pin_bhai.cel	*9 :    2               
+#50.999	whi_bhai.cel	*12 :    2               
+#50.999	lbr_bhai.cel	*6 :    2               
+#50.999	dbr_bhai.cel	*6 :    2               
+#50.999	bla_bhai.cel	*1 :    2               
+#51.999	red_mhai.cel	*11 :    2               
+#51.999	ora_mhai.cel	*8 :    2               
+#51.999	yel_mhai.cel	*5 :    2               
+#51.999	gre_mhai.cel	*7 :    2               
+#51.999	tea_mhai.cel	*13 :    2               
+#51.999	blu_mha2.cel	*2 :    2               
+#51.999	blu_mhai.cel	*2 :    2               
+#51.999	pur_mhai.cel	*10 :    2               
+#51.999	pin_mhai.cel	*9 :    2               
+#51.999	whi_mhai.cel	*12 :    2               
+#51.999	lbr_mhai.cel	*6 :    2               
+#51.999	dbr_mhai.cel	*6 :    2               
+#51.999	bla_mhai.cel	*1 :    2               
+#52.999	red_rhai.cel	*11 :    2               
+#52.999	ora_rhai.cel	*8 :    2               
+#52.999	yel_rhai.cel	*5 :    2               
+#52.999	gre_rhai.cel	*7 :    2               
+#52.999	tea_rhai.cel	*13 :    2               
+#52.999	blu_rha2.cel	*2 :    2               
+#52.999	blu_rhai.cel	*2 :    2               
+#52.999	pur_rhai.cel	*10 :    2               
+#52.999	pin_rhai.cel	*9 :    2               
+#52.999	whi_rhai.cel	*12 :    2               
+#52.999	lbr_rhai.cel	*6 :    2               
+#52.999	dbr_rhai.cel	*6 :    2               
+#52.999	bla_rhai.cel	*1 :    2               
+#53.999	red_fhai.cel	*11 :    2               
+#53.999	ora_fhai.cel	*8 :    2               
+#53.999	yel_fhai.cel	*5 :    2               
+#53.999	gre_fhai.cel	*7 :    2               
+#53.999	tea_fhai.cel	*13 :    2               
+#53.999	blu_fha2.cel	*2 :    2               
+#53.999	blu_fhai.cel	*2 :    2               
+#53.999	pur_fhai.cel	*10 :    2               
+#53.999	pin_fhai.cel	*9 :    2               
+#53.999	whi_fhai.cel	*12 :    2               
+#53.999	lbr_fhai.cel	*6 :    2               
+#53.999	dbr_fhai.cel	*6 :    2               
+#53.999	bla_fhai.cel	*1 :    2               
+#46.999	red_gem.cel	*11 :    2               
+#46.999	ora_gem.cel	*8 :    2               
+#46.999	gre_gem.cel	*7 :    2               
+#46.999	tea_gem.cel	*13 :    2               
+#46.999	blu_gem.cel	*2 :    2               
+#46.999	pur_gem.cel	*10 :    2               
+#46.999	pin_gem.cel	*9 :    2               
+#46.999	whi_gem.cel	*12 :    2               
+#46.999	bro_gem.cel	*6 :    2               
+#46.999	bla_gem.cel	*1 :    2               
+#32.999	tiara.cel	*5 :    2               
+#5.999	blu_eye.cel	*2 :    2               
+#5.999	bla_eye.cel	*1 :    2               
+#5.999	yel_eye.cel	*5 :    2               
+#5.999	bro_eye.cel	*6 :    2               
+#5.999	gre_eye.cel	*7 :    2               
+#5.999	ora_eye.cel	*8 :    2               
+#5.999	pin_eye.cel	*9 :    2               
+#5.999	pur_eye.cel	*10 :    2               
+#5.999	red_eye.cel	*11 :    2               
+#5.999	whi_eye.cel	*12 :    2               
+#5.999	tea_eye.cel	*13 :    2               
+#55.999	red_coll.cel	*11 :    2               
+#55.999	yel_coll.cel	*5 :    2               
+#55.999	ora_coll.cel	*8 :    2               
+#55.999	gre_coll.cel	*7 :    2               
+#55.999	tea_coll.cel	*13 :    2               
+#55.999	lbl_coll.cel	*2 :    2               
+#55.999	dbl_coll.cel	*2 :    2               
+#55.999	pur_coll.cel	*10 :    2               
+#55.999	pin_coll.cel	*9 :    2               
+#55.999	whi_coll.cel	*12 :    2               
+#55.999	lbr_coll.cel	*6 :    2               
+#55.999	dbr_coll.cel	*6 :    2               
+#55.999	bla_coll.cel	*1 :    2               
+#56.999	red_skir.cel	*11 :    2               
+#56.999	ora_skir.cel	*8 :    2               
+#56.999	yel_skir.cel	*5 :    2               
+#56.999	gre_skir.cel	*7 :    2               
+#56.999	tea_skir.cel	*13 :    2               
+#56.999	lbl_skir.cel	*2 :    2               
+#56.999	dbl_skir.cel	*2 :    2               
+#56.999	pur_skir.cel	*10 :    2               
+#56.999	pin_skir.cel	*9 :    2               
+#56.999	whi_skir.cel	*12 :    2               
+#56.999	lbr_skir.cel	*6 :    2               
+#56.999	dbr_skir.cel	*6 :    2               
+#56.999	bla_skir.cel	*1 :    2               
+#58.999	red_broo.cel	*11 :    2               
+#58.999	ora_broo.cel	*8 :    2               
+#58.999	yel_broo.cel	*5 :    2               
+#58.999	gre_broo.cel	*7 :    2               
+#58.999	tea_broo.cel	*13 :    2               
+#58.999	lbl_broo.cel	*2 :    2               
+#58.999	dbl_broo.cel	*2 :    2               
+#58.999	pur_broo.cel	*10 :    2               
+#58.999	pin_broo.cel	*9 :    2               
+#58.999	whi_broo.cel	*12 :    2               
+#58.999	lbr_broo.cel	*6 :    2               
+#58.999	dbr_broo.cel	*6 :    2               
+#58.999	bla_broo.cel	*1 :    2               
+#59.999	red_glba.cel	*11 :    2               
+#59.999	ora_glba.cel	*8 :    2               
+#59.999	yel_glba.cel	*5 :    2               
+#59.999	gre_glba.cel	*7 :    2               
+#59.999	tea_glba.cel	*13 :    2               
+#59.999	lbl_glba.cel	*2 :    2               
+#59.999	dbl_glba.cel	*2 :    2               
+#59.999	pur_glba.cel	*10 :    2               
+#59.999	pin_glba.cel	*9 :    2               
+#59.999	whi_glba.cel	*12 :    2               
+#59.999	lbr_glba.cel	*6 :    2               
+#59.999	dbr_glba.cel	*6 :    2               
+#59.999	bla_glba.cel	*1 :    2               
+#60.999	red_chok.cel	*11 :    2               
+#60.999	ora_chok.cel	*8 :    2               
+#60.999	yel_chok.cel	*5 :    2               
+#60.999	gre_chok.cel	*7 :    2               
+#60.999	tea_chok.cel	*13 :    2               
+#60.999	lbl_chok.cel	*2 :    2               
+#60.999	dbl_chok.cel	*2 :    2               
+#60.999	pur_chok.cel	*10 :    2               
+#60.999	pin_chok.cel	*9 :    2               
+#60.999	whi_chok.cel	*12 :    2               
+#60.999	lbr_chok.cel	*6 :    2               
+#60.999	dbr_chok.cel	*6 :    2               
+#60.999	bla_chok.cel	*1 :    2               
+#61.999	red_tboo.cel	*11 :    2               
+#61.999	ora_tboo.cel	*8 :    2               
+#61.999	yel_tboo.cel	*5 :    2               
+#61.999	gre_tboo.cel	*7 :    2               
+#61.999	tea_tboo.cel	*13 :    2               
+#61.999	lbl_tboo.cel	*2 :    2               
+#61.999	dbl_tboo.cel	*2 :    2               
+#61.999	pur_tboo.cel	*10 :    2               
+#61.999	pin_tboo.cel	*9 :    2               
+#61.999	whi_tboo.cel	*12 :    2               
+#61.999	lbr_tboo.cel	*6 :    2               
+#61.999	dbr_tboo.cel	*6 :    2               
+#61.999	bla_tboo.cel	*1 :    2               
+#62.999	red_sboo.cel	*11 :    2               
+#62.999	ora_sboo.cel	*8 :    2               
+#62.999	yel_sboo.cel	*5 :    2               
+#62.999	gre_sboo.cel	*7 :    2               
+#62.999	tea_sboo.cel	*13 :    2               
+#62.999	lbl_sboo.cel	*2 :    2               
+#62.999	dbl_sboo.cel	*2 :    2               
+#62.999	pur_sboo.cel	*10 :    2               
+#62.999	pin_sboo.cel	*9 :    2               
+#62.999	whi_sboo.cel	*12 :    2               
+#62.999	lbr_sboo.cel	*6 :    2               
+#62.999	dbr_sboo.cel	*6 :    2               
+#62.999	bla_sboo.cel	*1 :    2               
+#63.999	red_pump.cel	*11 :    2               
+#63.999	ora_pump.cel	*8 :    2               
+#63.999	yel_pump.cel	*5 :    2               
+#63.999	gre_pump.cel	*7 :    2               
+#63.999	tea_pump.cel	*13 :    2               
+#63.999	lbl_pump.cel	*2 :    2               
+#63.999	dbl_pump.cel	*2 :    2               
+#63.999	pur_pump.cel	*10 :    2               
+#63.999	pin_pump.cel	*9 :    2               
+#63.999	whi_pump.cel	*12 :    2               
+#63.999	lbr_pump.cel	*6 :    2               
+#63.999	dbr_pump.cel	*6 :    2               
+#63.999	bla_pump.cel	*1 :    2               
+#64.999	red_pum2.cel	*11 :    2               
+#64.999	ora_pum2.cel	*8 :    2               
+#64.999	yel_pum2.cel	*5 :    2               
+#64.999	gre_pum2.cel	*7 :    2               
+#64.999	tea_pum2.cel	*13 :    2               
+#64.999	lbl_pum2.cel	*2 :    2               
+#64.999	dbl_pum2.cel	*2 :    2               
+#64.999	pur_pum2.cel	*10 :    2               
+#64.999	pin_pum2.cel	*9 :    2               
+#64.999	whi_pum2.cel	*12 :    2               
+#64.999	lbr_pum2.cel	*6 :    2               
+#64.999	dbr_pum2.cel	*6 :    2               
+#64.999	bla_pum2.cel	*1 :    2               
+#65.999	red_bal.cel	*11 :    2               
+#65.999	ora_bal.cel	*8 :    2               
+#65.999	yel_bal.cel	*5 :    2               
+#65.999	gre_bal.cel	*7 :    2               
+#65.999	tea_bal.cel	*13 :    2               
+#65.999	lbl_bal.cel	*2 :    2               
+#65.999	dbl_bal.cel	*2 :    2               
+#65.999	pur_bal.cel	*10 :    2               
+#65.999	pin_bal.cel	*9 :    2               
+#65.999	whi_bal.cel	*12 :    2               
+#65.999	lbr_bal.cel	*6 :    2               
+#65.999	dbr_bal.cel	*6 :    2               
+#65.999	bla_bal.cel	*1 :    2               
+#66.999	red_ten.cel	*11 :    2               
+#66.999	ora_ten.cel	*8 :    2               
+#66.999	yel_ten.cel	*5 :    2               
+#66.999	gre_ten.cel	*7 :    2               
+#66.999	tea_ten.cel	*13 :    2               
+#66.999	lbl_ten.cel	*2 :    2               
+#66.999	dbl_ten.cel	*2 :    2               
+#66.999	pur_ten.cel	*10 :    2               
+#66.999	pin_ten.cel	*9 :    2               
+#66.999	whi_ten.cel	*12 :    2               
+#66.999	lbr_ten.cel	*6 :    2               
+#66.999	dbr_ten.cel	*6 :    2               
+#66.999	bla_ten.cel	*1 :    2               
+#57.999	red_bow.cel	*11 :    2               
+#57.999	ora_bow.cel	*8 :    2               
+#57.999	yel_bow.cel	*5 :    2               
+#57.999	gre_bow.cel	*7 :    2               
+#57.999	tea_bow.cel	*13 :    2               
+#57.999	lbl_bow.cel	*2 :    2               
+#57.999	dbl_bow.cel	*2 :    2               
+#57.999	pur_bow.cel	*10 :    2               
+#57.999	pin_bow.cel	*9 :    2               
+#57.999	whi_bow.cel	*12 :    2               
+#57.999	lbr_bow.cel	*6 :    2               
+#57.999	dbr_bow.cel	*6 :    2               
+#57.999	bla_bow.cel	*1 :    2               
+#54.999	details.cel	*12 :    2               
+#49.999	red_vhai.cel	*11 :    2               
+#49.999	ora_vhai.cel	*8 :    2               
+#49.999	yel_vhai.cel	*5 :    2               
+#49.999	gre_vhai.cel	*7 :    2               
+#49.999	tea_vhai.cel	*13 :    2               
+#49.999	blu_vha2.cel	*2 :    2               
+#49.999	blu_vhai.cel	*2 :    2               
+#49.999	pur_vhai.cel	*10 :    2               
+#49.999	pin_vhai.cel	*9 :    2               
+#49.999	whi_vhai.cel	*12 :    2               
+#49.999	lbr_vhai.cel	*6 :    2               
+#49.999	dbr_vhai.cel	*6 :    2               
+#49.999	bla_vhai.cel	*1 :    2               
+#0.999	mydoll.cel	*0 :    2               
+#0.999	mydoll2.cel	*4 :    2               
+#67.999	title.cel	*14 :0                   
+#68.999	instruct.cel	*1 :  1                 
+;
+;
+;  ** FKiSS stuff **
+;
+;@EventHandler()
+;
+;@initialize()
+;@	unmap(#0)
+;@	map("mydoll.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("whi_ohai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	unmap(#5)
+;@	map("whi_eye.cel")
+;@	unmap(#46)
+;@	map("ora_gem.cel")
+;@	unmap(#55)
+;@	map("bla_coll.cel")
+;@	unmap(#56)
+;@	map("bla_skir.cel")
+;@	unmap(#57)
+;@	map("ora_bow.cel")
+;@	unmap(#58)
+;@	map("bla_broo.cel")
+;@	unmap(#59)
+;@	map("bla_glba.cel")
+;@	unmap(#60)
+;@	map("bla_chok.cel")
+;@	unmap(#61)
+;@	map("bla_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("r_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("red_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("ora_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("yel_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("gre_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("tea_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("blu_uha2.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("blu_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("pur_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("pin_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("whi_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("lbr_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("dbr_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h1.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	map("bla_uhai.cel")
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("red_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("ora_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("yel_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("gre_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("tea_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("blu_sha2.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("blu_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("pur_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("pin_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("whi_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("lbr_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("dbr_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h2.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	map("bla_shai.cel")
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("red_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("ora_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("yel_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("gre_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("tea_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("blu_oha2.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("blu_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("pur_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("pin_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("whi_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("lbr_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("dbr_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h3.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	map("bla_ohai.cel")
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h4.cel")
+;@	unmap(#1)
+;@	map("red_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h4.cel")
+;@	unmap(#1)
+;@	map("ora_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h4.cel")
+;@	unmap(#1)
+;@	map("yel_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h4.cel")
+;@	unmap(#1)
+;@	map("gre_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h4.cel")
+;@	unmap(#1)
+;@	map("tea_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h4.cel")
+;@	unmap(#1)
+;@	map("blu_jha2.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h4.cel")
+;@	unmap(#1)
+;@	map("blu_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h4.cel")
+;@	unmap(#1)
+;@	map("pur_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h4.cel")
+;@	unmap(#1)
+;@	map("pin_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h4.cel")
+;@	unmap(#1)
+;@	map("whi_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h4.cel")
+;@	unmap(#1)
+;@	map("lbr_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h4.cel")
+;@	unmap(#1)
+;@	map("dbr_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h4.cel")
+;@	unmap(#1)
+;@	map("bla_jhai.cel")
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("red_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("ora_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("yel_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("gre_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("tea_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("blu_nha2.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("blu_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("pur_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("pin_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("whi_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("lbr_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("dbr_nhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h5.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#50)
+;@	map("bla_nhai.cel")
+;@	unmap(#49)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#50)
+;@	map("red_chai.cel")
+;@	unmap(#49)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("ora_chai.cel")
+;@	unmap(#49)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("yel_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("gre_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("tea_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("blu_cha2.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("blu_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("pur_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#53)
+;@press("pi_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("pin_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("whi_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("lbr_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("dbr_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h6.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	map("bla_chai.cel")
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("red_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("ora_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("yel_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("gre_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("tea_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("blu_vha2.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("blu_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("pur_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("pin_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("whi_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("lbr_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("dbr_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h7.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	map("bla_vhai.cel")
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("red_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("ora_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("yel_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("gre_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("tea_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("blu_bha2.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("blu_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("pur_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("pin_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("whi_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("lbr_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("dbr_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h8.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	map("bla_bhai.cel")
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("red_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("o_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("ora_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("y_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("yel_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("g_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("gre_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("t_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("tea_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lb_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("blu_mha2.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("db_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("blu_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pu_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("pur_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("pi_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("pin_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("w_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("whi_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("lbr_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("lbr_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("dbr_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("dbr_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("bla_h9.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	map("bla_mhai.cel")
+;@	unmap(#52)
+;@	unmap(#53)
+;@press("r_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("red_rhai.cel")
+;@	unmap(#53)
+;@press("o_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("ora_rhai.cel")
+;@	unmap(#53)
+;@press("y_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("yel_rhai.cel")
+;@	unmap(#53)
+;@press("g_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("gre_rhai.cel")
+;@	unmap(#53)
+;@press("t_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("tea_rhai.cel")
+;@	unmap(#53)
+;@press("lb_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("blu_rha2.cel")
+;@	unmap(#53)
+;@press("db_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("blu_rhai.cel")
+;@	unmap(#53)
+;@press("pu_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("pur_rhai.cel")
+;@	unmap(#53)
+;@press("pi_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("pin_rhai.cel")
+;@	unmap(#53)
+;@press("w_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("whi_rhai.cel")
+;@	unmap(#53)
+;@press("lbr_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("lbr_rhai.cel")
+;@	unmap(#53)
+;@press("dbr_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("dbr_rhai.cel")
+;@	unmap(#53)
+;@press("bla_h10.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	map("bla_rhai.cel")
+;@	unmap(#53)
+;@press("r_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("red_fhai.cel")
+;@press("o_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("ora_fhai.cel")
+;@press("y_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("yel_fhai.cel")
+;@press("g_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("gre_fhai.cel")
+;@press("t_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("tea_fhai.cel")
+;@press("lb_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("blu_fha2.cel")
+;@press("db_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("blu_fhai.cel")
+;@press("pu_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("pur_fhai.cel")
+;@press("pi_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("pin_fhai.cel")
+;@press("w_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("whi_fhai.cel")
+;@press("lbr_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("lbr_fhai.cel")
+;@press("dbr_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("dbr_fhai.cel")
+;@press("bla_h11.cel")
+;@	unmap(#1)
+;@	unmap(#2)
+;@	unmap(#3)
+;@	unmap(#4)
+;@	unmap(#47)
+;@	unmap(#48)
+;@	unmap(#49)
+;@	unmap(#50)
+;@	unmap(#51)
+;@	unmap(#52)
+;@	unmap(#53)
+;@	map("bla_fhai.cel")
+;@press("whskin.cel")
+;@	unmap(#0)
+;@	map("mydoll.cel")
+;@press("blskin.cel")
+;@	unmap(#0)
+;@	map("mydoll2.cel")
+;@press("r_eye.cel")
+;@	unmap(#5)
+;@	map("red_eye.cel")
+;@press("o_eye.cel")
+;@	unmap(#5)
+;@	map("ora_eye.cel")
+;@press("y_eye.cel")
+;@	unmap(#5)
+;@	map("yel_eye.cel")
+;@press("g_eye.cel")
+;@	unmap(#5)
+;@	map("gre_eye.cel")
+;@press("t_eye.cel")
+;@	unmap(#5)
+;@	map("tea_eye.cel")
+;@press("b_eye.cel")
+;@	unmap(#5)
+;@	map("blu_eye.cel")
+;@press("pu_eye.cel")
+;@	unmap(#5)
+;@	map("pur_eye.cel")
+;@press("pi_eye.cel")
+;@	unmap(#5)
+;@	map("pin_eye.cel")
+;@press("w_eye.cel")
+;@	unmap(#5)
+;@	map("whi_eye.cel")
+;@press("br_eye.cel")
+;@	unmap(#5)
+;@	map("bro_eye.cel")
+;@press("bl_eye.cel")
+;@	unmap(#5)
+;@	map("bla_eye.cel")
+;@press("r_gem.cel")
+;@	unmap(#46)
+;@	map("red_gem.cel")
+;@	map("tiara.cel")
+;@press("o_gem.cel")
+;@	unmap(#46)
+;@	map("ora_gem.cel")
+;@	map("tiara.cel")
+;@press("y_gem.cel")
+;@	unmap(#46)
+;@	map("tiara.cel")
+;@press("g_gem.cel")
+;@	unmap(#46)
+;@	map("gre_gem.cel")
+;@	map("tiara.cel")
+;@press("t_gem.cel")
+;@	unmap(#46)
+;@	map("tea_gem.cel")
+;@	map("tiara.cel")
+;@press("b_gem.cel")
+;@	unmap(#46)
+;@	map("blu_gem.cel")
+;@	map("tiara.cel")
+;@press("pu_gem.cel")
+;@	unmap(#46)
+;@	map("pur_gem.cel")
+;@	map("tiara.cel")
+;@press("pi_gem.cel")
+;@	unmap(#46)
+;@	map("pin_gem.cel")
+;@	map("tiara.cel")
+;@press("w_gem.cel")
+;@	unmap(#46)
+;@	map("whi_gem.cel")
+;@	map("tiara.cel")
+;@press("br_gem.cel")
+;@	unmap(#46)
+;@	map("bro_gem.cel")
+;@	map("tiara.cel")
+;@press("bl_gem.cel")
+;@	unmap(#46)
+;@	map("bla_gem.cel")
+;@	map("tiara.cel")
+;@press("notiara.cel")
+;@	unmap(#46)
+;@	unmap(#32)
+;@press("r_co.cel")
+;@	unmap(#55)
+;@	map("red_coll.cel")
+;@press("o_co.cel")
+;@	unmap(#55)
+;@	map("ora_coll.cel")
+;@press("y_co.cel")
+;@	unmap(#55)
+;@	map("yel_coll.cel")
+;@press("g_co.cel")
+;@	unmap(#55)
+;@	map("gre_coll.cel")
+;@press("t_co.cel")
+;@	unmap(#55)
+;@	map("tea_coll.cel")
+;@press("lb_co.cel")
+;@	unmap(#55)
+;@	map("lbl_coll.cel")
+;@press("db_co.cel")
+;@	unmap(#55)
+;@	map("dbl_coll.cel")
+;@press("pu_co.cel")
+;@	unmap(#55)
+;@	map("pur_coll.cel")
+;@press("pi_co.cel")
+;@	unmap(#55)
+;@	map("pin_coll.cel")
+;@press("w_co.cel")
+;@	unmap(#55)
+;@	map("whi_coll.cel")
+;@press("lbr_co.cel")
+;@	unmap(#55)
+;@	map("lbr_coll.cel")
+;@press("dbr_co.cel")
+;@	unmap(#55)
+;@	map("dbr_coll.cel")
+;@press("bla_co.cel")
+;@	unmap(#55)
+;@	map("bla_coll.cel")
+;@press("r_sk.cel")
+;@	unmap(#56)
+;@	map("red_skir.cel")
+;@press("o_sk.cel")
+;@	unmap(#56)
+;@	map("ora_skir.cel")
+;@press("y_sk.cel")
+;@	unmap(#56)
+;@	map("yel_skir.cel")
+;@press("g_sk.cel")
+;@	unmap(#56)
+;@	map("gre_skir.cel")
+;@press("t_sk.cel")
+;@	unmap(#56)
+;@	map("tea_skir.cel")
+;@press("lb_sk.cel")
+;@	unmap(#56)
+;@	map("lbl_skir.cel")
+;@press("db_sk.cel")
+;@	unmap(#56)
+;@	map("dbl_skir.cel")
+;@press("pu_sk.cel")
+;@	unmap(#56)
+;@	map("pur_skir.cel")
+;@press("pi_sk.cel")
+;@	unmap(#56)
+;@	map("pin_skir.cel")
+;@press("w_sk.cel")
+;@	unmap(#56)
+;@	map("whi_skir.cel")
+;@press("lbr_sk.cel")
+;@	unmap(#56)
+;@	map("lbr_skir.cel")
+;@press("dbr_sk.cel")
+;@	unmap(#56)
+;@	map("dbr_skir.cel")
+;@press("bla_sk.cel")
+;@	unmap(#56)
+;@	map("bla_skir.cel")
+;@press("r_bo.cel")
+;@	unmap(#57)
+;@	map("red_bow.cel")
+;@press("o_bo.cel")
+;@	unmap(#57)
+;@	map("ora_bow.cel")
+;@press("y_bo.cel")
+;@	unmap(#57)
+;@	map("yel_bow.cel")
+;@press("g_bo.cel")
+;@	unmap(#57)
+;@	map("gre_bow.cel")
+;@press("t_bo.cel")
+;@	unmap(#57)
+;@	map("tea_bow.cel")
+;@press("lb_bo.cel")
+;@	unmap(#57)
+;@	map("lbl_bow.cel")
+;@press("db_bo.cel")
+;@	unmap(#57)
+;@	map("dbl_bow.cel")
+;@press("pu_bo.cel")
+;@	unmap(#57)
+;@	map("pur_bow.cel")
+;@press("pi_bo.cel")
+;@	unmap(#57)
+;@	map("pin_bow.cel")
+;@press("w_bo.cel")
+;@	unmap(#57)
+;@	map("whi_bow.cel")
+;@press("lbr_bo.cel")
+;@	unmap(#57)
+;@	map("lbr_bow.cel")
+;@press("dbr_bo.cel")
+;@	unmap(#57)
+;@	map("dbr_bow.cel")
+;@press("bla_bo.cel")
+;@	unmap(#57)
+;@	map("bla_bow.cel")
+;@press("r_br.cel")
+;@	unmap(#58)
+;@	map("red_broo.cel")
+;@press("o_br.cel")
+;@	unmap(#58)
+;@	map("ora_broo.cel")
+;@press("y_br.cel")
+;@	unmap(#58)
+;@	map("yel_broo.cel")
+;@press("g_br.cel")
+;@	unmap(#58)
+;@	map("gre_broo.cel")
+;@press("t_br.cel")
+;@	unmap(#58)
+;@	map("tea_broo.cel")
+;@press("lb_br.cel")
+;@	unmap(#58)
+;@	map("lbl_broo.cel")
+;@press("db_br.cel")
+;@	unmap(#58)
+;@	map("dbl_broo.cel")
+;@press("pu_br.cel")
+;@	unmap(#58)
+;@	map("pur_broo.cel")
+;@press("pi_br.cel")
+;@	unmap(#58)
+;@	map("pin_broo.cel")
+;@press("w_br.cel")
+;@	unmap(#58)
+;@	map("whi_broo.cel")
+;@press("lbr_br.cel")
+;@	unmap(#58)
+;@	map("lbr_broo.cel")
+;@press("dbr_br.cel")
+;@	unmap(#58)
+;@	map("dbr_broo.cel")
+;@press("bla_br.cel")
+;@	unmap(#58)
+;@	map("bla_broo.cel")
+;@press("r_gb.cel")
+;@	unmap(#59)
+;@	map("red_glba.cel")
+;@press("o_gb.cel")
+;@	unmap(#59)
+;@	map("ora_glba.cel")
+;@press("y_gb.cel")
+;@	unmap(#59)
+;@	map("yel_glba.cel")
+;@press("g_gb.cel")
+;@	unmap(#59)
+;@	map("gre_glba.cel")
+;@press("t_gb.cel")
+;@	unmap(#59)
+;@	map("tea_glba.cel")
+;@press("lb_gb.cel")
+;@	unmap(#59)
+;@	map("lbl_glba.cel")
+;@press("db_gb.cel")
+;@	unmap(#59)
+;@	map("dbl_glba.cel")
+;@press("pu_gb.cel")
+;@	unmap(#59)
+;@	map("pur_glba.cel")
+;@press("pi_gb.cel")
+;@	unmap(#59)
+;@	map("pin_glba.cel")
+;@press("w_gb.cel")
+;@	unmap(#59)
+;@	map("whi_glba.cel")
+;@press("lbr_gb.cel")
+;@	unmap(#59)
+;@	map("lbr_glba.cel")
+;@press("dbr_gb.cel")
+;@	unmap(#59)
+;@	map("dbr_glba.cel")
+;@press("bla_gb.cel")
+;@	unmap(#59)
+;@	map("bla_glba.cel")
+;@press("r_ch.cel")
+;@	unmap(#60)
+;@	map("red_chok.cel")
+;@press("o_ch.cel")
+;@	unmap(#60)
+;@	map("ora_chok.cel")
+;@press("y_ch.cel")
+;@	unmap(#60)
+;@	map("yel_chok.cel")
+;@press("g_ch.cel")
+;@	unmap(#60)
+;@	map("gre_chok.cel")
+;@press("t_ch.cel")
+;@	unmap(#60)
+;@	map("tea_chok.cel")
+;@press("lb_ch.cel")
+;@	unmap(#60)
+;@	map("lbl_chok.cel")
+;@press("db_ch.cel")
+;@	unmap(#60)
+;@	map("dbl_chok.cel")
+;@press("pu_ch.cel")
+;@	unmap(#60)
+;@	map("pur_chok.cel")
+;@press("pi_ch.cel")
+;@	unmap(#60)
+;@	map("pin_chok.cel")
+;@press("w_ch.cel")
+;@	unmap(#60)
+;@	map("whi_chok.cel")
+;@press("lbr_ch.cel")
+;@	unmap(#60)
+;@	map("lbr_chok.cel")
+;@press("dbr_ch.cel")
+;@	unmap(#60)
+;@	map("dbr_chok.cel")
+;@press("bla_ch.cel")
+;@	unmap(#60)
+;@	map("bla_chok.cel")
+;@press("r_s1.cel")
+;@	unmap(#61)
+;@	map("red_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@press("o_s1.cel")
+;@	unmap(#61)
+;@	map("ora_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@press("y_s1.cel")
+;@	unmap(#61)
+;@	map("yel_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("g_s1.cel")
+;@	unmap(#61)
+;@	map("gre_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("t_s1.cel")
+;@	unmap(#61)
+;@	map("tea_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lb_s1.cel")
+;@	unmap(#61)
+;@	map("lbl_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("db_s1.cel")
+;@	unmap(#61)
+;@	map("dbl_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pu_s1.cel")
+;@	unmap(#61)
+;@	map("pur_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pi_s1.cel")
+;@	unmap(#61)
+;@	map("pin_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("w_s1.cel")
+;@	unmap(#61)
+;@	map("whi_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lbr_s1.cel")
+;@	unmap(#61)
+;@	map("lbr_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("dbr_s1.cel")
+;@	unmap(#61)
+;@	map("dbr_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("bla_s1.cel")
+;@	unmap(#61)
+;@	map("bla_tboo.cel")
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("r_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("red_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("o_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("ora_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("y_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("yel_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("g_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("gre_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("t_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("tea_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lb_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("lbl_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("db_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("dbl_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pu_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("pur_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pi_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("pin_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("w_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("whi_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lbr_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("lbr_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("dbr_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("dbr_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("bla_s2.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	map("bla_sboo.cel")
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("r_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("red_pump.cel")
+;@press("o_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("ora_pump.cel")
+;@press("y_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("yel_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("g_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("gre_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("t_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("tea_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lb_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("lbl_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("db_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("dbl_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pu_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("pur_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pi_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("pin_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("w_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("whi_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lbr_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("lbr_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("dbr_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("dbr_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("bla_s3.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("bla_pump.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("r_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("red_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("o_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("ora_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("y_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("yel_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("g_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("gre_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("t_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("tea_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lb_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("lbl_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("db_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("dbl_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pu_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("pur_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("pi_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("pin_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("w_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("whi_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("lbr_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("lbr_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("dbr_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("dbr_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("bla_s4.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	map("bla_pum2.cel")
+;@	unmap(#65)
+;@	unmap(#66)
+;@press("r_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("red_bal.cel")
+;@	unmap(#66)
+;@press("o_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("ora_bal.cel")
+;@	unmap(#66)
+;@press("y_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("yel_bal.cel")
+;@	unmap(#66)
+;@press("g_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("gre_bal.cel")
+;@	unmap(#66)
+;@press("t_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("tea_bal.cel")
+;@	unmap(#66)
+;@press("lb_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("lbl_bal.cel")
+;@	unmap(#66)
+;@press("db_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("dbl_bal.cel")
+;@	unmap(#66)
+;@press("pu_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("pur_bal.cel")
+;@	unmap(#66)
+;@press("pi_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("pin_bal.cel")
+;@	unmap(#66)
+;@press("w_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("whi_bal.cel")
+;@	unmap(#66)
+;@press("lbr_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("lbr_bal.cel")
+;@	unmap(#66)
+;@press("dbr_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("dbr_bal.cel")
+;@	unmap(#66)
+;@press("bla_s5.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	map("bla_bal.cel")
+;@	unmap(#66)
+;@press("r_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("red_ten.cel")
+;@press("o_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("ora_ten.cel")
+;@press("y_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("yel_ten.cel")
+;@press("g_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("gre_ten.cel")
+;@press("t_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("tea_ten.cel")
+;@press("lb_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("lbl_ten.cel")
+;@press("db_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("dbl_ten.cel")
+;@press("pu_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("pur_ten.cel")
+;@press("pi_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("pin_ten.cel")
+;@press("w_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("whi_ten.cel")
+;@press("lbr_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("lbr_ten.cel")
+;@press("dbr_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("dbr_ten.cel")
+;@press("bla_s6.cel")
+;@	unmap(#61)
+;@	unmap(#62)
+;@	unmap(#63)
+;@	unmap(#64)
+;@	unmap(#65)
+;@	unmap(#66)
+;@	map("bla_ten.cel")
+;
+;
+;  ** Object coordinates **
+;
+; *set #0*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 165,56 0,0 
+;
+; *set #1*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 89,0 
+;
+; *set #2*
+$0 39,25 81,13 69,19 83,18 84,19 98,48 415,20 415,32 415,44 415,56 415,68 
+ 415,79 415,90 415,101 415,112 415,123 415,135 419,314 419,325 419,337 419,348 
+ 419,359 419,370 343,174 375,174 405,174 441,174 480,174 537,174 596,174 
+ 641,174 345,17 97,42 528,424 624,424 470,424 605,424 490,424 451,424 565,424 
+ 547,424 431,424 586,424 510,424 644,426 345,406 110,47 72,23 68,19 60,17 
+ 81,17 31,14 93,23 93,22 39,25 85,78 50,158 72,96 94,104 37,90 104,75 64,284 
+ 64,368 64,402 64,391 63,341 64,398 0,0 0,0 
+;
+; *set #3*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #4*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #5*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #6*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #7*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #8*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+;
+; *set #9*
+$0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
+ 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 
