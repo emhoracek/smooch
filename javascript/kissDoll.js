@@ -36,10 +36,10 @@ class KiSSDoll extends EventTarget {
     initSetClicks(this)
 
     this.initFKiSS(kissData.fkiss)
+    this.dispatchEvent(new CustomEvent('initialize'))
 
     // Update and draw
     this.update()
-    this.dispatchEvent(new CustomEvent('initialize'))
     this.draw()
 
     this.dispatchEvent(new CustomEvent('begin'))

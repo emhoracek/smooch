@@ -103,3 +103,7 @@ img {
 a {
   color: grey;
 }
+
+#audio {
+  display: none;
+}

@@ -59,6 +59,13 @@ function mkUnmap (args, doll) {
   }
 }
 
+function mkSound (args, doll) {
+  const soundFile = args[0]
+  const wavFile = soundFile.replace('.au', '.wav')
+  const audioElement = document.getElementById(wavFile.replace('.wav', ''))
+  return () => audioElement.play()
+}
+
 function mkAltmap (args, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
