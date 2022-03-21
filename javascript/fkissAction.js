@@ -24,13 +24,14 @@ function makeAction (a, doll) {
   if (mkAction) {
     return mkAction(a.args, doll)
   }
-  console.log('Unknown action', a.action)
+  doll.logger.warn(`Unknown action "${a.action}"`)
 }
 
 function mkTimer (args, doll) {
   const alarmId = args[0]
   const duration = args[1]
   return () => {
+    doll.logger.debug(`Setting timer ${alarmId} for ${duration}ms`)
     const currentTimeout = doll.timers[alarmId].timeout
     if (currentTimeout) {
       clearTimeout(currentTimeout)
@@ -71,7 +72,7 @@ function objOrCelArg (arg, doll) {
     if (obj) {
       return obj
     } else {
-      console.log('Unable to find object with mark', arg)
+      doll.logger.warn(`Unable to find object with mark "#${arg}"`)
     }
   }
   if (arg.endsWith('.cel')) {
@@ -79,10 +80,10 @@ function objOrCelArg (arg, doll) {
     if (cel) {
       return cel
     } else {
-      console.log('Unable to find cel with filename', arg)
+      doll.logger.warn(`Unable to find cel with filename "${arg}"`)
     }
   }
-  console.log('Expected a cel or object reference but got: ', arg)
+  doll.logger.error(`Expected a cel or object reference but got "${arg}"`)
 }
 
 export { makeAction, objOrCelArg }

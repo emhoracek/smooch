@@ -7,7 +7,7 @@ function addEvent (eventJson, doll) {
     const actions = eventJson.actions.map(a => makeAction(a, doll)).filter(e => e !== undefined)
     setEvent(eventJson.args, actions, doll)
   } else {
-    console.log('Unknown event', eventJson.event)
+    doll.logger.warn(`Unknown event "${eventJson.event}"`)
   }
 }
 
@@ -56,8 +56,8 @@ function setCatch (args, actions, doll) {
 }
 
 // The user changes the palette to that specified
-function setCol () {
-  console.log("Not implemented: `col`. Smooch doesn't implement palette groups.")
+function setCol (args, actions, doll) {
+  doll.logger.warn("Not implemented: `col`. Smooch doesn't implement palette groups.")
 }
 
 // The user releases the mouse on the object or cel. Applies to all cels & objects except those with a maximal fix value.
@@ -67,8 +67,8 @@ function setDrop (args, actions, doll) {
 }
 
 // The user quits the player or closes the doll
-function setEnd () {
-  console.log('Not implemented: `end`. The browser environment makes this event impractical.')
+function setEnd (args, actions, doll) {
+  doll.logger.warn('Not implemented: `end`. The browser environment makes this event impractical.')
 }
 
 // The user clicks on the object or cel. Applies only to fixed cels & objects
@@ -117,8 +117,8 @@ function setSet (args, actions, doll) {
 }
 
 // A previously-fixed cel or object becomes free to move.
-function setUnfix () {
-  console.log("Not implemented: `unfix`. Smooch doesn't (currently) decrement fix.")
+function setUnfix (args, actions, doll) {
+  doll.logger.warn("Not implemented: `unfix`. Smooch doesn't (currently) decrement fix.")
 }
 
 export { addEvent, press }

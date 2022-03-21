@@ -1,10 +1,13 @@
 import { addEvent } from './fkissEvent'
 import { KiSSCel } from './kissCel'
 import { KiSSObject } from './kissObject'
+import { Logger } from './logger'
 
 class KiSSDoll extends EventTarget {
   constructor (kissData, incLoaded) {
     super()
+
+    this.logger = new Logger('debug')
 
     // Size of the play area.
     this.size = { x: kissData.window_size[0], y: kissData.window_size[1] }
