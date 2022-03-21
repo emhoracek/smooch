@@ -1,8 +1,9 @@
 function makeAction (a, doll) {
   const actionMap = {
-    timer: mkTimer,
     altmap: mkAltmap,
     map: mkMap,
+    sound: mkSound,
+    timer: mkTimer,
     unmap: mkUnmap
     /*
     changecol

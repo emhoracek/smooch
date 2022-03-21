@@ -5,6 +5,10 @@ module Kiss where
 import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
+data DollData = DollData { dollDirectory :: FilePath,
+                           dollCels      :: [KissCel],
+                           dollSounds    :: [FilePath] }
+
 data KissDoll = KissDoll { kData    :: CNFKissData
                          , kCnfCels :: [CNFKissCel]
                          , kPalette :: Array Int PaletteFilename

@@ -30,9 +30,13 @@
       <div id="playarea">
            <canvas id="screen"></canvas>
            <canvas id="ghost"></canvas>
-           <div id ="celImages">
-             <celImages><img src="/${dir}/${cel-name}.png" id="${cel-name}-${pal-num}" /></celImages>
+           <div id="cel-images">
+             <cel-images><img src="/${pal-dir}/${cel-name}.png" id="${cel-name}-${pal-num}" /></cel-images>
            </div>
+
+           <div id="audio"><sound-files>
+             <audio id="${sound-id}" src="/${sound-dir}/${sound-file}"></audio>
+           </sound-files></div>
       </div>
     </div>
 
