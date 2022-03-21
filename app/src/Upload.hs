@@ -12,7 +12,7 @@ import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
 import           Data.Text.ICU.Convert
 import           System.Directory
-import           System.FilePath            (takeBaseName, takeExtension, (</>))
+import           System.FilePath            (takeExtension, (</>))
 import           Control.Exception
 import           Control.Logging            (log')
 import           Control.Monad              (when, void)
@@ -32,7 +32,7 @@ import           Dolls.Model
 processDoll :: String
             -> FilePath
             -> FilePath
-            -> ExceptT Text IO (FilePath, [KissCel])
+            -> ExceptT Text IO DollData
 processDoll dollHash lzhPath newLzhPath = do
   liftIO $ copyFile lzhPath ("static/sets" </> newLzhPath)
   staticDir <- createDollDir ("static/sets" </> dollHash)
@@ -41,7 +41,9 @@ processDoll dollHash lzhPath newLzhPath = do
   liftIO $ lowercaseFiles staticDir
   log' "Lowercased file names"
   cels <- createCels staticDir
-  return (staticDir, cels)
+  sounds <- getSounds staticDir
+  return $ DollData staticDir cels sounds
+
 
 staticDollDir :: FilePath -> String -> FilePath
 staticDollDir userDir setName =  userDir <> "/" <> setName
@@ -60,7 +62,7 @@ deleteCels staticDir = do
   let cels = filter (\f -> takeExtension f == "cel") allFiles
   mapM_ removeFile cels
 
-getCels :: Doll -> ExceptT Text IO (FilePath, [KissCel])
+getCels :: Doll -> ExceptT Text IO DollData
 getCels doll =
   case dollError doll of
     Nothing -> do
@@ -73,7 +75,8 @@ getCels doll =
       celsWithOffsets <- readCels (nub celData) loc
       log' "Loaded cels"
       let realCelData = addOffsetsToCelData celsWithOffsets
-      return (loc, realCelData)
+      sounds <- getSounds loc
+      return $ DollData loc realCelData sounds
     Just err -> throwE err
 
 createCels :: FilePath -> ExceptT Text IO [KissCel]
@@ -147,8 +150,8 @@ addOffsetsToCelData offsets =
      | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
 addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
-addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp) bgColor borderColor cels =
-  KissData m borderColor bgColor p ws cels sp
+addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
+  KissData m borderColor bgColor p ws cels sp fkiss
 
 -- for now, only looks at first cnf listed
 getCNF :: FilePath -> ExceptT Text IO String
@@ -158,6 +161,11 @@ getCNF dir = do
   case cnfs of
     (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
     _ -> throwE "No configuration file found."
+
+getSounds :: FilePath -> ExceptT Text IO [String]
+getSounds dir = do
+  files <- liftIO $ getDirectoryContents dir
+  return $ sort $ filter (\x -> takeExtension x == ".wav") files
 
 readUtf8OrShiftJis :: String -> IO String
 readUtf8OrShiftJis fp = do

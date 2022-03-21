@@ -1,3 +1,5 @@
+import { press } from './fkissEvent'
+
 class DragAndDrop {
   constructor (doll) {
     this.dragHandler = false
@@ -21,10 +23,16 @@ class DragAndDrop {
     const pos = this.getMousePos(e)
     const obj = this.doll.getSelectedObject(pos)
     if (obj) {
-      const dragStart = this.getDragStart(obj, pos)
-      this.dragHandler = (e) => this.onMouseMove(e, obj, dragStart)
-      document.addEventListener('pointermove', this.dragHandler)
-      e.preventDefault()
+      obj.dispatchEvent(press)
+      obj.cels.forEach(c => {
+        c.dispatchEvent(press)
+      })
+      if (!obj.fixed) {
+        const dragStart = this.getDragStart(obj, pos)
+        this.dragHandler = (e) => this.onMouseMove(e, obj, dragStart)
+        document.addEventListener('pointermove', this.dragHandler)
+        e.preventDefault()
+      }
     }
   }
 

@@ -1,6 +1,9 @@
-class KiSSObject {
+class KiSSObject extends EventTarget {
   constructor (mark, positions) {
+    super()
+
     this.mark = mark
+    this.id = mark
     this.currentSet = 0
     this.positions = positions
     this.cels = []
@@ -26,6 +29,18 @@ class KiSSObject {
   setPosition (x, y) {
     this.positions[this.currentSet].x = x
     this.positions[this.currentSet].y = y
+  }
+
+  altmap () {
+    this.cels.forEach(cel => { cel.altmap() })
+  }
+
+  map () {
+    this.cels.forEach(cel => cel.map())
+  }
+
+  unmap () {
+    this.cels.forEach(cel => cel.unmap())
   }
 }
 

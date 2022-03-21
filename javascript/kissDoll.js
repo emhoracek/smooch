@@ -1,8 +1,14 @@
+import { addEvent } from './fkissEvent'
 import { KiSSCel } from './kissCel'
 import { KiSSObject } from './kissObject'
+import { Logger } from './logger'
 
-class KiSSDoll {
+class KiSSDoll extends EventTarget {
   constructor (kissData, incLoaded) {
+    super()
+
+    this.logger = new Logger('debug')
+
     // Size of the play area.
     this.size = { x: kissData.window_size[0], y: kissData.window_size[1] }
 
@@ -25,12 +31,18 @@ class KiSSDoll {
     // Initialize objs and cels
     this.objs = []
     this.cels = []
+    this.timers = []
     this.init(kissData.cels, kissData.positions, incLoaded)
     initSetClicks(this)
+
+    this.initFKiSS(kissData.fkiss)
+    this.dispatchEvent(new CustomEvent('initialize'))
 
     // Update and draw
     this.update()
     this.draw()
+
+    this.dispatchEvent(new CustomEvent('begin'))
 
     return this
   }
@@ -97,9 +109,7 @@ class KiSSDoll {
       console.log('not draggable')
     } else {
       const obj = this.objs[mark]
-      if (obj && !obj.fixed) {
-        return obj
-      }
+      return obj
     }
   }
 
@@ -107,11 +117,25 @@ class KiSSDoll {
     return obj.positions[this.currentSet]
   }
 
+  getCel (celName) {
+    return this.cels.find(c => (c.name + '.cel') === celName)
+  }
+
+  getObject (objMark) {
+    return this.objs[objMark]
+  }
+
   moveObject (obj, x, y) {
     obj.setPosition(x, y)
 
     this.update()
     this.draw()
+  }
+
+  initFKiSS (events) {
+    events.forEach(e => {
+      addEvent(e, this)
+    })
   }
 
   update (newSet) {

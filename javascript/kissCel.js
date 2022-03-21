@@ -2,10 +2,13 @@
 // doll. It doesn't represent the image file itself. So a single
 // image can appear multiple times in multiple objects as different
 // KiSSCels
-class KiSSCel {
+class KiSSCel extends EventTarget {
   constructor (obj, cel, set, incLoaded) {
+    super()
+
     this.name = cel.name
     this.mark = cel.mark
+    this.id = cel.name
     this.fix = cel.fix
     this.position = obj.positions[0]
     this.positions = obj.positions
@@ -13,6 +16,7 @@ class KiSSCel {
     this.image = document.getElementById(cel.name + '-' + cel.palette)
     this.ghostImage = undefined
     this.visible = false
+    this.mapped = true
     this.alpha = cel.alpha
     this.currentSet = 0
 
@@ -61,15 +65,12 @@ class KiSSCel {
 
   update (currentSet) {
     this.currentSet = currentSet
-    if (this.sets.indexOf(currentSet) === -1) {
+    if (this.sets.indexOf(currentSet) === -1 || !this.mapped) {
       this.visible = false
     } else {
       this.visible = true
     }
     this.position = this.positions[currentSet]
-    if (this.name === 'blink') {
-      this.visible = false
-    }
   }
 
   draw (screen, ghost) {
@@ -92,6 +93,18 @@ class KiSSCel {
         this.position.y + this.offset.y
       )
     }
+  }
+
+  altmap () {
+    this.mapped = !this.mapped
+  }
+
+  map () {
+    this.mapped = true
+  }
+
+  unmap () {
+    this.mapped = false
   }
 }
 

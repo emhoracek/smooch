@@ -93,6 +93,7 @@ sampleKiss5Cels =
     , KissCel 32 0 "belt4" 0 [2,3,4,5,6,7,8,9] 0 (Position 0 0) ]
     [ KissSetPos 0 [NoPosition, Position 110 31, NoPosition, NoPosition]
     , KissSetPos 0 [NoPosition, Position 110 31, Position 275 147, Position 223 109] ]
+    []
 
 sampleKiss6 :: String
 sampleKiss6 = "\
@@ -107,6 +108,38 @@ sampleKiss6Output = [
   CNFPalette "female.kcf"
   ]
 
+sampleFKiss :: String
+sampleFKiss = "\
+\;@begin() \n\
+\;@  timer(1, 3000)\n\
+\;@alarm(1)\n\
+\;@ map(\"blink.cel\")\n\
+\;@ timer(2, 150)\n\
+\;@alarm(2)\n\
+\;@ unmap(\"blink.cel\")\n\
+\;@ timer(3, 6500)\n\
+\;@alarm(3)\n\
+\;@ map(\"blink.cel\")\n\
+\;@ timer(2, 150)\n"
+
+fKiSSLines =
+  [ CNFFKiSSEvent $ FKiSSEvent "begin" [] [
+       FKiSSAction "timer" [Number 1, Number 3000]
+    ]
+  , CNFFKiSSEvent $ FKiSSEvent "alarm" [Number 1] [
+       FKiSSAction "map" [Text "blink.cel"]
+     , FKiSSAction "timer" [Number 2, Number 150]
+    ]
+  , CNFFKiSSEvent $ FKiSSEvent "alarm" [Number 2] [
+       FKiSSAction "unmap" [Text "blink.cel"]
+     , FKiSSAction "timer" [Number 3, Number 6500]
+    ]
+  , CNFFKiSSEvent $ FKiSSEvent "alarm" [Number 3] [
+       FKiSSAction "map" [Text "blink.cel"]
+     , FKiSSAction "timer" [Number 2, Number 150]
+    ]
+  ]
+
 spec :: Spec
 spec = do
   describe "getKissData" $ do
@@ -115,32 +148,37 @@ spec = do
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ fakeKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
             fakeKissCel 2 0 "body"  0 [0,1,2,3] 0,
-            fakeKissCel 3 0 "shirtb" 0 [0,1,2,3] 0] [KissSetPos 0  [NoPosition, Position 1 1, Position 2 2, Position 3 3]])
+            fakeKissCel 3 0 "shirtb" 0 [0,1,2,3] 0] [KissSetPos 0  [NoPosition, Position 1 1, Position 2 2, Position 3 3]]
+          [])
     it "parses a CNF into KiSS data" $
       runExceptT (getKissData sampleKiss2) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ fakeKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
-            fakeKissCel 1 0 "shirtb" 0 [0,1,2,3] 0 ] [KissSetPos 0 [NoPosition, Position 0 0]])
+            fakeKissCel 1 0 "shirtb" 0 [0,1,2,3] 0 ] [KissSetPos 0 [NoPosition, Position 0 0]]
+            [])
     it "parses a CNF into KiSS data even with idiosyncratic caps" $
       runExceptT (getKissData sampleKiss3) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ fakeKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
             fakeKissCel 2 0 "body"  0 [0,1,2,3] 0,
             fakeKissCel 1 0 "shirtb" 0 [0,1,2,3] 0 ]
-            [KissSetPos 0 [NoPosition, Position 1 1, Position 2 2]])
+            [KissSetPos 0 [NoPosition, Position 1 1, Position 2 2]]
+            [])
     it "parses a CNF into KiSS data even with odd formatting/encoding" $
       runExceptT (getKissData sampleKiss4) `shouldReturn`
         Right (CNFKissData 0 0 ["colors.kcf"] (756, 398)
           [ fakeKissCel 1 0 "shirt" 0 [0,1,2,3] 0,
             fakeKissCel 2 0 "body"  0 [0,1,2,3] 0,
-            fakeKissCel 1 0 "shirtb" 0 [0..9] 0] [KissSetPos 0 [NoPosition, Position 1 1, Position 2 2]])
+            fakeKissCel 1 0 "shirtb" 0 [0..9] 0] [KissSetPos 0 [NoPosition, Position 1 1, Position 2 2]]
+          [])
     it "parces even worse broken syntax" $
       runExceptT (getKissData sampleKiss5) `shouldReturn`
          Right sampleKiss5Cels
     it "returns an error message for a bad cnf" $
       runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
         Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected \"i\"\nexpecting \
-             \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \"=\" or whitespace"
+             \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \";@EventHandler\", \";@\", \
+             \\"=\" or whitespace"
   describe "getKissCels" $ do
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`
@@ -172,3 +210,7 @@ spec = do
       parse parseCNFLine "blah" sampleSet3 `shouldBe`
         Right (CNFSetPos (KissSetPos 0
                           [Position 192 11, NoPosition, Position 56 17]))
+  describe "parseCNFLines" $ do
+    it "parses FKiSS events" $
+      parse parseCNFLines "KiSS CNF error: " sampleFKiss `shouldBe`
+        Right fKiSSLines

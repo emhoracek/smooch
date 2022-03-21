@@ -84,7 +84,7 @@ createOrLoadDoll :: Ctxt
                  -> Maybe Text
                  -> BS.ByteString
                  -> FilePath
-                 -> ExceptT Text IO (FilePath, [KissCel])
+                 -> ExceptT Text IO DollData
 createOrLoadDoll ctxt dollname mLink hash lzhPath = do
   mExistingHashDoll <- liftIO $ getDollByHash ctxt hash
   case mExistingHashDoll of
@@ -96,7 +96,7 @@ createOrLoadDoll ctxt dollname mLink hash lzhPath = do
 processNewDoll :: Ctxt
                -> NewDoll
                -> FilePath
-               -> ExceptT Text IO (FilePath, [KissCel])
+               -> ExceptT Text IO DollData
 processNewDoll ctxt newDoll lzhPath = do
   let loc = T.unpack (T.decodeUtf8 (newDollHash newDoll))
   output <-  processDoll loc lzhPath (loc <> ".lzh")
@@ -107,7 +107,7 @@ loadExistingDoll :: Ctxt
                  -> Doll
                  -> String
                  -> Maybe Text
-                 -> ExceptT Text IO (FilePath, [KissCel])
+                 -> ExceptT Text IO DollData
 loadExistingDoll ctxt existingDoll dollname mLink = do
   mUpdatedDoll <-
     case mLink of
@@ -138,11 +138,14 @@ userDollHandler user ctxt setName = do
   -- `(fmap . fmap)` let's us map into two layers of functions -- first the
   -- IO functor, then then Either functor. This makes the Right side of
   -- the Either a tuple! Whew.
-  renderKissDoll ctxt output
+  renderKissDoll ctxt (toData <$> output)
+  where
+    toData :: (FilePath, [KissCel]) -> DollData
+    toData (fp, cels) = DollData fp cels []
 
-renderKissDoll :: Ctxt -> Either T.Text (FilePath, [KissCel]) -> IO (Maybe Response)
+renderKissDoll :: Ctxt -> Either T.Text DollData -> IO (Maybe Response)
 renderKissDoll ctxt eOutputError =
   case eOutputError of
-    Right (staticDir, cels) ->
-      renderWith ctxt ["users", "kiss-set"] $ setSplices staticDir cels
+    Right dollData ->
+      renderWith ctxt ["users", "kiss-set"] $ setSplices dollData
     Left  e -> errText e

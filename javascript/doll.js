@@ -13,8 +13,6 @@ window.addEventListener('load', function () {
     if (loaded < totalCels) {
       console.log(`loading ${loaded} of ${totalCels}`)
       window.setTimeout(checkLoaded, 500)
-    } else {
-      doll.draw()
     }
   }
 
