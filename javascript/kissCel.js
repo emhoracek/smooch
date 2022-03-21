@@ -3,12 +3,13 @@
 // image can appear multiple times in multiple objects as different
 // KiSSCels
 class KiSSCel extends EventTarget {
-  constructor (obj, cel, set, incLoaded) {
+  constructor (obj, cel, set, index, incLoaded) {
     super()
 
     this.name = cel.name
     this.mark = cel.mark
     this.id = cel.name
+    this.index = index
     this.fix = cel.fix
     this.position = obj.positions[0]
     this.positions = obj.positions
@@ -43,8 +44,8 @@ class KiSSCel extends EventTarget {
     const ghostImageData = drawctxt.getImageData(0, 0, image.width, image.height)
     const data = ghostImageData.data
 
-    // Fill ghost image data with obj color
-    const color = decimalToRgb(this.mark)
+    // Fill ghost image data with cel color
+    const color = decimalToRgb(this.index)
     for (let k = 0; k < data.length; k = k + 4) {
       data[k] = color.red
       data[k + 1] = color.green

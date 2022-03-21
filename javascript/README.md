@@ -135,4 +135,4 @@ instead of the original colors, each item is a subtly different color.
 
 When a player clicks on the real canvas, the JavaScript looks up the
 corresponding pixel on the ghost canvas. Each color on the ghost canvas maps to
-one object in the set, so the script knows which object you clicked!
+one cel in the set, so the script knows which cel you clicked!

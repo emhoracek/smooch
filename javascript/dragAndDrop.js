@@ -21,15 +21,13 @@ class DragAndDrop {
 
   onMouseDown (e) {
     const pos = this.getMousePos(e)
-    const obj = this.doll.getSelectedObject(pos)
-    if (obj) {
-      obj.dispatchEvent(press)
-      obj.cels.forEach(c => {
-        c.dispatchEvent(press)
-      })
-      if (!obj.fixed) {
-        const dragStart = this.getDragStart(obj, pos)
-        this.dragHandler = (e) => this.onMouseMove(e, obj, dragStart)
+    const objAndCel = this.doll.getSelectedObject(pos)
+    if (objAndCel) {
+      objAndCel.object.dispatchEvent(press)
+      objAndCel.cel.dispatchEvent(press)
+      if (!objAndCel.object.fixed) {
+        const dragStart = this.getDragStart(objAndCel.object, pos)
+        this.dragHandler = (e) => this.onMouseMove(e, objAndCel.object, dragStart)
         document.addEventListener('pointermove', this.dragHandler)
         e.preventDefault()
       }

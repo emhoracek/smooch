@@ -55,13 +55,13 @@ class KiSSDoll extends EventTarget {
 
     cnfCels.reverse()
 
-    cnfCels.forEach(cnfCel => {
+    cnfCels.forEach((cnfCel, i) => {
       // Objects are indexed by their "mark". This is what groups cels together.
       // First check if there's already an object with that mark.
       const existingObj = this.objs[cnfCel.mark]
       if (existingObj) {
         // If object already exists, create a cel that points to that object.
-        const newCel = new KiSSCel(existingObj, cnfCel, this, incLoaded)
+        const newCel = new KiSSCel(existingObj, cnfCel, this, i, incLoaded)
         // Add the new cel to the object's list of cels.
         existingObj.cels.push(newCel)
         // Add the new cel to the doll's list of cels.
@@ -71,7 +71,7 @@ class KiSSDoll extends EventTarget {
 
         // Create the new object and new cel
         const newObj = new KiSSObject(cnfCel.mark, cnfPositions.map(sp => sp.positions[cnfCel.mark] || { x: 0, y: 0 }))
-        const newCel = new KiSSCel(newObj, cnfCel, this, incLoaded)
+        const newCel = new KiSSCel(newObj, cnfCel, this, i, incLoaded)
         // Add the new cel to the object's list of cels.
         newObj.cels.push(newCel)
         // Add the object to the doll's list of objects.
@@ -102,14 +102,16 @@ class KiSSDoll extends EventTarget {
   getSelectedObject (pos) {
     const pixel = this.ghost.getImageData(pos.x, pos.y, 1, 1)
     const data = pixel.data
-    const mark = rgbToDecimal(data[0], data[1], data[2])
+    const index = rgbToDecimal(data[0], data[1], data[2])
     const alpha = data[3]
 
     if (alpha === 0) {
       console.log('not draggable')
+      return false
     } else {
-      const obj = this.objs[mark]
-      return obj
+      const cel = this.cels[index]
+      const obj = this.objs[cel.mark]
+      return { object: obj, cel: cel }
     }
   }
 
@@ -156,11 +158,7 @@ class KiSSDoll extends EventTarget {
   draw () {
     this.ctxt.clearRect(0, 0, this.size.x, this.size.y)
     this.ghost.clearRect(0, 0, this.size.x, this.size.y)
-    for (let i = 0; i < this.cels.length; i++) {
-      if (this.cels[i]) {
-        this.cels[i].draw(this.ctxt, this.ghost)
-      }
-    }
+    this.cels.forEach(cel => cel.draw(this.ctxt, this.ghost))
   }
 }
 

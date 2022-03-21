@@ -100,6 +100,9 @@ function setPress (args, actions, doll) {
   if (objOrCel) {
     objOrCel.addEventListener('press', (e) => actions.forEach(f => {
       if (f) { f() }
+
+      doll.update()
+      doll.draw()
     }))
   }
 }
