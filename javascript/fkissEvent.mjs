@@ -1,4 +1,4 @@
-import { makeAction, objOrCelArg } from './fkissAction'
+import { makeAction, objOrCelArg } from './fkissAction.mjs'
 
 function addEvent (eventJson, doll) {
   const setEvent = eventMap[eventJson.event]

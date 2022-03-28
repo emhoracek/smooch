@@ -94,7 +94,7 @@ parseCel = do
     skipMany1 spaceOrTab
     file <- many1 (noneOf ". ")
     string ".cel" <?> "cel file extension"
-    skipMany1 spaceOrTab
+    skipMany spaceOrTab
     palette <- option 0 (try parseCelPalette)
     spacesOrTabs
     sets <- option [0..9] parseSets
@@ -214,8 +214,8 @@ parseCNFLine :: Parser CNFLine
 parseCNFLine = do
     line <- choice [ parseCelLine, parseSetPos, parseCNFComment,
                      parsePalette, parseBorder, parseWindowSize,
-                     parseEventHandler,
-                     parseFKiSSLine, parseMemory, parseCNFJunk ]
+                     parseEventHandler, parseFKiSSLine, parseMemory,
+                     parseCNFJunk, parseEmptyLine ]
     spaces
     return line
 
@@ -233,6 +233,7 @@ parseFKiSSLine = do
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
     spacesOrTabs
+    optional parseCNFComment
     optional newline
     commands <- concat <$> many parseFKiSSActionLine
     optional parseCNFComment
@@ -242,8 +243,9 @@ parseFKiSSActionLine :: Parser [FKiSSAction]
 parseFKiSSActionLine = try $ do
     optional $ do string ";@"
                   many1 space
-    actions <- many parseFKiSSAction
+    actions <- many1 parseFKiSSAction
     optional newline
+    optional parseCNFComment
     return actions
 
 parseFKiSSAction :: Parser FKiSSAction
@@ -253,6 +255,7 @@ parseFKiSSAction = do
     args <- parseFKiSSArg `sepBy` (char ',' >> spaces)
     char ')'
     spacesOrTabs
+    optional newline
     optional parseCNFComment
     return $ FKiSSAction actionName args
 
@@ -270,6 +273,12 @@ parseFKiSSArg = parseObj <|> parseString <|> parseNumber
             minus <- optionMaybe (char '-')
             n <- many1 digit
             return $ Number $ read (maybe n (\_ -> '-': n) minus)
+
+parseEmptyLine :: Parser CNFLine
+parseEmptyLine = try $ do
+    optional (char '\r')
+    newline
+    return CNFJunkLine
 
 parseCNFJunk :: Parser CNFLine
 parseCNFJunk = do

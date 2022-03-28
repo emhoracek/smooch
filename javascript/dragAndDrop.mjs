@@ -1,4 +1,4 @@
-import { press } from './fkissEvent'
+import { press } from './fkissEvent.mjs'
 
 class DragAndDrop {
   constructor (doll) {

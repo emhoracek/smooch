@@ -1,6 +1,6 @@
 import { addEvent } from './fkissEvent'
-import { KiSSCel } from './kissCel'
-import { KiSSObject } from './kissObject'
+import { KiSSCel } from './kissCel.mjs'
+import { KiSSObject } from './kissObject.mjs'
 import { Logger } from './logger'
 
 class KiSSDoll extends EventTarget {
