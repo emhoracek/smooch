@@ -1,9 +1,15 @@
 /* eslint-disable no-unused-expressions */
 /* globals describe, it */
 import { expect } from 'chai'
-import { makeAction } from '../fkissAction.mjs'
+import { makeAction, objOrCelArg } from '../fkissAction.mjs'
+import { Logger } from '../logger.mjs'
 
 const testObj = {
+  altmap () { return 'altmapped' },
+  map () { return 'mapped' },
+  unmap () { return 'unmapped' }
+}
+const testCel = {
   altmap () { return 'altmapped' },
   map () { return 'mapped' },
   unmap () { return 'unmapped' }
@@ -11,9 +17,11 @@ const testObj = {
 const testTimer = { timeout: 0 }
 const testDoll = {
   getObject () { return testObj },
+  getCel () { return testCel },
   getSound () { return { play () { return 'sound played' } } },
   timers: [testTimer],
-  setTimer (alarmId, duration) { return `timer ${alarmId} set for ${duration} ms` }
+  setTimer (alarmId, duration) { return `timer ${alarmId} set for ${duration} ms` },
+  logger: new Logger('debug')
 }
 
 describe('makeAction', function () {
@@ -63,7 +71,6 @@ describe('makeAction', function () {
   })
 })
 
-/*
 describe('objOrCelArg', function () {
   it('returns a cel if given a cel name', function () {
     const doll = testDoll
@@ -82,5 +89,13 @@ describe('objOrCelArg', function () {
 
     expect(result).not.to.be.undefined
   })
+
+  it('returns undefined if given nonsense', function () {
+    const doll = testDoll
+    const arg = 'apple'
+
+    const result = objOrCelArg(arg, doll)
+
+    expect(result).to.be.undefined
+  })
 })
-*/
