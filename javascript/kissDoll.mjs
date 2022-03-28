@@ -129,6 +129,24 @@ class KiSSDoll extends EventTarget {
     return this.objs[objMark]
   }
 
+  getSound (soundFile) {
+    const wavFile = soundFile.replace('.au', '.wav')
+    return document.getElementById(wavFile.replace('.wav', ''))
+  }
+
+  setTimer (alarmId, duration) {
+    const currentTimeout = this.timers[alarmId].timeout
+    if (currentTimeout) {
+      clearTimeout(currentTimeout)
+    }
+    const timeout = setTimeout(() => {
+      this.timers[alarmId].timeout = false
+      this.timers[alarmId].callback()
+    }, duration)
+
+    this.timers[alarmId].timeout = timeout
+  }
+
   moveObject (obj, x, y) {
     obj.setPosition(x, y)
 

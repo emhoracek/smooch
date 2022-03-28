@@ -30,19 +30,7 @@ function makeAction (a, doll) {
 function mkTimer (args, doll) {
   const alarmId = args[0]
   const duration = args[1]
-  return () => {
-    doll.logger.debug(`Setting timer ${alarmId} for ${duration}ms`)
-    const currentTimeout = doll.timers[alarmId].timeout
-    if (currentTimeout) {
-      clearTimeout(currentTimeout)
-    }
-    const timeout = setTimeout(() => {
-      doll.timers[alarmId].timeout = false
-      doll.timers[alarmId].callback()
-    }, duration)
-
-    doll.timers[alarmId].timeout = timeout
-  }
+  return doll.setTimer.bind(doll, alarmId, duration)
 }
 
 function mkMap (args, doll) {
@@ -61,8 +49,7 @@ function mkUnmap (args, doll) {
 
 function mkSound (args, doll) {
   const soundFile = args[0]
-  const wavFile = soundFile.replace('.au', '.wav')
-  const audioElement = document.getElementById(wavFile.replace('.wav', ''))
+  const audioElement = doll.getSound(soundFile)
   return () => audioElement.play()
 }
 

@@ -1,5 +1,5 @@
-import { KiSSDoll } from './kissDoll'
-import { DragAndDrop } from './dragAndDrop'
+import { KiSSDoll } from './kissDoll.mjs'
+import { DragAndDrop } from './dragAndDrop.mjs'
 
 window.addEventListener('load', function () {
   /* globals kissJson, globalKiss */

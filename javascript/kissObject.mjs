@@ -36,7 +36,9 @@ class KiSSObject extends EventTarget {
   }
 
   map () {
+    console.log("I'm happening")
     this.cels.forEach(cel => cel.map())
+    return true
   }
 
   unmap () {
