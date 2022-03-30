@@ -1,5 +1,3 @@
-import { press } from './fkissEvent.mjs'
-
 class DragAndDrop {
   constructor (doll) {
     this.dragHandler = false
@@ -61,5 +59,7 @@ class DragAndDrop {
     }
   }
 }
+
+const press = new CustomEvent('press')
 
 export { DragAndDrop }
