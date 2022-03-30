@@ -49,7 +49,8 @@ function mkUnmap (args, doll) {
 
 function mkSound (args, doll) {
   const soundFile = args[0]
-  const audioElement = doll.getSound(soundFile)
+  const wavFile = soundFile.replace('.au', '.wav')
+  const audioElement = doll.getSound(wavFile)
   return () => audioElement.play()
 }
 

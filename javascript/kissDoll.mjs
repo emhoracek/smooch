@@ -129,8 +129,7 @@ class KiSSDoll extends EventTarget {
     return this.objs[objMark]
   }
 
-  getSound (soundFile) {
-    const wavFile = soundFile.replace('.au', '.wav')
+  getSound (wavFile) {
     return document.getElementById(wavFile.replace('.wav', ''))
   }
 

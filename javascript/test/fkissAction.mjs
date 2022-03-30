@@ -18,56 +18,100 @@ const testTimer = { timeout: 0 }
 const testDoll = {
   getObject () { return testObj },
   getCel () { return testCel },
-  getSound () { return { play () { return 'sound played' } } },
+  getSound (soundFile) { return { play () { return `sound ${soundFile} played` } } },
   timers: [testTimer],
   setTimer (alarmId, duration) { return `timer ${alarmId} set for ${duration} ms` },
   logger: new Logger('debug')
 }
 
 describe('makeAction', function () {
-  it('should work for altmap', function () {
-    const doll = testDoll
-    const action = { action: 'altmap', args: [1] }
+  describe('altmap', function () {
+    it('should work on objects', function () {
+      const doll = testDoll
+      const action = { action: 'altmap', args: [1] }
 
-    const result = makeAction(action, doll)
+      const result = makeAction(action, doll)
 
-    expect(result()).to.equal('altmapped')
+      expect(result()).to.equal('altmapped')
+    })
+    it('should work on cels', function () {
+      const doll = testDoll
+      const action = { action: 'altmap', args: ['somecel.cel'] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('altmapped')
+    })
   })
 
-  it('should work for map', function () {
-    const doll = testDoll
-    const action = { action: 'map', args: [1] }
+  describe('map', function () {
+    it('should work for objects', function () {
+      const doll = testDoll
+      const action = { action: 'map', args: [1] }
 
-    const result = makeAction(action, doll)
+      const result = makeAction(action, doll)
 
-    expect(result()).to.equal('mapped')
+      expect(result()).to.equal('mapped')
+    })
+    it('should work for cels', function () {
+      const doll = testDoll
+      const action = { action: 'map', args: ['somecel.cel'] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('mapped')
+    })
   })
 
-  it('should work for timer', function () {
-    const doll = testDoll
-    const action = { action: 'timer', args: [0, 100] }
+  describe('timer', function () {
+    it('should take two integer arguments', function () {
+      const doll = testDoll
+      const action = { action: 'timer', args: [0, 100] }
 
-    const result = makeAction(action, doll)
+      const result = makeAction(action, doll)
 
-    expect(result()).to.equal('timer 0 set for 100 ms')
+      expect(result()).to.equal('timer 0 set for 100 ms')
+    })
   })
 
-  it('should work for timer', function () {
-    const doll = testDoll
-    const action = { action: 'sound', args: [1] }
+  describe('sound', function () {
+    it('should work for wav files', function () {
+      const doll = testDoll
+      const action = { action: 'sound', args: ['some-sound.wav'] }
 
-    const result = makeAction(action, doll)
+      const result = makeAction(action, doll)
 
-    expect(result()).to.equal('sound played')
+      expect(result()).to.equal('sound some-sound.wav played')
+    })
+
+    it('should rename au files to wav', function () {
+      const doll = testDoll
+      const action = { action: 'sound', args: ['some-sound.au'] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('sound some-sound.wav played')
+    })
   })
 
-  it('should work for unmap', function () {
-    const doll = testDoll
-    const action = { action: 'unmap', args: [1] }
+  describe('unmap', function () {
+    it('should work for objects', function () {
+      const doll = testDoll
+      const action = { action: 'unmap', args: [1] }
 
-    const result = makeAction(action, doll)
+      const result = makeAction(action, doll)
 
-    expect(result()).to.equal('unmapped')
+      expect(result()).to.equal('unmapped')
+    })
+
+    it('should work for cels', function () {
+      const doll = testDoll
+      const action = { action: 'unmap', args: ['some.cel'] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('unmapped')
+    })
   })
 })
 
@@ -78,16 +122,16 @@ describe('objOrCelArg', function () {
 
     const result = objOrCelArg(arg, doll)
 
-    expect(result).not.to.be.undefined
+    expect(result).to.equal(testCel)
   })
 
-  it('returns an object if given a object number', function () {
+  it('returns an object if given an object number', function () {
     const doll = testDoll
     const arg = 1
 
     const result = objOrCelArg(arg, doll)
 
-    expect(result).not.to.be.undefined
+    expect(result).to.equal(testObj)
   })
 
   it('returns undefined if given nonsense', function () {
