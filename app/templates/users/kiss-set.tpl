@@ -1,13 +1,9 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>Smooch</title>
     <link rel="stylesheet" type="text/css" href="/static/screen.css">
-    <script type="text/javascript">
-     window.onload = function () {
-       document.getElementById('loading').style.display = 'none';
-     };
-    </script>
   </head>
   <body>
     <div id="wrapper">
