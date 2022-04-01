@@ -34,6 +34,10 @@ body {
 #wrapper {
 }
 
+#sets {
+  display: none;
+}
+
 #sets ul {
   padding-left: 0;
   display: flex;
@@ -75,7 +79,7 @@ button.question {
   padding: 1em;
   margin: 0;
   flex-grow: 1;
-  display: flex;
+  display: none;
   overflow: auto;
 }
 

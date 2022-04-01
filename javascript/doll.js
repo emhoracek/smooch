@@ -12,14 +12,18 @@ window.addEventListener('load', function () {
     if (loaded < totalCels) {
       window.setTimeout(checkLoaded, 5)
     } else {
+      document.getElementById('loading').style = 'display: none'
+      document.getElementById('sets').style = 'display: block'
+      document.getElementById('borderarea').style = 'display: flex'
       doll.draw()
     }
   }
 
   window.setTimeout(checkLoaded, 5)
 
-  doll = new KiSSDoll(kissJson, () => { loaded += 1 })
+  doll = new KiSSDoll(kissJson)
   const dragger = new DragAndDrop(doll)
+  doll.initialize(() => { loaded += 1 })
   dragger.initialize()
 
   // in testing and development, it's convenient to have access to

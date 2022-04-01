@@ -3,7 +3,7 @@
 // image can appear multiple times in multiple objects as different
 // KiSSCels
 class KiSSCel extends EventTarget {
-  constructor (obj, cel, set, index, incLoaded) {
+  constructor (obj, cel, index) {
     super()
 
     this.name = cel.name
@@ -20,22 +20,14 @@ class KiSSCel extends EventTarget {
     this.mapped = true
     this.alpha = cel.alpha
     this.currentSet = 0
-
     this.offset = cel.offset
-
-    this.init(set)
-
-    // Let Smooch know when image is loaded
-    this.ghostImage.onload = function () {
-      incLoaded()
-    }
 
     return this
   }
 
-  init (set) {
-    const drawctxt = set.ctxt
-    const drawcanvas = set.canvas
+  loadImage (doll, incLoaded) {
+    const drawctxt = doll.ctxt
+    const drawcanvas = doll.canvas
     const image = this.image
 
     // Draw image to ctxt and get image data
@@ -53,7 +45,7 @@ class KiSSCel extends EventTarget {
     }
 
     // Clear ctxt and draw altered image
-    drawctxt.clearRect(0, 0, set.size.x, set.size.y)
+    drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
     drawctxt.putImageData(ghostImageData, 0, 0)
 
     // Save altered image as cel's ghost image
@@ -61,7 +53,12 @@ class KiSSCel extends EventTarget {
     this.ghostImage.src = drawcanvas.toDataURL('image/png')
 
     // Clear ctxt
-    drawctxt.clearRect(0, 0, set.size.x, set.size.y)
+    drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
+
+    // Let Smooch know when image is loaded
+    this.ghostImage.onload = function () {
+      incLoaded()
+    }
   }
 
   update (currentSet) {

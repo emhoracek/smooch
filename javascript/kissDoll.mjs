@@ -4,26 +4,18 @@ import { KiSSObject } from './kissObject.mjs'
 import { Logger } from './logger'
 
 class KiSSDoll extends EventTarget {
-  constructor (kissData, incLoaded) {
+  constructor (kissData) {
     super()
 
+    this.cnf = kissData
     this.logger = new Logger('debug')
 
     // Size of the play area.
     this.size = { x: kissData.window_size[0], y: kissData.window_size[1] }
 
-    // Set up border area (around the playarea)
-    const borderarea = document.getElementById('borderarea')
-    borderarea.style.background = kissData.border
-
-    // Set up play area
-    const playarea = document.getElementById('playarea')
-    playarea.style.width = this.size.x + 'px'
-    playarea.style.height = this.size.y + 'px'
-    playarea.style.background = kissData.background
-
-    // Set up canvases
-    this.initCanvases(this.size)
+    // Set colors
+    this.borderColor = kissData.border
+    this.backgroundColor = kissData.background
 
     // Initialize current set
     this.currentSet = 0
@@ -32,24 +24,44 @@ class KiSSDoll extends EventTarget {
     this.objs = []
     this.cels = []
     this.timers = []
-    this.init(kissData.cels, kissData.positions, incLoaded)
+
+    return this
+  }
+
+  initialize (incLoaded) {
+    // Set up border area (around the playarea)
+    const borderarea = document.getElementById('borderarea')
+    borderarea.style.background = this.border
+
+    // Set up play area
+    const playarea = document.getElementById('playarea')
+    playarea.style.width = this.size.x + 'px'
+    playarea.style.height = this.size.y + 'px'
+    playarea.style.background = this.backgroundColor
+
+    // Set up canvases
+    this.initCanvases(this.size)
+
+    this.initCels(this.cnf.cels, this.cnf.positions)
     initSetClicks(this)
 
-    if (kissData.fkiss) {
-      this.initFKiSS(kissData.fkiss)
+    if (this.cnf.fkiss) {
+      this.initFKiSS(this.cnf.fkiss)
     }
+
     this.dispatchEvent(new CustomEvent('initialize'))
+
+    // load images for all the cels
+    this.cels.forEach(c => c.loadImage(this, incLoaded))
 
     // Update and draw
     this.update()
     this.draw()
 
     this.dispatchEvent(new CustomEvent('begin'))
-
-    return this
   }
 
-  init (cnfCels, cnfPositions, incLoaded) {
+  initCels (cnfCels, cnfPositions, incLoaded) {
     /* Cels have to be kept in a separate list from the objects.
         This is because objects are the things that get dragged, change
         position, etc. But cels are the things that are drawn, and they have
@@ -63,7 +75,7 @@ class KiSSDoll extends EventTarget {
       const existingObj = this.objs[cnfCel.mark]
       if (existingObj) {
         // If object already exists, create a cel that points to that object.
-        const newCel = new KiSSCel(existingObj, cnfCel, this, i, incLoaded)
+        const newCel = new KiSSCel(existingObj, cnfCel, i)
         // Add the new cel to the object's list of cels.
         existingObj.cels.push(newCel)
         // Add the new cel to the doll's list of cels.
@@ -73,7 +85,7 @@ class KiSSDoll extends EventTarget {
 
         // Create the new object and new cel
         const newObj = new KiSSObject(cnfCel.mark, cnfPositions.map(sp => sp.positions[cnfCel.mark] || { x: 0, y: 0 }))
-        const newCel = new KiSSCel(newObj, cnfCel, this, i, incLoaded)
+        const newCel = new KiSSCel(newObj, cnfCel, i)
         // Add the new cel to the object's list of cels.
         newObj.cels.push(newCel)
         // Add the object to the doll's list of objects.
