@@ -31,7 +31,7 @@ class KiSSDoll extends EventTarget {
   initialize (incLoaded) {
     // Set up border area (around the playarea)
     const borderarea = document.getElementById('borderarea')
-    borderarea.style.background = this.border
+    borderarea.style.background = this.borderColor
 
     // Set up play area
     const playarea = document.getElementById('playarea')
