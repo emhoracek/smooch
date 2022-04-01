@@ -36,9 +36,16 @@ class KiSSObject extends EventTarget {
   }
 
   map () {
-    console.log("I'm happening")
     this.cels.forEach(cel => cel.map())
-    return true
+  }
+
+  move (dx, dy) {
+    this.positions[this.currentSet].x += dx
+    this.positions[this.currentSet].y += dy
+  }
+
+  setTransparency (alpha) {
+    this.cels.forEach(cel => cel.setTransparency(alpha))
   }
 
   unmap () {

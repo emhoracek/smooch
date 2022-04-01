@@ -1,19 +1,18 @@
 function makeAction (a, doll) {
   const actionMap = {
     altmap: mkAltmap,
+    changeset: mkChangeset,
     map: mkMap,
+    move: mkMove,
+    nop: mkNop,
     sound: mkSound,
+    transparent: mkTransparent,
     timer: mkTimer,
     unmap: mkUnmap
     /*
+    Not implemented:
     changecol
-    changeset
-    move
-    nop
     shell
-    sound
-    transparent
-    unmap
     viewport
     windowsize
     */
@@ -27,10 +26,15 @@ function makeAction (a, doll) {
   doll.logger.warn(`Unknown action "${a.action}"`)
 }
 
-function mkTimer (args, doll) {
-  const alarmId = args[0]
-  const duration = args[1]
-  return doll.setTimer.bind(doll, alarmId, duration)
+function mkAltmap (args, doll) {
+  const objOrCel = objOrCelArg(args[0], doll)
+  if (objOrCel) {
+    return objOrCel.altmap.bind(objOrCel)
+  }
+}
+
+function mkChangeset (args, doll) {
+  return doll.changeSet.bind(doll, args[0])
 }
 
 function mkMap (args, doll) {
@@ -40,11 +44,17 @@ function mkMap (args, doll) {
   }
 }
 
-function mkUnmap (args, doll) {
+function mkMove (args, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
-    return objOrCel.unmap.bind(objOrCel)
+    const dx = args[1]
+    const dy = args[2]
+    return objOrCel.move.bind(objOrCel, dx, dy)
   }
+}
+
+function mkNop (args, doll) {
+  doll.logger.debug('Nothing happened :)')
 }
 
 function mkSound (args, doll) {
@@ -54,10 +64,24 @@ function mkSound (args, doll) {
   return () => audioElement.play()
 }
 
-function mkAltmap (args, doll) {
+function mkTimer (args, doll) {
+  const alarmId = args[0]
+  const duration = args[1]
+  return doll.setTimer.bind(doll, alarmId, duration)
+}
+
+function mkTransparent (args, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
   if (objOrCel) {
-    return objOrCel.altmap.bind(objOrCel)
+    const transparency = args[1]
+    return objOrCel.setTransparency.bind(objOrCel, transparency)
+  }
+}
+
+function mkUnmap (args, doll) {
+  const objOrCel = objOrCelArg(args[0], doll)
+  if (objOrCel) {
+    return objOrCel.unmap.bind(objOrCel)
   }
 }
 

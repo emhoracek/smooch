@@ -7,15 +7,18 @@ import { Logger } from '../logger.mjs'
 const testObj = {
   altmap () { return 'altmapped' },
   map () { return 'mapped' },
+  setTransparency (n) { return `set alpha to ${n}` },
   unmap () { return 'unmapped' }
 }
 const testCel = {
   altmap () { return 'altmapped' },
   map () { return 'mapped' },
+  setTransparency (n) { return `set alpha to ${n}` },
   unmap () { return 'unmapped' }
 }
 const testTimer = { timeout: 0 }
 const testDoll = {
+  changeSet (n) { return `set changed to ${n}` },
   getObject () { return testObj },
   getCel () { return testCel },
   getSound (soundFile) { return { play () { return `sound ${soundFile} played` } } },
@@ -44,6 +47,17 @@ describe('makeAction', function () {
     })
   })
 
+  describe('changeset', function () {
+    it("should change the doll's current set", function () {
+      const doll = testDoll
+      const action = { action: 'changeset', args: [9] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('set changed to 9')
+    })
+  })
+
   describe('map', function () {
     it('should work for objects', function () {
       const doll = testDoll
@@ -63,14 +77,14 @@ describe('makeAction', function () {
     })
   })
 
-  describe('timer', function () {
-    it('should take two integer arguments', function () {
+  describe('nop', function () {
+    it("should't do anything", function () {
       const doll = testDoll
-      const action = { action: 'timer', args: [0, 100] }
+      const action = { action: 'nop', args: [] }
 
       const result = makeAction(action, doll)
 
-      expect(result()).to.equal('timer 0 set for 100 ms')
+      expect(result()).to.be.undefined
     })
   })
 
@@ -91,6 +105,37 @@ describe('makeAction', function () {
       const result = makeAction(action, doll)
 
       expect(result()).to.equal('sound some-sound.wav played')
+    })
+  })
+
+  describe('transparent', function () {
+    it('should work for objects', function () {
+      const doll = testDoll
+      const action = { action: 'transparent', args: [1, 125] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('set alpha to 125')
+    })
+
+    it('should work for cels', function () {
+      const doll = testDoll
+      const action = { action: 'transparent', args: ['some.cel', 125] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('set alpha to 125')
+    })
+  })
+
+  describe('timer', function () {
+    it('should take two integer arguments', function () {
+      const doll = testDoll
+      const action = { action: 'timer', args: [0, 100] }
+
+      const result = makeAction(action, doll)
+
+      expect(result()).to.equal('timer 0 set for 100 ms')
     })
   })
 

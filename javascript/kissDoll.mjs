@@ -101,6 +101,12 @@ class KiSSDoll extends EventTarget {
     drawcanvas.addEventListener('touchcancel', function (event) { event.preventDefault() })
   }
 
+  changeSet (newSet) {
+    this.update(newSet)
+    this.draw()
+    updateSets(this.currentSet)
+  }
+
   getSelectedObject (pos) {
     const pixel = this.ghost.getImageData(pos.x, pos.y, 1, 1)
     const data = pixel.data
@@ -134,7 +140,9 @@ class KiSSDoll extends EventTarget {
   }
 
   setTimer (alarmId, duration) {
-    const currentTimeout = this.timers[alarmId].timeout
+    const timer = this.timers[alarmId]
+    const currentTimeout = timer ? timer.timeout : false
+    const currentCallback = timer ? timer.callback : () => {}
     if (currentTimeout) {
       clearTimeout(currentTimeout)
     }
@@ -143,7 +151,7 @@ class KiSSDoll extends EventTarget {
       this.timers[alarmId].callback()
     }, duration)
 
-    this.timers[alarmId].timeout = timeout
+    this.timers[alarmId] = { timeout: timeout, callback: currentCallback }
   }
 
   moveObject (obj, x, y) {
@@ -188,9 +196,7 @@ function initSetClicks (doll) {
     // when a number is clicked, update doll to new set
     sets[i].addEventListener('click', function () {
       const newSet = parseInt(this.innerHTML)
-      doll.update(newSet)
-      doll.draw()
-      updateSets(doll.currentSet)
+      doll.changeSet(newSet)
     })
   }
 

@@ -104,6 +104,15 @@ class KiSSCel extends EventTarget {
     this.mapped = true
   }
 
+  move (dx, dy) {
+    this.positions[this.currentSet].x += dx
+    this.positions[this.currentSet].y += dy
+  }
+
+  setTransparency (alpha) {
+    this.alpha = alpha
+  }
+
   unmap () {
     this.mapped = false
   }
