@@ -53,7 +53,9 @@ class KiSSDoll extends EventTarget {
 
     // load images for all the cels
     this.cels.forEach(c => c.loadImage(this, incLoaded))
+  }
 
+  begin () {
     // Update and draw
     this.update()
     this.draw()
