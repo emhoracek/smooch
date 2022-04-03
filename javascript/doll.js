@@ -27,7 +27,7 @@ window.addEventListener('load', function () {
 
     window.setTimeout(checkLoaded, 5)
 
-    doll = new KiSSDoll(kissJson)
+    doll = new KiSSDoll(kissJson, setDir)
     const dragger = new DragAndDrop(doll)
     doll.initialize(() => { loaded += 1 })
     dragger.initialize()

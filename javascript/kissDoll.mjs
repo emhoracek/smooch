@@ -4,9 +4,10 @@ import { KiSSObject } from './kissObject.mjs'
 import { Logger } from './logger'
 
 class KiSSDoll extends EventTarget {
-  constructor (kissData) {
+  constructor (kissData, staticDirectory) {
     super()
 
+    this.staticDirectory = staticDirectory
     this.cnf = kissData
     this.logger = new Logger('debug')
 
@@ -53,7 +54,9 @@ class KiSSDoll extends EventTarget {
 
     // load images for all the cels
     this.cels.forEach(c => c.loadImage(this, incLoaded))
+  }
 
+  begin () {
     // Update and draw
     this.update()
     this.draw()

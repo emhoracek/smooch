@@ -14,7 +14,8 @@ class KiSSCel extends EventTarget {
     this.position = obj.positions[0]
     this.positions = obj.positions
     this.sets = cel.sets
-    this.image = document.getElementById(cel.name + '-' + cel.palette)
+    this.palette = cel.palette
+    this.image = false
     this.ghostImage = undefined
     this.visible = false
     this.mapped = true
@@ -28,37 +29,45 @@ class KiSSCel extends EventTarget {
   loadImage (doll, incLoaded) {
     const drawctxt = doll.ctxt
     const drawcanvas = doll.canvas
-    const image = this.image
+    const pngLocation = `/sets/${doll.staticDirectory}/palette${this.palette}/${this.name}.png`
+    const cel = this
 
-    // Draw image to ctxt and get image data
-    drawctxt.drawImage(image, 0, 0, image.width, image.height)
+    const image = new Image()
+    image.addEventListener('load', e => {
+      // Draw image to ctxt and get image data
+      drawctxt.drawImage(image, 0, 0, image.width, image.height)
 
-    const ghostImageData = drawctxt.getImageData(0, 0, image.width, image.height)
-    const data = ghostImageData.data
+      const ghostImageData = drawctxt.getImageData(0, 0, image.width, image.height)
+      const data = ghostImageData.data
 
-    // Fill ghost image data with cel color
-    const color = decimalToRgb(this.index)
-    for (let k = 0; k < data.length; k = k + 4) {
-      data[k] = color.red
-      data[k + 1] = color.green
-      data[k + 2] = color.blue
-    }
+      // Fill ghost image data with cel color
+      const color = decimalToRgb(cel.index)
+      for (let k = 0; k < data.length; k = k + 4) {
+        data[k] = color.red
+        data[k + 1] = color.green
+        data[k + 2] = color.blue
+      }
 
-    // Clear ctxt and draw altered image
-    drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
-    drawctxt.putImageData(ghostImageData, 0, 0)
+      // Clear ctxt and draw altered image
+      drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
+      drawctxt.putImageData(ghostImageData, 0, 0)
 
-    // Save altered image as cel's ghost image
-    this.ghostImage = new Image()
-    this.ghostImage.src = drawcanvas.toDataURL('image/png')
+      // Save altered image as cel's ghost image
+      cel.ghostImage = new Image()
+      cel.ghostImage.src = drawcanvas.toDataURL('image/png')
 
-    // Clear ctxt
-    drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
+      // Clear ctxt
+      drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
 
-    // Let Smooch know when image is loaded
-    this.ghostImage.onload = function () {
-      incLoaded()
-    }
+      // Let Smooch know when image is loaded
+      cel.ghostImage.onload = function () {
+        incLoaded()
+      }
+
+      cel.image = image
+    })
+
+    image.src = pngLocation
   }
 
   update (currentSet) {
@@ -72,6 +81,8 @@ class KiSSCel extends EventTarget {
   }
 
   draw (screen, ghost) {
+    if (!this.image) return false
+
     if (this.visible === true) {
       if (this.alpha) {
         screen.globalAlpha = (255 - this.alpha) / 255
