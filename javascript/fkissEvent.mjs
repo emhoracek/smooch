@@ -46,7 +46,12 @@ function setAlarm (args, actions, doll) {
 
 // This event is triggered after the initialize event and before the version event.
 function setBegin (args, actions, doll) {
-  doll.addEventListener('begin', (e) => actions.forEach(f => f()))
+  doll.addEventListener('begin', (e) => {
+    actions.forEach(f => f())
+
+    doll.update()
+    doll.draw()
+  })
 }
 
 // The user clicks on the object or cel. Applies to all cels & objects except those with a maximal fix value.

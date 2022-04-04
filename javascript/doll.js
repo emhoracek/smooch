@@ -12,10 +12,10 @@ window.addEventListener('load', function () {
     if (loaded < totalCels) {
       window.setTimeout(checkLoaded, 5)
     } else {
+      doll.begin()
       document.getElementById('loading').style.display = 'none'
       document.getElementById('sets').style.display = 'block'
       document.getElementById('borderarea').style.display = 'block'
-      doll.draw()
     }
   }
 
