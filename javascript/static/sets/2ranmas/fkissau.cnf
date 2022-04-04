@@ -1,0 +1,812 @@
+;
+; Ranma 1/2 - Male and Female Ranma in ONE doll!
+;
+; Ranma 1/2 is trademarked and copyright of Rumiko Takahashi.
+;
+; This file created by Dov Sherman.
+; At the time of this release, I can be reached by e-mail at
+; DS5877@Alf.Appstate.Edu
+;
+
+;
+; Resolution
+;
+(632,411)
+
+;
+; Background color index
+;
+[0
+
+;
+; Palettes
+;
+%body.kcf      ;palette 0 - Bodies
+%water.kcf     ;palette 1 - Water, Kettle, Bucket
+%shirts.kcf    ;palette 2 - Some Shirts and Pants
+%pig.kcf       ;palette 3 - P-chan!
+%pink.kcf      ;palette 4 - Some girl clothes
+%hero.kcf      ;palette 5 - White and bronze
+
+;
+;  0 Ranma Saotome
+;  1 Male Eyes
+;  2 Female Eyes
+;  3 Water on body
+;  4 Puddle
+;  5 Drip
+;  6 Kettle
+;  7 Pouring Water
+;  8 Bucket
+;  9 "Ranma 1/2" in Kanji
+; 10 "Ranma 1/2" in Hiragana
+; 11 Red Long-Sleeve China Shirt
+; 12 Blue China Pants
+; 13 Blue Sleeveless China Shirt
+; 14 Orange Short-Sleeve China Shirt
+;; 15
+;; 16
+; 17 Black China Shoes
+; 18 White A-shirt
+; 19 Boxer Shorts
+; 20 P-chan on a Chain
+; 21 Leotard
+; 22 Cute Pink Dress
+; 23 Pink Shoes
+; 24 Scarf by Akane
+; 25 White Button-up Shirt
+; 26 Bow Tie
+; 27 Black Pants
+; 28 Red Cummerbund
+; 29 Tuxedo Jacket
+; 30 White Socks
+; 31 Men's Formal Shoes
+; 32 Boy's School Uniform Jacket
+; 33 Boy's School Uniform Pants
+; 34 Sailor Suit Top
+; 36 Sailor Suit Skirt
+; 35 Pink Mary Janes
+; 37 Yellow Sweater
+; 38 Black Skirt
+; 39 Black Stockings
+; 40 "Boy" Swimsuit
+; 41 Yellow Tee
+; 42 "China" Jumper
+; 43 Mary Janes
+; 44 Wingtips
+; 45 Armor
+; 46 White Chinese Shirt with Red Trim
+; 47 Hero's Boots
+; 48 White Pants
+; 49 Swordbelt
+;
+;100 Panda Body
+;101 Panda Arm
+;255 My Signature
+;=============================
+
+;
+; Cels
+;
+
+;
+; In front of everything
+;
+#101.32767 PARM1.CEL *3 ;Panda Arm Raised
+#101.32767 PARM2.CEL *3 ;Panda Arm Half
+#101.32767 PARM3.CEL *3 ;Panda Arm Down
+#100.32767 PANDA1.CEL *3 ;Panda 1/4
+#100.32767 PANDA2.CEL *3 ;Panda 2/4
+#100.32767 PANDA3.CEL *3 ;Panda 3/4
+#100.32767 PANDAX.CEL *3 ;Panda Up
+#3.32767 DOUSE-M0.CEL *1 ;Water, Male, End
+#3.32767 DOUSE-M1.CEL *1 ;Water, Male, Begin
+#3.32767 DOUSE-MA.CEL *1 ;Water, Male, A
+#3.32767 DOUSE-MB.CEL *1 ;Water, Male, B
+#3.32767 DOUSE-XA.CEL *1 ;Water, Neutral, A
+#3.32767 DOUSE-XB.CEL *1 ;Water, Neutral, B
+#3.32767 DOUSE-F0.CEL *1 ;Water, Female, End
+#3.32767 DOUSE-F1.CEL *1 ;Water, Female, Begin
+#3.32767 DOUSE-FA.CEL *1 ;Water, Female, A
+#3.32767 DOUSE-FB.CEL *1 ;Water, Female, B
+#7.32767 POUR1.CEL *1 ;Pouring 1
+#7.32767 POUR2.CEL *1 ;Pouring 2
+#6.32767 KETTLE.CEL *1 ;Kettle Ready
+#6.32767 KETTLE1.CEL *1 ;Kettle Pouring
+#6.32767 KETTLE2.CEL *1 ;Kettle Empty
+#8.32767 BUCKET.CEL *1 ;Bucket Ready
+#8.32767 BUCKET1.CEL *1 ;Bucket Pouring
+#8.32767 BUCKET2.CEL *1 ;Bucket Empty
+#20 RYOB.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga bangs
+#20 RYOEYE1.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga Eyes Open
+#20 RYOEYE2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga Eyes Half Open
+#20 RYOEYE3.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga Eyes Closed
+#20 RYO.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga
+#20 PIGEYE1.CEL *3 :1 2 3 4 5 6 7 8 9 ;P-chan Eyes Open
+#20 PIGEYE2.CEL *3 :1 2 3 4 5 6 7 8 9 ;P-chan Eyes Half Open
+#20 PIGEYE3.CEL *3 :1 2 3 4 5 6 7 8 9 ;P-chan Eyes Closed
+#20 PIG.CEL *3 :1 2 3 4 5 6 7 8 9 ;P-chan
+#20 RP-0001.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 1
+#20 RP-0002.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 2
+#20 RP-0003.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 3
+#20 RP-0004.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 4
+#20 RP-0005.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 5
+#20 RP-0006.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 6
+#20 RP-0007.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga into P-chan 7
+
+;
+; Section 1
+; Ranma's bangs, left arm, and right fingers
+;
+#24 SCARFF1.CEL *4 :0 1 2 3 4 5 6 7 8 9 ;Scarf, front, female
+#24 SCARFM1.CEL *4 :0 1 2 3 4 5 6 7 8 9 ;Scarf, front, male
+#45 ARMORF1.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, left arm, female
+#45 ARMORM1.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, left arm, male
+#34 SALRTPF1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Top, left arm, female
+#34 SALRTPM1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Top, left arm, male
+#37 YSWTRF1.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, left arm, female
+#37 YSWTRM1.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, left arm, male
+#32 BOYUJF1.CEL *0 :0 3 4 5 6 7 8 9 ;Boy's Uniform Jacket, left arm, female
+#32 BOYUJM1.CEL *0 :0 3 4 5 6 7 8 9 ;Boy's Uniform Jacket, left arm, male
+#29 TUXJKTF1.CEL *0 :0 3 4 5 6 7 8 9 ;Tuxedo Jacket, left arm, female
+#29 TUXJKTM1.CEL *0 :0 3 4 5 6 7 8 9 ;Tuxedo Jacket, left arm, male
+#11 RSHRTM1.CEL *2 :0 3 4 5 6 7 8 9 ;Red shirt, left arm, male
+#11 RSHRTF1.CEL *2 :0 3 4 5 6 7 8 9 ;Red shirt, left arm, female
+#46 HSHIRTF1.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, left arm, female
+#46 HSHIRTM1.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, left arm, male
+#13 BSHRTF1.CEL *2 :0 3 4 5 6 7 8 9 ;Blue shirt, left arm, female
+#14 OSHRTM1.CEL *2 :0 3 4 5 6 7 8 9 ;Orange shirt, left arm, male
+#14 OSHRTF1.CEL *2 :0 3 4 5 6 7 8 9 ;Orange shirt, left arm, female
+#22 KAWAIIM1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Cute pink dress, front, male
+#22 KAWAIIF1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Cute pink dress, front, female
+#25 BTNF1.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, left arm, female
+#25 BTNM1.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, left arm, male
+#41 YTEEM1.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, front, male
+#41 YTEEF1.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, front, female
+#21 LEOTM1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Pink leotard, left arm, male
+#21 LEOTF1.CEL *4 :1 2 3 4 5 6 7 8 9 ;Pink leotard, left arm, female
+#0.32767 RANMA-F1.CEL ;Ranma Saotome, female, bangs, left arm, right fingers
+#0.32767 RANMA-M1.CEL ;Ranma Saotome, male, bangs, left arm, right fingers
+;
+; In Right Hand
+;
+#20 CHAINFT.CEL *3 :1 2 3 4 5 6 7 8 9 ;P-chan's chain in hand
+#20 CHAINMT.CEL *3 :1 2 3 4 5 6 7 8 9 ;Ryouga's chain in hand
+#0.32767 RANMA-FT.CEL ;Ranma Saotome, female, thumb
+#0.32767 RANMA-MT.CEL ;Ranma Saotome, male, thumb
+
+;
+; Section 2
+; Behind Bangs, Torso, Legs
+;
+#49 HGEARM2.CEL *5 :0 3 4 5 6 7 8 9 ;Swordbelt, back, female
+#49 HGEARF2.CEL *5 :0 3 4 5 6 7 8 9 ;Swordbelt, back, female
+#45 ARMORF2.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, torso, female
+#45 ARMORM2.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, torso, male
+#34 SALRTPF2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Top, torso, female
+#34 SALRTPM2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Top, torso, male
+#26 BOWTIEMN.CEL *2 :0 3 4 5 6 7 8 9 ;Bow tie strap, male
+#26 BOWTIEFN.CEL *2 :0 3 4 5 6 7 8 9 ;Bow tie strap, female
+#25 BTNFN.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, closed collar, female
+#25 BTNMN.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, closed collar, male
+#25 BTNFNO.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, open collar, female
+#25 BTNMNO.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, open collar, male
+#37 YSWTRF2.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, torso, female
+#37 YSWTRM2.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, torso, male
+#29 TUXJKTM2.CEL *0 :0 3 4 5 6 7 8 9 ;Tuxedo Jacket, torso, male
+#29 TUXJKTF2.CEL *0 :0 3 4 5 6 7 8 9 ;Tuxedo Jacket, torso, female
+#11 RSHRTM2.CEL *2 :0 3 4 5 6 7 8 9 ;Red shirt, torso, male
+#11 RSHRTF2.CEL *2 :0 3 4 5 6 7 8 9 ;Red shirt, torso, female
+#46 HSHIRTF2.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, torso, female
+#46 HSHIRTM2.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, torso, male
+#13 BSHRTM2.CEL *2 :0 3 4 5 6 7 8 9 ;Blue shirt, torso, male
+#13 BSHRTF2.CEL *2 :0 3 4 5 6 7 8 9 ;Blue shirt, torso, female
+#14 OSHRTM2.CEL *2 :0 3 4 5 6 7 8 9 ;Orange shirt, torso, male
+#14 OSHRTF2.CEL *2 :0 3 4 5 6 7 8 9 ;Orange shirt, torso, female
+#22 KAWAIIM2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Cute pink dress, front, male
+#22 KAWAIIF2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Cute pink dress, front, female
+#26 BOWTIEM2.CEL *2 :0 3 4 5 6 7 8 9 ;Bow tie, male
+#26 BOWTIEF2.CEL *2 :0 3 4 5 6 7 8 9 ;Bow tie, female
+#25 BTNF2O.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar open, torso, female
+#25 BTNM2O.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar open, torso, male
+#38 BSKIRTF2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Skirt, front, female
+#38 BSKIRTM2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Skirt, front, male
+#36 SALRSKF2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Skirt, front, female
+#36 SALRSKM2.CEL *4 :1 2 3 4 5 6 7 8 9 ;Sailor Suit Skirt, front, male
+#42 JMPRF2.CEL *4 :1 2 3 4 5 6 7 8 9 ;"China" Jumper, front, female
+#42 JMPRM2.CEL *4 :1 2 3 4 5 6 7 8 9 ;"China" Jumper, front, male
+#28 TUXCBM2.CEL *2 :0 3 4 5 6 7 8 9 ;Cummerbund, front, male
+#28 TUXCBF2.CEL *2 :0 3 4 5 6 7 8 9 ;Cummerbund, front, female
+#27 TUXPNTM2.CEL *0 :0 3 4 5 6 7 8 9 ;Black slacks, front, male
+#27 TUXPNTF2.CEL *0 :0 3 4 5 6 7 8 9 ;Black slacks, front, female
+#33 BOYUPM2.CEL *0 :0 3 4 5 6 7 8 9 ;Blue slacks, front, male
+#33 BOYUPF2.CEL *0 :0 3 4 5 6 7 8 9 ;Blue slacks, front, female
+#25 BTNF2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar closed, torso, female
+#25 BTNM2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar closed, torso, male
+#12 BPANTSM2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;Blue china pants, front, male
+#12 BPANTSF2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;Blue china pants, front, female
+#47 HBOOTF2.CEL *5 :0 3 4 5 6 7 8 9 ;Hero's Boots, front, female
+#47 HBOOTM2.CEL *5 :0 3 4 5 6 7 8 9 ;Hero's Boots, front, male
+#48 HPANTF2.CEL *5 :0 3 4 5 6 7 8 9 ;White Pants, front, female
+#48 HPANTM2.CEL *5 :0 3 4 5 6 7 8 9 ;White Pants, front, male
+#41 YTEEM2.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, front, male
+#41 YTEEF2.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, front, female
+#19 BOXERM2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;Boxer shorts, front, male
+#19 BOXERF2.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;Boxer shorts, front, female
+#18 ASHRTM2.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#18 ASHRTF2.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#21 LEOTM2.CEL *4 :1 2 3 4 5 6 7 8 9
+#21 LEOTF2.CEL *4 :1 2 3 4 5 6 7 8 9
+#40 SWIMF2.CEL *2 :1 2 3 4 5 6 7 8 9 ;"Boy" Swimsuit, front, female
+#40 SWIMM2.CEL *2 :1 2 3 4 5 6 7 8 9 ;"Boy" Swimsuit, front, male
+#31 FSHOEM2.CEL *0 :0 3 4 5 6 7 8 9
+#31 FSHOEF2.CEL *0 :0 3 4 5 6 7 8 9
+#44 WTIPSM2.CEL *1 :0 1 2 3 4 5 6 7 8 9 ;Wingtips, front, male
+#44 WTIPSF2.CEL *1 :0 1 2 3 4 5 6 7 8 9 ;Wingtips, front, female
+#43 BSTRAPF2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Mary Janes, front, female
+#43 BSTRAPM2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Mary Janes, front, male
+#35 PSTRAPF2.CEL *4 :1 2 3 4 5 6 7 8 9
+#35 PSTRAPM2.CEL *4 :1 2 3 4 5 6 7 8 9
+#23 PSHOEM2.CEL *4 :1 2 3 4 5 6 7 8 9
+#23 PSHOEF2.CEL *4 :1 2 3 4 5 6 7 8 9
+#17 BSHOEM2.CEL :0 1 2 3 4 5 6 7 8 9
+#17 BSHOEF2.CEL :0 1 2 3 4 5 6 7 8 9
+#30 WSOXM2.CEL *0 :0 1 2 3 4 5 6 7 8 9
+#30 WSOXF2.CEL *0 :0 1 2 3 4 5 6 7 8 9
+#39 BSTKNF2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Stockings, front, female
+#39 BSTKNM2.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Stockings, front, male
+#1.32767 MEYES1.CEL ;Male Ranma's eyes open
+#1.32767 MEYES2.CEL ;Male Ranma's eyes half-open
+#1.32767 MEYES3.CEL ;Male Ranma's eyes closed
+#2.32767 FEYES1.CEL ;Female Ranma's eyes open
+#2.32767 FEYES2.CEL ;Female Ranma's eyes half-open
+#2.32767 FEYES3.CEL ;Female Ranma's eyes closed
+#0.32767 RANMA-F2.CEL
+#0.32767 RANMA-M2.CEL
+
+;
+; Section 3
+; Right Arm
+;
+#20 CHAINF3.CEL *3 :1 2 3 4 5 6 7 8 9
+#20 CHAINM3.CEL *3 :1 2 3 4 5 6 7 8 9
+#37 YSWTRF3.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, right arm, female
+#37 YSWTRM3.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, right arm, male
+#32 BOYUJF3.CEL *0 :0 3 4 5 6 7 8 9
+#32 BOYUJM3.CEL *0 :0 3 4 5 6 7 8 9
+#29 TUXJKTM3.CEL *0 :0 3 4 5 6 7 8 9
+#29 TUXJKTF3.CEL *0 :0 3 4 5 6 7 8 9
+#11 RSHRTM3.CEL *2 :0 3 4 5 6 7 8 9
+#11 RSHRTF3.CEL *2 :0 3 4 5 6 7 8 9
+#46 HSHIRTF3.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, right arm, female
+#46 HSHIRTM3.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, right arm, male
+#14 OSHRTM3.CEL *2 :0 3 4 5 6 7 8 9
+#14 OSHRTF3.CEL *2 :0 3 4 5 6 7 8 9
+#25 BTNF3.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#25 BTNM3.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#21 LEOTM3.CEL *4 :1 2 3 4 5 6 7 8 9
+#21 LEOTF3.CEL *4 :1 2 3 4 5 6 7 8 9
+#0.32767 RANMA-F3.CEL
+#0.32767 RANMA-M3.CEL
+
+;
+; Section 4
+; In front of pig-tail, behind everything else
+;
+#39 BSTKNF4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Stockings, back, female
+#39 BSTKNM4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Stockings, back, male
+#30 WSOXM4.CEL *0 :0 1 2 3 4 5 6 7 8 9
+#30 WSOXF4.CEL *0 :0 1 2 3 4 5 6 7 8 9
+#17 BSHOEM4.CEL :0 1 2 3 4 5 6 7 8 9
+#17 BSHOEF4.CEL :0 1 2 3 4 5 6 7 8 9
+#23 PSHOEM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#23 PSHOEF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#35 PSTRAPF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#35 PSTRAPM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#43 BSTRAPF4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Mary Janes, back, female
+#43 BSTRAPM4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Mary Janes, back, male
+#44 WTIPSM4.CEL *1 :0 1 2 3 4 5 6 7 8 9 ;Wingtips, back, male
+#44 WTIPSF4.CEL *1 :0 1 2 3 4 5 6 7 8 9 ;Wingtips, back, female
+#31 FSHOEM4.CEL *0 :0 3 4 5 6 7 8 9
+#31 FSHOEF4.CEL *0 :0 3 4 5 6 7 8 9
+#40 SWIMF4.CEL *2 :1 2 3 4 5 6 7 8 9 ;"Boy" Swimsuit, back, female
+#40 SWIMM4.CEL *2 :1 2 3 4 5 6 7 8 9 ;"Boy" Swimsuit, back, male
+#21 LEOTM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#21 LEOTF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#18 ASHRTM4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#18 ASHRTF4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#19 BOXERM4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#19 BOXERF4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#41 YTEEM4.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, back, male
+#41 YTEEF4.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Tee, back, female
+#25 BTNF4.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar closed, back, female
+#25 BTNM4.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar closed, back, male
+#48 HPANTF4.CEL *5 :0 3 4 5 6 7 8 9 ;White Pants, back, female
+#48 HPANTM4.CEL *5 :0 3 4 5 6 7 8 9 ;White Pants, back, male
+#47 HBOOTF4.CEL *5 :0 3 4 5 6 7 8 9 ;Hero's Boots, back, female
+#47 HBOOTM4.CEL *5 :0 3 4 5 6 7 8 9 ;Hero's Boots, back, male
+#12 BPANTSM4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#12 BPANTSF4.CEL *2 :0 1 2 3 4 5 6 7 8 9
+#33 BOYUPM4.CEL *0 :0 3 4 5 6 7 8 9
+#33 BOYUPF4.CEL *0 :0 3 4 5 6 7 8 9
+#27 TUXPNTM4.CEL *0 :0 3 4 5 6 7 8 9
+#27 TUXPNTF4.CEL *0 :0 3 4 5 6 7 8 9
+#42 JMPRF4.CEL *4 :1 2 3 4 5 6 7 8 9 ;"China" Jumper, back, female
+#42 JMPRM4.CEL *4 :1 2 3 4 5 6 7 8 9 ;"China" Jumper, back, male
+#36 SALRSKF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#36 SALRSKM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#38 BSKIRTF4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Skirt, back, female
+#38 BSKIRTM4.CEL *3 :1 2 3 4 5 6 7 8 9 ;Black Skirt, back, male
+#25 BTNF4O.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar open, back, female
+#25 BTNM4O.CEL *2 :0 1 2 3 4 5 6 7 8 9 ;White button-up shirt, collar open, back, male
+#26 BOWTIEM4.CEL *2 :0 3 4 5 6 7 8 9
+#26 BOWTIEF4.CEL *2 :0 3 4 5 6 7 8 9
+#22 KAWAIIM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#22 KAWAIIF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#28 TUXCBF4.CEL *2 :0 3 4 5 6 7 8 9
+#14 OSHRTM4.CEL *2 :0 3 4 5 6 7 8 9
+#14 OSHRTF4.CEL *2 :0 3 4 5 6 7 8 9
+#13 BSHRTM4.CEL *2 :0 3 4 5 6 7 8 9
+#13 BSHRTF4.CEL *2 :0 3 4 5 6 7 8 9
+#46 HSHIRTF4.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, back, female
+#46 HSHIRTM4.CEL *5 :0 3 4 5 6 7 8 9 ;White Shirt, back, male
+#11 RSHRTM4.CEL *2 :0 3 4 5 6 7 8 9
+#11 RSHRTF4.CEL *2 :0 3 4 5 6 7 8 9
+#29 TUXJKTM4.CEL *0 :0 3 4 5 6 7 8 9
+#29 TUXJKTF4.CEL *0 :0 3 4 5 6 7 8 9
+#32 BOYUJF4.CEL *0 :0 3 4 5 6 7 8 9
+#32 BOYUJM4.CEL *0 :0 3 4 5 6 7 8 9
+#37 YSWTRF4.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, back, female
+#37 YSWTRM4.CEL *2 :1 2 3 4 5 6 7 8 9 ;Yellow Sweater, back, male
+#34 SALRTPF4.CEL *4 :1 2 3 4 5 6 7 8 9
+#34 SALRTPM4.CEL *4 :1 2 3 4 5 6 7 8 9
+#45 ARMORF4.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, back, female
+#45 ARMORM4.CEL *5 :0 3 4 5 6 7 8 9 ;Armor, back, male
+#49 HGEARM4.CEL *5 :0 3 4 5 6 7 8 9 ;Swordbelt, back, female
+#49 HGEARF4.CEL *5 :0 3 4 5 6 7 8 9 ;Swordbelt, back, female
+#20 CHAINF4.CEL *3 :1 2 3 4 5 6 7 8 9
+#20 CHAINM4.CEL *3 :1 2 3 4 5 6 7 8 9
+#24 SCARFF4.CEL *4 :0 1 2 3 4 5 6 7 8 9
+#24 SCARFM4.CEL *4 :0 1 2 3 4 5 6 7 8 9
+#0.32767 RANMA-F4.CEL
+#0.32767 RANMA-M4.CEL
+
+;
+; Background
+;
+#5.32767 DRIP1.CEL *1
+#5.32767 DRIP2.CEL *1
+#5.32767 DRIP3.CEL *1
+#4.32767 PUDDLE.CEL *1
+#4.32767 PUDDLE1.CEL *1
+#4.32767 PUDDLE2.CEL *1
+#4.32767 PUDDLE3.CEL *1
+#4.32767 PUDDLE4.CEL *1
+#9.32767 KANJI.CEL
+#10.32767 HIRAGANA.CEL
+#255.32767 SIG.CEL
+
+
+
+
+
+
+;=============================
+
+;;                      fkiss config
+;
+;@EventHandler
+;@initialize()
+;@  unmap("MEYES2.CEL") unmap("MEYES3.CEL")
+;@  unmap("DOUSE-M0.CEL") unmap("DOUSE-M1.CEL")
+;@  unmap("DOUSE-MA.CEL") unmap("DOUSE-MB.CEL")
+;@  unmap("DOUSE-XA.CEL") unmap("DOUSE-XB.CEL")
+;@  unmap("DOUSE-F0.CEL") unmap("DOUSE-F1.CEL")
+;@  unmap("DOUSE-FA.CEL") unmap("DOUSE-FB.CEL")
+;@  unmap("PUDDLE.CEL") unmap("PUDDLE1.CEL") unmap("PUDDLE2.CEL")
+;@  unmap("PUDDLE3.CEL") unmap("PUDDLE4.CEL") unmap("PUDDLE5.CEL")
+;@  unmap("PUDDLE6.CEL") unmap("PUDDLE7.CEL")
+;@  unmap("DRIP1.CEL") unmap("DRIP2.CEL")
+;@  unmap("DRIP3.CEL") unmap("DRIP4.CEL")
+;@  unmap("KETTLE.CEL") unmap("KETTLE1.CEL") unmap("KETTLE2.CEL")
+;@  unmap("BUCKET1.CEL") unmap("BUCKET2.CEL")
+;@  unmap("POUR1.CEL") unmap("POUR2.CEL")
+;@  unmap("RANMA-F1.CEL") unmap("RANMA-F2.CEL")
+;@  unmap("RANMA-F3.CEL") unmap("RANMA-F4.CEL") unmap("RANMA-FT.CEL")
+;@  unmap("FEYES1.CEL") unmap("FEYES2.CEL") unmap("FEYES3.CEL")
+;@  unmap("HIRAGANA.CEL")
+;@  unmap("RSHRTF1.CEL") unmap("RSHRTF2.CEL")
+;@  unmap("RSHRTF3.CEL") unmap("RSHRTF4.CEL")
+;@  unmap("BPANTSF2.CEL") unmap("BPANTSF4.CEL")
+;@  unmap("BSHRTF1.CEL") unmap("BSHRTF2.CEL")
+;@  unmap("BSHRTF4.CEL")
+;@  unmap("OSHRTF1.CEL") unmap("OSHRTF2.CEL")
+;@  unmap("OSHRTF3.CEL") unmap("OSHRTF4.CEL")
+;@  unmap("BSHOEF2.CEL") unmap("BSHOEF4.CEL")
+;@  unmap("PSHOEF2.CEL") unmap("PSHOEF4.CEL")
+;@  unmap("ASHRTF2.CEL") unmap("ASHRTF4.CEL")
+;@  unmap("BOXERF2.CEL") unmap("BOXERF4.CEL")
+;@  unmap("PIG.CEL") unmap("CHAINFT.CEL") unmap("CHAINF3.CEL")
+;@  unmap("PIGEYE1.CEL") unmap("PIGEYE2.CEL") unmap("PIGEYE3.CEL")
+;@  unmap("RYOEYE2.CEL") unmap("RYOEYE3.CEL")
+;@  unmap("CHAINF4.CEL")
+;@  unmap("RP-0001.CEL") unmap("RP-0002.CEL") unmap("RP-0003.CEL")
+;@  unmap("RP-0004.CEL") unmap("RP-0005.CEL") unmap("RP-0006.CEL")
+;@  unmap("RP-0007.CEL")
+;@  unmap("LEOTF1.CEL") unmap("LEOTF2.CEL")
+;@  unmap("LEOTF3.CEL") unmap("LEOTF4.CEL")
+;@  unmap("KAWAIIF1.CEL") unmap("KAWAIIF2.CEL") unmap("KAWAIIF4.CEL")
+;@  unmap("SCARFF1.CEL") unmap("SCARFF4.CEL")
+;@  unmap("BTNF1.CEL") unmap("BTNFN.CEL") unmap("BTNF2.CEL")
+;@  unmap("BTNF3.CEL") unmap("BTNF4.CEL")
+;@  unmap("btnfno.cel") unmap("btnf2o.cel") unmap("btnf4o.cel")
+;@  unmap("BOWTIEFN.CEL") unmap("BOWTIEF2.CEL") unmap("BOWTIEF4.CEL")
+;@  unmap("TUXPNTF2.CEL") unmap("TUXPNTF4.CEL")
+;@  unmap("TUXCBF2.CEL") unmap("TUXCBF4.CEL")
+;@	unmap("TUXJKTF1.CEL") unmap("TUXJKTF2.CEL")
+;@	unmap("TUXJKTF3.CEL") unmap("TUXJKTF4.CEL")
+;@  unmap("WSOXF2.CEL") unmap("WSOXF4.CEL")
+;@  unmap("FSHOEF2.CEL") unmap("FSHOEF4.CEL")
+;@  unmap("BOYUJF1.CEL") unmap("BOYUJF3.CEL")
+;@  unmap("BOYUJF4.CEL")
+;@  unmap("BOYUPF2.CEL") unmap("BOYUPF4.CEL")
+;@  unmap("SALRTPF1.CEL") unmap("SALRTPF2.CEL") unmap("SALRTPF4.CEL")
+;@  unmap("PSTRAPF2.CEL") unmap("PSTRAPF4.CEL")
+;@  unmap("SALRSKF2.CEL") unmap("SALRSKF4.CEL")
+;@  unmap("YSWTRF1.CEL") unmap("YSWTRF2.CEL") unmap("YSWTRF3.CEL")
+;@  unmap("YSWTRF4.CEL")
+;@  unmap("btnmno.cel") unmap("btnm2o.cel") unmap("btnm4o.cel")
+;@  unmap("BSKIRTF2.CEL") unmap("BSKIRTF4.CEL")
+;@  unmap("BSTKNF2.CEL") unmap("BSTKNF4.CEL")
+;@  unmap("SWIMF2.CEL") unmap("SWIMF4.CEL")
+;@  unmap("YTEEF1.CEL") unmap("YTEEF2.CEL") unmap("YTEEF4.CEL")
+;@  unmap("JMPRF2.CEL") unmap("JMPRF4.CEL")
+;@  unmap("BSTRAPF2.CEL") unmap("BSTRAPF4.CEL")
+;@  unmap("WTIPSF2.CEL") unmap("WTIPSF4.CEL")
+;@  unmap("ARMORF1.CEL") unmap("ARMORF2.CEL") unmap("ARMORF4.CEL")
+;@  unmap("HSHIRTF1.CEL") unmap("HSHIRTF2.CEL") unmap("HSHIRTF3.CEL")
+;@  unmap("HSHIRTF4.CEL")
+;@  unmap("HBOOTF2.CEL") unmap("HBOOTF4.CEL")
+;@  unmap("HPANTF2.CEL") unmap("HPANTF4.CEL")
+;@  unmap("HGEARF2.CEL") unmap("HGEARF4.CEL")
+;@  unmap("PARM1.CEL") unmap("PARM2.CEL") unmap("PARM3.CEL") unmap("PARM4.CEL")
+;@  unmap("PANDA1.CEL") unmap("PANDA2.CEL") unmap("PANDA3.CEL")
+;@  unmap("PANDAX.CEL")
+;
+;@begin()
+;@  timer(0,3600)
+;
+;=========================================================================
+;
+;;                               Alarms
+;
+;=========================================================================
+;
+;
+;; Blink Male
+;@alarm(0) timer(1,30) unmap("MEYES1.CEL") map("MEYES2.CEL")
+;@         unmap("RYOEYE1.CEL") map("RYOEYE2.CEL") timer(4,32767)
+;@alarm(1) timer(2,35) unmap("MEYES2.CEL") map("MEYES3.CEL")
+;@         unmap("RYOEYE2.CEL") map("RYOEYE3.CEL") timer(5,32767)
+;@alarm(2) timer(3,30) unmap("MEYES3.CEL") map("MEYES2.CEL")
+;@         unmap("RYOEYE3.CEL") map("RYOEYE2.CEL") timer(6,32767)
+;@alarm(3) unmap("MEYES2.CEL") map("MEYES1.CEL")
+;@         unmap("RYOEYE2.CEL") map("RYOEYE1.CEL") timer(0,8200) timer(7,32767)
+;
+;; Blink Female
+;@alarm(4) timer(5,30) unmap("FEYES1.CEL") map("FEYES2.CEL")
+;@         unmap("PIGEYE1.CEL") map("PIGEYE2.CEL") timer(0,32767)
+;@alarm(5) timer(6,35) unmap("FEYES2.CEL") map("FEYES3.CEL")
+;@         unmap("PIGEYE2.CEL") map("PIGEYE3.CEL") timer(1,32767)
+;@alarm(6) timer(7,30) unmap("FEYES3.CEL") map("FEYES2.CEL")
+;@         unmap("PIGEYE3.CEL") map("PIGEYE2.CEL") timer(2,32767)
+;@alarm(7) unmap("FEYES2.CEL") map("FEYES1.CEL")
+;@         unmap("PIGEYE2.CEL") map("PIGEYE1.CEL") timer(4,8200) timer(3,32767)
+;
+;; Male to Female
+;@alarm(8)  timer(9,315)
+;@          map("DOUSE-MA.CEL") unmap("DOUSE-M0.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          map("PUDDLE2.CEL")
+;@          unmap("RANMA-M1.CEL") unmap("RANMA-M2.CEL")
+;@          unmap("RANMA-M3.CEL") unmap("RANMA-M4.CEL") unmap("RANMA-MT.CEL")
+;@          unmap("MEYES1.CEL") unmap("MEYES2.CEL") unmap("MEYES3.CEL")
+;@          timer(0,32767) timer(1,32767) timer(2,32767) timer(3,32767)
+;@          unmap("RYOB.CEL") unmap("RYO.CEL") unmap("RYOEYE1.CEL")
+;@          unmap("RYOEYE2.CEL") unmap("RYOEYE3.CEL")
+;@          map("RP-0001.CEL")
+;@alarm(9)  timer(10,315)
+;@          unmap("DOUSE-MA.CEL") map("DOUSE-MB.CEL")
+;@          map("PUDDLE1.CEL")
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          unmap("RP-0001.CEL") map("RP-0002.CEL")
+;@alarm(10) timer(11,315)
+;@          unmap("DOUSE-MB.CEL") map("DOUSE-XA.CEL")
+;@          map("PUDDLE.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          unmap("RP-0002.CEL") map("RP-0003.CEL")
+;@          map("BTNF1.CEL") map("BTNF3.CEL")
+;@          map("btnfno.cel") map("btnf2o.cel") map("btnf4o.cel")
+;@          unmap("BTNM1.CEL") unmap("BTNMN.CEL")  unmap("BTNM2.CEL")
+;@          unmap("BTNM3.CEL") unmap("BTNM4.CEL")
+;@          unmap("btnmno.cel") unmap("btnm2o.cel") unmap("btnm4o.cel")
+;@          map("CHAINFT.CEL") map("CHAINF3.CEL") map("CHAINF4.CEL")
+;@          unmap("CHAINMT.CEL") unmap("CHAINM3.CEL") unmap("CHAINM4.CEL")
+;@          altmap(#11) altmap(#12) altmap(#13) altmap(#14)
+;@          altmap(#17) altmap(#18) altmap(#19) altmap(#21)
+;@          altmap(#22) altmap(#23) altmap(#24) altmap(#26) altmap(#27)
+;@          altmap(#28) altmap(#29) altmap(#30) altmap(#31) altmap(#32)
+;@          altmap(#33) altmap(#34) altmap(#36) altmap(#35) altmap(#37)
+;@          altmap(#38) altmap(#39) altmap(#40) altmap(#41) altmap(#42)
+;@          altmap(#43) altmap(#44) altmap(#45) altmap(#46) altmap(#47)
+;@          altmap(#48) altmap(#49)
+;@          unmap("DOUSE-XA.CEL") map("DOUSE-XB.CEL")
+;@alarm(11) timer(12,315)
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          unmap("RP-0003.CEL") map("RP-0004.CEL")
+;@alarm(12) timer(13,315)
+;@          unmap("DOUSE-XB.CEL") map("DOUSE-FA.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          unmap("RP-0004.CEL") map("RP-0005.CEL")
+;@alarm(13) timer(14,315)
+;@          unmap("DOUSE-FA.CEL") map("DOUSE-FB.CEL")
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          unmap("RP-0005.CEL") map("RP-0006.CEL")
+;@alarm(14) timer(15,315)
+;@          map("DOUSE-F1.CEL") unmap("DOUSE-FB.CEL")
+;@          unmap("POUR1.CEL")
+;@          unmap("BUCKET1.CEL") map("BUCKET2.CEL")
+;@          map("RANMA-F1.CEL") map("RANMA-F2.CEL") map("RANMA-F3.CEL")
+;@          map("RANMA-F4.CEL") map("RANMA-FT.CEL") map("FEYES1.CEL")
+;@          timer(4,600)
+;@          unmap("RP-0006.CEL") map("RP-0007.CEL")
+;@alarm(15) unmap("DOUSE-F1.CEL") unmap("BUCKET2.CEL")
+;@          map("HIRAGANA.CEL") unmap("KANJI.CEL")
+;@          map("KETTLE.CEL") timer(24,40)
+;@          unmap("RP-0007.CEL") map("PIG.CEL")
+;@          map("PIGEYE1.CEL")
+;
+;; Female to Male
+;@alarm(16) timer(17,315)
+;@          map("DOUSE-FA.CEL") unmap("DOUSE-F0.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          map("PUDDLE2.CEL")
+;@          unmap("RANMA-F1.CEL") unmap("RANMA-F2.CEL")
+;@          unmap("RANMA-F3.CEL") unmap("RANMA-F4.CEL") unmap("RANMA-FT.CEL")
+;@          unmap("FEYES1.CEL") unmap("FEYES2.CEL") unmap("FEYES3.CEL")
+;@          timer(4,32767) timer(5,32767) timer(6,32767) timer(7,32767)
+;@          map("RP-0007.CEL") unmap("PIG.CEL")
+;@          unmap("PIGEYE1.CEL") unmap("PIGEYE2.CEL") unmap("PIGEYE3.CEL")
+;@alarm(17) timer(18,315)
+;@          unmap("DOUSE-FA.CEL") map("DOUSE-FB.CEL")
+;@          map("PUDDLE1.CEL")
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          map("RP-0006.CEL") unmap("RP-0007.CEL")
+;@alarm(18) timer(19,315)
+;@          unmap("DOUSE-FB.CEL") map("DOUSE-XA.CEL")
+;@          map("PUDDLE.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          map("RP-0005.CEL") unmap("RP-0006.CEL")
+;@alarm(19) timer(20,315)
+;@          unmap("DOUSE-XA.CEL") map("DOUSE-XB.CEL")
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          map("RP-0004.CEL") unmap("RP-0005.CEL")
+;@alarm(20) timer(21,315)
+;@          unmap("DOUSE-XB.CEL") map("DOUSE-MA.CEL")
+;@          unmap("POUR1.CEL") map("POUR2.CEL")
+;@          map("RP-0003.CEL") unmap("RP-0004.CEL")
+;@          unmap("BTNF1.CEL") unmap("BTNFN.CEL") unmap("BTNF2.CEL")
+;@          unmap("BTNF3.CEL") unmap("BTNF4.CEL")
+;@          unmap("btnfno.cel") unmap("btnf2o.cel") unmap("btnf4o.cel")
+;@          map("BTNM1.CEL") map("BTNM3.CEL")
+;@          map("btnmn.cel") map("btnm2.cel") map("btnm4.cel")
+;@          unmap("CHAINFT.CEL") unmap("CHAINF3.CEL") unmap("CHAINF4.CEL")
+;@          map("CHAINMT.CEL") map("CHAINM3.CEL") map("CHAINM4.CEL")
+;@          altmap(#11) altmap(#12) altmap(#13) altmap(#14)
+;@          altmap(#17) altmap(#18) altmap(#19) altmap(#21)
+;@          altmap(#22) altmap(#23) altmap(#24) altmap(#26) altmap(#27)
+;@          altmap(#28) altmap(#29) altmap(#30) altmap(#31) altmap(#32)
+;@          altmap(#33) altmap(#34) altmap(#36) altmap(#35) altmap(#37)
+;@          altmap(#38) altmap(#39) altmap(#40) altmap(#41) altmap(#42)
+;@          altmap(#43) altmap(#44) altmap(#45) altmap(#46) altmap(#47)
+;@          altmap(#48) altmap(#49)
+;@alarm(21) timer(22,315)
+;@          unmap("DOUSE-MA.CEL") map("DOUSE-MB.CEL")
+;@          unmap("POUR2.CEL") map("POUR1.CEL")
+;@          map("RP-0002.CEL") unmap("RP-0003.CEL")
+;@alarm(22) timer(23,315)
+;@          map("DOUSE-M1.CEL") unmap("DOUSE-MB.CEL")
+;@          unmap("POUR1.CEL")
+;@          unmap("KETTLE1.CEL") map("KETTLE2.CEL")
+;@          map("RANMA-M1.CEL") map("RANMA-M2.CEL") map("RANMA-M3.CEL")
+;@          map("RANMA-M4.CEL") map("RANMA-MT.CEL") map("MEYES1.CEL")
+;@          timer(0,600)
+;@          map("RP-0001.CEL") unmap("RP-0002.CEL")
+;@alarm(23) unmap("DOUSE-M1.CEL") unmap("KETTLE2.CEL")
+;@          unmap("HIRAGANA.CEL") map("KANJI.CEL")
+;@          map("BUCKET.CEL") timer(24,40)
+;@          map("RYOB.CEL") map("RYO.CEL") map("RYOEYE1.CEL")
+;@          map("RYOEYE2.CEL") map("RYOEYE3.CEL")
+;@          unmap("RP-0001.CEL")
+;
+;; Drip
+;@alarm(24) timer(25,10) map("DRIP1.CEL")
+;@alarm(25) timer(26,10) unmap("DRIP1.CEL") map("DRIP2.CEL")
+;@          sound("drip.au")
+;@alarm(26) timer(27,10) unmap("DRIP2.CEL") map("DRIP3.CEL")
+;@alarm(27) timer(29,32767) timer(30,32767) timer(31,32767) timer(32,32767)
+;@          timer(28,3600) unmap("DRIP3.CEL")
+;
+;; Puddle Trickle
+;@alarm(28) timer(29,7200) unmap("PUDDLE.CEL") map("PUDDLE1.CEL")
+;@          timer(30,32767) timer(31,32767)
+;@alarm(29) timer(30,7200) unmap("PUDDLE1.CEL") map("PUDDLE2.CEL")
+;@alarm(30) timer(31,7200) unmap("PUDDLE2.CEL") map("PUDDLE3.CEL")
+;@alarm(31) timer(32,7200) unmap("PUDDLE3.CEL") map("PUDDLE4.CEL")
+;@alarm(32) map("PANDA1.CEL") timer(33,40)
+;@alarm(33) unmap("PANDA1.CEL") map("PANDA2.CEL") timer(34,40)
+;@alarm(34) unmap("PANDA2.CEL") map("PANDA3.CEL") timer(35,40)
+;@alarm(35) unmap("PUDDLE4.CEL")
+;@          unmap("PANDA3.CEL") map("PANDAX.CEL") map("PARM3.CEL")
+;@          timer(36,60)
+;@alarm(36) unmap("PARM3.CEL") map("PARM2.CEL")
+;@          timer(37,60)
+;@alarm(37) unmap("PARM2.CEL") map("PARM1.CEL")
+;@          timer(38,1250)
+;@alarm(38) map("PARM2.CEL") unmap("PARM1.CEL")
+;@          timer(39,50)
+;@alarm(39) map("PARM3.CEL") unmap("PARM2.CEL")
+;@          timer(40,50)
+;@alarm(40) unmap("PANDAX.CEL") unmap("PARM3.CEL")
+;@          map("PANDA3.CEL") timer(41,50)
+;@alarm(41) unmap("PANDA3.CEL") map("PANDA2.CEL") timer(42,30)
+;@alarm(42) unmap("PANDA2.CEL") map("PANDA1.CEL") timer(43,30)
+;@alarm(43) unmap("PANDA1.CEL")
+;
+;
+;
+;
+;=========================================================================
+;
+;;                             Triggers
+;
+;=========================================================================
+;
+;; Cold water: Male to Female
+;@press("BUCKET.CEL")
+;@  timer(8,315); Start M2F Water Sequence
+;@  unmap("BUCKET.CEL") map("BUCKET1.CEL") map("POUR1.CEL")
+;@  sound("SPLASH.AU") map("DOUSE-M0.CEL")
+;
+;; Hot water: Female to Male
+;@press("KETTLE.CEL")
+;@  timer(16,315); Start F2M Water Sequence
+;@  unmap("KETTLE.CEL") map("KETTLE1.CEL") map("POUR1.CEL")
+;@  sound("SPLASH.AU") map("DOUSE-F0.CEL")
+;
+;; Pig Poke
+;@press("pig.cel") sound("grunt2.au")
+;
+;; Button-up Shirt Collar
+;@press("btnfn.cel") unmap("btnfn.cel") unmap("btnf2.cel") unmap("btnf4.cel")
+;@                   map("btnfno.cel") map("btnf2o.cel") map("btnf4o.cel")
+;@press("btnfno.cel") unmap("btnfno.cel") unmap("btnf2o.cel") unmap("btnf4o.cel")
+;@                   map("btnfn.cel") map("btnf2.cel") map("btnf4.cel")
+;@press("btnmn.cel") unmap("btnmn.cel") unmap("btnm2.cel") unmap("btnm4.cel")
+;@                   map("btnmno.cel") map("btnm2o.cel") map("btnm4o.cel")
+;@press("btnmno.cel") unmap("btnmno.cel") unmap("btnm2o.cel") unmap("btnm4o.cel"
+;@                   map("btnmn.cel") map("btnm2.cel") map("btnm4.cel")
+;
+;
+;
+;
+;; Cel Positions
+;
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 227,141 249,179 544,83 540,187 * * 255,344 259,147 261,189 * *
+ * * 556,22 91,137 131,138 120,185 119,182 89,138 40,311 41,341 7,135 38,186
+ * * * * * * * * * * 541,308 379,140 352,137 375,297 384,186 386,165 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * 143,245 243,231 * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 * 543,173 * * * * 548,344 373,217 376,262 242,190 228,141 10,143
+ 21,346 561,76 432,135 * * * * 160,313 * * * 150,151 155,342 156,192 432,135
+ 449,187 449,248 335,111 78,10 84,8 368,352 453,341 * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 * 110,179 * * * * 116,352 120,141 262,190 430,190 413,140 10,143
+ 21,346 561,76 503,139 * * * * 259,314 * * * 245,148 255,343 248,186 502,139
+ 521,188 518,247 455,35 340,147 347,147 368,108 522,340 * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372
+$0 226,89 269,122 270,156 201,80 201,346 200,219 214,4 277,69 278,15 158,8
+ 304,19 27,14 554,34 89,43 110,83 * * 117,361 258,147 261,192 0,190 0,116
+ 384,0 119,340 316,88 469,2 509,2 498,56 497,47 467,3 196,265 127,263 320,140
+ 350,190 146,135 121,320 150,169 0,1 180,68 550,227 74,134 403,212 408,211
+ 121,302 121,283 481,159 453,155 474,318 483,200 486,180 * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * 143,245 243,231 * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 571,372

@@ -1,0 +1,53 @@
+Ranma 1/2 - Male and Female Ranma in ONE doll!
+
+WARNING!  This doll contains minor frontal nudity of exposed female breasts in
+a purely harmless and non-sexual theme.  If you are too young to see female
+breasts or if female breasts offend you, please delete this doll from your
+drive.
+
+This is an FKISS set.  I don't know if it will run properly on FKISS on
+different platforms since the format seems to vary a bit from one platform to
+another.  If you try to run this on a version that doesn't support FKISS or an
+early FKISS which doesn't support enough alarms, it will look really, really
+bad.  I have tried to optimize the timers in the FKISS code as best I can.
+There may be points when the animation looks too slow but I have written such
+that it will never go faster than intended.
+
+Since WKISS 0.65e does not support .AU format while not all platforms support
+.WAV format, I have included two .CNF files:
+
+FKISSAU.CNF  - Standard configuration using .AU sound file format
+FKISSWAV.CNF - Alternate configuration using .WAV sound file format
+
+There is also one additional .CNF file for users without FKISS support:
+
+KISS.CNF     - Plain KISS set for viewers with no FKISS support (boring!)
+
+             ----------------------------------------------
+
+Please distribute this freely.  Don't charge any money for this set.
+Other than that, upload it anywhere you like.
+
+Ranma 1/2 is trademarked and copyright of Rumiko Takahashi.
+
+This file created by Dov Sherman.
+I can be reached by e-mail at dsherman@otakuworld.com
+
+             ----------------------------------------------
+
+Personal notes:
+When I first saw the FKISS format, I knew there had to be something really
+nifty I could do with it.  I thought about revamping my previous KISS set,
+KS_RANKO.LZH but the thought of going back and redrawing all those items
+was very daunting.
+
+I'd been wanting to do a single KISS set with both versions of Ranma for a
+while.  Originally, I'd been thinking it would be something using some kind
+of CEL-masking so that the same item could fit onto either of two dolls.
+Then FKISS came out and it became possible to do this using a single doll
+by simply animating the doll and all the clothing so that they change shape
+from male to female.  I hope you find it fun.
+
+By the way, for those of you who don't know Japanese, the sign the panda is
+holding up says, "Musabetsu Kakutou": Anything-Goes Martial Arts.
+
