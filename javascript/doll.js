@@ -6,9 +6,9 @@ window.addEventListener('load', function () {
   let doll = false
   let loaded = 0
 
-  const setDir = document.getElementById('set-data').dataset.staticDirectory
+  const staticDir = document.getElementById('set-data').dataset.staticDirectory
 
-  fetch(`/sets/${setDir}/setdata.json`).then(resp => {
+  fetch(`${staticDir}/setdata.json`).then(resp => {
     return resp.json()
   }).then(kissJson => {
     const totalCels = kissJson.cels.length
@@ -27,7 +27,7 @@ window.addEventListener('load', function () {
 
     window.setTimeout(checkLoaded, 500)
 
-    doll = new KiSSDoll(kissJson, setDir)
+    doll = new KiSSDoll(kissJson, staticDir)
     const dragger = new DragAndDrop(doll)
     doll.initialize(() => { loaded += 1 })
     dragger.initialize()

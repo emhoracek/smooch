@@ -29,7 +29,7 @@ class KiSSCel extends EventTarget {
   loadImage (doll, incLoaded) {
     const drawctxt = doll.ctxt
     const drawcanvas = doll.canvas
-    const pngLocation = `/sets/${doll.staticDirectory}/palette${this.palette}/${this.name}.png`
+    const pngLocation = `${doll.staticDirectory}/palette${this.palette}/${this.name}.png`
     const cel = this
 
     const image = new Image()
