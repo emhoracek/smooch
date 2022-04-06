@@ -16,7 +16,7 @@ window.addEventListener('load', function () {
     function checkLoaded () {
       console.log(`loading ${loaded} of ${totalCels}`)
       if (loaded < totalCels) {
-        window.setTimeout(checkLoaded, 5)
+        window.setTimeout(checkLoaded, 500)
       } else {
         doll.begin()
         document.getElementById('loading').style.display = 'none'
@@ -25,7 +25,7 @@ window.addEventListener('load', function () {
       }
     }
 
-    window.setTimeout(checkLoaded, 5)
+    window.setTimeout(checkLoaded, 500)
 
     doll = new KiSSDoll(kissJson, setDir)
     const dragger = new DragAndDrop(doll)
