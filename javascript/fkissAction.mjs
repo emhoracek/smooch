@@ -61,7 +61,15 @@ function mkSound (args, doll) {
   const soundFile = args[0]
   const wavFile = soundFile.replace('.au', '.wav')
   const audioElement = doll.getSound(wavFile)
-  return () => audioElement.play()
+  return () => {
+    if (audioElement.HAVE_ENOUGH_DATA) {
+      audioElement.play()
+    } else {
+      audioElement.addEventListener('canplaythrough', event => {
+        audioElement.play()
+      })
+    }
+  }
 }
 
 function mkTimer (args, doll) {

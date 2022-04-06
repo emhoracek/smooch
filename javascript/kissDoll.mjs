@@ -24,6 +24,7 @@ class KiSSDoll extends EventTarget {
     // Initialize objs and cels
     this.objs = []
     this.cels = []
+    this.sounds = []
     this.timers = []
 
     return this
@@ -151,7 +152,11 @@ class KiSSDoll extends EventTarget {
   }
 
   getSound (wavFile) {
-    return document.getElementById(wavFile.replace('.wav', ''))
+    if (!this.sounds[wavFile]) {
+      const url = `${this.staticDirectory}/${wavFile}`
+      this.sounds[wavFile] = new Audio(url)
+    }
+    return this.sounds[wavFile]
   }
 
   setTimer (alarmId, duration) {
