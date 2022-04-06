@@ -56,13 +56,10 @@ class KiSSCel extends EventTarget {
       cel.ghostImage = new Image()
       cel.ghostImage.src = drawcanvas.toDataURL('image/png')
 
-      // Clear ctxt
-      drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
-
       // Let Smooch know when image is loaded
-      cel.ghostImage.onload = function () {
+      cel.ghostImage.addEventListener('load', e => {
         incLoaded()
-      }
+      })
 
       cel.image = image
     })
