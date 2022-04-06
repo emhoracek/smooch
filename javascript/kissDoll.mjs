@@ -1,5 +1,6 @@
 import { addEvent } from './fkissEvent'
 import { KiSSCel } from './kissCel.mjs'
+import { KiSSSound } from './kissSound.mjs'
 import { KiSSObject } from './kissObject.mjs'
 import { Logger } from './logger'
 
@@ -151,12 +152,19 @@ class KiSSDoll extends EventTarget {
     return this.objs[objMark]
   }
 
-  getSound (wavFile) {
-    if (!this.sounds[wavFile]) {
-      const url = `${this.staticDirectory}/${wavFile}`
-      this.sounds[wavFile] = new Audio(url)
+  createSound (filename) {
+    this.sounds[filename] = new KiSSSound(filename)
+  }
+
+  getOrCreateSound (filename) {
+    const sound = this.sounds[filename]
+    if (sound) {
+      return sound
+    } else {
+      const newSound = new KiSSSound(this.staticDirectory, filename)
+      this.sounds[filename] = newSound
+      return newSound
     }
-    return this.sounds[wavFile]
   }
 
   setTimer (alarmId, duration) {
