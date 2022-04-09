@@ -22,16 +22,18 @@ data KissData = KissData { kMemory     :: Int
                          , kWindowSize :: (Int, Int)
                          , kCels       :: [KissCel]
                          , kPositions  :: [KissSetPos]
-                         , kFKiSS      :: [FKiSSEvent] }
+                         , kFKiSS      :: [FKiSSEvent]
+                         , kFiles      :: [FilePath] }
     deriving (Eq, Show)
 instance ToJSON KissData where
-    toJSON (KissData _ border bg _ win cels pos fkiss) =
+    toJSON (KissData _ border bg _ win cels pos fkiss files) =
         object["window_size" .= win,
                "border" .= border,
                "background" .= bg,
                "cels" .= cels,
                "positions" .= pos,
-               "fkiss" .= fkiss]
+               "fkiss" .= fkiss,
+               "files" .= files]
 
 data CNFKissData = CNFKissData { cnfkMemory     :: Int,
                                  cnfkBorder     :: Int,

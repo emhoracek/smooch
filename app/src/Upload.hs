@@ -4,8 +4,10 @@
 
 module Upload where
 
+import           Codec.Text.Detect          (detectEncodingName)
 import qualified Data.ByteString            as BS
 import qualified Data.ByteString.Lazy       as LBS
+import           Data.Char                  (toLower)
 import           Data.List                  (nub, sort)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
@@ -15,10 +17,9 @@ import           System.Directory
 import           System.FilePath            (takeExtension, (</>))
 import           Control.Exception
 import           Control.Logging            (log')
-import           Control.Monad              (when, void)
+import           Control.Monad              (when, void, filterM)
 import           Control.Monad.IO.Class     (liftIO)
 import           Control.Monad.Trans.Except
-
 import           Data.Aeson                 (encode)
 
 import           CelToPng
@@ -54,12 +55,6 @@ createDollDir staticDir = do
   liftIO $ createDirectory staticDir
   log' $ "Created static directory: " <> T.pack staticDir
   return staticDir
-
-deleteCels :: FilePath -> IO ()
-deleteCels staticDir = do
-  allFiles <- listDirectory staticDir
-  let cels = filter (\f -> takeExtension f == "cel") allFiles
-  mapM_ removeFile cels
 
 getCels :: Doll -> ExceptT Text IO DollData
 getCels doll =
@@ -98,11 +93,19 @@ createCelsAndJson staticDir = do
   log' "Got bg color"
   let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
   log' "Got border color"
-  let kissData = createKissData cnfKissData bgColor borderColor realCelData
+  files <- getNonCelFiles staticDir
+  log' "Got documentation files"
+  let kissData = createKissData cnfKissData bgColor borderColor realCelData files
   log' "Added cels and colors to kiss data"
   liftIO $ LBS.writeFile (staticDir <> "/setdata.json") (encode kissData)
   log' "Wrote JSON"
   return realCelData
+
+getNonCelFiles :: FilePath -> ExceptT Text IO [FilePath]
+getNonCelFiles staticDir = do
+  files <- liftIO $ getDirectoryContents staticDir
+  let nonCelFilepaths = sort $ filter (\x -> takeExtension x `elem` [".cnf", ".txt", ".doc"]) files
+  filterM (liftIO . convertTextFileToUtf8 staticDir) nonCelFilepaths
 
 convertCels :: Palettes -> [CNFKissCel] -> String -> ExceptT Text IO [(CNFKissCel, (Int, Int))]
 convertCels pals cels base = do
@@ -146,7 +149,7 @@ addOffsetsToCelData offsets =
   [ KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
-createKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
+createKissData :: CNFKissData -> Color -> Color -> [KissCel] -> [FilePath] -> KissData
 createKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
   KissData m borderColor bgColor p ws cels sp fkiss
 
@@ -168,3 +171,21 @@ readUtf8OrShiftJis fp = do
   where decodeShiftJiS bs = do
           convert <- toUnicode <$> open "SHIFT_JIS" Nothing
           return $ convert bs
+
+convertTextFileToUtf8 :: FilePath -> FilePath -> IO Bool
+convertTextFileToUtf8 staticDir fp = do
+  let fullPath = staticDir </> fp
+  void $ makeWriteable fullPath
+  fileBS <- BS.readFile (staticDir </> fp)
+  let mEncoding =  detectEncodingName (LBS.fromStrict fileBS)
+  case map toLower <$> mEncoding of
+    Just "utf-8" -> return True
+    Just encoding -> do
+      convert <- toUnicode <$> open encoding Nothing
+      let convertedBS = LBS.fromStrict . T.encodeUtf8 . convert $ fileBS
+      LBS.writeFile (staticDir </> fp) convertedBS
+      return True
+    Nothing -> return False
+  where makeWriteable f = do
+          p <- getPermissions f
+          setPermissions f (p {writable = True})
