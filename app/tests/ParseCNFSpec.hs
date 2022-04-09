@@ -178,7 +178,7 @@ spec = do
       runExceptT (getKissData "I'm not a CNF.") `shouldReturn`
         Left "\"KiSS CNF error: \" (line 1, column 1):\nunexpected \"i\"\nexpecting \
              \\"#\", \"$\", \";\", \"%\", \"[\", \"(\", \";@EventHandler\", \";@\", \
-             \\"=\" or whitespace"
+             \\"=\", whitespace or empty line"
   describe "getKissCels" $ do
     it "parses a CNF into a list of KiSS cels" $
       runExceptT (getKissCels sampleKiss) `shouldReturn`
