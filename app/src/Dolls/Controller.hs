@@ -129,7 +129,7 @@ userUploadHandler _user ctxt (File name _ filePath') = do
 userDollHandler :: User -> Ctxt -> T.Text -> IO (Maybe Response)
 userDollHandler user ctxt setName = do
   let staticDir = T.unpack $ "static/sets/" <> setName
-  output <- (fmap . fmap) (staticDir,) (runExceptT $ createCels staticDir)
+  output <- (fmap . fmap) (staticDir,) (runExceptT $ createCelsAndJson staticDir)
   -- The previous line is a bit weird.
   -- the result of runEitherT is an `IO (Either Text [KissCel])`.
   -- `renderKissDoll` wants an `Either Text (FilePath, [KissCel])`
@@ -141,7 +141,7 @@ userDollHandler user ctxt setName = do
   renderKissDoll ctxt (toData <$> output)
   where
     toData :: (FilePath, [KissCel]) -> DollData
-    toData (fp, cels) = DollData fp cels []
+    toData (fp, cels) = DollData fp cels
 
 renderKissDoll :: Ctxt -> Either T.Text DollData -> IO (Maybe Response)
 renderKissDoll ctxt eOutputError =

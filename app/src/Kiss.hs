@@ -6,8 +6,7 @@ import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
 data DollData = DollData { dollDirectory :: FilePath,
-                           dollCels      :: [KissCel],
-                           dollSounds    :: [FilePath] }
+                           dollCels      :: [KissCel] }
 
 data KissDoll = KissDoll { kData    :: CNFKissData
                          , kCnfCels :: [CNFKissCel]

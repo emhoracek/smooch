@@ -10,11 +10,9 @@ import           Ctxt
 import           Kiss
 
 setSplices :: DollData -> Substitutions Ctxt
-setSplices (DollData staticDir cs sounds) =
+setSplices (DollData staticDir _) =
   subs [("set-listing", setListingSplice),
-        ("base", textFill (T.pack staticDir)),
-        ("cel-images", celsSplice staticDir cs),
-        ("sound-files", soundsSplice staticDir sounds)]
+        ("base", textFill (T.pack staticDir))]
 
 setListingSplice :: Fill Ctxt
 setListingSplice =

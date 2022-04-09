@@ -40,9 +40,8 @@ processDoll dollHash lzhPath newLzhPath = do
   log' "Unzipped file!"
   liftIO $ lowercaseFiles staticDir
   log' "Lowercased file names"
-  cels <- createCels staticDir
-  sounds <- getSounds staticDir
-  return $ DollData staticDir cels sounds
+  cels <- createCelsAndJson staticDir
+  return $ DollData staticDir cels
 
 
 staticDollDir :: FilePath -> String -> FilePath
@@ -75,12 +74,11 @@ getCels doll =
       celsWithOffsets <- readCels (nub celData) loc
       log' "Loaded cels"
       let realCelData = addOffsetsToCelData celsWithOffsets
-      sounds <- getSounds loc
-      return $ DollData loc realCelData sounds
+      return $ DollData loc realCelData
     Just err -> throwE err
 
-createCels :: FilePath -> ExceptT Text IO [KissCel]
-createCels staticDir = do
+createCelsAndJson :: FilePath -> ExceptT Text IO [KissCel]
+createCelsAndJson staticDir = do
   log' "About to get CNF"
   cnf <- getCNF staticDir
   log' "Got CNF"
@@ -100,7 +98,7 @@ createCels staticDir = do
   log' "Got bg color"
   let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
   log' "Got border color"
-  let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
+  let kissData = createKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
   liftIO $ LBS.writeFile (staticDir <> "/setdata.json") (encode kissData)
   log' "Wrote JSON"
@@ -148,8 +146,8 @@ addOffsetsToCelData offsets =
   [ KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
-addCelsAndColorsToKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
-addCelsAndColorsToKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
+createKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
+createKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
   KissData m borderColor bgColor p ws cels sp fkiss
 
 -- for now, only looks at first cnf listed
@@ -160,11 +158,6 @@ getCNF dir = do
   case cnfs of
     (f:_fs) -> liftIO $ readUtf8OrShiftJis (dir </> f)
     _ -> throwE "No configuration file found."
-
-getSounds :: FilePath -> ExceptT Text IO [String]
-getSounds dir = do
-  files <- liftIO $ getDirectoryContents dir
-  return $ sort $ filter (\x -> takeExtension x == ".wav") files
 
 readUtf8OrShiftJis :: String -> IO String
 readUtf8OrShiftJis fp = do
