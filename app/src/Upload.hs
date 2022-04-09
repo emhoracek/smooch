@@ -102,8 +102,7 @@ createCels staticDir = do
   log' "Got border color"
   let kissData = addCelsAndColorsToKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
-  let json = "var kissJson = " <> encode kissData <> ";\n"
-  liftIO $ LBS.writeFile (staticDir <> "/setdata.js") json
+  liftIO $ LBS.writeFile (staticDir <> "/setdata.json") (encode kissData)
   log' "Wrote JSON"
   return realCelData
 

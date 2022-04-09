@@ -54,14 +54,13 @@ function mkMove (args, doll) {
 }
 
 function mkNop (args, doll) {
-  doll.logger.debug('Nothing happened :)')
+  return () => doll.logger.debug('Nothing happened :)')
 }
 
 function mkSound (args, doll) {
-  const soundFile = args[0]
-  const wavFile = soundFile.replace('.au', '.wav')
-  const audioElement = doll.getSound(wavFile)
-  return () => audioElement.play()
+  const filename = args[0]
+  const sound = doll.getOrCreateSound(filename)
+  return sound.play.bind(sound)
 }
 
 function mkTimer (args, doll) {

@@ -7,42 +7,34 @@
   </head>
   <body>
     <div id="wrapper">
-    <div id="loading">
-      <p>Loading...</p>
-      <progress></progress>
-    </div>
+      <div id="loading">
+        <p>Loading...</p>
+        <progress></progress>
+      </div>
 
-    <div id="sets">
-      <ul>
-        <set-listing>
-          <li><button class="set"><set-number /></a></li>
-        </set-listing>
-        <li><button id="open-tip">?</a></li>
-      </ul>
-      <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
-    </div>
+      <div id="sets">
+        <ul>
+          <set-listing>
+            <li><button class="set"><set-number /></a></li>
+          </set-listing>
+          <li><button id="open-tip">?</a></li>
+        </ul>
+        <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
+      </div>
 
-    <div id="borderarea">
-      <div id="playarea">
-           <canvas id="screen"></canvas>
-           <canvas id="ghost"></canvas>
-           <div id="cel-images">
-             <cel-images><img src="/${pal-dir}/${cel-name}.png" id="${cel-name}-${pal-num}" /></cel-images>
-           </div>
+      <div id="borderarea">
+        <div id="playarea">
+            <canvas id="screen"></canvas>
+            <canvas id="ghost"></canvas>
+        </div>
+      </div>
 
-           <div id="audio"><sound-files>
-             <audio id="${sound-id}" src="/${sound-dir}/${sound-file}"></audio>
-           </sound-files></div>
+      <div id="set-data" data-static-directory="/${base}"></div>
+
+      <div id="footer">
+        <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
       </div>
     </div>
-
-    <div id="footer">
-      <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
-    </div>
-
-    </div>
-
-    <script type="text/javascript" src="/${base}/setdata.js"></script>
 
     <script type="module" src="/static/doll.js"></script>
   </body>

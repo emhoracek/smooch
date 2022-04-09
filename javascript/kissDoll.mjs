@@ -1,12 +1,14 @@
 import { addEvent } from './fkissEvent'
 import { KiSSCel } from './kissCel.mjs'
+import { KiSSSound } from './kissSound.mjs'
 import { KiSSObject } from './kissObject.mjs'
 import { Logger } from './logger'
 
 class KiSSDoll extends EventTarget {
-  constructor (kissData) {
+  constructor (kissData, staticDirectory) {
     super()
 
+    this.staticDirectory = staticDirectory
     this.cnf = kissData
     this.logger = new Logger('debug')
 
@@ -23,6 +25,7 @@ class KiSSDoll extends EventTarget {
     // Initialize objs and cels
     this.objs = []
     this.cels = []
+    this.sounds = []
     this.timers = []
 
     return this
@@ -149,8 +152,19 @@ class KiSSDoll extends EventTarget {
     return this.objs[objMark]
   }
 
-  getSound (wavFile) {
-    return document.getElementById(wavFile.replace('.wav', ''))
+  createSound (filename) {
+    this.sounds[filename] = new KiSSSound(filename)
+  }
+
+  getOrCreateSound (filename) {
+    const sound = this.sounds[filename]
+    if (sound) {
+      return sound
+    } else {
+      const newSound = new KiSSSound(this.staticDirectory, filename)
+      this.sounds[filename] = newSound
+      return newSound
+    }
   }
 
   setTimer (alarmId, duration) {

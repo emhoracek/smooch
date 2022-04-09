@@ -16,12 +16,17 @@ const testCel = {
   setTransparency (n) { return `set alpha to ${n}` },
   unmap () { return 'unmapped' }
 }
+function testSound (soundFile) {
+  return {
+    play () { return `sound ${soundFile} played` }
+  }
+}
 const testTimer = { timeout: 0 }
 const testDoll = {
   changeSet (n) { return `set changed to ${n}` },
   getObject () { return testObj },
   getCel () { return testCel },
-  getSound (soundFile) { return { play () { return `sound ${soundFile} played` } } },
+  getOrCreateSound (soundFile) { return testSound(soundFile) },
   timers: [testTimer],
   setTimer (alarmId, duration) { return `timer ${alarmId} set for ${duration} ms` },
   logger: new Logger('debug')
@@ -89,18 +94,9 @@ describe('makeAction', function () {
   })
 
   describe('sound', function () {
-    it('should work for wav files', function () {
+    it('should play a sound', function () {
       const doll = testDoll
       const action = { action: 'sound', args: ['some-sound.wav'] }
-
-      const result = makeAction(action, doll)
-
-      expect(result()).to.equal('sound some-sound.wav played')
-    })
-
-    it('should rename au files to wav', function () {
-      const doll = testDoll
-      const action = { action: 'sound', args: ['some-sound.au'] }
 
       const result = makeAction(action, doll)
 
