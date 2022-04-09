@@ -17,7 +17,6 @@
     </script>
 
     <!-- Doll scripts -->
-    <script type='text/javascript' src='/static/yura/setdata.js'></script>
     <script type='text/javascript' src='/static/doll.js'></script>
   </head>
   <body>
