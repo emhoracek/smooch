@@ -66,6 +66,7 @@ library
                        binary-parser,
                        base16-bytestring,
                        bytestring,
+                       charsetdetect,
                        configurator,
                        cookie,
                        cryptohash-md5,

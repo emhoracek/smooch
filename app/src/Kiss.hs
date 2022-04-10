@@ -7,7 +7,7 @@ import           Data.Array (Array)
 
 data DollData = DollData { dollDirectory :: FilePath,
                            dollCels      :: [KissCel],
-                           dollSounds    :: [FilePath] }
+                           dollFiles     :: [FilePath] }
 
 data KissDoll = KissDoll { kData    :: CNFKissData
                          , kCnfCels :: [CNFKissCel]

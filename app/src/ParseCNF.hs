@@ -276,8 +276,7 @@ parseFKiSSArg = parseObj <|> parseString <|> parseNumber
 
 parseEmptyLine :: Parser CNFLine
 parseEmptyLine = try $ do
-    optional (char '\r')
-    newline
+    optional (char '\r') >> newline <?> "empty line"
     return CNFJunkLine
 
 parseCNFJunk :: Parser CNFLine

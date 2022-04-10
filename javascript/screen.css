@@ -36,6 +36,8 @@ body {
 
 #sets {
   display: none;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #sets ul {
@@ -46,13 +48,10 @@ body {
   margin: 0.25em;
 }
 
-#sets p {
+#menu .tip {
+  display: none;
   margin-left: 1em;
   font-size: 0.75em;
-}
-
-#sets .tip {
-  display: none;
 }
 
 li {
@@ -109,4 +108,63 @@ a {
 
 #audio {
   display: none;
+}
+
+.documents {
+  display: none;
+}
+
+.show-docs {
+  display: flex;
+  justify-content: end;
+  text-align: right;
+}
+
+.notepad-modal {
+  display: none;
+  position: absolute;
+  left: 1em;
+  right: 1em;
+  top: 1em;
+  border: 5px outset darkgray;
+  background:  white;
+}
+
+.notepad-modal header {
+  border-bottom: 2px solid gray;
+  padding: 0.5em;
+  background-color: darkblue;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.notepad-modal h2 {
+  font-size: 1em;
+  margin: 0;
+}
+
+.notepad-modal header button {
+  margin: 0;
+  padding: 3px;
+  height: 1.25em;
+  width: 1.25em;
+  font-size: 12px;
+  box-sizing: content-box;
+  border: 2px outset darkgray;
+}
+
+.notepad-modal pre {
+  font-size: 16px;
+  height: 80vh;
+  overflow: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0.5em;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }

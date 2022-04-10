@@ -4,17 +4,16 @@ module Dolls.View where
 
 import qualified Data.Text   as T
 import           System.FilePath            (takeBaseName)
-import           Web.Larceny
+import           Web.Larceny ( Substitutions, mapSubs, textFill, subs, Fill )
 
 import           Ctxt
 import           Kiss
 
 setSplices :: DollData -> Substitutions Ctxt
-setSplices (DollData staticDir cs sounds) =
+setSplices (DollData staticDir _ files) =
   subs [("set-listing", setListingSplice),
         ("base", textFill (T.pack staticDir)),
-        ("cel-images", celsSplice staticDir cs),
-        ("sound-files", soundsSplice staticDir sounds)]
+        ("files", filesSplice files)]
 
 setListingSplice :: Fill Ctxt
 setListingSplice =
@@ -41,6 +40,10 @@ soundSplice dir sound =
   subs [("sound-file", textFill $ T.pack sound)
        ,("sound-id", textFill $ T.pack soundId)
        ,("sound-dir", textFill $ T.pack dir)]
+
+filesSplice :: [FilePath] -> Fill Ctxt
+filesSplice = mapSubs fileSplice
+  where fileSplice fp = subs [("filename", textFill (T.pack fp))]
 
 linkUploadSplices :: Substitutions Ctxt
 linkUploadSplices =
