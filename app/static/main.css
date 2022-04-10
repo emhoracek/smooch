@@ -151,6 +151,8 @@ a {
 
 .notepad-modal header { margin: 0 }
 
+.notepad-modal #wrapper header { margin: 0 }
+
 pre { font-family: monospace }
 
 #wrapper header {
