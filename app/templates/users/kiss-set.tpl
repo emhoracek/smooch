@@ -12,14 +12,28 @@
         <progress></progress>
       </div>
 
-      <div id="sets">
-        <ul>
-          <set-listing>
-            <li><button class="set"><set-number /></a></li>
-          </set-listing>
-          <li><button id="open-tip">?</a></li>
-        </ul>
+      <div id="menu">
+        <div id="sets">
+          <ul>
+            <set-listing>
+              <li><button class="set"><set-number /></a></li>
+            </set-listing>
+            <li><button id="open-tip">?</a></li>
+          </ul>
+          <button id="documents-button" class="documents-button">Documents</button>
+        </div>
+
         <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
+        <div id="documents" class="documents">
+          <ul id="document-list">
+            <files>
+              <li><filepath /> -
+                    <a class="view-file" data-filename="${filepath}" href="/${base}/${filepath}">view</a> /
+                    <a class="dl-file"  download="${filepath}" href="/${base}/${filepath}">download</a>
+              </li>
+            </files>
+          </ul>
+        </div>
       </div>
 
       <div id="borderarea">
@@ -34,6 +48,15 @@
       <div id="footer">
         <p>All sets are © their original artists. Learn more about Smooch <a href="https://github.com/emhoracek/smooch">from the Github repo</a>.</p>
       </div>
+    </div>
+
+    <div id="notepad-modal" class="notepad-modal">
+      <header>
+        <h2 id="notepad-title"></h2>
+        <button id="notepad-close">&#x2715</button>
+      </header>
+
+      <pre></pre>
     </div>
 
     <script type="module" src="/static/doll.js"></script>

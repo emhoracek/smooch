@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
       } else {
         doll.begin()
         document.getElementById('loading').style.display = 'none'
-        document.getElementById('sets').style.display = 'block'
+        document.getElementById('sets').style.display = 'flex'
         document.getElementById('borderarea').style.display = 'block'
       }
     }
@@ -32,6 +32,8 @@ window.addEventListener('load', function () {
     doll.initialize(() => { loaded += 1 })
     dragger.initialize()
 
+    setUpDocViewer()
+
     // in testing and development, it's convenient to have access to
     // to the kiss set object in the development console
     if (typeof globalKiss !== 'undefined') {
@@ -40,3 +42,37 @@ window.addEventListener('load', function () {
     }
   })
 })
+
+function setUpDocViewer () {
+  const docsButton = document.getElementById('documents-button')
+  const docsDiv = document.getElementById('documents')
+  docsButton.addEventListener('click', e => {
+    docsDiv.classList.toggle('show-docs')
+  })
+
+  const viewLinks = document.getElementsByClassName('view-file')
+  const modal = document.getElementById('notepad-modal')
+  const modaltext = document.querySelector('#notepad-modal pre')
+  const modalh2 = document.getElementById('notepad-title')
+  for (let i = 0; i < viewLinks.length; i++) {
+    viewLinks[i].addEventListener('click', e => {
+      const file = e.target.href
+      const filename = e.target.dataset.filename
+      e.preventDefault()
+      fetch(file).then(resp => {
+        return resp.text()
+      }).then(text => {
+        modal.style.display = 'block'
+        modaltext.style.display = 'block'
+        modaltext.textContent = text
+        modalh2.textContent = filename
+        modaltext.scrollTop = 0
+      })
+    })
+  }
+  const closeBtn = document.getElementById('notepad-close')
+  closeBtn.addEventListener('click', e => {
+    modal.style.display = 'none'
+    e.preventDefault()
+  })
+}
