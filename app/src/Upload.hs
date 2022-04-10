@@ -42,7 +42,9 @@ processDoll dollHash lzhPath newLzhPath = do
   liftIO $ lowercaseFiles staticDir
   log' "Lowercased file names"
   cels <- createCelsAndJson staticDir
-  return $ DollData staticDir cels
+  files <- getDocumentationFiles staticDir
+  log' "Got documentation files"
+  return $ DollData staticDir cels files
 
 
 staticDollDir :: FilePath -> String -> FilePath
@@ -69,7 +71,9 @@ getCels doll =
       celsWithOffsets <- readCels (nub celData) loc
       log' "Loaded cels"
       let realCelData = addOffsetsToCelData celsWithOffsets
-      return $ DollData loc realCelData
+      files <- getDocumentationFiles loc
+      log' "Got documentation files"
+      return $ DollData loc realCelData files
     Just err -> throwE err
 
 createCelsAndJson :: FilePath -> ExceptT Text IO [KissCel]
@@ -93,16 +97,14 @@ createCelsAndJson staticDir = do
   log' "Got bg color"
   let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
   log' "Got border color"
-  files <- getNonCelFiles staticDir
-  log' "Got documentation files"
-  let kissData = createKissData cnfKissData bgColor borderColor realCelData files
+  let kissData = createKissData cnfKissData bgColor borderColor realCelData
   log' "Added cels and colors to kiss data"
   liftIO $ LBS.writeFile (staticDir <> "/setdata.json") (encode kissData)
   log' "Wrote JSON"
   return realCelData
 
-getNonCelFiles :: FilePath -> ExceptT Text IO [FilePath]
-getNonCelFiles staticDir = do
+getDocumentationFiles :: FilePath -> ExceptT Text IO [FilePath]
+getDocumentationFiles staticDir = do
   files <- liftIO $ getDirectoryContents staticDir
   let nonCelFilepaths = sort $ filter (\x -> takeExtension x `elem` [".cnf", ".txt", ".doc"]) files
   filterM (liftIO . convertTextFileToUtf8 staticDir) nonCelFilepaths
@@ -149,7 +151,7 @@ addOffsetsToCelData offsets =
   [ KissCel cnfCelMark cnfCelFix cnfCelName cnfCelPalette cnfCelSets cnfCelAlpha (Position xoff yoff)
      | (CNFKissCel{..}, (xoff, yoff)) <- offsets]
 
-createKissData :: CNFKissData -> Color -> Color -> [KissCel] -> [FilePath] -> KissData
+createKissData :: CNFKissData -> Color -> Color -> [KissCel] -> KissData
 createKissData (CNFKissData m _ p ws _ sp fkiss) bgColor borderColor cels =
   KissData m borderColor bgColor p ws cels sp fkiss
 

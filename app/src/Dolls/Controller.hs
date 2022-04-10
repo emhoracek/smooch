@@ -141,7 +141,7 @@ userDollHandler user ctxt setName = do
   renderKissDoll ctxt (toData <$> output)
   where
     toData :: (FilePath, [KissCel]) -> DollData
-    toData (fp, cels) = DollData fp cels
+    toData (fp, cels) = DollData fp cels []
 
 renderKissDoll :: Ctxt -> Either T.Text DollData -> IO (Maybe Response)
 renderKissDoll ctxt eOutputError =

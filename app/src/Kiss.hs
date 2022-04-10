@@ -6,7 +6,8 @@ import           Data.Aeson hiding (Array)
 import           Data.Array (Array)
 
 data DollData = DollData { dollDirectory :: FilePath,
-                           dollCels      :: [KissCel] }
+                           dollCels      :: [KissCel],
+                           dollFiles     :: [FilePath] }
 
 data KissDoll = KissDoll { kData    :: CNFKissData
                          , kCnfCels :: [CNFKissCel]
@@ -22,18 +23,16 @@ data KissData = KissData { kMemory     :: Int
                          , kWindowSize :: (Int, Int)
                          , kCels       :: [KissCel]
                          , kPositions  :: [KissSetPos]
-                         , kFKiSS      :: [FKiSSEvent]
-                         , kFiles      :: [FilePath] }
+                         , kFKiSS      :: [FKiSSEvent] }
     deriving (Eq, Show)
 instance ToJSON KissData where
-    toJSON (KissData _ border bg _ win cels pos fkiss files) =
+    toJSON (KissData _ border bg _ win cels pos fkiss) =
         object["window_size" .= win,
                "border" .= border,
                "background" .= bg,
                "cels" .= cels,
                "positions" .= pos,
-               "fkiss" .= fkiss,
-               "files" .= files]
+               "fkiss" .= fkiss]
 
 data CNFKissData = CNFKissData { cnfkMemory     :: Int,
                                  cnfkBorder     :: Int,
