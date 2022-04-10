@@ -149,6 +149,30 @@ a {
   color: grey;
 }
 
+.notepad-modal header { margin: 0 }
+
+pre { font-family: monospace }
+
+#wrapper header {
+  margin: 0;
+  margin-top: 0px;
+  padding: 0;
+  padding-bottom: 0px;
+  border-bottom: 0;
+  padding-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+#wrapper header h2 {
+  margin: 0;
+}
+
+#credits {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  text-align: right;
+}
+
 @media only screen and (min-width: 1024px){
   .wrapper {
     display: flex;
@@ -191,3 +215,4 @@ a {
     border: none;
   }
 }
+

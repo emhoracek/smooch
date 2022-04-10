@@ -23,11 +23,11 @@
           <button id="documents-button" class="documents-button">Documents</button>
         </div>
 
-        <p class="tip">Click through the set by choosing a number. <button id="close-tip">Close</button></p>
+        <p class="tip">Click through the doll's sets of clothing by choosing a number. <button id="close-tip">Close</button></p>
         <div id="documents" class="documents">
           <ul id="document-list">
             <files>
-              <li><filepath /> -
+              <li><filename /> -
                     <a class="view-file" data-filename="${filename}" href="/${base}/${filename}">view</a> /
                     <a class="dl-file"  download="${filename}" href="/${base}/${filename}">download</a>
               </li>
