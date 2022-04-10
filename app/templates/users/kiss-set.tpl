@@ -28,8 +28,8 @@
           <ul id="document-list">
             <files>
               <li><filepath /> -
-                    <a class="view-file" data-filename="${filepath}" href="/${base}/${filepath}">view</a> /
-                    <a class="dl-file"  download="${filepath}" href="/${base}/${filepath}">download</a>
+                    <a class="view-file" data-filename="${filename}" href="/${base}/${filename}">view</a> /
+                    <a class="dl-file"  download="${filename}" href="/${base}/${filename}">download</a>
               </li>
             </files>
           </ul>

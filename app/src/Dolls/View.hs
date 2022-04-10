@@ -43,7 +43,7 @@ soundSplice dir sound =
 
 filesSplice :: [FilePath] -> Fill Ctxt
 filesSplice = mapSubs fileSplice
-  where fileSplice fp = subs [("filepath", textFill (T.pack fp))]
+  where fileSplice fp = subs [("filename", textFill (T.pack fp))]
 
 linkUploadSplices :: Substitutions Ctxt
 linkUploadSplices =
