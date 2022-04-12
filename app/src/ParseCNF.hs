@@ -266,7 +266,7 @@ parseFKiSSArg = parseObj <|> parseString <|> parseNumber
             Object . read <$> many1 digit
           parseString = do
             char '"'
-            str <- many1 (noneOf "\"")
+            str <- many (noneOf "\"")
             char '"'
             return (Text str)
           parseNumber = do
