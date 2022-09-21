@@ -78,29 +78,17 @@ getCels doll =
 
 createCelsAndJson :: FilePath -> ExceptT Text IO [KissCel]
 createCelsAndJson staticDir = do
-  log' "About to get CNF"
   cnf <- getCNF staticDir
-  log' "Got CNF"
   KissDoll cnfKissData celData kissPalettes <- getKissDoll cnf
-  log' "Parsed CNF"
   celsWithOffsets <- convertCels kissPalettes (nub celData) staticDir
-  log' "Converted cels"
   let realCelData = addOffsetsToCelData celsWithOffsets
-  log' "Added offsets"
   defPalette <- defaultPalette kissPalettes
-  log' "Got default palette"
   palData <- liftIO $ BS.readFile (staticDir </> defPalette)
-  log' "Got default palette data"
   palEntries <- PK.parseKCF palData
-  log' "Got default palette entries"
   let bgColor = PK.colorByIndex 0 palEntries
-  log' "Got bg color"
   let borderColor = PK.colorByIndex (cnfkBorder cnfKissData) palEntries
-  log' "Got border color"
   let kissData = createKissData cnfKissData bgColor borderColor realCelData
-  log' "Added cels and colors to kiss data"
   liftIO $ LBS.writeFile (staticDir <> "/setdata.json") (encode kissData)
-  log' "Wrote JSON"
   return realCelData
 
 getDocumentationFiles :: FilePath -> ExceptT Text IO [FilePath]
