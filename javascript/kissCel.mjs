@@ -35,13 +35,16 @@ class KiSSCel extends EventTarget {
     const image = new Image()
     image.addEventListener('load', e => {
       // Draw image to ctxt and get image data
+      drawctxt.clearRect(0, 0, doll.size.x, doll.size.y)
       drawctxt.drawImage(image, 0, 0, image.width, image.height)
 
+      
       const ghostImageData = drawctxt.getImageData(0, 0, image.width, image.height)
       const data = ghostImageData.data
 
       // Fill ghost image data with cel color
       const color = decimalToRgb(cel.index)
+
       for (let k = 0; k < data.length; k = k + 4) {
         data[k] = color.red
         data[k + 1] = color.green
