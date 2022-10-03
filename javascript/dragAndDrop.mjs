@@ -1,6 +1,7 @@
 class DragAndDrop {
   constructor (doll) {
     this.dragHandler = false
+    this.releaseHandler = false
     this.doll = doll
     this.screen = document.getElementById('screen')
     const canvas = document.getElementById('ghost')
@@ -8,13 +9,25 @@ class DragAndDrop {
   }
 
   initialize () {
-    document.addEventListener('pointerdown', (e) => this.onMouseDown(e))
-    document.addEventListener('pointerup', () => {
-      if (this.dragHandler) {
-        document.removeEventListener('pointermove', this.dragHandler)
-        this.dragHandler = false
-      }
+    document.addEventListener('pointerdown', (e) => {
+      if (this.releaseHandler) {
+        document.removeEventListener('pointerup', this.releaseHandler)
+        this.releaseHandler = false
+      } 
+      this.onMouseDown(e)
     })
+  }
+
+  onRelease (e, objAndCel) {
+    if (objAndCel) {
+      objAndCel.object.dispatchEvent(release)
+      objAndCel.cel.dispatchEvent(release)
+    }
+
+    if (this.dragHandler) {
+      document.removeEventListener('pointermove', this.dragHandler)
+      this.dragHandler = false
+    }
   }
 
   onMouseDown (e) {
@@ -23,6 +36,10 @@ class DragAndDrop {
     if (objAndCel) {
       objAndCel.object.dispatchEvent(press)
       objAndCel.cel.dispatchEvent(press)
+
+      this.releaseHandler = (e) => this.onRelease(e, objAndCel)
+      document.addEventListener('pointerup', this.releaseHandler)
+
       if (!objAndCel.object.fixed) {
         const dragStart = this.getDragStart(objAndCel.object, pos)
         this.dragHandler = (e) => this.onMouseMove(e, objAndCel.object, dragStart)
@@ -61,5 +78,6 @@ class DragAndDrop {
 }
 
 const press = new CustomEvent('press')
+const release = new CustomEvent('release')
 
 export { DragAndDrop }

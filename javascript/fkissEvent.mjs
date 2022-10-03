@@ -104,7 +104,6 @@ function setPress (args, actions, doll) {
   if (objOrCel) {
     objOrCel.addEventListener('press', (e) => actions.forEach(f => {
       if (f) { f() }
-
       doll.update()
       doll.draw()
     }))
@@ -114,7 +113,12 @@ function setPress (args, actions, doll) {
 // The user releases the object or cel.
 function setRelease (args, actions, doll) {
   const objOrCel = objOrCelArg(args[0], doll)
-  objOrCel.addEventListener('release', (e) => actions.forEach(f => f()))
+  objOrCel.addEventListener('release', (e) => actions.forEach(f => {
+    if (f) { f() }
+
+    doll.update()
+    doll.draw()
+  }))
 }
 
 // The user changes the specified set
