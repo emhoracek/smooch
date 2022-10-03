@@ -26,10 +26,13 @@ The [Smooch alpha test](http://67.205.172.104:8000/) is now live! Try out some d
       * A single doll can have multiple configuration files - this was
         often used to have one version with FKiSS effects and another
         without
+  * Add CherryKiSS support
   * Allow users to create sets from scratch
       * Users can upload a PSD file.
-          * PSDs must be indexed to a single palette.
-          * The PSD palette becomes a KCF file.
+          * If the PSD is indexed to a single palette:
+               * The PSD palette becomes a KCF file
+          * If the PSD is 32-bit color:
+               * A standard 256-color KCF is created for the doll
           * Each layer becomes a separate cel with the name of the layer
           * All the cels are listed in a CNF that is editable in the browser
       * A user can download their own sets as LHA archives viewable in any
@@ -38,7 +41,6 @@ The [Smooch alpha test](http://67.205.172.104:8000/) is now live! Try out some d
       * Users can click a button to enter "edit" mode
       * Users can modify the position and layering of cels in sets
       * Users can make cels fixed or unfixed
-  * Add CherryKiSS support
   * Add FKiSS, FKiSS2, FKiSS3, FKiSS4
 
 ### Someday, maybes
